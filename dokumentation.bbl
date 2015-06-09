@@ -1,5 +1,5 @@
 % $ biblatex auxiliary file $
-% $ biblatex version 2.2 $
+% $ biblatex version 2.3 $
 % Do not modify the above lines!
 %
 % This is an auxiliary file used by the 'biblatex' package.
@@ -39,6 +39,7 @@
   }
   \strng{namehash}{BPHHMHK1}
   \strng{fullhash}{BPHHMHK1}
+  \field{labelyear}{2002}
   \field{sortinit}{B}
   \field{isbn}{3-7065-1771-X}
   \field{title}{E-Learning Praxishandbuch : Auswahl von Lernplattformen;
@@ -64,6 +65,7 @@
   }
   \strng{namehash}{DSEDHL1}
   \strng{fullhash}{DSEDHL1}
+  \field{labelyear}{1980}
   \field{sortinit}{D}
   \field{title}{A Five-Stage Model Of The Mental Activities Involved In
   Directed Skill Acquisition}
@@ -88,6 +90,7 @@
   }
   \strng{namehash}{F1}
   \strng{fullhash}{F1}
+  \field{labelyear}{2007}
   \field{sortinit}{F}
   \field{title}{{GNU AFFERO GENERAL PUBLIC LICENSE}}
   \verb{url}
@@ -106,6 +109,7 @@
   }
   \strng{namehash}{MM1}
   \strng{fullhash}{MM1}
+  \field{labelyear}{2012}
   \field{sortinit}{M}
   \field{note}{Studienarbeit}
   \field{title}{tolles Musterthema}
