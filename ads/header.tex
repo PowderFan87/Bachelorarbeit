@@ -56,11 +56,12 @@
 \usepackage{makeidx}
 \usepackage[autostyle=true,german=quotes]{csquotes}
 \usepackage{longtable}
+\usepackage{enumitem}	% mehr Optionen bei Aufzählungen
 \usepackage{graphicx}
-\usepackage{xcolor} 	%xcolor für HTML-Notation
+\usepackage{xcolor} 	% für HTML-Notation
 \usepackage{float}
 \usepackage{array}
-\usepackage{calc}		%zum Rechnen (Bildtabelle in Deckblatt)
+\usepackage{calc}		% zum Rechnen (Bildtabelle in Deckblatt)
 \usepackage[right]{eurosym}
 \usepackage{wrapfig}
 \usepackage{pgffor} % für automatische Kapiteldateieinbindung
@@ -68,6 +69,12 @@
 \usepackage[printonlyused]{acronym} % falls gewünscht kann die Option footnote eingefügt werden, dann wird die Erklärung nicht inline sondern in einer Fußnote dargestellt
 
 \usepackage{listings}
+
+% Eigene zusätzliche packages
+\usepackage{xfrac}
+\usepackage{tikz}
+%\usepackage{packages/pgf-pie}
+
 
 
 % eine Kommentarumgebung "k" (Handhabe mit \begin{k}<Kommentartext>\end{k},
@@ -121,7 +128,7 @@
 % Literaturverweise (sowohl deutsch als auch englisch)
 \iflang{de}{%
 \usepackage[
-	backend=biber,		% empfohlen. Falls biber Probleme macht: bibtex
+	backend=bibtex,		% empfohlen. Falls biber Probleme macht: bibtex
 	bibwarn=true,
 	bibencoding=utf8,	% wenn .bib in utf8, sonst ascii
 	sortlocale=de_DE,
@@ -130,13 +137,16 @@
 }
 \iflang{en}{%
 \usepackage[
-	backend=biber,		% empfohlen. Falls biber Probleme macht: bibtex
+	backend=bibtex,		% empfohlen. Falls biber Probleme macht: bibtex
 	bibwarn=true,
 	bibencoding=utf8,	% wenn .bib in utf8, sonst ascii
 	sortlocale=en_US,
 	style=\zitierstil,
 ]{biblatex}
 }
+
+% Mehr Platz zwischen einzelnen Items im Literaturverzeichnis bei Verwendung von authoryear
+\setlength{\bibitemsep}{\baselineskip}
 
 \ladeliteratur{}
 
