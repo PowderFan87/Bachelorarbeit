@@ -1,6 +1,6 @@
 \glossarysection[\glossarytoctitle]{\glossarytitle}\glossarypreamble
 \begin{theglossary}\glossaryheader
 \glsgroupheading{G}\relax \glsresetentrylist %
-\glossentry{Glossareintrag}{\glossaryentrynumbers{\relax 
+\glossaryentryfield{Glossareintrag}{\glsnamefont{Glossareintrag}}{Ein Glossar beschreibt verschiedenste Dinge in kurzen Worten}{\relax }{\glossaryentrynumbers{\relax 
 		\setentrycounter[]{page}\glsnumberformat{1}}}%
 \end{theglossary}\glossarypostamble
