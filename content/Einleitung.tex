@@ -3,20 +3,26 @@
 \chapter{Einleitung}\label{cha:Einleitung}
 Kurze Einleitung. Vorstellung der Firma und Abteilung. Allgemeine Heranführung zum Thema und der Brance (IT Umfeld ist groß. Hier sollte klar werden, dass im weiteren Verlauf der Arbeit das Web Umfeld speziell mit Java als Grundlage dient).
 
-\section{Problemstellung}\label{sec:Problemstellung}
-Genaue Beschreibung der Problemstellung. Was fehlt? Warum fehlt es? Welche Auswirkungen hat das Problem auf die tägliche Arbeit?
-
 \section{Motivation}\label{sec:Motivation}
 Beschreibung warum dieses Thema gewählt wurde für die Arbeit. Eventuell beschreiben was ich mir selbst erhoffe von der Arbeit und welchen Nährwert ich mir wünsche. \autoref{equ:Formel1} und \ref{equ:Formel2} zeigen...
 \begin{align}
-	V & = \frac{1}{2} \tau \cdot r^{2} \cdot h
-	\label{equ:Formel1} \\
-	\frac{12}{43} \cdot V & = x^2 \cdot n
-	\label{equ:Formel2}
+V & = \frac{1}{2} \tau \cdot r^{2} \cdot h
+\label{equ:Formel1} \\
+\frac{12}{43} \cdot V & = x^2 \cdot n
+\label{equ:Formel2}
 \end{align}
 
+\section{Problemstellung}\label{sec:Problemstellung}
+
+
+Genaue Beschreibung der Problemstellung. Was fehlt? Warum fehlt es? Welche Auswirkungen hat das Problem auf die tägliche Arbeit?
+
 \section{Zielsetzung}\label{sec:Zielsetzung}
-Was ist das Ziel der Arbeit? Was soll das Ergebnis sein?
+Ziel dieser Bachelorarbeit ist die Umsetzung und Dokumentation einer Java-Anwendung, welche, durch die Anwendung des Hadoop Frameworks und des Mapreduce Algorithmus, eine Analyse von Logfiles durchführt. Das Programm muss konfigurierbar sein, um unterschiedliche Formate verarbeiten zu können. Die  Resultate müssen jedoch immer im gleichen format gespeichert sein, damit diese über eine Schnittstelle standartisiert abgefragt werden können.
+
+
 
 \section{Abgrenzung}\label{sec:Abgrenzung}
-Was soll NICHT Teil der Arbeit sein? Dabei unbedingt beschreiben das die serverseitige Konfiguration von Hadoop und YARN und das Aufsetzung von Clustern ignoriert wird. Dadurch soll klar werden, dass der Fokus auf der Anwendung des Algorithmus auf einen konkreten Fall liegt.
+Nicht Teil der Arbeit ist die Installation und Konfiguration des Ressourcenmanagement und der automatischen Skallierung von Hadoop. Es wird nur eine einfache Single Node Installation vorgenommen und beschrieben. Ebenfalls nicht teil der Arbeit ist die Impelmentierung eines Checkskriptes für ein Monitoringtool. Es wird lediglich eine Schnittstelle zur Abfrage der Daten bereitgestellt.
+
+%Was soll NICHT Teil der Arbeit sein? Dabei unbedingt beschreiben das die serverseitige Konfiguration von Hadoop und YARN und das Aufsetzung von Clustern ignoriert wird. Dadurch soll klar werden, dass der Fokus auf der Anwendung des Algorithmus auf einen konkreten Fall liegt.
