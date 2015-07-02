@@ -11,7 +11,7 @@ Hier sollte die Überleitung zum nächsten Kapitel kommen d.h. Logfiles werden a
 Was sind Logfiles im allgemeinen? Was ist die Funktion eines Logfiles? Gibt es Standards? Wenn ja welche und wie sehen die aus? Werden die Standards im weiteren Verlauf der Arbeit noch einmal relevant sein (Ja/Nein begründen und erläutern)?
 
 \section{Einführung in MapReduce}\label{sec:EinführungInMapReduce}
-Die Google Mitarbeiter Jeffrey Dean und Sanjar Ghemawat standen veröffentlichten 2004 eine Arbeit, in welcher sie einen neuen Ansatz zur Verarbeitung von großen, unstrukturierten Daten beschrieben. Das in der Arbeit beschriebene Modell wurde als \textit{Map-Reduce} bezeichnet. Dabei wurde nicht nur beschrieben, wie man große Datenmengen durchsucht, auswetet und in Schlüssel-Wert-Paaren zusammenfast. Die Clusterung von Jobs auf \gls{Commodity-Hardware} waren ebenfalls ein Bestandteil der Arbeit. Freiknecht schreibt weiter, dass diese Arbeit als Ursprung des Algorithmus bezeichnet wird, und somit Implementierungen wie Hadoop, Disco oder BashReduce inspiriert hat.\footcite[Vgl.][S. 42]{Freiknecht.2014}
+Die Google Mitarbeiter Jeffrey Dean und Sanjar Ghemawat veröffentlichten 2004 eine Arbeit, in welcher sie einen neuen Ansatz zur Verarbeitung von großen, unstrukturierten Daten beschrieben. Das in der Arbeit beschriebene Modell wurde als \textit{Map-Reduce} bezeichnet. Dabei wurde nicht nur beschrieben, wie man große Datenmengen durchsucht, auswetet und in Schlüssel-Wert-Paaren zusammenfast. Die Clusterung von Jobs auf \gls{Commodity-Hardware} waren ebenfalls ein Bestandteil der Arbeit. Freiknecht schreibt weiter, dass diese Arbeit als Ursprung des Algorithmus bezeichnet wird, und somit Implementierungen wie Hadoop, Disco oder BashReduce inspiriert hat.\footcite[Vgl.][S. 42]{Freiknecht.2014}
 
 Ein MapReduce Programm lässt sich i.d.R. in drei Bereiche unterteilen. Der Map-Phase, in welcher die Schlüssel-Wert-Paare aus den Eingabedaten erzeugt werden, der Combine-Phase, zur Aggregation der Paare, sowie der Reduce-Phase, in welcher die Daten ausgedünnt werden, bis nur noch ein Wert pro Schlüssel vorhanden ist (siehe \autoref{fig:DreiPhasenMapReduce}).
 
@@ -21,13 +21,91 @@ Ein MapReduce Programm lässt sich i.d.R. in drei Bereiche unterteilen. Der Map-
 	\caption{Die drei Phasen eines Map-Reduce-Prozesses\footnotemark}
 	\label{fig:DreiPhasenMapReduce}
 \end{figure}
-\footnotetext{S. 42 \cite{Freiknecht.2014}}
+\footnotetext{\cite[S. 42.]{Freiknecht.2014}}
 
-Woher kommt MapReduce? Wie funktioniert MapReduce? Stärken/Schwächen aufzeigen. Versuchen den Algorithmus mathematisch zu beschreiben ($O(n)$ Methode, Mengenleere). Hierfür muss noch Literatur gesucht werden. Bisher nur mathematische Beschreibungen im Internet gefunden.
+Die Stärke von MapReduce, liegt in der Kombination von sequentieller und paralleler Verarbeitung. Die einzelnen Phasen von MapReduce werden sequentiell ausgeführt. Die Combine- oder Reduce-Phase kann nicht beginnen, bevor die Map-Phase abgeschlossen ist. Innerhalb der Phasen können die Aufgaben jedoch auf mehrere Instanzen verteil und parallel verarbeitet werden. Diese Form der Verarbeitung entspricht dem Master-Worker-Modell.\footcite[Vgl.][S.1 f]{Karloff.2010}
 
-\begin{equation}
-	V = \frac{1}{2} \tau \cdot r^{2} \cdot h
-\end{equation}
+Speziell bei der Parallelisierung von Tasks, welche wenig bis keine Abhängigkeit voneinander aufweise, stellt dieses Modell ein ideales Hilfmittel dar. Die zentralen Elemente des Shemas bildet ein Master und $n$ Worker. Der Master startet die Verarbeitung, indem er ein gegebenes Probelm aufarbeitet und eine Sammlung von Tasks erzeugt.  Die Tasks werden vom Master an die ihm bekannten Worker verteilt (Worker werden entweder vom Master selbst erzeugt oder melden sich bei diesem an). Die Worker arbeiten parallel und senden einen Statuscode an den Master, sobald der Task vollständig bearbeitet wurde (oder der Worker in einen Fehler läuft).\footcite[Vgl.][S. 80 ff]{Fey.2008} \autoref{fig:MasterWorkerInMR} zeigt die Anwendung des Master-Worker-Modells auf ein MapReduce Programm.
+
+\begin{figure}
+	\includegraphics[width=1\textwidth]{MasterWorkerMR.png}
+	\caption{Master-Worker in MapReduce\footnotemark}
+	\label{fig:MasterWorkerInMR}
+\end{figure}
+\footnotetext{\cite[S. 3.]{Dean.2004}}
+
+Im folgenden wird MapReduce zunächst formal definiert. Die Grundlage der Definition bildet das durch Karloff, Suri und Vassilvitskii beschriebene \ac{MRC} Model.\footcite[S. 3 f]{Karloff.2010} Danach soll die Funktionsweise anhand eines Beispiels weiter verdeutlicht werden.
+
+\subsection{Formale Beschreibung von MapReduce}\label{subsec:FormaleBeschreibung}
+Da es sich bei MapReduce um ein Modell zur Verarbeitung von Daten handelt, und nicht um einen Algorithmus, wird die durch Karloff et al. beschriebene \ac{MRC} verwendet, um eine Grundlage für die formale Definition zu haben. Dabei werden die drei Karakteristiken Funktion, Ausführungszeit und Speicherauslastung beschrieben.
+
+Im zentrum der Datenverarbeitung mit MapReduce steht das Schlüssel-Wert-Paar, welches als ein String Tupel $\langle k; v \rangle$, mit dem Schlüssel $k$ und dem dazu gehörenden Wert $v$. Die Eingabe für eine \ac{MRC} Maschiene ist eine Liste von Schlüssel-Wert-Paaren $\langle k_i, v_i \rangle_{i=1}^{\mathbb{N}}$ mit einer Gesamtgröße im Speicher von $\sum_{i=1}^{\mathbb{N}}|k_i|+|v_i|$.
+
+Die Map Funktion verarbeitet einen Tupel $\langle k; v \rangle$ zu einer Liste von neuen Schlüssel-Wert-Paaren $\langle k_1; v_1 \rangle, \langle k_2; v_2 \rangle, \dots, \langle k_n; v_n \rangle$.
+
+Die Reduce Funktion erhält als Eingabeparameter einen Schlüssel $k$ sowie eine Sequenz von Werten $v_1, v_2, \dots, v_n$. Aus diesen erzeugt die Funktion eine Liste von Schlüssel-Wert-Paaren $\langle k; v_{k,1} \rangle, \langle k; v_{k,2} \rangle, \dots, \langle k; v_{k,n} \rangle$. Die Schlüssel der Tupel in der erzeugten Liste ist identisch mit dem Schlüssel, welcher an die Reduce Funktion übergeben wurde.
+
+Aus diesen beiden Definitionen folgt, dass die Map Funktion Schlüssel nach belieben manipulieren kann. Für Reduce sind die Schlüssel jedoch unveränderlich.
+
+Die Ausführung von MapReduce lässt sich wie folgt deifnieren. Sei $M$ die Menge aller Map und Reduce Funktionen $\langle \mu_1, \rho_1, \mu_2, \rho_2, \dots, \mu_R, \rho_R \rangle$ und $U_0$ eine Liste von Tupeln $\langle k; v \rangle$, dann gilt für die Ausfürhung von $M$ auf die Daten $U_0$:
+
+Für $r = 1, 2, \dots, R$:
+
+\begin{enumerate}
+	\item \textbf{MAP:} $\forall \langle k; v \rangle \in U_{r-1}$ führe $\mu_r \in M$ mit $\langle k; v \rangle$ aus. Die Funktion erzeugt eine Liste neuer Tupel $\langle k_1; v_1 \rangle, \langle k_2; v_2 \rangle, \dots, \langle k_n; v_n \rangle$. Sei $U_r^{\prime}$ die Ausgabe für eine Eingabe $\langle k; v \rangle$, dann gilt: $U_r^{\prime} = \bigcup_{\langle k; v \rangle \in U_{r-1}} \mu_r(\langle k; v\rangle)$.
+	\item \textbf{COMBINE:} $\forall k$ erzeuge Liste $V_{k,r}$ mit den Werten $v_i$, so dass gilt $\langle k; v_i \rangle \in U_r^{\prime}$.
+	\item \textbf{REDUCE:} $\forall k$, übergebe $k$ und eine willkürliche Permutation von $V_{k,r}$ in eine Instanz von Reducer $\rho_r \in M$ zur Ausführung. Dieser erzuegt eine Liste von Tupeln $\langle k; v_1^{\prime} \rangle, \langle k; v_2^{\prime} \rangle, \dots, \langle k; v_n^{\prime} \rangle$. Sei $U_r$ die Ausgabe für die Eingabe $\langle k; V_{k,r} \rangle$, \\ dann gilt: $U_r = \bigcup_k \rho(\langle k; V_{k,r}\rangle)$.
+\end{enumerate}
+
+Die Verarbeitung wird beendet, wenn der letzte Reducer $\rho_R$ beendet wird. In der Definition wird die Möglichkeit zur Parallelisierung, der sequentiell ausgeführten Funktionen Map und Reduce deutlich. Sowohl Mapper als auch Reducer verarbeiten immer nur einen Tupel zeitgleich. Es können also mehrere Instanzen von $\mu_r$ und $\rho_r$ gestartet werden.\footcite[Vgl.][S. 2 f]{Karloff.2010}
+
+Die Ausfürhungszeit von MapReduce kann nicht spezifiziert werden ohne ein wissen über den Inhalt der Funktionen. Die Effizient hängt von den in den Funktionen angewandten Algorithmen ab. Allgemein lässt sich folgende Ausführungszeit definieren: Teilt man die Map-Phase in $M$ teile und die Reduce-Phase in $R$ teile, dann lässt sich allgemein eine Ausführungszeit von $O(M+R)$ festlegen. Für die Speicherauslastung gilt dabei eine maximale Auslastung von $O(M \ast R)$.\footcite[Vgl.][S. 5]{Dean.2004}
+
+\subsection{Beispielanwendung von MapReduce}\label{subsec:Beispielanwendung}
+Die formale Definition von MapReduce soll nun anhand eines einfachen Beispiels verdeutlicht werden. Dazu wird auf eine Beispielanalyse aus dem Buch "`Hadoop - Zuverlässig, verteilte und skalierbare Big-Data-Anwendungen"' von Ramon Wartala zurückgegriffen.
+
+In seinem Beispiel will Wartala aufzeigen, wie, ohne die volle Funktionalität der Hadoop-Api zu nutzen und unter Verwendung von Standard-Unix-Kommandozeilen-Tools wie \textit{grep}, \textit{sort}, \textit{cat} und \textit{awk}, aus einer CSV-Datei eine spezifische Information extrahiert werden kann.
+
+\autoref{tbl:Beispieldaten} zeigt die in seinem Beispiel verwendeten Daten. Dabei handelt es sich um die Anzahl der im Hafen Hamburg von 2004 bis 2011 umgeschlagenen Container pro Monat. Um die Verarbeitung für das Beispiel zu vereinfachen, wurde aus den Daten eine dreispaltige CSV-Datei erzeugt im Vormat \textit{Jahr;Monat;Container-Umschlag}.
+
+\newpage
+
+\begin{table}
+	\includegraphics[width=1\textwidth]{Beispieldaten.png}
+	\caption{Beispieldaten: Anzahl umgeschlagener Container\footnotemark}
+	\label{tbl:Beispieldaten}
+\end{table}
+\footnotetext{\cite[S. 26.]{Wartala.2012}}
+
+Die Information, welche mit MapReduce ermittelt werden soll, ist der Monat im Jahr 2004 mit den meisten umgeschlagenen Containern. Dieser Task lässt sich, unter Verwendung der erwähnten Unix-Tools, in drei Teilaufgaben seperieren. Als erstes werden mit den \textit{grep}-Befehl alle Zeilen ausgegeben, welche aus dem Jahr 2004 stammen (siehe \autoref{lis:Grep2004}). \\
+
+\begin{lstlisting}[language=bash, caption=Befehl zur Anzeige aller Zeilen mit Jahr 2004, label=lis:Grep2004]
+grep 2004
+\end{lstlisting}
+
+Danach werden die Zeilen nach der dritten Spalte sortiert (Spalten wurden mit ; getrennt, siehe \autoref{lis:SortiereZeilen}). \\
+
+\begin{lstlisting}[language=bash, caption=Befehl zur Sortierung der Zeilen nach der dritten Spalte, label=lis:SortiereZeilen]
+sort -t ';' -k +3 -r
+\end{lstlisting}
+
+Zuletzt wird die maximale Anzahl der Container bestimmt und das Jahr sowie der Monat und die Anzahl ausgegeben (siehe \autoref{lis:AusgabeBeispiel}). \\
+
+\begin{lstlisting}[language=bash, caption=Ausgabe des Beispielprogramms, label=lis:AusgabeBeispiel]
+awk 'max== "" || $3 > max {max=$3;jahr=$1;monat=$2} END { print "jahr:" jahr; print "monat:" monat; print "anzahl:" max;}' FS=";"
+\end{lstlisting}
+
+Mit Hilfe der Unix-Befehls-Pipeline lassen sich alle Befehle auf eine Zieldatei Anwenden (siehe \autoref{lis:VollständigerBefehl}). \\
+
+\begin{lstlisting}[language=bash, caption=Vollständiger Befehl zur Auswertung der Beispieldaten, label=lis:VollständigerBefehl]
+cat container_umschlag.csv | grep 2004 | sort -t ';' -k +3 -r | awk 'max== "" || $3 > max {max=$3;jahr=$1;monat=$2} END { print "jahr:" jahr; print "monat:" monat; print "anzahl:" max;}' FS=";" | cat > maximum_umschlag.txt
+\end{lstlisting}
+
+<Text der die ausgabe und teilung beschreibt plus bild von seite 28>
+
+Hier wird nun deutlich, dass es sich bei MapReduce nicht um einen Algoritmus, sondern um ein Vorgehensmodell handelt. Es geht lediglich darum, die Datenverarbeitung so effizient wie möglich sowohl parallel als auch seriell zu verarbeiten. Wie das Beispiel zeigt, lässt sich dieses Vorgehen auch sehr minimalistisch anwenden.
+
+%Woher kommt MapReduce? Wie funktioniert MapReduce? Stärken/Schwächen aufzeigen. Versuchen den Algorithmus mathematisch zu beschreiben ($O(n)$ Methode, Mengenleere). Hierfür muss noch Literatur gesucht werden. Bisher nur mathematische Beschreibungen im Internet gefunden.
 
 \section{Was ist Hadoop?}\label{sec:WasIstHadoop}
 \flqq Kurz gesagt: Hadoop ist ein freies, Java-basiertes Open-Source-Framework für die skalierbare und verteilte Verarbeitung großer Datenmengen auf vielen Rechnern innerhalb eines Netzwerks.\frqq\footcite[S. 21]{Wartala.2012}
