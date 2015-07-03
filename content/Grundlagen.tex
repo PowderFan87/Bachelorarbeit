@@ -1,11 +1,25 @@
 %!TEX root = ../dokumentation.tex
 
 \chapter{Theoretische Grundlagen}\label{cha:Grundlagen}
-Kurze Einleitung in das Kapitel. Beschreiben warum die Grundlagen notwendig sind. Auch darüber schreiben, dass nicht ALLE Grundlagen sondern lediglich die für das Verständnis der Arbeit notwendigen erklärt werden.
+Für das bessere Verständniss des Themas soll dieses Kapitel die relevanten, theoretischen Grundlagen vermitteln,  und an das Kernthema herranführen. Dabei wird zunächst geklärt, worum es sich bei der Überwachung von IT-Infrastrukturen handelt, und soll Antworten auf Fragen wie "`Warum werden diese überwacht?"', "`Welche Komponenten sind zu unterscheiden?"' und "`Welche Technologien werden eingesetzt?"' geben. Danach soll der Begriff Logfiles genauer definiert werden, bevor die Funktionalität von MapReduce und Hadoop erläutert wird.
+
+%Kurze Einleitung in das Kapitel. Beschreiben warum die Grundlagen notwendig sind. Auch darüber schreiben, dass nicht ALLE Grundlagen sondern lediglich die für das Verständnis der Arbeit notwendigen erklärt werden.
 
 \section{Überwachung von IT-Infrastrukturen}\label{sec:UeberwachungIT}
-Worum geht es bei der Überwachung? Was ist das Ziel? Warum braucht man eine Überwachung? Wie sieht diese i.d.R. Aus? Welche Kernpunkte gibt es in der Überwachung? \\
-Hier sollte die Überleitung zum nächsten Kapitel kommen d.h. Logfiles werden als letztes behandelt in diesem Kapitel, damit der Übergang sauber ist.
+Ziel der Überwachung ist es, durch extraktion von Informationen und überprüfen von Komponenten, Aussagen über den Zustand einer oder mehrerer Komponenten innerhalb einer IT-Infrastruktur zu erhalten. Die durch die Überwachung erhobenen Basis-Informationen werden zur Optimierung der Performance und Verfügbarkeit eines Dienstes eingesetzt.
+
+Nach Salm gibt es drei Arten von Komponenten die es zu unterscheiden gilt:
+
+\begin{itemize}
+	\item Netzwerk, um eine ausreichende Bandbreite und bestehende Übertragung zu sichern
+	\item Ressourcen, um eine effiziente Lastverteilung innerhalb der Infrastruktur zu gewährleisten
+	\item Anwendung, um Anwender schnellen, unkomplizierten Zugriff zu ermöglichen
+\end{itemize}\footcite[Vgl.][S. 8]{Salm.2007}
+
+
+
+%Worum geht es bei der Überwachung? Was ist das Ziel? Warum braucht man eine Überwachung? Wie sieht diese i.d.R. Aus? Welche Kernpunkte gibt es in der Überwachung? \\
+%Hier sollte die Überleitung zum nächsten Kapitel kommen d.h. Logfiles werden als letztes behandelt in diesem Kapitel, damit der Übergang sauber ist.
 
 \section{Bedeutung von Logfiles}\label{sec:BedeutungVonLogfiles}
 Was sind Logfiles im allgemeinen? Was ist die Funktion eines Logfiles? Gibt es Standards? Wenn ja welche und wie sehen die aus? Werden die Standards im weiteren Verlauf der Arbeit noch einmal relevant sein (Ja/Nein begründen und erläutern)?
@@ -77,33 +91,33 @@ In seinem Beispiel will Wartala aufzeigen, wie, ohne die volle Funktionalität d
 \end{table}
 \footnotetext{\cite[S. 26.]{Wartala.2012}}
 
-Die Information, welche mit MapReduce ermittelt werden soll, ist der Monat im Jahr 2004 mit den meisten umgeschlagenen Containern. Dieser Task lässt sich, unter Verwendung der erwähnten Unix-Tools, in drei Teilaufgaben seperieren. Als erstes werden mit den \textit{grep}-Befehl alle Zeilen ausgegeben, welche aus dem Jahr 2004 stammen (siehe \autoref{lis:Grep2004}). \\
+Die Information, welche mit MapReduce ermittelt werden soll, ist der Monat im Jahr 2004 mit den meisten umgeschlagenen Containern. Dieser Task lässt sich, unter Verwendung der erwähnten Unix-Tools, in drei Teilaufgaben seperieren. Als erstes werden mit den \textit{grep}-Befehl alle Zeilen ausgegeben, welche aus dem Jahr 2004 stammen (siehe \autoref{lis:Grep2004}). Dieser Schritt repräsentiert den Mapper für dieses Beispiel. \\
 
 \begin{lstlisting}[language=bash, caption=Befehl zur Anzeige aller Zeilen mit Jahr 2004, label=lis:Grep2004]
 grep 2004
 \end{lstlisting}
 
-Danach werden die Zeilen nach der dritten Spalte sortiert (Spalten wurden mit ; getrennt, siehe \autoref{lis:SortiereZeilen}). \\
+Danach werden die Zeilen nach der dritten Spalte sortiert (Spalten wurden mit ; getrennt, siehe \autoref{lis:SortiereZeilen}). Dieser Befehl repräsentiert die Combine-Phase des Modells. \\
 
 \begin{lstlisting}[language=bash, caption=Befehl zur Sortierung der Zeilen nach der dritten Spalte, label=lis:SortiereZeilen]
 sort -t ';' -k +3 -r
 \end{lstlisting}
 
-Zuletzt wird die maximale Anzahl der Container bestimmt und das Jahr sowie der Monat und die Anzahl ausgegeben (siehe \autoref{lis:AusgabeBeispiel}). \\
+Zuletzt wird die maximale Anzahl der Container bestimmt und das Jahr sowie der Monat und die Anzahl ausgegeben (siehe \autoref{lis:AusgabeBeispiel}). Dieser letzte Schritt in diesem Beispiel steht für den Reducer. \\
 
 \begin{lstlisting}[language=bash, caption=Ausgabe des Beispielprogramms, label=lis:AusgabeBeispiel]
 awk 'max== "" || $3 > max {max=$3;jahr=$1;monat=$2} END { print "jahr:" jahr; print "monat:" monat; print "anzahl:" max;}' FS=";"
 \end{lstlisting}
 
-Mit Hilfe der Unix-Befehls-Pipeline lassen sich alle Befehle auf eine Zieldatei Anwenden (siehe \autoref{lis:VollständigerBefehl}). \\
+Mit Hilfe der Unix-Befehls-Pipeline lassen sich alle Befehle auf eine Zieldatei Anwenden (siehe \autoref{lis:VollständigerBefehl}). Das Ergebnis wird in die Datei maximum\_umschlag.txt geschrieben. \\
 
 \begin{lstlisting}[language=bash, caption=Vollständiger Befehl zur Auswertung der Beispieldaten, label=lis:VollständigerBefehl]
 cat container_umschlag.csv | grep 2004 | sort -t ';' -k +3 -r | awk 'max== "" || $3 > max {max=$3;jahr=$1;monat=$2} END { print "jahr:" jahr; print "monat:" monat; print "anzahl:" max;}' FS=";" | cat > maximum_umschlag.txt
 \end{lstlisting}
 
-<Text der die ausgabe und teilung beschreibt plus bild von seite 28>
 
-Hier wird nun deutlich, dass es sich bei MapReduce nicht um einen Algoritmus, sondern um ein Vorgehensmodell handelt. Es geht lediglich darum, die Datenverarbeitung so effizient wie möglich sowohl parallel als auch seriell zu verarbeiten. Wie das Beispiel zeigt, lässt sich dieses Vorgehen auch sehr minimalistisch anwenden.
+
+Hier wird deutlich, dass es sich bei MapReduce nicht um einen Algoritmus, sondern um ein Vorgehensmodell handelt. Es geht lediglich darum, die Datenverarbeitung so effizient wie möglich sowohl parallel als auch seriell durchzuführen. Wie das Beispiel zeigt, lässt sich dieses Vorgehen auch sehr minimalistisch anwenden.
 
 %Woher kommt MapReduce? Wie funktioniert MapReduce? Stärken/Schwächen aufzeigen. Versuchen den Algorithmus mathematisch zu beschreiben ($O(n)$ Methode, Mengenleere). Hierfür muss noch Literatur gesucht werden. Bisher nur mathematische Beschreibungen im Internet gefunden.
 
@@ -125,8 +139,8 @@ Die einzlenen Komponenten sind unabhängig voneinander einsetzbar. Eine große R
 \subsection{Das verteilte Dateisystem HDFS}\label{subsec:DasVerteilteDateisystemHDFS}
 Was ist ein verteiltes Dateisystem überhaupt und wozu braucht man es? Vergleich mit einem normalen Dateisystem?
 
-\subsection{MapReduce-Framework}\label{subsec:MapReduceFramework}
-ACHTUNG. Vermutlich überflüssig da MapReduce bereits beschrieben wurde. Das Framework funktioniert nicht wirklich anders es stellt nur interfaces bereit damit die klassen stimmen.
+%\subsection{MapReduce-Framework}\label{subsec:MapReduceFramework}
+%ACHTUNG. Vermutlich überflüssig da MapReduce bereits beschrieben wurde. Das Framework funktioniert nicht wirklich anders es stellt nur interfaces bereit damit die klassen stimmen.
 
 \subsection{Abgrenzung - Was ist Hadoop nicht?}
 

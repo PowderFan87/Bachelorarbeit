@@ -138,6 +138,26 @@
   \field{year}{2010}
 \endentry
 
+\entry{Salm.2007}{book}{}
+  \name{author}{1}{}{%
+    {{}%
+     {Salm}{S.}%
+     {E.}{E.}%
+     {}{}%
+     {}{}}%
+  }
+  \list{publisher}{1}{%
+    {Diplomica-Verlag}%
+  }
+  \strng{namehash}{SE1}
+  \strng{fullhash}{SE1}
+  \field{labelyear}{2007}
+  \field{sortinit}{S}
+  \field{isbn}{9783836652537}
+  \field{title}{IT-Systemmanagement: Infrastruktur-Management}
+  \field{year}{2007}
+\endentry
+
 \entry{Wartala.2012}{book}{}
   \name{author}{1}{}{%
     {{}%
