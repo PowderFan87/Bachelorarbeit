@@ -24,56 +24,56 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {section}{\numberline {2.1}\IeC {\"U}berwachung von IT-Infrastrukturen}{3}{section.2.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {2.2}Bedeutung von Logfiles}{3}{section.2.2}
+\contentsline {section}{\numberline {2.2}Bedeutung von Logfiles}{4}{section.2.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {2.3}Einf\IeC {\"u}hrung in MapReduce}{4}{section.2.3}
+\contentsline {section}{\numberline {2.3}Einf\IeC {\"u}hrung in MapReduce}{6}{section.2.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {2.3.1}Formale Beschreibung von MapReduce}{5}{subsection.2.3.1}
+\contentsline {subsection}{\numberline {2.3.1}Formale Beschreibung von MapReduce}{7}{subsection.2.3.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {2.3.2}Beispielanwendung von MapReduce}{7}{subsection.2.3.2}
+\contentsline {subsection}{\numberline {2.3.2}Beispielanwendung von MapReduce}{9}{subsection.2.3.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {2.4}Was ist Hadoop?}{9}{section.2.4}
+\contentsline {section}{\numberline {2.4}Was ist Hadoop?}{10}{section.2.4}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {2.4.1}Das verteilte Dateisystem HDFS}{10}{subsection.2.4.1}
+\contentsline {subsection}{\numberline {2.4.1}Das verteilte Dateisystem HDFS}{12}{subsection.2.4.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {2.4.2}Abgrenzung - Was ist Hadoop nicht?}{10}{subsection.2.4.2}
+\contentsline {subsection}{\numberline {2.4.2}Abgrenzung - Was ist Hadoop nicht?}{12}{subsection.2.4.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {3}Planung}{11}{chapter.3}
+\contentsline {chapter}{\numberline {3}Planung}{13}{chapter.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {3.1}Ermittlung der Anforderungen}{11}{section.3.1}
+\contentsline {section}{\numberline {3.1}Ermittlung der Anforderungen}{13}{section.3.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {3.2}Formulierung konkreter Ziele}{11}{section.3.2}
+\contentsline {section}{\numberline {3.2}Formulierung konkreter Ziele}{13}{section.3.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {3.3}Definition der Umgebung}{11}{section.3.3}
+\contentsline {section}{\numberline {3.3}Definition der Umgebung}{13}{section.3.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {4}Setup}{12}{chapter.4}
+\contentsline {chapter}{\numberline {4}Setup}{14}{chapter.4}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {4.1}Installation von Hadoop}{12}{section.4.1}
+\contentsline {section}{\numberline {4.1}Installation von Hadoop}{14}{section.4.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {4.2}Anlegen eines neuen Maven Projektes}{12}{section.4.2}
+\contentsline {section}{\numberline {4.2}Anlegen eines neuen Maven Projektes}{14}{section.4.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {5}Umsetzung}{13}{chapter.5}
+\contentsline {chapter}{\numberline {5}Umsetzung}{15}{chapter.5}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {5.1}Implementierung von Properties}{13}{section.5.1}
+\contentsline {section}{\numberline {5.1}Implementierung von Properties}{15}{section.5.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {5.2}Grundlagen f\IeC {\"u}r Datenverarbeitung}{13}{section.5.2}
+\contentsline {section}{\numberline {5.2}Grundlagen f\IeC {\"u}r Datenverarbeitung}{15}{section.5.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {5.3}Bestimmung des Aufbaus der Logfiles}{13}{section.5.3}
+\contentsline {section}{\numberline {5.3}Bestimmung des Aufbaus der Logfiles}{15}{section.5.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {5.4}Implementierung von MapReduce}{13}{section.5.4}
+\contentsline {section}{\numberline {5.4}Implementierung von MapReduce}{15}{section.5.4}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {6}Projektabschluss, Fazit \& Ausblick}{14}{chapter.6}
+\contentsline {chapter}{\numberline {6}Projektabschluss, Fazit \& Ausblick}{16}{chapter.6}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {6.1}Vergleich der Umsetzung mit den Zielen}{14}{section.6.1}
+\contentsline {section}{\numberline {6.1}Vergleich der Umsetzung mit den Zielen}{16}{section.6.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {6.2}Proof of Concept}{14}{section.6.2}
+\contentsline {section}{\numberline {6.2}Proof of Concept}{16}{section.6.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {6.3}Fazit}{14}{section.6.3}
+\contentsline {section}{\numberline {6.3}Fazit}{16}{section.6.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {6.4}Ausblick}{14}{section.6.4}
+\contentsline {section}{\numberline {6.4}Ausblick}{16}{section.6.4}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\nonumberline Literatur}{i}{chapter*.11}
+\contentsline {chapter}{\nonumberline Literatur}{i}{chapter*.15}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{Glossar}{ii}{section*.14}
+\contentsline {chapter}{Glossar}{iii}{section*.20}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\nonumberline Anhang}{iii}{appendix*.16}
+\contentsline {chapter}{\nonumberline Anhang}{iv}{appendix*.22}

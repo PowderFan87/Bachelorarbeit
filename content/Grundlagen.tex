@@ -14,15 +14,49 @@ Nach Salm gibt es drei Arten von Komponenten die es zu unterscheiden gilt:
 	\item Netzwerk, um eine ausreichende Bandbreite und bestehende Übertragung zu sichern
 	\item Ressourcen, um eine effiziente Lastverteilung innerhalb der Infrastruktur zu gewährleisten
 	\item Anwendung, um Anwender schnellen, unkomplizierten Zugriff zu ermöglichen
-\end{itemize}\footcite[Vgl.][S. 8]{Salm.2007}
+\end{itemize}
 
+Überwachungssysteme zeigen Administratoren die Up- und Downtime, sowie die Auslastung, von Soft- und Hardware an.\footcite[Vgl.][S. 8]{Salm.2007}
 
+Um Aussagen über den Zustand einer Komponente treffen zu können, analysiert das Überwachungssystem eine Vielzahl von Informationen. Dabei werden unterschiedliche techniken eingesetzt von einfachen Standard-Unix-Kommandozeilen-Tools bis hin zu inteligenten Agenten.
+
+Diese Agenten werden auf der Zielkomponente installiert und sind als Hintergrundanwendung dauerhaft aktiv um immer die aktuellsten Informationen an das Überwachungssystem zu übermitteln.
+
+Um eine hohe Qualität der Daten zu gewährleisten, werden die Agenten, entweder direkt oder über eine externe Schnittstelle, so konfiguriert, dass sie nur die Informationen ermitteln und übertragen, welche für das Überwachungssystem relevant sind. Agenten können auch eine direktere Rolle bei der Überwachung von Komponenten übernehmen, indem sie, anstatt oder zusätzlich zu den Informationen, die Daten selbst interpretieren, um Meldungen an das Überwachungssystem zu übermitteln.
+
+In beiden fällen kombinieren Agenten selbst ermittelte Informationen mit bereits vorhandenen. Zu den selbst ermittelten Daten gehören unter anderem CPU und RAM Auslastung oder offene Ports. Bereits vorhandene Informationen können durch auf der Komponente laufende Software, oder durch die Komponente selbst, erzeugt werden.
+
+<Kurze Fokusierung auf Online Service. Welche Informationen werden hier im speziellen benötigt. Erwähnen von Monitoring Systemen. Daraus die Überleitung zu Logfiles machen>
 
 %Worum geht es bei der Überwachung? Was ist das Ziel? Warum braucht man eine Überwachung? Wie sieht diese i.d.R. Aus? Welche Kernpunkte gibt es in der Überwachung? \\
 %Hier sollte die Überleitung zum nächsten Kapitel kommen d.h. Logfiles werden als letztes behandelt in diesem Kapitel, damit der Übergang sauber ist.
 
 \section{Bedeutung von Logfiles}\label{sec:BedeutungVonLogfiles}
-Was sind Logfiles im allgemeinen? Was ist die Funktion eines Logfiles? Gibt es Standards? Wenn ja welche und wie sehen die aus? Werden die Standards im weiteren Verlauf der Arbeit noch einmal relevant sein (Ja/Nein begründen und erläutern)?
+Nach Baur und Blasius bezeichnen Logfiles (oder auch Protokolldateien) \flqq [...] automatisch erstellte Dateien [..], in denen bestimmte Ereignisse elektronisch aufgezeichnet werden.\frqq\footcite[S. 847]{Baur.2014} Dabei werden sowhl negative wie auch positive Ereignisse protokolliert.
+
+Bei Web-Servern, welche mit Apache unter Linux betrieben werden, stellen syslog von Linux, soweie Error- und Access-Log von Apache, die Grundlage zur Überwachung des Servers. Sie lassen sich sehr einfach durch die in \autoref{sec:UeberwachungIT} beschriebenen Agenten überwachen, da sie einem klar vorgegebenen Standard folgen.
+
+Im syslog von Linux werden alle Ereignisse protokolliert, welche im direkten Zusammenhang mit dem System stehen. Die Einträge folgen dabei der im \ac{RFC} 5424\footcite[RFC 5424,][]{RFC5424.2009} festgehaltenen Beschreibung (Da es sich bei RFC um keine offizielle Norm handelt, handelt es sich lediglich um eine Beschreibung, nicht um einen Standard).
+
+Das Apache-Error-Log enthält diagnostische Informationen und protokolliert alle Fehler, welche bei der Verarbeitung einer Anfrage auftreten. \autoref{lst:BeispieleintragApacheErrorLog} zeigt, wie ein Eintrag in einem Error-Log aussehen könnte. Es lässt sich klar erkennen, wann der Fehler aufgetreten ist, was fehlgeschlagen ist und welches Modul betroffen ist. Ebenfalls sichtbar ist die \ac{IP}-Adresse des Clients, bei dem der Fehler aufgetreten ist. Die Einträge des Error-Logs entsprechen keiner Norm oder \ac{RFC} Beschreibung. Sie können nach der Installation individuell angepasst werden.\footcite[Vgl.][]{ApacheErrorLog.2015} \\
+
+\begin{lstlisting}[caption=Beispieleintrag für ein Appache-Error-Log,label=lst:BeispieleintragApacheErrorLog]
+[Fri Jun 12 10:42:29.902022 2015] [core:error] [pid 35708:tid 4328636416] [client 192.168.172.15] File does not exist: /usr/local/apache2/htdocs/favicon.ico
+\end{lstlisting}
+
+Im Apache-Access-Log werden alle Anfragen an den Server protokolliert. Dabei wird gespeichert von welcher \ac{IP}-Adresse die Anfrage kam, wann die Anfrage gestartet wurde, welcher art die Anfrage war und welche Pfad angefragt wurde, sowie welcher Statuscode zurückgegeben wurde und wie groß die Antwort des Server war (siehe \autoref{lst:BeispieleintragApacheAccessLog}). \\
+
+\begin{lstlisting}[caption=Beispieleintrag für ein Appache-Access-Log,label=lst:BeispieleintragApacheAccessLog]
+192.168.172.15 - Max [11/Jun/2015:13:55:36 -0700] "GET /dummy.gif HTTP/1.0" 200 2326
+\end{lstlisting}
+
+Wie beim Error-Log können die Einträge angepasst werden und folgen somit keiner Norm oder \ac{RFC}. Die Beispiele zeigen ebenfalls, wie unterschiedlich die Einträge für zwei Logfiles des gleichen Systems sein können.\footcite[Vgl.][]{ApacheAccessLog.2015}
+
+Da es sich bei \ac{IP}-Adressen potenziell um Personenbezogenen daten handelt, ist diese nach §3 Abs. 1 des \ac{BDSG} geschützt\footcite[§3 Abs. 1 BDSG,][]{BDSG3.1990} (Potenziell Personenbezogen, da nicht ersichtlich ist ob eine \ac{IP}-Adresse sttisch oder dynamisch ist). Die speicherung der \ac{IP}-Adresse ist daher nur gestattet, wenn der Anwender zustimmt, oder ein Grund für die speicherung vorliegt, welcher §15 \ac{TMG} genügt.\footcite[§15 TMG,][]{TMG15.2007} Ist dies nicht der Fall, darf die \ac{IP} nicht Teil des Protokolleintrags sein. Die Standardeinstellung muss entsprechend verändert werden.
+
+Aufgrund der Gesetzeslage, muss die im Zuge dieser Arbeit entwickelte Anwendung, bei der Weiterverarbeitung der Daten, den gesetzlichen Vorlagen genügen. Dabei ist besonders zu beachten, ob eine Anonymisierung oder Pseudonymisierung der Daten stattfinden muss. Dieser Aspekt wird in \autoref{cha:Planung} näher betrachtet.
+
+%Was sind Logfiles im allgemeinen? Was ist die Funktion eines Logfiles? Gibt es Standards? Wenn ja welche und wie sehen die aus? Werden die Standards im weiteren Verlauf der Arbeit noch einmal relevant sein (Ja/Nein begründen und erläutern)?
 
 \section{Einführung in MapReduce}\label{sec:EinführungInMapReduce}
 Die Google Mitarbeiter Jeffrey Dean und Sanjar Ghemawat veröffentlichten 2004 eine Arbeit, in welcher sie einen neuen Ansatz zur Verarbeitung von großen, unstrukturierten Daten beschrieben. Das in der Arbeit beschriebene Modell wurde als \textit{Map-Reduce} bezeichnet. Dabei wurde nicht nur beschrieben, wie man große Datenmengen durchsucht, auswetet und in Schlüssel-Wert-Paaren zusammenfast. Die Clusterung von Jobs auf \gls{Commodity-Hardware} waren ebenfalls ein Bestandteil der Arbeit. Freiknecht schreibt weiter, dass diese Arbeit als Ursprung des Algorithmus bezeichnet wird, und somit Implementierungen wie Hadoop, Disco oder BashReduce inspiriert hat.\footcite[Vgl.][S. 42]{Freiknecht.2014}
@@ -82,9 +116,7 @@ In seinem Beispiel will Wartala aufzeigen, wie, ohne die volle Funktionalität d
 
 \autoref{tbl:Beispieldaten} zeigt die in seinem Beispiel verwendeten Daten. Dabei handelt es sich um die Anzahl der im Hafen Hamburg von 2004 bis 2011 umgeschlagenen Container pro Monat. Um die Verarbeitung für das Beispiel zu vereinfachen, wurde aus den Daten eine dreispaltige CSV-Datei erzeugt im Vormat \textit{Jahr;Monat;Container-Umschlag}.
 
-\newpage
-
-\begin{table}
+\begin{table}[h]
 	\includegraphics[width=1\textwidth]{Beispieldaten.png}
 	\caption{Beispieldaten: Anzahl umgeschlagener Container\footnotemark}
 	\label{tbl:Beispieldaten}
@@ -93,29 +125,31 @@ In seinem Beispiel will Wartala aufzeigen, wie, ohne die volle Funktionalität d
 
 Die Information, welche mit MapReduce ermittelt werden soll, ist der Monat im Jahr 2004 mit den meisten umgeschlagenen Containern. Dieser Task lässt sich, unter Verwendung der erwähnten Unix-Tools, in drei Teilaufgaben seperieren. Als erstes werden mit den \textit{grep}-Befehl alle Zeilen ausgegeben, welche aus dem Jahr 2004 stammen (siehe \autoref{lis:Grep2004}). Dieser Schritt repräsentiert den Mapper für dieses Beispiel. \\
 
-\begin{lstlisting}[language=bash, caption=Befehl zur Anzeige aller Zeilen mit Jahr 2004, label=lis:Grep2004]
+\begin{lstlisting}[language=bash, caption={Befehl zur Anzeige aller Zeilen mit Jahr 2004\protect\footnotemark}, label=lis:Grep2004]
 grep 2004
 \end{lstlisting}
+\footnotetext{\cite[S. 27.]{Wartala.2012}}
 
 Danach werden die Zeilen nach der dritten Spalte sortiert (Spalten wurden mit ; getrennt, siehe \autoref{lis:SortiereZeilen}). Dieser Befehl repräsentiert die Combine-Phase des Modells. \\
 
-\begin{lstlisting}[language=bash, caption=Befehl zur Sortierung der Zeilen nach der dritten Spalte, label=lis:SortiereZeilen]
+\begin{lstlisting}[language=bash, caption={Befehl zur Sortierung der Zeilen nach der dritten Spalte\protect\footnotemark}, label=lis:SortiereZeilen]
 sort -t ';' -k +3 -r
 \end{lstlisting}
+\footnotetext{\cite[S. 27.]{Wartala.2012}}
 
 Zuletzt wird die maximale Anzahl der Container bestimmt und das Jahr sowie der Monat und die Anzahl ausgegeben (siehe \autoref{lis:AusgabeBeispiel}). Dieser letzte Schritt in diesem Beispiel steht für den Reducer. \\
 
-\begin{lstlisting}[language=bash, caption=Ausgabe des Beispielprogramms, label=lis:AusgabeBeispiel]
+\begin{lstlisting}[language=bash, caption={Ausgabe des Beispielprogramms\protect\footnotemark}, label=lis:AusgabeBeispiel]
 awk 'max== "" || $3 > max {max=$3;jahr=$1;monat=$2} END { print "jahr:" jahr; print "monat:" monat; print "anzahl:" max;}' FS=";"
 \end{lstlisting}
+\footnotetext{\cite[S. 27.]{Wartala.2012}}
 
-Mit Hilfe der Unix-Befehls-Pipeline lassen sich alle Befehle auf eine Zieldatei Anwenden (siehe \autoref{lis:VollständigerBefehl}). Das Ergebnis wird in die Datei maximum\_umschlag.txt geschrieben. \\
+Mit Hilfe der Unix-Befehls-Pipeline lassen sich alle Befehle auf eine Zieldatei Anwenden (siehe \autoref{lis:VollständigerBefehl}). Das Ergebnis wird in die Datei maximum\_umschlag.txt geschrieben.\footcite[Vgl.][S. 26 ff]{Wartala.2012} \\
 
-\begin{lstlisting}[language=bash, caption=Vollständiger Befehl zur Auswertung der Beispieldaten, label=lis:VollständigerBefehl]
+\begin{lstlisting}[language=bash, caption={Vollständiger Befehl zur Auswertung der Beispieldaten\protect\footnotemark}, label=lis:VollständigerBefehl]
 cat container_umschlag.csv | grep 2004 | sort -t ';' -k +3 -r | awk 'max== "" || $3 > max {max=$3;jahr=$1;monat=$2} END { print "jahr:" jahr; print "monat:" monat; print "anzahl:" max;}' FS=";" | cat > maximum_umschlag.txt
 \end{lstlisting}
-
-
+\footnotetext{\cite[S. 28.]{Wartala.2012}}
 
 Hier wird deutlich, dass es sich bei MapReduce nicht um einen Algoritmus, sondern um ein Vorgehensmodell handelt. Es geht lediglich darum, die Datenverarbeitung so effizient wie möglich sowohl parallel als auch seriell durchzuführen. Wie das Beispiel zeigt, lässt sich dieses Vorgehen auch sehr minimalistisch anwenden.
 
