@@ -3,6 +3,9 @@
 \chapter{Theoretische Grundlagen}\label{cha:Grundlagen}
 Für das bessere Verständniss des Themas soll dieses Kapitel die relevanten, theoretischen Grundlagen vermitteln,  und an das Kernthema herranführen. Dabei wird zunächst geklärt, worum es sich bei der Überwachung von IT-Infrastrukturen handelt, und soll Antworten auf Fragen wie "`Warum werden diese überwacht?"', "`Welche Komponenten sind zu unterscheiden?"' und "`Welche Technologien werden eingesetzt?"' geben. Danach soll der Begriff Logfiles genauer definiert werden, bevor die Funktionalität von MapReduce und Hadoop erläutert wird.
 
+%TODO: Einleitung überarbeiten
+<Einleitung in das Kapitel noch nicht wirklich rund. Überarbeiten!>
+
 %Kurze Einleitung in das Kapitel. Beschreiben warum die Grundlagen notwendig sind. Auch darüber schreiben, dass nicht ALLE Grundlagen sondern lediglich die für das Verständnis der Arbeit notwendigen erklärt werden.
 
 \section{Überwachung von IT-Infrastrukturen}\label{sec:UeberwachungIT}
@@ -26,7 +29,8 @@ Um eine hohe Qualität der Daten zu gewährleisten, werden die Agenten, entweder
 
 In beiden fällen kombinieren Agenten selbst ermittelte Informationen mit bereits vorhandenen. Zu den selbst ermittelten Daten gehören unter anderem CPU und RAM Auslastung oder offene Ports. Bereits vorhandene Informationen können durch auf der Komponente laufende Software, oder durch die Komponente selbst, erzeugt werden.
 
-<Kurze Fokusierung auf Online Service. Welche Informationen werden hier im speziellen benötigt. Erwähnen von Monitoring Systemen. Daraus die Überleitung zu Logfiles machen>
+%TODO: Überleitung zu Logfiles schreiben aus fokusieren auf web und monitoring systemen
+<Kurze Fokusierung auf Online Service. Welche Informationen werden hier im speziellen benötigt. Erwähnen von Monitoring Systemen. Funktion von Agenten, im zusammenspiel mit Monitoring Systemen, bei der analyse von Logfiles beschreiben und daraus die Überleitung zu Logfiles ableiten>
 
 %Worum geht es bei der Überwachung? Was ist das Ziel? Warum braucht man eine Überwachung? Wie sieht diese i.d.R. Aus? Welche Kernpunkte gibt es in der Überwachung? \\
 %Hier sollte die Überleitung zum nächsten Kapitel kommen d.h. Logfiles werden als letztes behandelt in diesem Kapitel, damit der Übergang sauber ist.
@@ -52,12 +56,17 @@ Im Apache-Access-Log werden alle Anfragen an den Server protokolliert. Dabei wir
 
 Wie beim Error-Log können die Einträge angepasst werden und folgen somit keiner Norm oder \ac{RFC}. Die Beispiele zeigen ebenfalls, wie unterschiedlich die Einträge für zwei Logfiles des gleichen Systems sein können.\footcite[Vgl.][]{ApacheAccessLog.2015}
 
+%TODO: Gesetz zur Vorratsdatenspeicherung suchen und abgleichen mit TMG und BDSG
 Da es sich bei \ac{IP}-Adressen potenziell um Personenbezogenen daten handelt, ist diese nach §3 Abs. 1 des \ac{BDSG} geschützt\footcite[§3 Abs. 1 BDSG,][]{BDSG3.1990} (Potenziell Personenbezogen, da nicht ersichtlich ist ob eine \ac{IP}-Adresse sttisch oder dynamisch ist). Die speicherung der \ac{IP}-Adresse ist daher nur gestattet, wenn der Anwender zustimmt, oder ein Grund für die speicherung vorliegt, welcher §15 \ac{TMG} genügt.\footcite[§15 TMG,][]{TMG15.2007} Ist dies nicht der Fall, darf die \ac{IP} nicht Teil des Protokolleintrags sein. Die Standardeinstellung muss entsprechend verändert werden.
 
 Aufgrund der Gesetzeslage, muss die im Zuge dieser Arbeit entwickelte Anwendung, bei der Weiterverarbeitung der Daten, den gesetzlichen Vorlagen genügen. Dabei ist besonders zu beachten, ob eine Anonymisierung oder Pseudonymisierung der Daten stattfinden muss. Dieser Aspekt wird in \autoref{cha:Planung} näher betrachtet.
 
+%TODO: Kapitel Logfiles zusammenfassen und aus nicht norm folgenden notation überleitung zu MapReduce bilden
+<Zusammenfassung am ende des Kapitels. Aufzeigen das Logfiles unterschiedliche Notation besitzen und keinem einheitlichen Standard folgen. Erwähnen das die üblichen Logs trotz allem durch Agenten auswertbar sind, die Logs um die es später geht jedoch nicht. Aus dieser Aussage die verwendung von MapReduce begründen und daraus die Überleitung zu MapReduce bilden>
+
 %Was sind Logfiles im allgemeinen? Was ist die Funktion eines Logfiles? Gibt es Standards? Wenn ja welche und wie sehen die aus? Werden die Standards im weiteren Verlauf der Arbeit noch einmal relevant sein (Ja/Nein begründen und erläutern)?
 
+%TODO: Kapitel inhaltlich abgeschlossen. Review für Formuliereungen und Rechtschreibung noch offen. Auch auf überleitungen zu den unterkapiteln achten um lesefluss nicht zu stören
 \section{Einführung in MapReduce}\label{sec:EinführungInMapReduce}
 Die Google Mitarbeiter Jeffrey Dean und Sanjar Ghemawat veröffentlichten 2004 eine Arbeit, in welcher sie einen neuen Ansatz zur Verarbeitung von großen, unstrukturierten Daten beschrieben. Das in der Arbeit beschriebene Modell wurde als \textit{Map-Reduce} bezeichnet. Dabei wurde nicht nur beschrieben, wie man große Datenmengen durchsucht, auswetet und in Schlüssel-Wert-Paaren zusammenfast. Die Clusterung von Jobs auf \gls{Commodity-Hardware} waren ebenfalls ein Bestandteil der Arbeit. Freiknecht schreibt weiter, dass diese Arbeit als Ursprung des Algorithmus bezeichnet wird, und somit Implementierungen wie Hadoop, Disco oder BashReduce inspiriert hat.\footcite[Vgl.][S. 42]{Freiknecht.2014}
 
@@ -153,6 +162,9 @@ cat container_umschlag.csv | grep 2004 | sort -t ';' -k +3 -r | awk 'max== "" ||
 
 Hier wird deutlich, dass es sich bei MapReduce nicht um einen Algoritmus, sondern um ein Vorgehensmodell handelt. Es geht lediglich darum, die Datenverarbeitung so effizient wie möglich sowohl parallel als auch seriell durchzuführen. Wie das Beispiel zeigt, lässt sich dieses Vorgehen auch sehr minimalistisch anwenden.
 
+%TODO: Überleitung zum nächsten Kapitel noch offen
+<Noch ein paar sätze zur anwendung auf komplexere daten. Daraus die Überleitung zum nächsten Kapitel über Hadoop und das Framework schaffen>
+
 %Woher kommt MapReduce? Wie funktioniert MapReduce? Stärken/Schwächen aufzeigen. Versuchen den Algorithmus mathematisch zu beschreiben ($O(n)$ Methode, Mengenleere). Hierfür muss noch Literatur gesucht werden. Bisher nur mathematische Beschreibungen im Internet gefunden.
 
 \section{Was ist Hadoop?}\label{sec:WasIstHadoop}
@@ -171,14 +183,13 @@ Hadoop besteht aus zwei Kernkomponenten. Dem verteilten Dateisystem \ac{HDFS} un
 Die einzlenen Komponenten sind unabhängig voneinander einsetzbar. Eine große Rolle spielt bei Hadoop das Konzept der Datenlokalität. Entgegen dem normalen vorgehen, bei welchem einem Programm die daten zu verfügung gestellt werden, wird bei Hadoop das Programm zur Ausführung im Cluster verteilt. Da es sich bei Hadoop i.d.R. um Anwendungen im Big Data bereich handelt, macht es Sinn, da die Anwendung wesentlich kleiner und somit schneller zu übertragen ist, als die Daten.\footcite[Vgl.][S. 20]{Freiknecht.2014}
 
 \subsection{Das verteilte Dateisystem HDFS}\label{subsec:DasVerteilteDateisystemHDFS}
-Was ist ein verteiltes Dateisystem überhaupt und wozu braucht man es? Vergleich mit einem normalen Dateisystem?
+<Was ist ein verteiltes Dateisystem überhaupt und wozu braucht man es? Vergleich mit einem normalen Dateisystem?>
 
 %\subsection{MapReduce-Framework}\label{subsec:MapReduceFramework}
 %ACHTUNG. Vermutlich überflüssig da MapReduce bereits beschrieben wurde. Das Framework funktioniert nicht wirklich anders es stellt nur interfaces bereit damit die klassen stimmen.
 
 \subsection{Abgrenzung - Was ist Hadoop nicht?}
-
-%Was gehört alles zu Hadoop? Worauf zieht Hadoop ab? Warum verwende ich Hadoop statt es einfach selbst zu machen? Stärken und Schwächen aufzeigen.
+<Was gehört alles zu Hadoop? Worauf zieht Hadoop ab? Warum verwende ich Hadoop statt es einfach selbst zu machen? Stärken und Schwächen aufzeigen.>
 
 %\section{Betrachten von Alternativen}
 %Alternativen sowohl zu Hadoop als auch zu MapReduce selbst. Was gibt es in diesen Bereichen noch? Wie unterscheiden sich diese?
