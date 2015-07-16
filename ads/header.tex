@@ -67,7 +67,8 @@
 \usepackage{wrapfig}
 \usepackage{pgffor} % für automatische Kapiteldateieinbindung
 \usepackage[perpage, hang, multiple, stable]{footmisc} % Fussnoten
-\usepackage[footnote]{acronym} % falls gewünscht kann die Option footnote eingefügt werden, dann wird die Erklärung nicht inline sondern in einer Fußnote dargestellt
+%\usepackage[nohyperlinks]{acronym} % falls gewünscht kann die Option footnote eingefügt werden, dann wird die Erklärung nicht inline sondern in einer Fußnote dargestellt
+\usepackage{acronym}
 
 \usepackage{listings}
 
@@ -154,6 +155,7 @@
 
 % Mehr Platz zwischen einzelnen Items im Literaturverzeichnis bei Verwendung von authoryear
 \setlength{\bibitemsep}{\baselineskip}
+\DeclareNameAlias{sortname}{last-first}
 
 \ladeliteratur{}
 
@@ -172,7 +174,7 @@
 \graphicspath{{images/}}
 
 % Einige häufig verwendete Sprachen
-\lstloadlanguages{PHP,Python,Java,C,C++,bash}
+\lstloadlanguages{PHP,Python,Java,C,C++,bash,XML}
 \listingsettings{}
 % Umbennung des Listings
 \renewcommand\lstlistingname{\langlistingname}

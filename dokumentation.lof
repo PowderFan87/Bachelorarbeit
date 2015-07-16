@@ -14,13 +14,17 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {figure}{\numberline {2.2}{\ignorespaces Master-Worker in MapReduce\FN@sf@gobble@optonly }}{7}{figure.2.2}
 \defcounter {refsection}{0}\relax 
-\addvspace {10\p@ }
-\defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {3.1}{\ignorespaces DUMMY: Aufbau der Infrastruktur}}{15}{figure.3.1}
+\contentsline {figure}{\numberline {2.3}{\ignorespaces HDFS Architektur-Schema\FN@sf@gobble@optonly }}{13}{figure.2.3}
 \defcounter {refsection}{0}\relax 
 \addvspace {10\p@ }
 \defcounter {refsection}{0}\relax 
 \addvspace {10\p@ }
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {4.1}{\ignorespaces Ergebnis f\IeC {\"u}r die Komandozeileneingabe \textit {hadoop version}}}{21}{figure.4.1}
+\defcounter {refsection}{0}\relax 
+\addvspace {10\p@ }
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {5.1}{\ignorespaces DUMMY: Aufbau der Infrastruktur}}{25}{figure.5.1}
 \defcounter {refsection}{0}\relax 
 \addvspace {10\p@ }
 \defcounter {refsection}{0}\relax 

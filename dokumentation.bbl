@@ -253,7 +253,7 @@
   \field{year}{2007}
 \endentry
 
-\entry{ApacheAccessLog.2015}{online}{}
+\entry{ApacheHadoopDoku.2015}{online}{}
   \name{author}{1}{}{%
     {{}%
      {{The Apache Software Foundation}}{T.}%
@@ -265,6 +265,31 @@
   \strng{fullhash}{T1}
   \field{labelyear}{2015}
   \field{extrayear}{1}
+  \field{sortinit}{T}
+  \field{title}{Apache Hadoop 2.7.1 - Hadoop: Setting up a Single Node
+  Cluster.}
+  \verb{url}
+  \verb http://hadoop.apache.org/docs/current/hadoop-project-dist/hadoop-common
+  \verb /SingleCluster.html
+  \endverb
+  \field{year}{2015}
+  \field{urlday}{13}
+  \field{urlmonth}{07}
+  \field{urlyear}{2015}
+\endentry
+
+\entry{ApacheAccessLog.2015}{online}{}
+  \name{author}{1}{}{%
+    {{}%
+     {{The Apache Software Foundation}}{T.}%
+     {}{}%
+     {}{}%
+     {}{}}%
+  }
+  \strng{namehash}{T1}
+  \strng{fullhash}{T1}
+  \field{labelyear}{2015}
+  \field{extrayear}{2}
   \field{sortinit}{T}
   \field{title}{Log Files - Access Log}
   \verb{url}
@@ -287,7 +312,7 @@
   \strng{namehash}{T1}
   \strng{fullhash}{T1}
   \field{labelyear}{2015}
-  \field{extrayear}{2}
+  \field{extrayear}{3}
   \field{sortinit}{T}
   \field{title}{Log Files - Error Log}
   \verb{url}
