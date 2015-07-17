@@ -17,7 +17,7 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {lstlisting}{\numberline {2.5}Ausgabe des Beispielprogramms\footnotemark }{10}{lstlisting.2.5}
 \defcounter {refsection}{0}\relax 
-\contentsline {lstlisting}{\numberline {2.6}Vollst\IeC {\"a}ndiger Befehl zur Auswertung der Beispieldaten\footnotemark }{10}{lstlisting.2.6}
+\contentsline {lstlisting}{\numberline {2.6}Vollst\IeC {\"a}ndiger Befehl zur Auswertung der Beispieldaten\footnotemark }{11}{lstlisting.2.6}
 \defcounter {refsection}{0}\relax 
 \addvspace {10\p@ }
 \defcounter {refsection}{0}\relax 

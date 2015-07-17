@@ -28,7 +28,7 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {section}{\numberline {2.3}Einf\IeC {\"u}hrung in MapReduce}{6}{section.2.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {2.3.1}Formale Beschreibung von MapReduce}{7}{subsection.2.3.1}
+\contentsline {subsection}{\numberline {2.3.1}Formale Beschreibung von MapReduce}{8}{subsection.2.3.1}
 \defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {2.3.2}Beispielanwendung von MapReduce}{9}{subsection.2.3.2}
 \defcounter {refsection}{0}\relax 
@@ -36,21 +36,23 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {2.4.1}Das verteilte Dateisystem HDFS}{12}{subsection.2.4.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\nonumberline NameNodes}{13}{section*.17}
+\contentsline {subsubsection}{\nonumberline NameNodes}{14}{section*.17}
 \defcounter {refsection}{0}\relax 
 \contentsline {subsubsection}{\nonumberline DataNodes}{14}{section*.22}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {2.4.2}Abgrenzung - Was ist Hadoop nicht?}{14}{subsection.2.4.2}
+\contentsline {subsection}{\numberline {2.4.2}Abgrenzung - Was ist Hadoop nicht?}{15}{subsection.2.4.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {2.4.3}\IeC {\"U}berlegungen zur Ausfallsicherheit von Hadoop}{15}{subsection.2.4.3}
+\contentsline {subsection}{\numberline {2.4.3}\IeC {\"U}berlegungen zur Ausfallsicherheit von Hadoop}{16}{subsection.2.4.3}
 \defcounter {refsection}{0}\relax 
 \contentsline {chapter}{\numberline {3}Planung}{17}{chapter.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {3.1}Ermittlung der Anforderungen}{17}{section.3.1}
+\contentsline {section}{\numberline {3.1}Anforderungen \& Produktleistungen}{17}{section.3.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {3.2}Formulierung konkreter Ziele}{17}{section.3.2}
+\contentsline {subsection}{\numberline {3.1.1}Anforderungen}{17}{subsection.3.1.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {3.3}Definition der Umgebung}{17}{section.3.3}
+\contentsline {subsection}{\numberline {3.1.2}Produktleistungen}{17}{subsection.3.1.2}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {3.2}Definition der Umgebung}{17}{section.3.2}
 \defcounter {refsection}{0}\relax 
 \contentsline {chapter}{\numberline {4}Setup}{19}{chapter.4}
 \defcounter {refsection}{0}\relax 
@@ -90,4 +92,4 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {chapter}{Glossar}{iii}{section*.34}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\nonumberline Anhang}{iv}{appendix*.36}
+\contentsline {chapter}{\nonumberline Anhang}{v}{appendix*.36}

@@ -29,8 +29,12 @@ Um eine hohe Qualität der Daten zu gewährleisten, werden die Agenten, entweder
 
 In beiden fällen kombinieren Agenten selbst ermittelte Informationen mit bereits vorhandenen. Zu den selbst ermittelten Daten gehören unter anderem CPU und RAM Auslastung oder offene Ports. Bereits vorhandene Informationen können durch auf der Komponente laufende Software, oder durch die Komponente selbst, erzeugt werden.
 
+Speziell Webseiten und deren Infrastrukturen, ist die Überwachung ein signifikater Punkt bei der Qualitätssicherung. Die Verfügbarkeit eines Systems ist oft Teil von Dienstleistungsverträgen. Aus diesem grund setzen IT-Dienstleister auf Monitoring Systeme wie \gls{Nagios} oder \gls{Zabbix}, um Informationen über die von ihnen administrierten Systeme zu erhalten. Auf allen zu überwachenden Systemen werden die entsprechenden Agenten installiert und aktiviert. Danach kann das Hauptsystem über die Agenten alle benötigten Informationen beziehen.
+
+Von besonderem Interesse sind hier Logfiles. Aus ihnen lassen sich viele Informationen über den Zustand eines Systems ausgelesen. Dabei handelt es sich sowohl um Real- oder Near-Time, als auch historische Informationen.
+
 %TODO: Überleitung zu Logfiles schreiben aus fokusieren auf web und monitoring systemen
-<Kurze Fokusierung auf Online Service. Welche Informationen werden hier im speziellen benötigt. Erwähnen von Monitoring Systemen. Funktion von Agenten, im zusammenspiel mit Monitoring Systemen, bei der analyse von Logfiles beschreiben und daraus die Überleitung zu Logfiles ableiten>
+%<Kurze Fokusierung auf Online Service. Welche Informationen werden hier im speziellen benötigt. Erwähnen von Monitoring Systemen. Funktion von Agenten, im zusammenspiel mit Monitoring Systemen, bei der analyse von Logfiles beschreiben und daraus die Überleitung zu Logfiles ableiten>
 
 %Worum geht es bei der Überwachung? Was ist das Ziel? Warum braucht man eine Überwachung? Wie sieht diese i.d.R. Aus? Welche Kernpunkte gibt es in der Überwachung? \\
 %Hier sollte die Überleitung zum nächsten Kapitel kommen d.h. Logfiles werden als letztes behandelt in diesem Kapitel, damit der Übergang sauber ist.
@@ -83,7 +87,7 @@ Die Stärke von MapReduce, liegt in der Kombination von sequentieller und parall
 
 Speziell bei der Parallelisierung von Tasks, welche wenig bis keine Abhängigkeit voneinander aufweise, stellt dieses Modell ein ideales Hilfmittel dar. Die zentralen Elemente des Shemas bildet ein Master und $n$ Worker. Der Master startet die Verarbeitung, indem er ein gegebenes Probelm aufarbeitet und eine Sammlung von Tasks erzeugt.  Die Tasks werden vom Master an die ihm bekannten Worker verteilt (Worker werden entweder vom Master selbst erzeugt oder melden sich bei diesem an). Die Worker arbeiten parallel und senden einen Statuscode an den Master, sobald der Task vollständig bearbeitet wurde (oder der Worker in einen Fehler läuft).\footcite[Vgl.][S. 80 ff]{Fey.2008} \autoref{fig:MasterWorkerInMR} zeigt die Anwendung des Master-Worker-Modells auf ein MapReduce Programm.
 
-\begin{figure}
+\begin{figure}[h]
 	\includegraphics[width=1\textwidth]{MasterWorkerMR.png}
 	\caption{Master-Worker in MapReduce\footnotemark}
 	\label{fig:MasterWorkerInMR}
@@ -124,6 +128,7 @@ In seinem Beispiel will Wartala aufzeigen, wie, ohne die volle Funktionalität d
 
 \autoref{tbl:Beispieldaten} zeigt die in seinem Beispiel verwendeten Daten. Dabei handelt es sich um die Anzahl der im Hafen Hamburg von 2004 bis 2011 umgeschlagenen Container pro Monat. Um die Verarbeitung für das Beispiel zu vereinfachen, wurde aus den Daten eine dreispaltige CSV-Datei erzeugt im Vormat \textit{Jahr;Monat;Container-Umschlag}.
 
+\pagebreak
 \begin{table}[h]
 	\includegraphics[width=1\textwidth]{Beispieldaten.png}
 	\caption{Beispieldaten: Anzahl umgeschlagener Container\footnotemark}
@@ -200,8 +205,7 @@ Die Architektur von \ac{HDFS} entspricht einem Master-Slave-System. Die verschie
 
 Die genaue Funktionsweise von \ac{HDFS} wird in einem Comic\footnote{Comic über Funktionsweise von HDFS: \\ \url{http://de.slideshare.net/jaganadhg/hdfs-10509123}} von \textit{Maneesh Varshney} sehr einfach und anschaulich erklährt.\footcite[Vgl.][S. 22 f.]{Wartala.2012}
 
-\pagebreak
-\begin{figure}
+\begin{figure}[h]
 	\centering
 	\includegraphics[scale=1.2]{HDFS_Architektur.png}
 	\caption{HDFS Architektur-Schema\footnotemark}
@@ -265,7 +269,7 @@ In einer komplexeren Infrastruktur, mit mehreren DataNodes, verteilt auf untersc
 
 Die Knoten melden sich in regelmäßigen Abständen beim NameNode, um, zum einen, mitzuteilen dass sie noch aktiv sind, und um einen Abgleich der Datenblöcke mittels einer Checksumme vor zu nehmen. Sollte diese nicht stimmen, kann der NameNode dem betreffenden DataNode den Auftrag erteilen, den Datenblock von einem anderen Knoten zu kopieren. Dadurch wird der beschädigte Block ersetzt. Die Integrität der Daten ist somit durch die Replikation sehr sicher.
 
-Es gibt jedoch einen großen Schwacstelle in Form des im System einmalig vorhandenen NameNodes. Dieser stellt einen \ac{SPOF} dar. Ein Ausfall des NameNode würde das gesamte Dateisystem lahm legen. Zudem besteht die Gefahr, dass, bei einem plötzlichen Ausfall des NameNode, die gespeicherten Metadaten beschädigt oder verloren gehen.
+Es gibt jedoch einen großen Schwachstelle in Form des im System einmalig vorhandenen NameNodes. Dieser stellt einen \ac{SPOF} dar. Ein Ausfall des NameNode würde das gesamte Dateisystem lahm legen. Zudem besteht die Gefahr, dass, bei einem plötzlichen Ausfall des NameNode, die gespeicherten Metadaten beschädigt oder verloren gehen.
 
 Aus diesem Grund muss der NameNode über entsprechende Sicherheitsvorkehrungen verfügen, um das Ausfallrisiko zu minimieren.
 
