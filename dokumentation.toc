@@ -50,46 +50,58 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {3.1.1}Anforderungen}{17}{subsection.3.1.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {3.1.2}Produktleistungen}{17}{subsection.3.1.2}
+\contentsline {subsubsection}{\nonumberline A001 - Formatunabh\IeC {\"a}ngige Analyse}{17}{section*.27}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {3.2}Definition der Umgebung}{17}{section.3.2}
+\contentsline {subsubsection}{\nonumberline A010 - Dynamisches Analyseverfahren}{18}{section*.28}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {4}Setup}{19}{chapter.4}
+\contentsline {subsubsection}{\nonumberline A020 - Konfigurierbarkeit}{18}{section*.29}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {4.1}Installation von Hadoop}{19}{section.4.1}
+\contentsline {subsubsection}{\nonumberline A030 - Erweiterbarkeit}{18}{section*.30}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {4.1.1}Einrichten eines dedizierten Hadoop-Users}{19}{subsection.4.1.1}
+\contentsline {subsection}{\numberline {3.1.2}Produktleistungen}{18}{subsection.3.1.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {4.1.2}Installation von Hadoop}{20}{subsection.4.1.2}
+\contentsline {subsubsection}{\nonumberline PL001 - Ausf\IeC {\"u}hrungszeit}{18}{section*.31}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {4.1.3}Konfiguration f\IeC {\"u}r Pseudo-Distributed Umgebung}{21}{subsection.4.1.3}
+\contentsline {subsubsection}{\nonumberline PL010 - Dateigr\IeC {\"o}\IeC {\ss }e}{19}{section*.32}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {4.2}Anlegen eines neuen Maven Projektes}{23}{section.4.2}
+\contentsline {section}{\numberline {3.2}Definition der Umgebung}{19}{section.3.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {5}Umsetzung}{24}{chapter.5}
+\contentsline {chapter}{\numberline {4}Setup}{20}{chapter.4}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {5.1}Verarbeitungsprozess}{24}{section.5.1}
+\contentsline {section}{\numberline {4.1}Installation von Hadoop}{20}{section.4.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {5.2}Implementierung von Properties}{24}{section.5.2}
+\contentsline {subsection}{\numberline {4.1.1}Einrichten eines dedizierten Hadoop-Users}{20}{subsection.4.1.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {5.3}Grundlagen f\IeC {\"u}r Datenverarbeitung}{24}{section.5.3}
+\contentsline {subsection}{\numberline {4.1.2}Installation von Hadoop}{21}{subsection.4.1.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {5.4}Bestimmung des Aufbaus der Logfiles}{24}{section.5.4}
+\contentsline {subsection}{\numberline {4.1.3}Konfiguration f\IeC {\"u}r Pseudo-Distributed Umgebung}{22}{subsection.4.1.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {5.5}Implementierung von MapReduce}{25}{section.5.5}
+\contentsline {section}{\numberline {4.2}Anlegen eines neuen Maven Projektes}{24}{section.4.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {6}Projektabschluss, Fazit \& Ausblick}{26}{chapter.6}
+\contentsline {chapter}{\numberline {5}Umsetzung}{25}{chapter.5}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {6.1}Vergleich der Umsetzung mit den Zielen}{26}{section.6.1}
+\contentsline {section}{\numberline {5.1}Verarbeitungsprozess}{25}{section.5.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {6.2}Proof of Concept}{26}{section.6.2}
+\contentsline {section}{\numberline {5.2}Implementierung von Properties}{25}{section.5.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {6.3}Fazit}{26}{section.6.3}
+\contentsline {section}{\numberline {5.3}Grundlagen f\IeC {\"u}r Datenverarbeitung}{25}{section.5.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {6.4}Ausblick}{26}{section.6.4}
+\contentsline {section}{\numberline {5.4}Bestimmung des Aufbaus der Logfiles}{25}{section.5.4}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\nonumberline Literatur}{i}{chapter*.33}
+\contentsline {section}{\numberline {5.5}Implementierung von MapReduce}{26}{section.5.5}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{Glossar}{iii}{section*.34}
+\contentsline {chapter}{\numberline {6}Projektabschluss, Fazit \& Ausblick}{27}{chapter.6}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\nonumberline Anhang}{v}{appendix*.36}
+\contentsline {section}{\numberline {6.1}Vergleich der Umsetzung mit den Zielen}{27}{section.6.1}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {6.2}Proof of Concept}{27}{section.6.2}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {6.3}Fazit}{27}{section.6.3}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {6.4}Ausblick}{27}{section.6.4}
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{\nonumberline Literatur}{i}{chapter*.39}
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{Glossar}{iii}{section*.40}
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{\nonumberline Anhang}{v}{appendix*.42}

@@ -172,6 +172,7 @@ Für die Anwendung von MapReduce auf komplexere bzw. größere Daten reicht dies
 
 %Woher kommt MapReduce? Wie funktioniert MapReduce? Stärken/Schwächen aufzeigen. Versuchen den Algorithmus mathematisch zu beschreiben ($O(n)$ Methode, Mengenleere). Hierfür muss noch Literatur gesucht werden. Bisher nur mathematische Beschreibungen im Internet gefunden.
 
+%TODO: Einleitung ändern. Nicht direkt mit Zitat beginnen. Eher etwas in die richtung "Wartala sagt..." oder so
 \section{Was ist Hadoop?}\label{sec:WasIstHadoop}
 \flqq Kurz gesagt: Hadoop ist ein freies, Java-basiertes Open-Source-Framework für die skalierbare und verteilte Verarbeitung großer Datenmengen auf vielen Rechnern innerhalb eines Netzwerks.\frqq\footcite[S. 21]{Wartala.2012}
 
@@ -247,6 +248,7 @@ Es gibt unterschiedliche Techniken für die Speicherung und Verarbeitung von Dat
 
 Es ist daher wichtig zu wissen, was Hadoop nicht ist. Jede Technologie ist nur dann Sinnvoll, wenn sie der Aufgabe entsprechend eingesetzt wird. Für die Aufgaben, für welche Hadoop konzipierte wurde, sind keine Transaktionen oder Views notwendig. Diese Funktionalitäten werden bei relationalen Datenbanken (und deren Aufgaben) benötigt, nicht jedoch bei Hadoop.
 
+%TODO: Abwägen ob dieser Absatz in das Kapitel "Was ist Hadoop" gehört. Meine Idee war, dass dieser Absatz die Abgrenzung zu relationalen Datenbanksystemen verdeutlichen sollte.
 Laut Wartala gibt es eine Reihe von algorithmischen Problemlösungen, welche i.d.R. auf Hadoop besser ausgeführt werden können, als auf einem relationalen Datenbanksystem. Darunter unter anderem die Indexierung für Suchmaschienen, Text Mining, sowie die Analyse von Logfiles und Click-Streams.
 
 Eine weitere Unterscheidung muss zu Systemen gemacht werden, welche in die Gruppe der \ac{EDA} bzw. \ac{CEP} Systeme fallen. Der Fokus von Hadoop liegt bei der Verarbeitung großer Datenmengen mittels Batch-Prozessen. Dieser Ansatz ist zu langsam für eine Real- oder Near-Time-Datenverarbeitung. Jedoch ist das Ziel einers \ac{EDA} oder \ac{CEP} Systems nicht die Abfrage gespeicherter Informationen, sondern die kontinuierliche Informationsbeschaffung, und haben somit eine vollkommen andere Funktion.

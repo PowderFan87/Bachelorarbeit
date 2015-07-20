@@ -11,7 +11,19 @@ Bevor mit die Entwicklung der Anwendung begonnen werden kann, müssen die Anford
 \subsection{Anforderungen}
 Im folgenden werden die Anforderungen beschrieben, welche an die fertige Anwendung gestellt werden. Bei der Definition von Anforderungen oder Zielen ist es hilfreich, sich gedanklich an das Ende des Projektes zu versetzen, und diese Situation dan zu beschreiben. Außerdem sollten alle Anforderungen "`smart"' sein, d.h., sie sind \textbf{s}peziefisch, \textbf{m}essbar, \textbf{a}ttraktiv, \textbf{r}ealistisch und \textbf{t}erminiert.\footcite[Vgl.][S. 48]{Bauer.2014}
 
+Bei den folgenden Definitionen gibt es keine unterscheidung bei der Priorität. Alle Anforderungen müssen mit der fertigen Anwendung abgedeckt sein. Des weiteren handelt es sich um rein funktionale Anforderungen. 
 
+\subsubsection{A001 - Formatunabhängige Analyse}\label{subsubsec:A001}
+Die Analyse eines Logfiles muss unabhängig von dessen Format möglich sein. Alle textbasierten Formate (z.B. .txt, .log, .csv, usw.) müssen durch die Anwendung interpretierbar sein. Eine Umwandlung der Datei soll nicht stattfinden. Es wird davon ausgegangen, dass alle Logfiles UTF-8 codiert sind.
+
+\subsubsection{A010 - Dynamisches Analyseverfahren}\label{subsubsec:A010}
+Die Analyse eines Logfiles muss dynamisch sein, d.h., dass die Parameter der Analyse flexibel eingestellt werden können. Dies bezieht sich in erster linie auf relevante Muster, welche durch Reguläre Ausdrücke oder Keywords eingestellt werden können, und einen Zeitraum, in welchem die relevanten Muster liegen müssen.
+
+\subsubsection{A020 - Konfigurierbarkeit}\label{subsubsec:A020}
+Die Anwendung muss für jede  Ausführung individuell konfigurierbar sein. Die Konfiguration findet über eine Datei des Typs \textit{.properies} statt, welche zu Beginn der Ausführung durch die Anwendung geladen und interpretiert werden muss. Die Konfigurationswerte folgen der, für dieses Dateiformat üblichen, Formatierung. Jeder Eintrag besteht aus einem eindeutigen Schlüssel sowie einem dazu gehörenden Wert. Die Trennung erfolgt durch einen Doppelpunkt.
+
+\subsubsection{A030 - Erweiterbarkeit}\label{subsubsec:A030}
+Die Anwendung muss eine modularen Aufbau folgen, um eine einfache Erweiterbarkeit um eventuell folgende Features zu gewährleisten. Die einzelnen Komponenten müssen, soweit dies programmatisch möglich ist, über eine lose Kopplung besitzen. Dies soll sicherstelle, dass neue Komponenten hinzugefügt oder bestehende ausgetauscht werden können, ohne die Integrität der Anwendung zu gefärden.
 
 %\begin{table}[h]
 %	\centering
@@ -28,12 +40,28 @@ Im folgenden werden die Anforderungen beschrieben, welche an die fertige Anwendu
 %\end{table}
 
 \subsection{Produktleistungen}
+Zusätlich zu den beschriebenen, funktionalen Anfordernen, werden weitere, nicht funktionale Leistungen definiert, welche durch von der fertigen Anwendung erfüllt werden müssen. Hierbei handelt es sich in erster linie um Richtwerte, welche sich i.d.R. auf die Performance der Anwendung beziehen.
+
+\subsubsection{PL001 - Ausführungszeit}\label{subsubsec:PL001}
+Die Ausführungszeit der Anwendung muss unter dem im folgenden definierten Richtwert liegen. Ist die einhaltung von diesem nicht möglich, muss eine alternative für den Verarbeitungsprozess implementiert werden, welche die Ergebnisse der Analyse in einer NoSQL-Datenbank speichert, welche dan durch ein Checkscript abgefragt werden kann.
+
+Es ist nicht möglich einen festen Richtwert für die Ausführungszeit zu definieren, da dieser in Abhängigkeit zum Ausführungsinterval steht (z.B. wäre eine max. Ausführungszeit von einer Minute bei einem Interval von einer Minute nicht ausreichend). Aus diesem grund wird die maximale Ausführungszeit $t_e$, in abhängigkeit zum Interval $t_i$, wie folgt definiert:
+
+\begin{equation}
+t_e \leq \frac{t_i}{5} \quad \text{ mit } t_e \in \mathbb{Q}^+ \text{ und } t_i \in \mathbb{N}
+\label{equ:MaxAusführungszeit}
+\end{equation}
+
+\subsubsection{PL010 - Dateigröße}\label{subsubsec:PL010}
+Die Anwendung muss in der lage sein, Logfiles bis zu einer größe von 500 \ac{MB} verarbeiten zu können. Größere Dateien dürfen, wenn dies noch nicht durch \ac{HDFS} selbst vorgenommen wurde, in mehrere Dateien, für die weitere Verarbeitung, zerlegt werden.
 
 \section{Definition der Umgebung}
 Die Programmierung der Anwendung erfolgt in der Programmiersprache Java, unter verwendung des Hadoop Frameworks für MapReduce in der Version 2.7.1. Die Entwicklung wird mit der \ac{IDE} \gls{NetBeans}, Version 8.0.2, durchgeführt. Für die Versionsverwaltung wird \gls{Git} eingesetzt. In der \ac{IDE} wird ein \gls{Maven}-Projekt erzeugt, um alle benötigten Bibliotheken automatisch, durch die \ac{IDE}, beziehen zu können.
 
 %TODO: Datenbank definieren
-Über die \ac{IDE} wird eine ausführtbare JAR-Datei erzeugt, welche auf dem Server mit Hadoop ausgeführt werden soll. Für die Ausführung wird Java in Version 1.7 benötigt. Zusätzlich wird eine <PUTNAM> Datenbank für die Speicheurng der Ausgabe benötigt.
+Über die \ac{IDE} wird eine ausführtbare JAR-Datei erzeugt, welche auf dem Server mit Hadoop ausgeführt werden soll. Für die Ausführung wird Java in Version 1.7 benötigt.
+
+Sollte sich im Verlauf der Entwicklung abzeichen, dass der Richtwert, welcher in \autoref{subsubsec:PL001} durch \autoref{equ:MaxAusführungszeit} definiert wurde, nicht eingehalten werden kann, so muss eine NoSQL-Datenbank für die Speicherung der Ergebnisse verwendet werden. In diesem Fall muss das entsprechende Datenbanksystem auf dem Server vorhanden sein.
 
 Die anwendung wird durch das Hadoop Framework Version 2.7.1 ausgeführt. Es muss mindestens eine \textit{Single Node} Installation vorhanden sein. Es müssen die entsprechenden Rechte auf dem Dateisystem \ac{HDFS} gesetzt sein, um Dateien lesen und schreiben zu können.
 
