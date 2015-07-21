@@ -6,15 +6,54 @@
 \section{Verarbeitungsprozess}
 <Hier sollte der Prozess der Anwendung geplant werden. wo liegen die Daten? wie findet der zugriff statt? nach welchem schema sind sie abgelegt und benannt? Außerdem sollte klar werden wie die Informationen verarbeitet werden. ein großer map reduce oder eine verkettung mehrerer mapper und reducer? Außerdem muss das ausgabeformat festgelegt werden. Bzw. zwei alternativen. eine für wenn die anwendung performant genug ist um als check skript zu laufen, und eine für den fall das nicht.>
 
-\begin{figure}
-	\centering
-	\includegraphics[width=.8\textwidth]{Infrastruktur.png}
-	\caption{DUMMY: Aufbau der Infrastruktur}
-	\label{fig:AufbauInfrastruktur}
-\end{figure}
+%\begin{figure}
+%	\centering
+%	\includegraphics[width=.8\textwidth]{Infrastruktur.png}
+%	\caption{DUMMY: Aufbau der Infrastruktur}
+%	\label{fig:AufbauInfrastruktur}
+%\end{figure}
 
-\section{Implementierung von Properties}
+\section{Implementierung der Konfigurationsschnittstelle}
+Wie bereits bei der Beschreibung des Verarbeitungsprozesses gezeigt wurde, wird direkt nach dem Start der Anwendung eine Initialisierung vorgenommen. Hierbei soll die Umgebung so konfiguriert werden, dass die gewünschte Analyse durch die Anwendung ohne Probleme vorgenommen werden kann.
+
+Die Konfiguration der Anwendung wird durch Dateien vom Typ \textit{.properties} vorgenommen. Diese werden von Java vollständig unterstützt. Für die Interpretation der Konfigurationsdateien wird auf die Klasse \textit{java.util.Properties} zurückgegriffen. Die Funktionsweise der Properties wird im folgenden genauer betrachtet.
+
+\subsection{Aufbau von Properties}
+Die Konfigurationswerte werden in Properties Dateien als Schlüssel-Wert-Paare gespeichert. Die Trennung kann hierbei durch einen Doppelpunkt oder Gleichheitszeichen erfolgen. Des weiteren ist es möglich, Platzhalter bei den Werten zu definieren, welche später durch Variablen ersetzt werden können. Außerdem ist es möglich, zum besseren Verständnis, die Datei um Kommentare zu erweitern. Jede Zeile, welche mit einem Hash oder Ausrufezeichen beginnt, wird als Kommentar gesehen, und von der Anwendung nicht interpretiert. \autoref{lis:AuszugDefaultProperties} zeigt einen Auszug aus der \textit{default.properties} Datei. \\
+
+\begin{lstlisting}[language=Bash,caption=Auszug aus default.properties,label=lis:AuszugDefaultProperties]
+###
+# Default properties for Logfileanalyzer.
+# Properties can be extended by user defined properties.
+# Never change this file to fit one case.
+#
+
+# Set mode for execution (DEBUG, TEST, LIVE)
+RUNMODE         : DEBUG
+
+# Runtime properties
+LOGTARGET       : {0}
+
+[...]
+\end{lstlisting}
+
+Grundsätzlich sind alle Konfigurationen vom Typ \textit{String}. Es ist, nativ, nicht möglich, direkt einen Wert in einem anderen Datentyp zu definieren. Falls eine Typenkonvertieren notwendig ist, muss diese manuell durchgeführt werden.
+
+In Java stellt die Klasse \textit{Properties}, welche teil des \textit{java.util} Paketes ist, alle benötigten Methoden bereit. Um die Konfiguration der Anwendung zu vereinfachen, wurde die Klasse \textit{Configuration} im Paket \textit{com.hszuesz.logfileanalyzer} erzeugt. Diese leitet sich aus der Klasse \textit{Properties} ab, und stellt Erweiterungen zum einlesen mehrerer Konfigurationsdateien bereit. Dies ist notwendig, um eine stufenweise Konfiguration der Anwendung zu realisieren.
+
+\subsection{Beschreibung der Konfigurationsstufen}
+Die Konfiguration der Anwendung wird in drei Stufen durchgeführt. Dies soll die Komplexität der Konfigurationsdateien reduzieren, indem die individuellen Anpassungen für jede Ausführung des Programms gekapselt, und immer gleiche Einstellungen ausgelagert werden.
+
+Die erste Stufe bilden die sog. Core-Properties, welche in der Datei \textit{core.properties} hinterlegt sind. Wie der Name bereits erkennen lässt, handelt es sich hierbei um Grundlegende Einstellungen, welche den Kern der Anwendung beeinflussen. Dazu gehört z.B. die Konfiguration der verschiedenen \textit{RUNMODES} oder Pfade zu weiteren wichtigen Dateien, wie den Default- oder Logger-Properties. Ein überschreiben dieser Einstellungen ist nicht möglich.
+
+Die zweite Stufe bildet die Defaults. Hier werden alle Konfigurationen vorgenommen, welche für eine Standardausführung der Anwendung benötigt werden. Alle Einstellungen, welche in der \textit{defaults.properties} Datei hinterlegt sind, können durch den Anwender verändert werden.
+
+Die dritte und letzte Stufe bilden die User-Properties. Beim Start der Anwendung kann der Pfad zu einer individuellen Properties-Datei übergeben werden. In dieser können die Einstellungen, welche durch die Defaults vorgenommen wurden, ergänzt und  überschreiben werden.
+
 <Beschreibung wie Properties programmiert werden. Wie werden diese in der Anwendung umgesetzt? Welche Rolle spielen Properties für den generischen Teil der Anwendung?>
+
+\subsection{Logger Konfiguration}
+<Beschreibung wie der Logger in Java funktioniert und wie dieser hier eingesetzt wird. Speziell die Konfiguration über die logger.properties datei hervorheben.>
 
 \section{Grundlagen für Datenverarbeitung}
 <Beschreibung der Entwicklung für die Grundlagen zur Datenverarbeitung. Welche Klassen werden dabei verwendet? Welches System liegt dahinter? Warum dieses System? Dabei nicht nur auf die Speicherung von Daten eingehen sondern auch auf das Lesen von Dateien.>
