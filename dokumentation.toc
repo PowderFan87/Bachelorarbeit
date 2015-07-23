@@ -82,29 +82,35 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {section}{\numberline {5.1}Verarbeitungsprozess}{25}{section.5.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {5.2}Implementierung der Konfigurationsschnittstelle}{25}{section.5.2}
+\contentsline {section}{\numberline {5.2}Die Konfigurationsschnittstelle}{25}{section.5.2}
 \defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {5.2.1}Aufbau von Properties}{25}{subsection.5.2.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {5.2.2}Beschreibung der Konfigurationsstufen}{26}{subsection.5.2.2}
+\contentsline {subsection}{\numberline {5.2.2}Beschreibung der Konfigurationsstufen}{27}{subsection.5.2.2}
 \defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {5.2.3}Logger Konfiguration}{27}{subsection.5.2.3}
 \defcounter {refsection}{0}\relax 
 \contentsline {section}{\numberline {5.3}Grundlagen f\IeC {\"u}r Datenverarbeitung}{27}{section.5.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {5.4}Bestimmung des Aufbaus der Logfiles}{27}{section.5.4}
+\contentsline {section}{\numberline {5.4}Bestimmung des Aufbaus der Logfiles}{28}{section.5.4}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {5.5}Implementierung von MapReduce}{27}{section.5.5}
+\contentsline {section}{\numberline {5.5}Implementierung von MapReduce}{28}{section.5.5}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {6}Projektabschluss, Fazit \& Ausblick}{28}{chapter.6}
+\contentsline {subsection}{\numberline {5.5.1}Einblick in die InputFormat Klasse}{28}{subsection.5.5.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {6.1}Vergleich der Umsetzung mit den Zielen}{28}{section.6.1}
+\contentsline {subsection}{\numberline {5.5.2}Der RecordReader}{28}{subsection.5.5.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {6.2}Proof of Concept}{28}{section.6.2}
+\contentsline {subsection}{\numberline {5.5.3}Mapper und Reducer}{28}{subsection.5.5.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {6.3}Fazit}{28}{section.6.3}
+\contentsline {chapter}{\numberline {6}Projektabschluss, Fazit \& Ausblick}{29}{chapter.6}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {6.4}Ausblick}{28}{section.6.4}
+\contentsline {section}{\numberline {6.1}Vergleich der Umsetzung mit den Zielen}{29}{section.6.1}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {6.2}Proof of Concept}{29}{section.6.2}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {6.3}Fazit}{29}{section.6.3}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {6.4}Ausblick}{29}{section.6.4}
 \defcounter {refsection}{0}\relax 
 \contentsline {chapter}{Literatur}{i}{chapter*.39}
 \defcounter {refsection}{0}\relax 

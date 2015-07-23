@@ -13,7 +13,7 @@
 %	\label{fig:AufbauInfrastruktur}
 %\end{figure}
 
-\section{Implementierung der Konfigurationsschnittstelle}
+\section{Die Konfigurationsschnittstelle}
 Wie bereits bei der Beschreibung des Verarbeitungsprozesses gezeigt wurde, wird direkt nach dem Start der Anwendung eine Initialisierung vorgenommen. Hierbei soll die Umgebung so konfiguriert werden, dass die gewünschte Analyse durch die Anwendung ohne Probleme vorgenommen werden kann.
 
 Die Konfiguration der Anwendung wird durch Dateien vom Typ \textit{.properties} vorgenommen. Diese werden von Java vollständig unterstützt. Für die Interpretation der Konfigurationsdateien wird auf die Klasse \textit{java.util.Properties} zurückgegriffen. Die Funktionsweise der Properties wird im folgenden genauer betrachtet.
@@ -41,6 +41,21 @@ Grundsätzlich sind alle Konfigurationen vom Typ \textit{String}. Es ist, nativ,
 
 In Java stellt die Klasse \textit{Properties}, welche teil des \textit{java.util} Paketes ist, alle benötigten Methoden bereit. Um die Konfiguration der Anwendung zu vereinfachen, wurde die Klasse \textit{Configuration} im Paket \textit{com.hszuesz.logfileanalyzer} erzeugt. Diese leitet sich aus der Klasse \textit{Properties} ab, und stellt Erweiterungen zum einlesen mehrerer Konfigurationsdateien bereit. Dies ist notwendig, um eine stufenweise Konfiguration der Anwendung zu realisieren.
 
+Da die Anwendung später innerhalb des Hadoop Frameworks ausgeführt wird, müssen die Konfigurationsdateien ein Teil der, durch Maven erzeugten, JAR-Datei sein. Dies wird durch eine Ergänzung in der \textit{pom.xml} innerhalb des \textit{build} Knotens sichergestellt (siehe \autoref{lis:POMErgänzung}). \\
+
+\begin{lstlisting}[language=XML,caption=pom.xml Ergänzung für Konfigurationsdateien,label=lis:POMErgänzung]
+[...]
+	<resources>
+		<resource>
+			<directory>conf</directory>
+			<includes>
+				<include>*.properties</include>
+			</includes>
+		</resource>
+	</resources>
+[...]
+\end{lstlisting}
+
 \subsection{Beschreibung der Konfigurationsstufen}
 Die Konfiguration der Anwendung wird in drei Stufen durchgeführt. Dies soll die Komplexität der Konfigurationsdateien reduzieren, indem die individuellen Anpassungen für jede Ausführung des Programms gekapselt, und immer gleiche Einstellungen ausgelagert werden.
 
@@ -50,7 +65,7 @@ Die zweite Stufe bildet die Defaults. Hier werden alle Konfigurationen vorgenomm
 
 Die dritte und letzte Stufe bilden die User-Properties. Beim Start der Anwendung kann der Pfad zu einer individuellen Properties-Datei übergeben werden. In dieser können die Einstellungen, welche durch die Defaults vorgenommen wurden, ergänzt und  überschreiben werden.
 
-<Beschreibung wie Properties programmiert werden. Wie werden diese in der Anwendung umgesetzt? Welche Rolle spielen Properties für den generischen Teil der Anwendung?>
+%<Beschreibung wie Properties programmiert werden. Wie werden diese in der Anwendung umgesetzt? Welche Rolle spielen Properties für den generischen Teil der Anwendung?>
 
 \subsection{Logger Konfiguration}
 <Beschreibung wie der Logger in Java funktioniert und wie dieser hier eingesetzt wird. Speziell die Konfiguration über die logger.properties datei hervorheben.>
@@ -62,4 +77,16 @@ Die dritte und letzte Stufe bilden die User-Properties. Beim Start der Anwendung
 <Wie sehen die Logfiles aus? Welche Formate haben sie? Welche rolle spielen diese bei der Datenverarbeitung? Welche Informationen sind die richtigen Informationen?>
 
 \section{Implementierung von MapReduce}
+Nachdem alle Grundlagen der Anwendung fertiggestellt wurden kann mit der Entwicklung des Kernstückes begonnen werden, der Implementierung von MapReduce. Dabei besteht die größte Hürde im generischen Ansatz, welcher, insbesondere im Kern des Programms, immer berücksichtigt werden muss.
+
+
+
+\subsection{Einblick in die InputFormat Klasse}
+
+
+\subsection{Der RecordReader}
+
+
+\subsection{Mapper und Reducer}
+
 <Beschreibung vom Kern der Anwendung. Wie wird der Algorithmus umgesetzt? Welche Klassen/Methoden sind notwendig? Wie unterscheidet sich die Implementierung bei unterschiedlichem Input. Spielt das überhaupt eine Rolle oder muss es nur Text sein? Welches Ergebnis bekommt man und in welcher Form?>
