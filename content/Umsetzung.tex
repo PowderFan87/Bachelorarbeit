@@ -3,15 +3,34 @@
 \chapter{Umsetzung}\label{cha:Umsetzung}
 <Allgemeine Beschreibung des Inhalts des Kapitels.>
 
-\section{Verarbeitungsprozess}
-<Hier sollte der Prozess der Anwendung geplant werden. wo liegen die Daten? wie findet der zugriff statt? nach welchem schema sind sie abgelegt und benannt? Außerdem sollte klar werden wie die Informationen verarbeitet werden. ein großer map reduce oder eine verkettung mehrerer mapper und reducer? Außerdem muss das ausgabeformat festgelegt werden. Bzw. zwei alternativen. eine für wenn die anwendung performant genug ist um als check skript zu laufen, und eine für den fall das nicht.>
+\section{Infrastruktur \& Prozesse}
+Vor Beginn der Entwicklung werden im folgenden die Umgebung, in welcher die Applikation später ausgeführt werden soll, sowie der Anwendungsprozess, genauer definiert. 
 
-%\begin{figure}
-%	\centering
-%	\includegraphics[width=.8\textwidth]{Infrastruktur.png}
-%	\caption{DUMMY: Aufbau der Infrastruktur}
-%	\label{fig:AufbauInfrastruktur}
-%\end{figure}
+<Weitere Einführung in das Kapitel bzw. aktuelle überarbeiten>
+
+\subsection{Beschreibung der Infrastruktur}
+<...Einleitung/überleitung zur beschreibung der infrastruktur>
+
+Alle Server (sowohl Wen- wie auch Application-Server), schreiben ihre jeweiligen Logfiles auf ein \ac{NFS}. Der entsprechende Infrastruktur-Server mounted die benötigten Verzeichnisse. Der Server verfügt über eine Hadoop Installation, auf welcher die Applikation ausgeführt wird (siehe \autoref{fig:AufbauInfrastruktur}).
+
+\begin{figure}
+	\centering
+	\includegraphics[width=.8\textwidth]{Infrastruktur.png}
+	\caption{DUMMY: Aufbau der Infrastruktur}
+	\label{fig:AufbauInfrastruktur}
+\end{figure}
+
+\subsection{Definition des Anwendungsprozesses}
+
+
+\begin{figure}
+	\centering
+	\includegraphics[scale=1]{PAP_Main_main.png}
+	\caption{PAP für main Methode der Main Klasse}
+	\label{fig:PAP_Main_main}
+\end{figure}
+
+<Hier sollte der Prozess der Anwendung geplant werden. wo liegen die Daten? wie findet der zugriff statt? nach welchem schema sind sie abgelegt und benannt? Außerdem sollte klar werden wie die Informationen verarbeitet werden. ein großer map reduce oder eine verkettung mehrerer mapper und reducer? Außerdem muss das ausgabeformat festgelegt werden. Bzw. zwei alternativen. eine für wenn die anwendung performant genug ist um als check skript zu laufen, und eine für den fall das nicht.>
 
 \section{Die Konfigurationsschnittstelle}
 Wie bereits bei der Beschreibung des Verarbeitungsprozesses gezeigt wurde, wird direkt nach dem Start der Anwendung eine Initialisierung vorgenommen. Hierbei soll die Umgebung so konfiguriert werden, dass die gewünschte Analyse durch die Anwendung ohne Probleme vorgenommen werden kann.
@@ -65,13 +84,15 @@ Die zweite Stufe bildet die Defaults. Hier werden alle Konfigurationen vorgenomm
 
 Die dritte und letzte Stufe bilden die User-Properties. Beim Start der Anwendung kann der Pfad zu einer individuellen Properties-Datei übergeben werden. In dieser können die Einstellungen, welche durch die Defaults vorgenommen wurden, ergänzt und  überschreiben werden.
 
+Der Prozess für die Verarbeitung der einzelnen Stufen wird im \ac{PAP} der \textit{LFAConfiguration} verdeutlicht, welcher im Anhang zu finden ist.
+
 %<Beschreibung wie Properties programmiert werden. Wie werden diese in der Anwendung umgesetzt? Welche Rolle spielen Properties für den generischen Teil der Anwendung?>
 
 \subsection{Logger Konfiguration}
 <Beschreibung wie der Logger in Java funktioniert und wie dieser hier eingesetzt wird. Speziell die Konfiguration über die logger.properties datei hervorheben.>
 
-\section{Grundlagen für Datenverarbeitung}
-<Beschreibung der Entwicklung für die Grundlagen zur Datenverarbeitung. Welche Klassen werden dabei verwendet? Welches System liegt dahinter? Warum dieses System? Dabei nicht nur auf die Speicherung von Daten eingehen sondern auch auf das Lesen von Dateien.>
+%\section{Grundlagen für Datenverarbeitung}
+%<Beschreibung der Entwicklung für die Grundlagen zur Datenverarbeitung. Welche Klassen werden dabei verwendet? Welches System liegt dahinter? Warum dieses System? Dabei nicht nur auf die Speicherung von Daten eingehen sondern auch auf das Lesen von Dateien.>
 
 \section{Bestimmung des Aufbaus der Logfiles}
 <Wie sehen die Logfiles aus? Welche Formate haben sie? Welche rolle spielen diese bei der Datenverarbeitung? Welche Informationen sind die richtigen Informationen?>
@@ -90,3 +111,86 @@ Nachdem alle Grundlagen der Anwendung fertiggestellt wurden kann mit der Entwick
 \subsection{Mapper und Reducer}
 
 <Beschreibung vom Kern der Anwendung. Wie wird der Algorithmus umgesetzt? Welche Klassen/Methoden sind notwendig? Wie unterscheidet sich die Implementierung bei unterschiedlichem Input. Spielt das überhaupt eine Rolle oder muss es nur Text sein? Welches Ergebnis bekommt man und in welcher Form?>
+
+\section{Ausführungsdatei Logfileanalyzer.sh}
+
+\begin{lstlisting}[language=Bash,caption=Ausführungsdatei Logfileanalyzer.sh,label=lis:Logfileanalyzer.sh]
+#!/bin/bash
+
+#Load config
+. $1/config.cfg
+#Cleanup input direktory on dfs
+/bin/hdfs dfs -rm -r -skipTrash input/*
+#Delete output directory on dfs
+/bin/hdfs dfs -rm -r -skipTrash output
+#Put input files on dfs
+/bin/hdfs dfs -put $MAP_REDUCE_INPUT input
+mkdir $MAP_REDUCE_OUTPUT
+if [ $MAP_REDUCE_USE_USER_PROPERTIES == true ]
+then
+        #Export HADOOP_OPTS to pass user properties file
+        export HADOOP_OPTS="-Dlfa.userconf=$1/$MAP_REDUCE_USER_PROPERTIES"
+fi
+if [ $MAP_REDUCE_USE_LOG == true ]
+then
+        #Use log logfile
+        echo "Log file wird verwendet"
+        /bin/hadoop jar $1/$MAP_REDUCE_JAR $MAP_REDUCE_MAIN input output 2> $MAP_REDUCE_LOGFILE
+else
+        echo "Kein Logfile"
+        /bin/hadoop jar $1/$MAP_REDUCE_JAR $MAP_REDUCE_MAIN input output
+fi
+if [ $MAP_REDUCE_USE_USER_PROPERTIES == true ]
+then
+        #Unset HADOOP_OPTS after apllication finished
+        export HADOOP_OPTS=""
+fi
+#Get output from dfs
+/bin/hdfs dfs -get output/* $MAP_REDUCE_OUTPUT
+if [ $MAP_REDUCE_DISPLAY_OUTPUT == true ]
+then
+        cat ${MAP_REDUCE_OUTPUT}/*
+fi
+\end{lstlisting}
+
+<Beschreiben der Bash Datei, durch welche der job (Jar) ausgeführt wird. Beschreiben der einzlenen Schritte und der configuration>
+
+\section{Anwendungstest \& Ergebnisse}
+
+\begin{lstlisting}[language=Java,caption=Properties für Anwendungstest,label=lis:PropertiesAnwendungstest]
+lfa.runmode              : DEBUG
+
+lfa.driver.mapper        : com.hszuesz.logfileanalyzer.mapper.PatternMapper
+lfa.driver.reducer       : com.hszuesz.logfileanalyzer.reducer.CountReducer
+
+lfa.driver.input.format  : org.apache.hadoop.mapreduce.lib.input.TextInputFormat
+
+lfa.driver.output.key    : org.apache.hadoop.io.Text
+lfa.driver.output.value  : org.apache.hadoop.io.IntWritable
+lfa.driver.output.format : org.apache.hadoop.mapreduce.lib.output.TextOutputFormat
+
+lfa.driver.job.name      : Laufzeittest webadapter.log
+
+lfa.mapper.pattern.key   : \\] ([A-Z]{4,5})
+lfa.mapper.nomatchaction : SKIP
+\end{lstlisting}
+
+\begin{figure}
+	\includegraphics[width=1\textwidth]{Laufzeitanalyse.png}
+	\caption{Laufzeitanalyse für Logfileanalyzer}
+	\label{fig:Laufzeitanalyse}
+\end{figure}
+
+\begin{align}
+f_1(x) &= 8,199 \times 10^{-6} x + 8,418 \label{equ:Laufzeit} \\
+f_2(x) &= f_1(x) \times 5 \label{equ:MaxInterval}
+\end{align}
+<IDEE: Es wurde eine formel angegeben, welche aussage über die maximale ausführungsdauer gibt...eventuell lassen sich diese beiden formeln verbinden (also eine Formel die aussage gibt über den maximal möglichen intervall für eine bestimmte datenmenge \autoref{equ:MaxInterval})>
+
+\begin{figure}
+	\includegraphics[width=1\textwidth]{Zeit_Pro_Eintrag.png}
+	\caption{Verarbeitungszeit pro Eintrag}
+	\label{fig:VerarbeitungszeitProEintrag}
+\end{figure}
+
+<Dokumentation der Tests mit unterschiedlich großen Datenmengen (10 Logeinträge bis 10.000.000 Einträge). Grafische Darstellung der Laufzeiten. Jede Stufe min. 10 mal ausführen und Ausführungszeit Nottieren/Dokumentieren. In Kapitel 6 Erkenntnisse aus den Tests aufarbeiten>
