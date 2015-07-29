@@ -16,7 +16,7 @@ Alle Server (sowohl Wen- wie auch Application-Server), schreiben ihre jeweiligen
 \begin{figure}
 	\centering
 	\includegraphics[width=.8\textwidth]{Infrastruktur.png}
-	\caption{DUMMY: Aufbau der Infrastruktur}
+	\caption{Aufbau der Infrastruktur}
 	\label{fig:AufbauInfrastruktur}
 \end{figure}
 
@@ -155,7 +155,7 @@ fi
 
 <Beschreiben der Bash Datei, durch welche der job (Jar) ausgeführt wird. Beschreiben der einzlenen Schritte und der configuration>
 
-\section{Anwendungstest \& Ergebnisse}
+\section{Anwendungstest \& Auswertung der Ergebnisse}
 
 \begin{lstlisting}[language=Java,caption=Properties für Anwendungstest,label=lis:PropertiesAnwendungstest]
 lfa.runmode              : DEBUG
@@ -175,22 +175,85 @@ lfa.mapper.pattern.key   : \\] ([A-Z]{4,5})
 lfa.mapper.nomatchaction : SKIP
 \end{lstlisting}
 
-\begin{figure}
+\subsection{Analyse der Laufzeiten}
+Die im Anwendungstest erhobenen Laufzeiten sollen nun weiter Analysiert werden. Hierfür soll zunächst das Ausmaß des \textit{linearen} Zusammenhangs zwischen der Anzahl der verarbeiteten Einträge und der Laufzeit ermittelt werden. Gerald und Susanne Teschl definieren die, nach dem englischen Mathematiker Karl Pearson (1857 - 1936) benannte, Kennzahl wie folgt:
+
+\flqq Gegeben seien die Wertepaare $(x_1,y_1), \dots,(x_n,y_n)$, wobei nicht alle $x_i$ gleich sind bzw. nicht alle $y_i$ gleich sind. Die Zahl
+\begin{equation*}
+r_{xy} = \frac{s_{xy}}{s_x \cdot s_y}
+\end{equation*} 
+heißt \textbf{(empirischer) Korrelationskoeffizient} oder \textbf{Pearson'scher Korrelationskoeffizient}. Dabei ist
+\begin{equation*}
+s_{xy} = \frac{1}{n-1} \displaystyle\sum_{i=1}^{n} (x_i - \bar{x})(y_i - \bar{y})
+\end{equation*}
+die \textbf{(empirische) Kovarianz}, $\bar{x}$, $\bar{y}$ sind die arithmetischen Mittelwerte und
+\begin{equation*}
+s_x = \sqrt{\frac{1}{n-1} \displaystyle\sum_{i=1}^{n} (x_i - \bar{x})^2}, \quad s_y = \sqrt{\frac{1}{n-1} \displaystyle\sum_{i=1}^{n} (y_i - \bar{y})^2}
+\end{equation*}
+sind die (empirischen) Standardabweichungen der $x_i$ bzw. der $y_i$-Werte.\frqq\footcite[S. 213]{Teschl.2014}
+
+Der Pearson'sche Korrelationskoeffizient liegt immer zwischen $-1$ und $+1$. Je näher $r_{xy}$ an $-1$ oder $1$ liegt, desto genauer konzentrieren sich die Datenpunkte auf einer Geraden. Zudem spricht man bei einem Korrelationskoeffizienten $r_{xy}>0$ von einer \textbf{positiven (linearen) Korrelation}.\footcite[Vgl.][S. 214]{Teschl.2014}
+
+Nach Anwendung der eben definierten Gleichungen auf die, durch den Anwendungstest, ermittelten Werte, ergibt sich ein Wert von $r_{xy} \approx 0,9982$. Daraus folgt eine starke, lineare Korrelation zwischen der Laufzeit und der Anzahl der verarbeiteten Einträge.
+
+Basierend auf dieser Abhängigkeit lässt sich, durch die sog. \textbf{Regressionsanalyse}, eine Funktion bestimmen, mit welcher, anhand der vorhandenen Testdaten, die zu erwartende Laufzeit der Anwendung, in Abhängigkeit zur Menge der zu verarbeitenden Daten, approximiert werden kann.
+
+Bei der \textbf{linearen Regression} wird eine Funktion der Form $y = f(x) = kx + d$ gesucht (der sog. \textbf{Regressionsgeraden}), welche der folgenden Definition gerecht wird:
+
+\flqq Die Gerade $f(x) = kx + d$, für die
+\begin{equation*}
+\displaystyle\sum_{i=1}^{n} (y_i - f(x_i))^2
+\end{equation*}
+minimal wird, ist gegeben durch
+\begin{equation*}
+k = r_{xy} \frac{s_y}{s_x}, \quad \quad d = \bar{y} - k\bar{x}.
+\end{equation*}
+Hier ist $r_{xy}$ der empirische Korrelationskoeffizient, $\bar{x}$, $\bar{y}$ sind die arithmetischen Mittelwerte und $s_x$, $s_y$ die Standardabweichungen der Stichprobenwerte $x_i$ bzw. $y_i$.\frqq\footcite[216]{Teschl.2014}
+
+Daraus ergeben sich, basierend auf den ermittelten Testdaten, die Werte $k \approx 8,199 \cdot 10^{-6}$, $d \approx 8,418$, und die \autoref{equ:Laufzeit}, für die Berechnung der Laufzeit. \autoref{fig:VerlaufRegressionsgerade} zeigt den Verlauf der Regressionsgeraden durch die Testdaten.
+
+\begin{equation}
+t_e = f(x) = 8,199 \cdot 10^{-6}x + 8,418 \quad \quad \quad \{x \in \mathbb{N}\} \label{equ:Laufzeit}
+\end{equation}
+
+\begin{figure}[h]
 	\includegraphics[width=1\textwidth]{Laufzeitanalyse.png}
-	\caption{Laufzeitanalyse für Logfileanalyzer}
-	\label{fig:Laufzeitanalyse}
+	\caption{Verlauf der Regressionsgeraden}
+	\label{fig:VerlaufRegressionsgerade}
 \end{figure}
 
-\begin{align}
-f_1(x) &= 8,199 \times 10^{-6} x + 8,418 \label{equ:Laufzeit} \\
-f_2(x) &= f_1(x) \times 5 \label{equ:MaxInterval}
-\end{align}
-<IDEE: Es wurde eine formel angegeben, welche aussage über die maximale ausführungsdauer gibt...eventuell lassen sich diese beiden formeln verbinden (also eine Formel die aussage gibt über den maximal möglichen intervall für eine bestimmte datenmenge \autoref{equ:MaxInterval})>
+Um die ermittelte Funktion zu testen, wird nun zunächst die Laufzeit für die Verarbeitung von 20 Mio. Einträge mit \autoref{equ:Laufzeit} berechnet. Anschließend wird die Anwendung mit der entsprechenden Anzahl von Einträgen zehn mal ausgeführt (siehe \autoref{lis:Laufzeit20Mio}), und die durchschnittliche Laufzeit mit der Berechnung verglichen. \\
 
-\begin{figure}
-	\includegraphics[width=1\textwidth]{Zeit_Pro_Eintrag.png}
-	\caption{Verarbeitungszeit pro Eintrag}
-	\label{fig:VerarbeitungszeitProEintrag}
-\end{figure}
+\begin{lstlisting}[language=Bash,caption=Laufzeiten mit 20 Mio. Einträgen,label=lis:Laufzeit20Mio]
+Runtime: 185
+Runtime: 171
+Runtime: 166
+Runtime: 174
+Runtime: 166
+Runtime: 172
+Runtime: 170
+Runtime: 170
+Runtime: 171
+Runtime: 171
+\end{lstlisting}
 
-<Dokumentation der Tests mit unterschiedlich großen Datenmengen (10 Logeinträge bis 10.000.000 Einträge). Grafische Darstellung der Laufzeiten. Jede Stufe min. 10 mal ausführen und Ausführungszeit Nottieren/Dokumentieren. In Kapitel 6 Erkenntnisse aus den Tests aufarbeiten>
+Die Berechnete Laufzeit beträgt $t_e = 172,398$. Die durchschnittliche Laufzeit, bei 20 Mio. Einträgen, beträgt $171,6$. Die berechnete Laufzeit weicht lediglich $\approx 0,46\%$ vom Durchschnitt ab, was die Richtigkeit der Funktion hinreichend bestätigt.
+
+\subsection{Definition des minimalen Ausführungsintervalls}
+In \autoref{subsubsec:PL001} wurde, durch die \autoref{equ:MaxAusführungszeit}, ein maximale Laufzeit für einen festen Ausführungsintervall definiert. Durch die Kombination mit \autoref{equ:Laufzeit} lässt sich die Definition um einen Gültigkeitsbereich für $t_i$ erweitern:
+
+\begin{equation}
+t_e \leq \frac{t_i}{5} \quad \quad \quad \{t_e \in \mathbb{Q}^+\},\;\{t_i \in \mathbb{N}\;|\;5t_e \leq t_i \leq +\infty\} \label{equ:MinInterval}
+\end{equation}
+
+Durch diese Anpassung lässt sich, bereits vor Implementierung einer Analyse, ein minimaler Ausführungsintervall, in Abhängigkeit zur Datenmenge, bestimmen. Dies kann auch für bereits bestehende Analysen durchgeführt werden, um festzustellen, ob diese durch die Anwendung ersetzt werden können.
+
+%<IDEE: Es wurde eine formel angegeben, welche aussage über die maximale ausführungsdauer gibt...eventuell lassen sich diese beiden formeln verbinden (also eine Formel die aussage gibt über den maximal möglichen intervall für eine bestimmte datenmenge \autoref{equ:MinInterval})>
+
+%\begin{figure}
+%	\includegraphics[width=1\textwidth]{Zeit_Pro_Eintrag.png}
+%	\caption{Verarbeitungszeit pro Eintrag}
+%	\label{fig:VerarbeitungszeitProEintrag}
+%\end{figure}
+
+%<Dokumentation der Tests mit unterschiedlich großen Datenmengen (10 Logeinträge bis 10.000.000 Einträge). Grafische Darstellung der Laufzeiten. Jede Stufe min. 10 mal ausführen und Ausführungszeit Nottieren/Dokumentieren. In Kapitel 6 Erkenntnisse aus den Tests aufarbeiten>
