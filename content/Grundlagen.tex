@@ -49,7 +49,7 @@ Im syslog von Linux werden alle Ereignisse protokolliert, welche im direkten Zus
 Das Apache-Error-Log enthält diagnostische Informationen und protokolliert alle Fehler, welche bei der Verarbeitung einer Anfrage auftreten. \autoref{lst:BeispieleintragApacheErrorLog} zeigt, wie ein Eintrag in einem Error-Log aussehen könnte. Es lässt sich klar erkennen, wann der Fehler aufgetreten ist, was fehlgeschlagen ist und welches Modul betroffen ist. Ebenfalls sichtbar ist die \ac{IP}-Adresse des Clients, bei dem der Fehler aufgetreten ist. Die Einträge des Error-Logs entsprechen keiner Norm oder \ac{RFC} Beschreibung. Sie können nach der Installation individuell angepasst werden.\footcite[Vgl.][]{ApacheErrorLog.2015} \\
 
 \begin{lstlisting}[caption=Beispieleintrag für ein Appache-Error-Log,label=lst:BeispieleintragApacheErrorLog]
-[Fri Jun 12 10:42:29.902022 2015] [core:error] [pid 35708:tid 4328636416] [client 192.168.172.15] File does not exist: /usr/local/apache2/htdocs/favicon.ico
+[Fri Jun 12 10:42:29.902022 2015] ERROR [pid 35708:tid 4328636416] [client 192.168.172.15] File does not exist: /usr/local/apache2/htdocs/favicon.ico
 \end{lstlisting}
 
 Im Apache-Access-Log werden alle Anfragen an den Server protokolliert. Dabei wird gespeichert von welcher \ac{IP}-Adresse die Anfrage kam, wann die Anfrage gestartet wurde, welcher art die Anfrage war und welche Pfad angefragt wurde, sowie welcher Statuscode zurückgegeben wurde und wie groß die Antwort des Server war (siehe \autoref{lst:BeispieleintragApacheAccessLog}). \\
