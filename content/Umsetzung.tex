@@ -11,7 +11,7 @@ Vor Beginn der Entwicklung werden im folgenden die Umgebung, in welcher die Appl
 \subsection{Beschreibung der Infrastruktur}
 <...Einleitung/überleitung zur beschreibung der infrastruktur>
 
-Alle Server (sowohl Wen- wie auch Application-Server), schreiben ihre jeweiligen Logfiles auf ein \ac{NFS}. Der entsprechende Infrastruktur-Server mounted die benötigten Verzeichnisse. Der Server verfügt über eine Hadoop Installation, auf welcher die Applikation ausgeführt wird (siehe \autoref{fig:AufbauInfrastruktur}).
+Alle Server (sowohl Web- wie auch Appserver), schreiben ihre jeweiligen Logfiles auf ein \ac{NAS}. Der Infrastrukturserver mounted die entsprechenden Verzeichnisse. Der Server verfügt über eine Hadoop Installation, auf welcher die Applikation ausgeführt wird (siehe \autoref{fig:AufbauInfrastruktur}).
 
 \begin{figure}
 	\centering
@@ -48,10 +48,10 @@ Die Konfigurationswerte werden in Properties Dateien als Schlüssel-Wert-Paare g
 #
 
 # Set mode for execution (DEBUG, TEST, LIVE)
-RUNMODE         : DEBUG
+lfa.runmode         : DEBUG
 
 # Runtime properties
-LOGTARGET       : {0}
+lfa.logger.handlers : {0}
 
 [...]
 \end{lstlisting}
@@ -98,8 +98,30 @@ Der Prozess für die Verarbeitung der einzelnen Stufen wird im \ac{PAP} der \tex
 <Wie sehen die Logfiles aus? Welche Formate haben sie? Welche rolle spielen diese bei der Datenverarbeitung? Welche Informationen sind die richtigen Informationen?>
 
 \section{Implementierung von MapReduce}
-Nachdem alle Grundlagen der Anwendung fertiggestellt wurden kann mit der Entwicklung des Kernstückes begonnen werden, der Implementierung von MapReduce. Dabei besteht die größte Hürde im generischen Ansatz, welcher, insbesondere im Kern des Programms, immer berücksichtigt werden muss.
+Nachdem alle Grundlagen der Anwendung fertiggestellt wurden kann mit der Entwicklung des Kernstückes begonnen werden, der Implementierung von MapReduce. Zunächst wird der Verarbeitungsprozess innerhalb des MapReduce Modells beschrieben. Im Anschluss werden einzelne Module genauer betrachtet.
 
+Um dem generischen Anforderungen der Anwendung gerecht zu werden, ist ein Verständnis des modularen Aufbaus des Modells, für die Entwicklung der individuellen Anpassungen, von entscheidender Bedeutung. 
+
+\subsection{Datenfluss in MapReduce}
+Ein MapReduce Job beginnt mit der Übertragung der Daten an die Klasse \textit{InputFormat}. Diese teilt (\textit{Split}) die Informationen in annähernd gleich große Teile. Dabei werden die Daten mit dem \textit{RecordReader} ausgetauscht, welcher innerhalb eines Splits die initialen Schlüssel-Wert-Paare ermittelt. Im Anschluss werden diese an die \textit{Map}-Funktion weitergegeben. Je nach Größe der Daten werden $n$ Splits parallel verarbeitet.
+
+Erst wenn alle \textit{Mapper} die Verarbeitung abgeschlossen haben, werden die neuen Schlüssel-Wert-Paare partitioniert und sortiert. Diese Sortierten Paare werden dem \textit{Reducer} übergeben.
+
+Abschließend wird das Ergebnis der Analyse der Klasse \textit{OutputFormat} übergeben, welche das Resultat aufbereitet und im \ac{HDFS} ablegt. \autoref{fig:DatenflussMapReduce} stellt den Datenfluss zur Verdeutlichung graphisch dar.
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=1\textwidth]{MapReduceDatenfluss.png}
+	\caption{Datenfluss in MapReduce\footnotemark}
+	\label{fig:DatenflussMapReduce}
+\end{figure}
+\footnotetext{\cite[S. 111]{Freiknecht.2014}}
+
+Die einzelnen Module, sowie deren Implementierung in der Anwendung, werden in den nächsten Abschnitten beschrieben, mit Ausnahme der Module \textit{Partitioner} und der \textit{Sortierung}, da diese keine Anpassungen benötigen.
+
+Zusätzlich zu den Modulen von MapReduce, werden vorab die Klassen \textit{Bootstrap} und \textit{Driver} beschrieben. Diese gehören nicht direkt in das Modell von MapReduce sondern sind Teil der Initialisierung der Anwendung selbst.
+
+\subsection{Funktion von Bootstrap \& Driver}
 
 
 \subsection{Einblick in die InputFormat Klasse}
@@ -113,6 +135,7 @@ Nachdem alle Grundlagen der Anwendung fertiggestellt wurden kann mit der Entwick
 <Beschreibung vom Kern der Anwendung. Wie wird der Algorithmus umgesetzt? Welche Klassen/Methoden sind notwendig? Wie unterscheidet sich die Implementierung bei unterschiedlichem Input. Spielt das überhaupt eine Rolle oder muss es nur Text sein? Welches Ergebnis bekommt man und in welcher Form?>
 
 \section{Ausführungsdatei Logfileanalyzer.sh}\label{sec:Ausführungsdatei}
+
 
 \begin{lstlisting}[language=Bash,caption=Ausführungsdatei Logfileanalyzer.sh,label=lis:Logfileanalyzer.sh]
 #!/bin/bash
@@ -192,19 +215,19 @@ Bei jeder Ausführung des Programms wird das in \autoref{sec:Ausführungsdatei} 
 
 \begin{table}
 	\centering
-	\begin{tabular}{| l | l | r |}
+	\begin{tabular}{| r | l | r |}
 		\hline
 		\rowcolor[HTML]{3531FF} 
-		\multicolumn{1}{|l|}{\cellcolor[HTML]{4976AA}{\color[HTML]{FFFFFF} {\bf \#}}} & \multicolumn{1}{l|}{\cellcolor[HTML]{4976AA}{\color[HTML]{FFFFFF} {\bf Einträge $(x)$}}} & \multicolumn{1}{l|}{\cellcolor[HTML]{4976AA}{\color[HTML]{FFFFFF} {\bf $\bar{x}$}}} \\ \hline
-		01 & $10$ & 7,4 \\  \hline
-		02 & $100$ & 7,1 \\ \hline
-		03 & $1000$ & 7,3 \\  \hline
-		04 & $10^4$ & 9,1 \\  \hline
-		05 & $5\cdot10^4$ & 9,1 \\  \hline
-		06 & $2,5\cdot10^5$ & 11,0 \\  \hline
-		07 & $1,5\cdot10^6$ & 21,7 \\  \hline
-		08 & $3\cdot10^6$ & 33,7 \\  \hline
-		09 & $6\cdot10^6$ & 59,5 \\  \hline
+		\multicolumn{1}{|l|}{\cellcolor[HTML]{4976AA}{\color[HTML]{FFFFFF} {\bf \#}}} & \multicolumn{1}{l|}{\cellcolor[HTML]{4976AA}{\color[HTML]{FFFFFF} {\bf Anzahl Einträge}}} & \multicolumn{1}{l|}{\cellcolor[HTML]{4976AA}{\color[HTML]{FFFFFF} {\bf Durchsch. Laufzeit (in Sekunden)}}} \\ \hline
+		1 & $10$ & 7,4 \\  \hline
+		2 & $100$ & 7,1 \\ \hline
+		3 & $1000$ & 7,3 \\  \hline
+		4 & $10^4$ & 9,1 \\  \hline
+		5 & $5\times10^4$ & 9,1 \\  \hline
+		6 & $2,5\times10^5$ & 11,0 \\  \hline
+		7 & $1,5\times10^6$ & 21,7 \\  \hline
+		8 & $3\times10^6$ & 33,7 \\  \hline
+		9 & $6\times10^6$ & 59,5 \\  \hline
 		10 & $10^7$ & 88,9 \\  \hline
 	\end{tabular}
 	\caption{Durchschnittliche Laufzeiten für gegebene Datenmenge}
@@ -236,7 +259,7 @@ Der Pearson'sche Korrelationskoeffizient liegt immer zwischen $-1$ und $+1$. Je 
 
 Nach Anwendung der eben definierten Gleichungen auf die, durch den Anwendungstest, ermittelten Werte, ergibt sich ein Wert von $r_{xy} \approx 0,9982$. Daraus folgt eine starke, lineare Korrelation zwischen der Laufzeit und der Anzahl der verarbeiteten Einträge.
 
-Basierend auf dieser Abhängigkeit lässt sich, durch die sog. \textbf{Regressionsanalyse}, eine Funktion bestimmen, mit welcher, anhand der vorhandenen Testdaten, die zu erwartende Laufzeit der Anwendung, in Abhängigkeit zur Menge der zu verarbeitenden Daten, approximiert werden kann.
+Basierend auf dieser Abhängigkeit lässt sich, durch die sog. \textbf{Regressionsanalyse}, eine Funktion bestimmen, mit welcher, die zu erwartende Laufzeit der Anwendung, in Abhängigkeit zur Menge der zu verarbeitenden Daten, approximiert werden kann.
 
 Bei der \textbf{linearen Regression} wird eine Funktion der Form $y = f(x) = kx + d$ gesucht (der sog. \textbf{Regressionsgeraden}), welche der folgenden Definition gerecht wird:
 
@@ -250,11 +273,11 @@ k = r_{xy} \frac{s_y}{s_x}, \quad \quad d = \bar{y} - k\bar{x}.
 \end{equation*}
 Hier ist $r_{xy}$ der empirische Korrelationskoeffizient, $\bar{x}$, $\bar{y}$ sind die arithmetischen Mittelwerte und $s_x$, $s_y$ die Standardabweichungen der Stichprobenwerte $x_i$ bzw. $y_i$.\frqq\footcite[216]{Teschl.2014}
 
-Daraus ergeben sich, basierend auf den ermittelten Testdaten, die Werte $k \approx 8,199 \cdot 10^{-6}$, $d \approx 8,418$, und die \autoref{equ:Laufzeit}, für die Berechnung der Laufzeit.
+Daraus ergeben sich, basierend auf den ermittelten Testdaten, die Werte $k \approx 8,199 \times 10^{-6}$, $d \approx 8,418$, und die \autoref{equ:Laufzeit}, für die Berechnung der Laufzeit.
 
-\begin{equation}
-t_e = f(x) = 8,199 \cdot 10^{-6}x + 8,418 \quad \quad \quad \{x \in \mathbb{N}\} \label{equ:Laufzeit}
-\end{equation}
+\begin{flalign}
+&&  && t_e = f(x) = 8,199 \times 10^{-6}x + 8,418 && \{x \in \mathbb{N}\} \label{equ:Laufzeit}
+\end{flalign}
 
 \autoref{fig:VerlaufRegressionsgerade} zeigt den Verlauf der Regressionsgeraden durch die Testdaten.
 
@@ -266,7 +289,6 @@ t_e = f(x) = 8,199 \cdot 10^{-6}x + 8,418 \quad \quad \quad \{x \in \mathbb{N}\}
 
 Um die ermittelte Funktion zu testen, wird nun zunächst die Laufzeit für die Verarbeitung von 20 Mio. Einträge mit \autoref{equ:Laufzeit} berechnet. Anschließend wird die Anwendung mit der entsprechenden Anzahl von Einträgen zehn mal ausgeführt (siehe \autoref{lis:Laufzeit20Mio}), und die durchschnittliche Laufzeit mit der Berechnung verglichen. \\
 
-\newpage
 \begin{lstlisting}[language=Bash,caption=Laufzeiten mit 20 Mio. Einträgen,label=lis:Laufzeit20Mio]
 Runtime: 185
 Runtime: 171
@@ -283,11 +305,13 @@ Runtime: 171
 Die Berechnete Laufzeit beträgt $t_e = 172,398$. Die durchschnittliche Laufzeit, bei 20 Mio. Einträgen, beträgt $171,6$. Die berechnete Laufzeit weicht lediglich $\approx 0,46\%$ vom Durchschnitt ab, was die Richtigkeit der Funktion hinreichend bestätigt.
 
 \subsection{Definition des minimalen Ausführungsintervalls}
-In \autoref{subsubsec:PL001} wurde, durch die \autoref{equ:MaxAusführungszeit}, ein maximale Laufzeit für einen festen Ausführungsintervall definiert. Durch die Kombination mit \autoref{equ:Laufzeit} lässt sich die Definition um einen Gültigkeitsbereich für $t_i$ erweitern:
+<Diese Zurückführung auf die Definition der maximalen Laufzeit funktioniert zwar, ist aber noch nicht richtig rund. Eventuell die Gleichung doch umschreiben. $t_e$ ist in der ursprünglichen Formel gesucht, wird hier jetzt aber teilweise gesucht und steht in der Definition als errechneter wert mit drin...das passt irgendwie noch nicht...>
 
-\begin{equation}
-t_e \leq \frac{t_i}{5} \quad \quad \quad \{t_e \in \mathbb{Q}^+\},\;\{t_i \in \mathbb{N}\;|\;5t_e \leq t_i \leq +\infty\} \label{equ:MinInterval}
-\end{equation}
+In \autoref{subsubsec:PL001} wurde, durch die \autoref{equ:MaxAusführungszeit}, ein maximale Laufzeit für einen festen Ausführungsintervall definiert. Durch die Kombination mit \autoref{equ:Laufzeit}, durch welche sich ein zu erwartender Wert für $t_e$ berechnen lässt, kann die Definition um einen Gültigkeitsbereich für $t_i$ erweitern:
+
+\begin{flalign}
+&& && t_e \leq \frac{t_i}{5} && \{t_e \in \mathbb{Q}^+\},\;\{t_i \in \mathbb{N}\;|\;5t_e \leq t_i \leq +\infty\} \label{equ:MinInterval}
+\end{flalign}
 
 Durch diese Anpassung lässt sich, bereits vor Implementierung einer Analyse, ein minimaler Ausführungsintervall, in Abhängigkeit zur Datenmenge, bestimmen. Dies kann auch für bereits bestehende Analysen durchgeführt werden, um festzustellen, ob diese durch die Anwendung ersetzt werden können.
 

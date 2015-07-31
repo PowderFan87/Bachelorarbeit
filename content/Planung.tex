@@ -47,9 +47,9 @@ Die Ausführungszeit der Anwendung muss unter dem im folgenden definierten Richt
 
 Es ist nicht möglich einen festen Richtwert für die Ausführungszeit zu definieren, da dieser in Abhängigkeit zum Ausführungsinterval steht (z.B. wäre eine max. Ausführungszeit von einer Minute bei einem Interval von einer Minute nicht ausreichend). Aus diesem grund wird die maximale Ausführungszeit $t_e$, in abhängigkeit zum Interval $t_i$, wie folgt definiert:
 
-\begin{equation}
-t_e \leq \frac{t_i}{5} \quad \{t_e \in \mathbb{Q}^+\},\;\{t_i \in \mathbb{N}\} \label{equ:MaxAusführungszeit}
-\end{equation}
+\begin{flalign}
+&& && t_e \leq \frac{t_i}{5} && \{t_e \in \mathbb{Q}^+\},\;\{t_i \in \mathbb{N}\} \label{equ:MaxAusführungszeit}
+\end{flalign}
 
 \subsubsection{PL010 - Dateigröße}\label{subsubsec:PL010}
 Die Anwendung muss in der lage sein, Logfiles bis zu einer größe von 500 \ac{MB} verarbeiten zu können. Größere Dateien dürfen, wenn dies noch nicht durch \ac{HDFS} selbst vorgenommen wurde, in mehrere Dateien, für die weitere Verarbeitung, zerlegt werden.
