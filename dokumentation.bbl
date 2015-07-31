@@ -41,6 +41,48 @@
   \field{year}{2014}
 \endentry
 
+\entry{Beal.2015}{online}{}
+  \name{author}{1}{}{%
+    {{}%
+     {Beal}{B.}%
+     {Vangie}{V.}%
+     {}{}%
+     {}{}}%
+  }
+  \strng{namehash}{BV1}
+  \strng{fullhash}{BV1}
+  \field{labelyear}{2015}
+  \field{sortinit}{B}
+  \field{title}{Commodity Hardware}
+  \verb{url}
+  \verb http://www.webopedia.com/TERM/C/commodity_hardware.html
+  \endverb
+  \field{year}{2015}
+  \field{urlday}{30}
+  \field{urlmonth}{06}
+  \field{urlyear}{2015}
+\endentry
+
+\entry{Buchholz.1953}{article}{}
+  \name{author}{1}{}{%
+    {{}%
+     {Buchholz}{B.}%
+     {Werner}{W.}%
+     {}{}%
+     {}{}}%
+  }
+  \strng{namehash}{BW1}
+  \strng{fullhash}{BW1}
+  \field{labelyear}{1953}
+  \field{sortinit}{B}
+  \field{issn}{0096-8390}
+  \field{pages}{1262 \bibrangedash  1275}
+  \field{title}{The System Design of the IBM Type 701 Computer}
+  \field{journaltitle}{Proceedings of the I.R.E., Vol. 41", no. 10 Special
+  Computer Issue}
+  \field{year}{1953}
+\endentry
+
 \entry{BDSG3.1990}{online}{}
   \name{author}{1}{}{%
     {{}%

@@ -11,7 +11,7 @@ Vor Beginn der Entwicklung werden im folgenden die Umgebung, in welcher die Appl
 \subsection{Beschreibung der Infrastruktur}
 <...Einleitung/überleitung zur beschreibung der infrastruktur>
 
-Alle Server (sowohl Web- wie auch Appserver), schreiben ihre jeweiligen Logfiles auf ein \ac{NAS}. Der Infrastrukturserver mounted die entsprechenden Verzeichnisse. Der Server verfügt über eine Hadoop Installation, auf welcher die Applikation ausgeführt wird (siehe \autoref{fig:AufbauInfrastruktur}).
+Alle Server (sowohl Web- wie auch Appserver), schreiben ihre jeweiligen Logfiles auf ein \ac{NFS}. Der Infrastrukturserver mounted die entsprechenden Verzeichnisse. Der Server verfügt über eine Hadoop Installation, auf welcher die Applikation ausgeführt wird (siehe \autoref{fig:AufbauInfrastruktur}).
 
 \begin{figure}
 	\centering
@@ -64,14 +64,14 @@ Da die Anwendung später innerhalb des Hadoop Frameworks ausgeführt wird, müss
 
 \begin{lstlisting}[language=XML,caption=pom.xml Ergänzung für Konfigurationsdateien,label=lis:POMErgänzung]
 [...]
-	<resources>
-		<resource>
-			<directory>conf</directory>
-			<includes>
-				<include>*.properties</include>
-			</includes>
-		</resource>
-	</resources>
+<resources>
+	<resource>
+		<directory>conf</directory>
+		<includes>
+			<include>*.properties</include>
+		</includes>
+	</resource>
+</resources>
 [...]
 \end{lstlisting}
 
@@ -84,7 +84,7 @@ Die zweite Stufe bildet die Defaults. Hier werden alle Konfigurationen vorgenomm
 
 Die dritte und letzte Stufe bilden die User-Properties. Beim Start der Anwendung kann der Pfad zu einer individuellen Properties-Datei übergeben werden. In dieser können die Einstellungen, welche durch die Defaults vorgenommen wurden, ergänzt und  überschreiben werden.
 
-Der Prozess für die Verarbeitung der einzelnen Stufen wird im \ac{PAP} der \textit{LFAConfiguration} verdeutlicht, welcher im Anhang zu finden ist.
+Der Prozess für die Verarbeitung der einzelnen Stufen wird im \ac{PAP} der \textit{LFAConfiguration} verdeutlicht, welcher im Anhang zu finden ist.\footnote{\ac{PAP} für \textit{LFAConfiguration} im Anhang, S. \pageref{subsec:PAPLFAConfiguration}}
 
 %<Beschreibung wie Properties programmiert werden. Wie werden diese in der Anwendung umgesetzt? Welche Rolle spielen Properties für den generischen Teil der Anwendung?>
 
@@ -107,7 +107,7 @@ Ein MapReduce Job beginnt mit der Übertragung der Daten an die Klasse \textit{I
 
 Erst wenn alle \textit{Mapper} die Verarbeitung abgeschlossen haben, werden die neuen Schlüssel-Wert-Paare partitioniert und sortiert. Diese Sortierten Paare werden dem \textit{Reducer} übergeben.
 
-Abschließend wird das Ergebnis der Analyse der Klasse \textit{OutputFormat} übergeben, welche das Resultat aufbereitet und im \ac{HDFS} ablegt. \autoref{fig:DatenflussMapReduce} stellt den Datenfluss zur Verdeutlichung graphisch dar.
+Abschließend wird das Ergebnis der Analyse der Klasse \textit{OutputFormat} übergeben, welche das Resultat aufbereitet und im \ac{HDFS} ablegt. \autoref{fig:DatenflussMapReduce} stellt den Datenfluss zur Verdeutlichung grafisch dar.
 
 \begin{figure}[h]
 	\centering
@@ -122,7 +122,71 @@ Die einzelnen Module, sowie deren Implementierung in der Anwendung, werden in de
 Zusätzlich zu den Modulen von MapReduce, werden vorab die Klassen \textit{Bootstrap} und \textit{Driver} beschrieben. Diese gehören nicht direkt in das Modell von MapReduce sondern sind Teil der Initialisierung der Anwendung selbst.
 
 \subsection{Funktion von Bootstrap \& Driver}
+Durch den generischen Ansatz der Anwendung muss jeder Programmlauf initialisiert werden (auch als \gls{Bootstrapping} bezeichnet). Dies wird durch die Methode \textit{init} der Klasse \textit{Bootstrap} durchgeführt. Die zuvor erstellte Instanz der Klasse \textit{LFAConfiguration} wird hierfür an die Methode übergeben. Basierend auf den gesetzten Properties wird eine Instanz der Klasse \textit{Driver} erzeugt (siehe \autoref{lst:BootstrapInit} oder \ac{PAP}\footnote{\ac{PAP} für \textit{Bootstrap:init() im Anhang, S. \pageref{subsec:PAPBootstrapInit}}}).
 
+Dem \textit{Driver} werden zunächst alle Klassen mitgeteilt, welche zur Ausführung eines Jobs essentiell notwendig sind. Hierzu gehören die Klassen für \textit{InputFormat}, \textit{OutputFormat}, \textit{OutputKey}, \textit{OutputValue}, \textit{Mapper} und \textit{Reducer}. Die gesetzten Werte sind vom Typ \textit{Class<?>}. Es werden keine Instanzen der Klassen erzeugt. Ebenfalls notwendig für die Ausführung eines Jobs ist das Setzen eines Namens.
+
+Zuletzt wird eine Iteration über alle Schlüssel der Konfiguration durchgeführt, um zusätzliche Properties an den \textit{Driver} zu übergeben. Diese erweiterten Einstellungen werden vor Ausführung des Jobs in eine Instanz der Klasse \textit{org.apache.hadoop.conf.Configuration} geschrieben. Bei diesen Properties handelt es sich um Einstellungen, welche von den einzelnen Modulen des MapReduce Modells verwendet werden (z.B. ein regulärer Ausdruck für die \textit{Mapper} Klasse).\\
+
+\begin{lstlisting}[language=Java,caption=Auszug der Methode Bootstrap:init(),label=lst:BootstrapInit]
+public static Driver init(LFAConfiguration objConfiguration) {
+	[...]
+	// Set class to use for InputFormat
+	objDriver.setClsInputFormatClass(Class.forName(objConfiguration.getProperty("lfa.driver.input.format")));
+	
+	// Set classes regarding the output
+	objDriver.setClsOutputFormatClass(Class.forName(objConfiguration.getProperty("lfa.driver.output.format")));
+	objDriver.setClsOutputKeyClass(Class.forName(objConfiguration.getProperty("lfa.driver.output.key")));
+	objDriver.setClsOutputValueClass(Class.forName(objConfiguration.getProperty("lfa.driver.output.value")));
+	
+	// Set classes for mapper and reducer
+	objDriver.setClsMapperClass(Class.forName(objConfiguration.getProperty("lfa.driver.mapper")));
+	objDriver.setClsReducerClass(Class.forName(objConfiguration.getProperty("lfa.driver.reducer")));
+	
+	// Set job name
+	objDriver.setStrJobName(objConfiguration.getProperty("lfa.driver.job.name"));
+	
+	Set<String> setKeys = objConfiguration.stringPropertyNames();
+	
+	// Extract additional properties for the MapReduce job
+	for (String strKey : setKeys) {
+		if (strKey.contains("lfa.mapper.") || strKey.contains("lfa.reducer.") || strKey.contains("lfa.driver.add.")) {
+			objDriver.setAdditionalConfiguration(strKey, objConfiguration.getProperty(strKey));
+		}
+	}
+	[...]
+}
+\end{lstlisting}
+
+Die Klasse \textit{Driver} leitet sich von \textit{org.apache.hadoop.conf.Configured} ab und implementiert das Interface \textit{org.apache.hadoop.util.Tool}. Von der Klasse \textit{Configured} werden alle notwendigen Methoden und Attribute geerbt, welche für die Verwendung der, durch das Hadoop Framework gestellte und interpretierte, Konfiguration notwendig sind. Durch das Interface wird wiederum die Implementierung der Methode \textit{run()} vorgegeben.
+
+Diese Methode, welche später durch den \textit{ToolRunner} aufgerufen wird, Erstellt und Konfiguriert einen neuen Job, um diesen auszuführen und seinen Statuscode zurück zu geben. Hier werden alle, durch die \textit{Bootstrap:init()} Methode gesetzten Einstellungen, an den Job übergeben. Dieser Umweg ist notwendig, da ein Job mit einer Instanz von \textit{import org.apache.hadoop.conf.Configuration} erzeugt werden muss. Diese steht erst nach Ausführung durch den \textit{ToolRunner} zu Verfügung.
+
+Dieser Konfigurationsklasse werden ebenfalls die zusätzlichen Einstellungen übergeben, sofern diese vorhanden sind. Das übergebene Array enthält die Pfade für den Input und Output des Jobs, welche der Klasse \textit{FileInputFormat} und \textit{FileOutputFormat} hinzugefügt werden. \autoref{lst:AuszugRunMethode} zeigt einen Auszug der \textit{run} Methode (siehe auch \ac{PAP}\footnote{\ac{PAP} für \textit{Driver.run()} im Anhang, S. \pageref{subsec:PAPDriverRun}}) \\
+
+\begin{lstlisting}[language=Java,caption=Auszug der run Methode,label=lst:AuszugRunMethode]
+public int run(String[] arrArguments) throws Exception {
+	Configuration objConf = this.getConf();
+	
+	if (this.mapAdditionalConfigurations.size() > 0) {
+		for (String strKey : this.mapAdditionalConfigurations.keySet()) {
+			objConf.set(strKey, this.mapAdditionalConfigurations.get(strKey));
+		}
+	}
+	
+	Job objJob = new Job(objConf, this.strJobName);
+	
+	[...]
+	
+	FileInputFormat.addInputPath(objJob, new Path(arrArguments[0]));
+	objJob.setInputFormatClass(this.clsInputFormatClass);
+	
+	FileOutputFormat.setOutputPath(objJob, new Path(arrArguments[1]));
+	objJob.setOutputFormatClass(this.clsOutputFormatClass);
+	
+	return objJob.waitForCompletion(true) ? 0 : 1;
+}
+\end{lstlisting}
 
 \subsection{Einblick in die InputFormat Klasse}
 
@@ -139,7 +203,6 @@ Zusätzlich zu den Modulen von MapReduce, werden vorab die Klassen \textit{Boots
 
 \begin{lstlisting}[language=Bash,caption=Ausführungsdatei Logfileanalyzer.sh,label=lis:Logfileanalyzer.sh]
 #!/bin/bash
-
 #Load config
 . $1/config.cfg
 #Cleanup input direktory on dfs
@@ -151,28 +214,28 @@ Zusätzlich zu den Modulen von MapReduce, werden vorab die Klassen \textit{Boots
 mkdir $MAP_REDUCE_OUTPUT
 if [ $MAP_REDUCE_USE_USER_PROPERTIES == true ]
 then
-        #Export HADOOP_OPTS to pass user properties file
-        export HADOOP_OPTS="-Dlfa.userconf=$1/$MAP_REDUCE_USER_PROPERTIES"
+		#Export HADOOP_OPTS to pass user properties file
+		export HADOOP_OPTS="-Dlfa.userconf=$1/$MAP_REDUCE_USER_PROPERTIES"
 fi
 if [ $MAP_REDUCE_USE_LOG == true ]
 then
-        #Use log logfile
-        echo "Log file wird verwendet"
-        /bin/hadoop jar $1/$MAP_REDUCE_JAR $MAP_REDUCE_MAIN input output 2> $MAP_REDUCE_LOGFILE
+		#Use log logfile
+		echo "Log file wird verwendet"
+		/bin/hadoop jar $1/$MAP_REDUCE_JAR $MAP_REDUCE_MAIN input output 2> $MAP_REDUCE_LOGFILE
 else
-        echo "Kein Logfile"
-        /bin/hadoop jar $1/$MAP_REDUCE_JAR $MAP_REDUCE_MAIN input output
+		echo "Kein Logfile"
+		/bin/hadoop jar $1/$MAP_REDUCE_JAR $MAP_REDUCE_MAIN input output
 fi
 if [ $MAP_REDUCE_USE_USER_PROPERTIES == true ]
 then
-        #Unset HADOOP_OPTS after apllication finished
-        export HADOOP_OPTS=""
+		#Unset HADOOP_OPTS after apllication finished
+		export HADOOP_OPTS=""
 fi
 #Get output from dfs
 /bin/hdfs dfs -get output/* $MAP_REDUCE_OUTPUT
 if [ $MAP_REDUCE_DISPLAY_OUTPUT == true ]
 then
-        cat ${MAP_REDUCE_OUTPUT}/*
+		cat ${MAP_REDUCE_OUTPUT}/*
 fi
 \end{lstlisting}
 
@@ -215,22 +278,22 @@ Bei jeder Ausführung des Programms wird das in \autoref{sec:Ausführungsdatei} 
 
 \begin{table}
 	\centering
-	\begin{tabular}{| r | l | r |}
+	\begin{tabular}{| r | l | r | r |}
 		\hline
 		\rowcolor[HTML]{3531FF} 
-		\multicolumn{1}{|l|}{\cellcolor[HTML]{4976AA}{\color[HTML]{FFFFFF} {\bf \#}}} & \multicolumn{1}{l|}{\cellcolor[HTML]{4976AA}{\color[HTML]{FFFFFF} {\bf Anzahl Einträge}}} & \multicolumn{1}{l|}{\cellcolor[HTML]{4976AA}{\color[HTML]{FFFFFF} {\bf Durchsch. Laufzeit (in Sekunden)}}} \\ \hline
-		1 & $10$ & 7,4 \\  \hline
-		2 & $100$ & 7,1 \\ \hline
-		3 & $1000$ & 7,3 \\  \hline
-		4 & $10^4$ & 9,1 \\  \hline
-		5 & $5\times10^4$ & 9,1 \\  \hline
-		6 & $2,5\times10^5$ & 11,0 \\  \hline
-		7 & $1,5\times10^6$ & 21,7 \\  \hline
-		8 & $3\times10^6$ & 33,7 \\  \hline
-		9 & $6\times10^6$ & 59,5 \\  \hline
-		10 & $10^7$ & 88,9 \\  \hline
+		\multicolumn{1}{|l|}{\cellcolor[HTML]{4F88BB}{\color[HTML]{FFFFFF} {\bf \#}}} & \multicolumn{1}{l|}{\cellcolor[HTML]{4F88BB}{\color[HTML]{FFFFFF} {\bf Anzahl Einträge}}} & \multicolumn{1}{l|}{\cellcolor[HTML]{4F88BB}{\color[HTML]{FFFFFF} {\bf Dateigröße}}} & \multicolumn{1}{l|}{\cellcolor[HTML]{4F88BB}{\color[HTML]{FFFFFF} {\bf Laufzeit}}} \\ \hline
+		1 & $10$ & 1,6 \ac{KB} & 7,4 \\  \hline
+		2 & $100$ & 17,0 \ac{KB} & 7,1 \\ \hline
+		3 & $1000$ & 157,0 \ac{KB} & 7,3 \\  \hline \hline
+		4 & $10^4$ & 1,6 \ac{MB} & 9,1 \\  \hline
+		5 & $5\times10^4$ & 7,7 \ac{MB} & 9,1 \\  \hline
+		6 & $2,5\times10^5$ & 39,0 \ac{MB} & 11,0 \\  \hline
+		7 & $1,5\times10^6$ & 231,0 \ac{MB} & 21,7 \\  \hline
+		8 & $3\times10^6$ & 461,0 \ac{MB} & 33,7 \\  \hline
+		9 & $6\times10^6$ & 921,0 \ac{MB} & 59,5 \\  \hline \hline
+		10 & $10^7$ & 1,5 \ac{GB} & 88,9 \\  \hline
 	\end{tabular}
-	\caption{Durchschnittliche Laufzeiten für gegebene Datenmenge}
+	\caption{Durchschnittliche Laufzeiten (in Sekunden) für gegebene Datenmenge}
 	\label{tbl:DurchschnittlicheLaufzeiten}
 \end{table}
 
@@ -287,9 +350,9 @@ Daraus ergeben sich, basierend auf den ermittelten Testdaten, die Werte $k \appr
 	\label{fig:VerlaufRegressionsgerade}
 \end{figure}
 
-Um die ermittelte Funktion zu testen, wird nun zunächst die Laufzeit für die Verarbeitung von 20 Mio. Einträge mit \autoref{equ:Laufzeit} berechnet. Anschließend wird die Anwendung mit der entsprechenden Anzahl von Einträgen zehn mal ausgeführt (siehe \autoref{lis:Laufzeit20Mio}), und die durchschnittliche Laufzeit mit der Berechnung verglichen. \\
+Um die ermittelte Funktion zu testen, wird nun zunächst die Laufzeit für die Verarbeitung von $2 \times 10^7$ Einträgen mit \autoref{equ:Laufzeit} berechnet. Anschließend wird die Anwendung mit der entsprechenden Anzahl von Einträgen zehn mal ausgeführt (siehe \autoref{lis:Laufzeit20Mio}), und die durchschnittliche Laufzeit mit der Berechnung verglichen. Die Dateigröße, bei $2 \times 10^7$ Einträgen, beträgt 3 \ac{GB}. \\
 
-\begin{lstlisting}[language=Bash,caption=Laufzeiten mit 20 Mio. Einträgen,label=lis:Laufzeit20Mio]
+\begin{lstlisting}[language=Bash,caption=Laufzeiten mit $2 \times 10^7$ Einträgen,label=lis:Laufzeit20Mio]
 Runtime: 185
 Runtime: 171
 Runtime: 166

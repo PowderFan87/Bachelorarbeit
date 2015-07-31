@@ -181,6 +181,22 @@
 \renewcommand\lstlistlistingname{\langlistlistingname}
 \def\lstlistingautorefname{\langlistingautorefname}
 
+% Weitere Keyword Highlights
+\lstset{
+	emph=[1]{ 
+	    mkdir, jps, sudo, wget, mv, chown, su, adduser, addgroup, grep, sort, print, max
+    },
+    emphstyle=[1]{\color[rgb]{0.133,0.133,0.6}},
+    emph=[2]{
+	    LFAConfiguration, Driver, Set, Exception, Configuration, FileInputFormat, FileOutputFormat, Job, Path
+    },
+    emphstyle=[2]{\color[HTML]{006400}},
+    emph=[3]{
+	    String, int
+    },
+    emphstyle=[3]{\color{Mulberry}}
+}
+
 % Abstände in Tabellen
 \setlength{\tabcolsep}{\spaltenabstand}
 \renewcommand{\arraystretch}{\zeilenabstand}

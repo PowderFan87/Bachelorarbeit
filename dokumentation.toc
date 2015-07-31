@@ -102,34 +102,34 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {5.4.2}Funktion von Bootstrap \& Driver}{31}{subsection.5.4.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {5.4.3}Einblick in die InputFormat Klasse}{31}{subsection.5.4.3}
+\contentsline {subsection}{\numberline {5.4.3}Einblick in die InputFormat Klasse}{33}{subsection.5.4.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {5.4.4}Der RecordReader}{31}{subsection.5.4.4}
+\contentsline {subsection}{\numberline {5.4.4}Der RecordReader}{33}{subsection.5.4.4}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {5.4.5}Mapper und Reducer}{31}{subsection.5.4.5}
+\contentsline {subsection}{\numberline {5.4.5}Mapper und Reducer}{33}{subsection.5.4.5}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {5.5}Ausf\IeC {\"u}hrungsdatei Logfileanalyzer.sh}{31}{section.5.5}
+\contentsline {section}{\numberline {5.5}Ausf\IeC {\"u}hrungsdatei Logfileanalyzer.sh}{33}{section.5.5}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {5.6}Anwendungstest \& Auswertung der Ergebnisse}{32}{section.5.6}
+\contentsline {section}{\numberline {5.6}Anwendungstest \& Auswertung der Ergebnisse}{34}{section.5.6}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {5.6.1}Durchf\IeC {\"u}hrung der Tests}{32}{subsection.5.6.1}
+\contentsline {subsection}{\numberline {5.6.1}Durchf\IeC {\"u}hrung der Tests}{34}{subsection.5.6.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {5.6.2}Analyse der Laufzeiten}{34}{subsection.5.6.2}
+\contentsline {subsection}{\numberline {5.6.2}Analyse der Laufzeiten}{37}{subsection.5.6.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {5.6.3}Definition des minimalen Ausf\IeC {\"u}hrungsintervalls}{37}{subsection.5.6.3}
+\contentsline {subsection}{\numberline {5.6.3}Definition des minimalen Ausf\IeC {\"u}hrungsintervalls}{39}{subsection.5.6.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {6}Projektabschluss, Fazit \& Ausblick}{38}{chapter.6}
+\contentsline {chapter}{\numberline {6}Projektabschluss, Fazit \& Ausblick}{40}{chapter.6}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {6.1}Vergleich der Umsetzung mit den Zielen}{38}{section.6.1}
+\contentsline {section}{\numberline {6.1}Vergleich der Umsetzung mit den Zielen}{40}{section.6.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {6.2}Proof of Concept}{38}{section.6.2}
+\contentsline {section}{\numberline {6.2}Proof of Concept}{40}{section.6.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {6.3}Fazit}{38}{section.6.3}
+\contentsline {section}{\numberline {6.3}Fazit}{40}{section.6.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {6.4}Ausblick}{38}{section.6.4}
+\contentsline {section}{\numberline {6.4}Ausblick}{40}{section.6.4}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{Literatur}{i}{chapter*.40}
+\contentsline {chapter}{Literatur}{i}{chapter*.41}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{Glossar}{iii}{section*.41}
+\contentsline {chapter}{Glossar}{iii}{section*.42}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{Anhang}{v}{appendix*.43}
+\contentsline {chapter}{Anhang}{v}{appendix*.44}
