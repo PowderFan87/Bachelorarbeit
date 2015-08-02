@@ -79,6 +79,12 @@
 %\usepackage[leqno]{amsmath}
 %\usepackage{remreset}
 
+% Wurzel mit schießendem Strich am ende
+% New definition of square root: % it renames \sqrt as \oldsqrt
+\let\oldsqrt\sqrt % it defines the new \sqrt in terms of the old one 
+\def\sqrt{\mathpalette\DHLhksqrt} \def\DHLhksqrt#1#2{
+\setbox0=\hbox{$#1\oldsqrt{#2\,}$}\dimen0=\ht0 \advance\dimen0-0.2\ht0 \setbox2=\hbox{\vrule height\ht0 depth -\dimen0}{\box0\lower0.4pt\box2}}
+
 %\makeatletter
 %\@removefromreset{equation}{chapter}
 %\makeatother
@@ -184,15 +190,15 @@
 % Weitere Keyword Highlights
 \lstset{
 	emph=[1]{ 
-	    mkdir, jps, sudo, wget, mv, chown, su, adduser, addgroup, grep, sort, print, max
+	    mkdir, jps, sudo, wget, mv, chown, su, adduser, addgroup, grep, sort, print, max, WARNING
     },
     emphstyle=[1]{\color[rgb]{0.133,0.133,0.6}},
     emph=[2]{
-	    LFAConfiguration, Driver, Set, Exception, Configuration, FileInputFormat, FileOutputFormat, Job, Path
+	    LFAConfiguration, Driver, Set, Exception, Configuration, FileInputFormat, FileOutputFormat, Job, Path, Text, IntWritable, Mapper, Matcher, Pattern, PatternMapper, Logger, Level, Context, IOException, InterruptedException, Reducer, CountReducer, Iterable
     },
     emphstyle=[2]{\color[HTML]{006400}},
     emph=[3]{
-	    String, int
+	    String, int, Object
     },
     emphstyle=[3]{\color{Mulberry}}
 }

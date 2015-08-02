@@ -58,7 +58,7 @@ lfa.logger.handlers : {0}
 
 Grundsätzlich sind alle Konfigurationen vom Typ \textit{String}. Es ist, nativ, nicht möglich, direkt einen Wert in einem anderen Datentyp zu definieren. Falls eine Typenkonvertieren notwendig ist, muss diese manuell durchgeführt werden.
 
-In Java stellt die Klasse \textit{Properties}, welche teil des \textit{java.util} Paketes ist, alle benötigten Methoden bereit. Um die Konfiguration der Anwendung zu vereinfachen, wurde die Klasse \textit{Configuration} im Paket \textit{com.hszuesz.logfileanalyzer} erzeugt. Diese leitet sich aus der Klasse \textit{Properties} ab, und stellt Erweiterungen zum einlesen mehrerer Konfigurationsdateien bereit. Dies ist notwendig, um eine stufenweise Konfiguration der Anwendung zu realisieren.
+In Java stellt die Klasse \textit{Properties}, welche teil des \textit{java.util} Paketes ist, alle benötigten Methoden bereit. Um die Konfiguration der Anwendung zu vereinfachen, wurde die Klasse \textit{LFAConfiguration}\footnote{Der Name \textit{LFAConfiguration} wurde bewusst gewählt, da der Name \textit{Configuration} bereits von einer Klasse des Hadoop Frameworks verwendet wird.} im Paket \textit{com.hszuesz.logfileanalyzer} erzeugt. Diese leitet sich aus der Klasse \textit{Properties} ab, und stellt Erweiterungen zum einlesen mehrerer Konfigurationsdateien bereit. Dies ist notwendig, um eine stufenweise Konfiguration der Anwendung zu realisieren.
 
 Da die Anwendung später innerhalb des Hadoop Frameworks ausgeführt wird, müssen die Konfigurationsdateien ein Teil der, durch Maven erzeugten, JAR-Datei sein. Dies wird durch eine Ergänzung in der \textit{pom.xml} innerhalb des \textit{build} Knotens sichergestellt (siehe \autoref{lis:POMErgänzung}). \\
 
@@ -94,8 +94,8 @@ Der Prozess für die Verarbeitung der einzelnen Stufen wird im \ac{PAP} der \tex
 %\section{Grundlagen für Datenverarbeitung}
 %<Beschreibung der Entwicklung für die Grundlagen zur Datenverarbeitung. Welche Klassen werden dabei verwendet? Welches System liegt dahinter? Warum dieses System? Dabei nicht nur auf die Speicherung von Daten eingehen sondern auch auf das Lesen von Dateien.>
 
-\section{Bestimmung des Aufbaus der Logfiles}
-<Wie sehen die Logfiles aus? Welche Formate haben sie? Welche rolle spielen diese bei der Datenverarbeitung? Welche Informationen sind die richtigen Informationen?>
+%\section{Bestimmung des Aufbaus der Logfiles}
+%<Wie sehen die Logfiles aus? Welche Formate haben sie? Welche rolle spielen diese bei der Datenverarbeitung? Welche Informationen sind die richtigen Informationen?>
 
 \section{Implementierung von MapReduce}
 Nachdem alle Grundlagen der Anwendung fertiggestellt wurden kann mit der Entwicklung des Kernstückes begonnen werden, der Implementierung von MapReduce. Zunächst wird der Verarbeitungsprozess innerhalb des MapReduce Modells beschrieben. Im Anschluss werden einzelne Module genauer betrachtet.
@@ -103,11 +103,11 @@ Nachdem alle Grundlagen der Anwendung fertiggestellt wurden kann mit der Entwick
 Um dem generischen Anforderungen der Anwendung gerecht zu werden, ist ein Verständnis des modularen Aufbaus des Modells, für die Entwicklung der individuellen Anpassungen, von entscheidender Bedeutung. 
 
 \subsection{Datenfluss in MapReduce}
-Ein MapReduce Job beginnt mit der Übertragung der Daten an die Klasse \textit{InputFormat}. Diese teilt (\textit{Split}) die Informationen in annähernd gleich große Teile. Dabei werden die Daten mit dem \textit{RecordReader} ausgetauscht, welcher innerhalb eines Splits die initialen Schlüssel-Wert-Paare ermittelt. Im Anschluss werden diese an die \textit{Map}-Funktion weitergegeben. Je nach Größe der Daten werden $n$ Splits parallel verarbeitet.
+Ein MapReduce Job beginnt mit der Übertragung der Daten an die Klasse \textit{InputFormat}. Diese teilt die Daten nach einer vorgegebenen Größe\footnote{Standardgröße für \textit{FileInputFormat} beträgt 64 \ac{MB}. Dieser Wert kann durch setzen der Einstellung \textit{mapred.min.split.size} verändert werden. Die Angabe erfolgt in Bytes.}. Jeder erzeugte \textit{Split} wird von einem \textit{Mapper} verarbeitet. Dabei werden die Daten mit dem \textit{RecordReader} aufbereitet, welcher die initialen Schlüssel-Wert-Paare ermittelt. Im Anschluss werden diese an die \textit{Map}-Funktion weitergegeben. Die einzelnen \textit{Splits} werden parallel verarbeitet.
 
-Erst wenn alle \textit{Mapper} die Verarbeitung abgeschlossen haben, werden die neuen Schlüssel-Wert-Paare partitioniert und sortiert. Diese Sortierten Paare werden dem \textit{Reducer} übergeben.
+Erst wenn alle \textit{Mapper} die Verarbeitung abgeschlossen haben, folgt die Partitionierung und Sortierung der neuen Schlüssel-Wert-Paare. Die Sortierten Paare werden den \textit{Reducern} übergeben.
 
-Abschließend wird das Ergebnis der Analyse der Klasse \textit{OutputFormat} übergeben, welche das Resultat aufbereitet und im \ac{HDFS} ablegt. \autoref{fig:DatenflussMapReduce} stellt den Datenfluss zur Verdeutlichung grafisch dar.
+Abschließend wird das Ergebnis der Analyse an eine Instanz der Klasse \textit{OutputFormat} übergeben, welche das Resultat aufbereitet und im \ac{HDFS} ablegt. \autoref{fig:DatenflussMapReduce} stellt den Datenfluss zur Verdeutlichung grafisch dar.
 
 \begin{figure}[h]
 	\centering
@@ -128,7 +128,7 @@ Dem \textit{Driver} werden zunächst alle Klassen mitgeteilt, welche zur Ausfüh
 
 Zuletzt wird eine Iteration über alle Schlüssel der Konfiguration durchgeführt, um zusätzliche Properties an den \textit{Driver} zu übergeben. Diese erweiterten Einstellungen werden vor Ausführung des Jobs in eine Instanz der Klasse \textit{org.apache.hadoop.conf.Configuration} geschrieben. Bei diesen Properties handelt es sich um Einstellungen, welche von den einzelnen Modulen des MapReduce Modells verwendet werden (z.B. ein regulärer Ausdruck für die \textit{Mapper} Klasse).\\
 
-\begin{lstlisting}[language=Java,caption=Auszug der Methode Bootstrap:init(),label=lst:BootstrapInit]
+\begin{lstlisting}[language=Java,caption=Auszug der Methode \textit{Bootstrap:init()},label=lst:BootstrapInit]
 public static Driver init(LFAConfiguration objConfiguration) {
 	[...]
 	// Set class to use for InputFormat
@@ -164,7 +164,7 @@ Diese Methode, welche später durch den \textit{ToolRunner} aufgerufen wird, Ers
 
 Dieser Konfigurationsklasse werden ebenfalls die zusätzlichen Einstellungen übergeben, sofern diese vorhanden sind. Das übergebene Array enthält die Pfade für den Input und Output des Jobs, welche der Klasse \textit{FileInputFormat} und \textit{FileOutputFormat} hinzugefügt werden. \autoref{lst:AuszugRunMethode} zeigt einen Auszug der \textit{run} Methode (siehe auch \ac{PAP}\footnote{\ac{PAP} für \textit{Driver.run()} im Anhang, S. \pageref{subsec:PAPDriverRun}}) \\
 
-\begin{lstlisting}[language=Java,caption=Auszug der run Methode,label=lst:AuszugRunMethode]
+\begin{lstlisting}[language=Java,caption=Auszug der \textit{run()} Methode,label=lst:AuszugRunMethode]
 public int run(String[] arrArguments) throws Exception {
 	Configuration objConf = this.getConf();
 	
@@ -195,8 +195,88 @@ public int run(String[] arrArguments) throws Exception {
 
 
 \subsection{Mapper und Reducer}
+Die durch den \textit{RecordReader} erzeugten Schlüssel-Wert-Paare werden an den Mapper weiter gegeben. Die Aufgabe des \textit{Mappers}, ist die weiterverarbeitung und genauere Interpretation/Analyse der Paare.
 
-<Beschreibung vom Kern der Anwendung. Wie wird der Algorithmus umgesetzt? Welche Klassen/Methoden sind notwendig? Wie unterscheidet sich die Implementierung bei unterschiedlichem Input. Spielt das überhaupt eine Rolle oder muss es nur Text sein? Welches Ergebnis bekommt man und in welcher Form?>
+Wichtig ist hierbei die unterscheidung zwischen der Aufgabe des \textit{RecordReader} und \textit{Mapper}. Beider wandeln gegebene Informationen in Schlüssel-Wert-Paare um. Die durch den \textit{RecordReader} erzeugten Paare sind als die Datensätze zu sehen, welche durch den Mapper analysiert werden sollen.
+
+Diese Trennung muss bei der Entwicklung unter allen Umständen beachtet werden. Der \textit{RecordReader} darf nicht die Aufgaben des \textit{Mapper} übernehmen.
+
+Die Interpretation der Daten kann auf unterschiedlichste weise erfolgen. Die Auswertung ist dabei immer an den zu verarbeitenden Datentyp angepasst. Analysiert werden können alle formen von Daten (Numerisch, Alphanumerisch oder binäre Daten).
+
+\subsubsection{Implementierung individueller Mapper}
+Alle Mapper müssen sich von der Klasse \textit{org.apache.hadoop.mapreduce.Mapper} ableiten. Bei der Klassendefinition muss ebenfalls die Angabe der \glspl{Generic} erfolgen. Der Mapper wird in der Hadoop 2.7.1 \ac{API} der Apache Software Foundation Definiert mit \textit{Class Mapper<KEYIN,VALUEIN,KEYOUT,VALUEOUT>}. Die \glspl{Generic} geben für die Schlüssel-Wert-Paare, sowohl vom Input (\textit{KEYIN}, \textit{VALUEIN}) wie auch für den Output (\textit{KEYOUT}, \textit{VALUEOUT}), die Datentypen an.\footcite[Vgl.][]{ApacheHadoopApiDokuMapper.2015}
+
+\autoref{lst:DefinitionPatternMapper} zeigt die Definition der für diese Anwedung programmierten Klasse \textit{PatternMapper}, mit den entsprechenden Generics innerhalb der spitzen Klammern. Diese erwartet als Input ein Schlüssel-Wert-Paar, bei welchem der Schlüssel ein beliebiges Objekt und der Wert ein Objekt des Typs \textit{org.apache.hadoop.io.Text} repräsentiert. Das Inputpaar wird durch die Methode \textit{map()} in ein Schlüssel-Wert-Paar mit Schlüsseltyp \textit{org.apache.hadoop.io.Text} und Werttyp \textit{org.apache.hadoop.io.IntWritable} umgewandelt. \\
+
+\begin{lstlisting}[language=Java,caption=Deklaration \textit{PatternMapper} mit Generics,label=lst:DefinitionPatternMapper]
+public class PatternMapper extends Mapper<Object,Text,Text,IntWritable>
+\end{lstlisting}
+
+Der \textit{PatternMapper} Analysiert den übergebenen Wert anhand eines in der Konfiguration definierten regulären Ausdrucks. Dieser kann alle Daten analysieren, welche durch \acp{DEA} oder \acp{NEA} erkannt werden können, d.h., dass die Daten mit einer \textit{Grammatik} vom \textit{Typ 3} der Chomsky-Hierarchie interpretiert werden können. Diese wird von Ulrich Hedtstück wie folgt definiert:
+
+Sei $G = (V_N, V_T, P, S)$ eine \textit{Grammatik}, mit der endlichen, nichtleeren Mengen $V = V_N \cup V_T$, wobei $V_N$ die Menge aller \textit{Variablen} (\textit{nichtterminalen Symbole}) und $V_T$ die Menge aller \textit{terminalen Symbole} (\textit{Terminale}) ist, einer endlichen Menge $P$ von \textit{Regeln} (\textit{Produktionen}) der Form $\alpha$ \textrightarrow $\beta$ (mit $\alpha \in (V_N \cup V_T)^+$ und $\beta \in (V_N \cup V_T)^*$) und dem \textit{Startsymbol} $S \in V_N$. 
+
+$G$ ist vom \textit{Typ 3} oder \textit{regulär}, wenn es eine Produktion der Form \textit{A} \textrightarrow \textit{aB}, oder \textit{A} \textrightarrow \textit{a} hat, wobei $A, B \in V_N$, $a \in V_T$, mit der Ausnahme \textit{S} \textrightarrow $\varepsilon$, wobei \textit{S} nie auf der rechten Seite einer Produktion stehen darf.\footcite[Vgl.][S. 25 u. 32]{Hedtstueck.2012}
+
+Eine \textit{Grammatik} von diesem Typ kann immer in einen regulären Ausdruck umgewandelt werden. Der \textit{PatternMapper} ermittelt anhand dieses Ausdrucks den Schlüssel innerhalb des ihm übergebenen Wertes. Der reguläre Ausdruck muss über mindestens eine definierte Gruppe verfügen, da diese letztendlich als Schlüssel verwendet wird. Wenn dieser gefunden wird, kann als Ergebnis ein Schlüssel-Wert-Paar dem aktuellen \textit{Mapper-Context}, mittels der Methode \textit{write()}, mit einem Wert von $1$, hinzugefügt werden. Wird keine Übereinstimmung gefunden, kann der Eintrag, durch das Setzen einer entsprechenden Konfiguration auf den Wert \textit{SKIP}, ignoriert werden. Anderenfalls wird \textit{NA} als Schlüssel verwendet. \autoref{lst:MethodeMap} zeigt die Methode \textit{map()} des \textit{PatternMappers}. \\
+
+\begin{lstlisting}[language=Java,caption=Methode \textit{map()} der Klasse \textit{PatternMapper},label=lst:MethodeMap]
+public void map(Object objKey, Text objValue, Mapper.Context objContext) throws IOException, InterruptedException {
+	Configuration	objConf						= objContext.getConfiguration();
+	Pattern				objKeyPattern			= Pattern.compile(objConf.get([...]));
+	String				strNoMatchAction	= objConf.get([...]);
+
+	String 	strLine 		= objValue.toString();
+	Matcher	objMatcher	= objKeyPattern.matcher(strLine);
+
+	if (objMatcher.find()) {
+		this.objTmpKey.set(objMatcher.group(1));
+		objContext.write(this.objTmpKey, PatternMapper.objOne);
+	} else {
+		if ("SKIP".equals(strNoMatchAction)) {
+			Logger.getLogger(PatternMapper.class.getName()).log(Level.WARNING, [...]);
+		} else {
+			Logger.getLogger(PatternMapper.class.getName()).log(Level.WARNING, [...]);
+			this.objTmpKey.set("NA");
+			objContext.write(this.objTmpKey, PatternMapper.objOne);
+		}
+	}
+}
+\end{lstlisting}
+
+Wie in \autoref{fig:DatenflussMapReduce} gezeigt wird, werden die durch den \textit{Mapper} erzeugten Schlüssel-Wert-Paare, nach deren Partitionierung/Sortierung, an den \textit{Reducer} weitergegeben.
+
+\subsubsection{Implementierung individueller Reducer}
+Die Definition der \textit{Reducer} Klasse, in der Hadoop 2.7.1 \ac{API} ähnelt stark der des \textit{Mappers} mit \textit{Class Reducer<KEYIN,VALUEIN,KEYOUT,VALUEOUT>}.\footcite[Vgl.][]{ApacheHadoopApiDokuReducer.2015} Die Generics haben die gleiche Bedeutung wie die des \textit{Mappers}.
+
+\autoref{lst:DefinitionCountReducer} zeigt die Definition des für die Anwendung programmierten \textit{CountReducer}.  \\
+
+\begin{lstlisting}[language=Java,caption=Deklaration \textit{CountReducer} mit Generics,label=lst:DefinitionCountReducer]
+public class CountReducer extends Reducer<Text, IntWritable, Text, IntWritable>
+\end{lstlisting}
+
+Der \textit{CountReducer} summiert alle im \textit{Mapper} gesetzten Werte für einen gegebenen Schlüssel auf und schreibt das Ergebnis wieder in den entsprechenden Context. \autoref{lst:MethodeReduce} zeigt die \textit{reduce()} Methode der Klasse \textit{CountReducer}. Im gegensatz zur \textit{map()} Methode, bekommt der \textit{Reducer} ein Array von werten übergeben. \\
+
+\begin{lstlisting}[language=Java,caption=Methode \textit{reduce()} der Klasse \textit{CountReducer},label=lst:MethodeReduce]
+public void reduce(Text objKey, Iterable<IntWritable> arrValues, Context objContext) throws IOException, InterruptedException {
+	int lngSum = 0;
+
+	for(IntWritable objValue : arrValues) {
+		lngSum += objValue.get();
+	}
+
+	this.objTotal.set(lngSum);
+
+	objContext.write(objKey, this.objTotal);
+}
+\end{lstlisting}
+
+Der \textit{Reducer} kann auch andere Aufgaben übernehmen. Die naheliegensten Funktionen sind arithmetische Operationen wie die Berechnung eines arithmetischen Mittels, des Medians oder minimal/maximal Werte für einen Schlüssel.
+
+Je nach Analyse müssen unterschiedliche \textit{Mapper} und/oder \textit{Reducer} programmiert werden. Die zu verwendenden Klassen sind über die entsprechenden Properties konfigurierbar.
+
+\subsection{Betrachtung von alternativen Mappingverfahren}
+
 
 \section{Ausführungsdatei Logfileanalyzer.sh}\label{sec:Ausführungsdatei}
 
@@ -214,28 +294,28 @@ public int run(String[] arrArguments) throws Exception {
 mkdir $MAP_REDUCE_OUTPUT
 if [ $MAP_REDUCE_USE_USER_PROPERTIES == true ]
 then
-		#Export HADOOP_OPTS to pass user properties file
-		export HADOOP_OPTS="-Dlfa.userconf=$1/$MAP_REDUCE_USER_PROPERTIES"
+	#Export HADOOP_OPTS to pass user properties file
+	export HADOOP_OPTS="-Dlfa.userconf=$1/$MAP_REDUCE_USER_PROPERTIES"
 fi
 if [ $MAP_REDUCE_USE_LOG == true ]
 then
-		#Use log logfile
-		echo "Log file wird verwendet"
-		/bin/hadoop jar $1/$MAP_REDUCE_JAR $MAP_REDUCE_MAIN input output 2> $MAP_REDUCE_LOGFILE
+	#Use log logfile
+	echo "Log file wird verwendet"
+	/bin/hadoop jar $1/$MAP_REDUCE_JAR $MAP_REDUCE_MAIN input output 2> $MAP_REDUCE_LOGFILE
 else
-		echo "Kein Logfile"
-		/bin/hadoop jar $1/$MAP_REDUCE_JAR $MAP_REDUCE_MAIN input output
+	echo "Kein Logfile"
+	/bin/hadoop jar $1/$MAP_REDUCE_JAR $MAP_REDUCE_MAIN input output
 fi
 if [ $MAP_REDUCE_USE_USER_PROPERTIES == true ]
 then
-		#Unset HADOOP_OPTS after apllication finished
-		export HADOOP_OPTS=""
+	#Unset HADOOP_OPTS after apllication finished
+	export HADOOP_OPTS=""
 fi
 #Get output from dfs
 /bin/hdfs dfs -get output/* $MAP_REDUCE_OUTPUT
 if [ $MAP_REDUCE_DISPLAY_OUTPUT == true ]
 then
-		cat ${MAP_REDUCE_OUTPUT}/*
+	cat ${MAP_REDUCE_OUTPUT}/*
 fi
 \end{lstlisting}
 

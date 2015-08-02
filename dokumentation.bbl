@@ -1,5 +1,5 @@
 % $ biblatex auxiliary file $
-% $ biblatex version 2.2 $
+% $ biblatex version 2.3 $
 % Do not modify the above lines!
 %
 % This is an auxiliary file used by the 'biblatex' package.
@@ -223,6 +223,27 @@
   \field{urlyear}{2015}
 \endentry
 
+\entry{Hedtstueck.2012}{book}{}
+  \name{author}{1}{}{%
+    {{}%
+     {Hedtst{\"u}ck}{H.}%
+     {Ulrich}{U.}%
+     {}{}%
+     {}{}}%
+  }
+  \list{publisher}{1}{%
+    {Oldenbourg Verlag}%
+  }
+  \strng{namehash}{HU1}
+  \strng{fullhash}{HU1}
+  \field{labelyear}{2012}
+  \field{sortinit}{H}
+  \field{isbn}{9783486714043}
+  \field{title}{Einf{\"u}hrung in die Theoretische Informatik. Formale Sprachen
+  und Automatentheorie. 5. Auflage}
+  \field{year}{2012}
+\endentry
+
 \entry{Karloff.2010}{article}{}
   \name{author}{3}{}{%
     {{}%
@@ -251,6 +272,31 @@
   \field{journaltitle}{SODA '10 Proceedings of the twenty-first annual ACM-SIAM
   symposium on Discrete Algorithms}
   \field{year}{2010}
+\endentry
+
+\entry{Naftalin.2006}{book}{}
+  \name{author}{2}{}{%
+    {{}%
+     {Naftalin}{N.}%
+     {Maurice}{M.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Wadler}{W.}%
+     {Philip}{P.}%
+     {}{}%
+     {}{}}%
+  }
+  \list{publisher}{1}{%
+    {O'Reilly Media}%
+  }
+  \strng{namehash}{NMWP1}
+  \strng{fullhash}{NMWP1}
+  \field{labelyear}{2006}
+  \field{sortinit}{N}
+  \field{isbn}{9780596551506}
+  \field{title}{Java Generics and Collections}
+  \field{year}{2006}
 \endentry
 
 \entry{Salm.2007}{book}{}
@@ -368,6 +414,54 @@
   \field{year}{2015}
   \field{urlday}{07}
   \field{urlmonth}{07}
+  \field{urlyear}{2015}
+\endentry
+
+\entry{ApacheHadoopApiDokuMapper.2015}{online}{}
+  \name{author}{1}{}{%
+    {{}%
+     {{The Apache Software Foundation}}{T.}%
+     {}{}%
+     {}{}%
+     {}{}}%
+  }
+  \strng{namehash}{T1}
+  \strng{fullhash}{T1}
+  \field{labelyear}{2015}
+  \field{extrayear}{4}
+  \field{sortinit}{T}
+  \field{title}{Mapper (Apache Hadoop Main 2.7.1 API)}
+  \verb{url}
+  \verb http://hadoop.apache.org/docs/r2.7.1/api/org/apache/hadoop/mapreduce/Ma
+  \verb pper.html
+  \endverb
+  \field{year}{2015}
+  \field{urlday}{02}
+  \field{urlmonth}{08}
+  \field{urlyear}{2015}
+\endentry
+
+\entry{ApacheHadoopApiDokuReducer.2015}{online}{}
+  \name{author}{1}{}{%
+    {{}%
+     {{The Apache Software Foundation}}{T.}%
+     {}{}%
+     {}{}%
+     {}{}}%
+  }
+  \strng{namehash}{T1}
+  \strng{fullhash}{T1}
+  \field{labelyear}{2015}
+  \field{extrayear}{5}
+  \field{sortinit}{T}
+  \field{title}{Reducer (Apache Hadoop Main 2.7.1 API)}
+  \verb{url}
+  \verb http://hadoop.apache.org/docs/r2.7.1/api/org/apache/hadoop/mapreduce/Re
+  \verb ducer.html
+  \endverb
+  \field{year}{2015}
+  \field{urlday}{02}
+  \field{urlmonth}{08}
   \field{urlyear}{2015}
 \endentry
 
