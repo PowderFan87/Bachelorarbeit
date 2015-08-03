@@ -9,11 +9,21 @@ Vor Beginn der Entwicklung werden im folgenden die Umgebung, in welcher die Appl
 <Weitere Einführung in das Kapitel bzw. aktuelle überarbeiten>
 
 \subsection{Beschreibung der Infrastruktur}
-<...Einleitung/überleitung zur beschreibung der infrastruktur>
+Obwohl Java als eine Plattform unabhängige Programmiersprache gesehen wird, spielt die Infrastruktur, in welcher die Anwendung ausgeführt werden soll, bei der Entwicklung eine entscheidende Rolle.
 
-Alle Server (sowohl Web- wie auch Appserver), schreiben ihre jeweiligen Logfiles auf ein \ac{NFS}. Der Infrastrukturserver mounted die entsprechenden Verzeichnisse. Der Server verfügt über eine Hadoop Installation, auf welcher die Applikation ausgeführt wird (siehe \autoref{fig:AufbauInfrastruktur}).
+Durch die Infrastruktur wird indirekt die art der Datenverarbeitung vorgegeben. Außerdem müssen potenzielle Einschränkungen, wie z.B. verfügbare Speicherplatz oder maximale Übertragungsrate (falls Daten über ein Netzwerk ausgetauscht werden müssen), identifiziert werden.
 
-\begin{figure}
+Des weiteren können, erst durch die Betrachtung der Umgebung, die Systeme ermittelt werden, welche für die Ausführung der Anwendung eventuell angepasst werden müssen (Installation zusätzlicher Software, setzen von Berechtigungen, etc.).
+
+Innerhalb der Infrastruktur werden drei verschiedene Serverarten unterschieden. Aktuell werden die Webseiten auf zwei, physisch getrennten Webservern betrieben. Durch sie wird die Kommunikation zwischen den Clients und den \textit{Appservern} gesteuert (Annehmen von Requests und senden des entsprechenden Response).
+
+Die Inhalte für die einzelnen Seiten werden durch die \textit{Appserver} bereitgestellt. Die Anzahl dieser ist nicht festgelegt, um auf schwankende Anforderungen schneller regieren zu können. Steigt die Last auf das System, können weitere \textit{Appserver} der Infrastruktur hinzugefügt werden.
+
+Der \textit{Infrastrukturserver} überwacht das gesamte System. Alle Informationen über den Zustand der Infrastruktur werden auf diesem Server konsolidiert. Dazu gehören ebenfalls die Logfiles. Diese werden, sowohl vom \textit{Web}- wie auch \textit{Appserver}, auf einem \ac{NFS} abgelegt. Die entsprechenden Verzeichnisse werden über einen mount dem \textit{Infrastrukturserver} zugänglich gemacht. 
+
+Der \textit{Infrastrukturserver} muss über eine Hadoop Installation verfügen, auf welcher die Applikation ausgeführt werden muss. \autoref{fig:AufbauInfrastruktur} zeigt die beschriebene Infrastruktur. \\
+
+\begin{figure}[h]
 	\centering
 	\includegraphics[width=.8\textwidth]{Infrastruktur.png}
 	\caption{Aufbau der Infrastruktur}
@@ -21,16 +31,26 @@ Alle Server (sowohl Web- wie auch Appserver), schreiben ihre jeweiligen Logfiles
 \end{figure}
 
 \subsection{Definition des Anwendungsprozesses}
+Um die Entwicklung der Anwendung zu vereinfachen wird zunächst der vollständige Anwendungsprozess grob beschrieben. Die Beschreibung wird aus den in \autoref{sec:AnforderungenUndPLs} definierten Anforderungen und Produktleistungen abgeleitet.
 
+<Einleitung noch nicht rund/komplett>
 
-\begin{figure}
+Nach dem Starten der Anwendung wird zunächst überprüft, ob beim Aufruf eine zusätzliche Konfiguration angegeben wurde. Ist dies der Fall, so wird die Konfiguration der Anwendung unter Verwendung dieser erzeugt. Anderenfalls wird die Standardkonfiguration verwendet.
+
+Mit der erstellten Konfiguration wird mittels einer Initialisierungsfunktion ein \textit{Driver} für den Programmlauf erzeugt (\gls{Bootstrapping}). Der \textit{Driver} besitzt alle Informationen, welche für die Ausführung eines MapReduce Jobs benötigt werden.
+
+Der \textit{Driver} wird anschließend durch den, vom Hadoop Framework bereitgestellten, \textit{ToolRunner} ausgeführt. Letztendlich wird die Anwendung mit dem vom \textit{ToolRunner} zurückgegebenen Statuscode beendet.
+
+\autoref{fig:PAP_Main_main} zeigt den beschriebenen Prozess als \ac{PAP}. Die einzelnen Unterprozesse werden in den folgenden Kapiteln genauer betrachtet.\footnote{Die \acp{PAP} der Unterprozesse sind im Anhang (S. \pageref{subsec:PAPMainMain} bis \pageref{subsec:PAPDriverRun}) zu finden.} \\
+
+\begin{figure}[h]
 	\centering
 	\includegraphics[scale=1]{PAP_Main_main.png}
 	\caption{PAP für main Methode der Main Klasse}
 	\label{fig:PAP_Main_main}
 \end{figure}
 
-<Hier sollte der Prozess der Anwendung geplant werden. wo liegen die Daten? wie findet der zugriff statt? nach welchem schema sind sie abgelegt und benannt? Außerdem sollte klar werden wie die Informationen verarbeitet werden. ein großer map reduce oder eine verkettung mehrerer mapper und reducer? Außerdem muss das ausgabeformat festgelegt werden. Bzw. zwei alternativen. eine für wenn die anwendung performant genug ist um als check skript zu laufen, und eine für den fall das nicht.>
+%<Hier sollte der Prozess der Anwendung geplant werden. wo liegen die Daten? wie findet der zugriff statt? nach welchem schema sind sie abgelegt und benannt? Außerdem sollte klar werden wie die Informationen verarbeitet werden. ein großer map reduce oder eine Verkettung mehrerer mapper und reducer? Außerdem muss das Ausgabeformat festgelegt werden. Bzw. zwei alternativen. eine für wenn die Anwendung performant genug ist um als check skript zu laufen, und eine für den fall das nicht.>
 
 \section{Die Konfigurationsschnittstelle}
 Wie bereits bei der Beschreibung des Verarbeitungsprozesses gezeigt wurde, wird direkt nach dem Start der Anwendung eine Initialisierung vorgenommen. Hierbei soll die Umgebung so konfiguriert werden, dass die gewünschte Analyse durch die Anwendung ohne Probleme vorgenommen werden kann.
@@ -89,7 +109,35 @@ Der Prozess für die Verarbeitung der einzelnen Stufen wird im \ac{PAP} der \tex
 %<Beschreibung wie Properties programmiert werden. Wie werden diese in der Anwendung umgesetzt? Welche Rolle spielen Properties für den generischen Teil der Anwendung?>
 
 \subsection{Logger Konfiguration}
-<Beschreibung wie der Logger in Java funktioniert und wie dieser hier eingesetzt wird. Speziell die Konfiguration über die logger.properties datei hervorheben.>
+Ein weiteres Modul, welches durch die Konfigurationsschnittstelle beeinflusst wird, ist der Logger. Die Anwendung verwendet den standard Logger von Java, welcher sich über eine externe Properties Datei beliebig einstellen lässt.
+
+Es gibt zwei Möglichkeiten die Arbeitsweise des Loggers zu beeinflussen. Die erste bildet der sog. \textit{Rumode}, welcher sich über die Property \textit{lfa.runmode} setzen lässt. Es wird unterschieden zwischen \textit{DEBUG}, \textit{TEST} und \textit{LIVE}. \autoref{tbl:LoggerSettingsRunmode} zeigt die Voreinstellungen des Loggers, für die unterschiedlichen Runmodes. Diese Einstellungen können durch eine zusätzliche Konfigurationsdatei individuell angepasst werden. 
+
+\begin{table}[h]
+	\centering
+	\begin{tabular}{| l | l | l | l |}
+		\hline
+		\rowcolor[HTML]{3531FF} 
+		\multicolumn{1}{|l|}{\cellcolor[HTML]{4F88BB}{\color[HTML]{FFFFFF} {\bf Runmode}}} & \multicolumn{1}{l|}{\cellcolor[HTML]{4F88BB}{\color[HTML]{FFFFFF} {\bf Handlers}}} & \multicolumn{1}{l|}{\cellcolor[HTML]{4F88BB}{\color[HTML]{FFFFFF} {\bf Loglevel}}} & \multicolumn{1}{l|}{\cellcolor[HTML]{4F88BB}{\color[HTML]{FFFFFF} {\bf Formatter}}} \\ \hline
+		\textbf{DEBUG} & ConsoleHandler & ALL & SimpleFormatter \\  \hline
+		\textbf{TEST} & FileHandler & WARNING & SimpleFormatter \\ \hline
+		\textbf{LIVE} & FileHandler & SEVERE & SimpleFormatter \\  \hline
+	\end{tabular}
+	\caption{Logger Einstellungen für die einzelnen Runmodes\footnotemark}
+	\label{tbl:LoggerSettingsRunmode}
+\end{table}
+\footnotetext{Die Angaben in den Spalten \textit{Handlers} und \textit{Formatter} haben noch den zusätzlichen Prefix \\ \textit{java.util.logging.}, um die expliziten Klassen zu definieren.}
+
+Aus den einzelnen Konfigurationsdateien werden die endgültigen Einstellungen zusammengestellt und über den \textit{LogManager} gesetzt. Für den \textit{FileHandler} wird zusätzlich ein Pattern definiert, welches den Speicherort und Dateinamen des Logfiles angibt. \autoref{lst:BeispielConfLogger} zeigt ein Beispiel für eine Logger Konfiguration. Im angegebenen Pattern sind zwei Platzhalter definiert. Die Variable \textit{\%h} wird mit dem Home-Verzeichnis des aktiven Users ersetzt, \textit{\%u} mit einer Identifikationsnummer. \\
+
+\begin{lstlisting}[language=Java,caption=Beispiel Konfiguration für den Logger,label=lst:BeispielConfLogger]
+handlers=java.util.logging.FileHandler
+java.util.logging.FileHandler.level=ALL
+java.util.logging.FileHandler.formatter=java.util.logging.SimpleFormatter
+java.util.logging.FileHandler.pattern=%h/scripts/default_%u.log
+\end{lstlisting}
+
+%<Beschreibung wie der Logger in Java funktioniert und wie dieser hier eingesetzt wird. Speziell die Konfiguration über die logger.properties datei hervorheben.>
 
 %\section{Grundlagen für Datenverarbeitung}
 %<Beschreibung der Entwicklung für die Grundlagen zur Datenverarbeitung. Welche Klassen werden dabei verwendet? Welches System liegt dahinter? Warum dieses System? Dabei nicht nur auf die Speicherung von Daten eingehen sondern auch auf das Lesen von Dateien.>
@@ -212,7 +260,7 @@ Alle Mapper müssen sich von der Klasse \textit{org.apache.hadoop.mapreduce.Mapp
 public class PatternMapper extends Mapper<Object,Text,Text,IntWritable>
 \end{lstlisting}
 
-Der \textit{PatternMapper} Analysiert den übergebenen Wert anhand eines in der Konfiguration definierten regulären Ausdrucks. Dieser kann alle Daten analysieren, welche durch \acp{DEA} oder \acp{NEA} erkannt werden können, d.h., dass die Daten mit einer \textit{Grammatik} vom \textit{Typ 3} der Chomsky-Hierarchie interpretiert werden können. Diese wird von Ulrich Hedtstück wie folgt definiert:
+Der \textit{PatternMapper} Analysiert den übergebenen Wert anhand eines in der Konfiguration definierten regulären Ausdrucks. Dieser kann alle Daten analysieren, welche durch \aclp{DEA} ({\color{LinkColor}\acsp{DEA}}) oder \aclp{NEA} ({\color{LinkColor}\acsp{NEA}}) erkannt werden können, d.h., dass die Daten mit einer \textit{Grammatik} vom \textit{Typ 3} der Chomsky-Hierarchie interpretiert werden können. Diese wird von Ulrich Hedtstück wie folgt definiert:
 
 Sei $G = (V_N, V_T, P, S)$ eine \textit{Grammatik}, mit der endlichen, nichtleeren Mengen $V = V_N \cup V_T$, wobei $V_N$ die Menge aller \textit{Variablen} (\textit{nichtterminalen Symbole}) und $V_T$ die Menge aller \textit{terminalen Symbole} (\textit{Terminale}) ist, einer endlichen Menge $P$ von \textit{Regeln} (\textit{Produktionen}) der Form $\alpha$ \textrightarrow $\beta$ (mit $\alpha \in (V_N \cup V_T)^+$ und $\beta \in (V_N \cup V_T)^*$) und dem \textit{Startsymbol} $S \in V_N$. 
 
@@ -221,7 +269,7 @@ $G$ ist vom \textit{Typ 3} oder \textit{regulär}, wenn es eine Produktion der F
 Eine \textit{Grammatik} von diesem Typ kann immer in einen regulären Ausdruck umgewandelt werden. Der \textit{PatternMapper} ermittelt anhand dieses Ausdrucks den Schlüssel innerhalb des ihm übergebenen Wertes. Der reguläre Ausdruck muss über mindestens eine definierte Gruppe verfügen, da diese letztendlich als Schlüssel verwendet wird. Wenn dieser gefunden wird, kann als Ergebnis ein Schlüssel-Wert-Paar dem aktuellen \textit{Mapper-Context}, mittels der Methode \textit{write()}, mit einem Wert von $1$, hinzugefügt werden. Wird keine Übereinstimmung gefunden, kann der Eintrag, durch das Setzen einer entsprechenden Konfiguration auf den Wert \textit{SKIP}, ignoriert werden. Anderenfalls wird \textit{NA} als Schlüssel verwendet. \autoref{lst:MethodeMap} zeigt die Methode \textit{map()} des \textit{PatternMappers}. \\
 
 \begin{lstlisting}[language=Java,caption=Methode \textit{map()} der Klasse \textit{PatternMapper},label=lst:MethodeMap]
-public void map(Object objKey, Text objValue, Mapper.Context objContext) throws IOException, InterruptedException {
+public void map(Object objKey, Text objValue, Context objContext) throws IOException, InterruptedException {
 	Configuration	objConf						= objContext.getConfiguration();
 	Pattern				objKeyPattern			= Pattern.compile(objConf.get([...]));
 	String				strNoMatchAction	= objConf.get([...]);
@@ -275,7 +323,7 @@ Der \textit{Reducer} kann auch andere Aufgaben übernehmen. Die naheliegensten F
 
 Je nach Analyse müssen unterschiedliche \textit{Mapper} und/oder \textit{Reducer} programmiert werden. Die zu verwendenden Klassen sind über die entsprechenden Properties konfigurierbar.
 
-\subsection{Betrachtung von alternativen Mappingverfahren}
+\section{Betrachtung von alternativen Mappingverfahren}
 
 
 \section{Ausführungsdatei Logfileanalyzer.sh}\label{sec:Ausführungsdatei}
