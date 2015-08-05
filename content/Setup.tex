@@ -1,7 +1,7 @@
 %!TEX root = ../dokumentation.tex
 
 \chapter{Setup}\label{cha:Setup}
-Vor Beginn der Implementierung steht das Setup der Entwicklungsumgebung. Um die Anwendug testen zu können, wird eine \ac{VM} mit dem \ac{OS} Ubuntu verwendet. Auf diesem muss Hadoop installiert und konfiguriert sein. Dabe ist zu beachten, dass es sich um eine Single Node Installation handelt. Es wird also kein Clustering vorgenommen.
+Vor Beginn der Implementierung steht das Setup der Entwicklungsumgebung. Um die Anwendung testen zu können, wird eine \ac{VM} mit dem \ac{OS} Ubuntu verwendet. Auf diesem muss Hadoop installiert und konfiguriert sein. Dabe ist zu beachten, dass es sich um eine Single Node Installation handelt. Es wird also kein Clustering vorgenommen.
 
 Auch in der \ac{IDE} muss ein Setup durchgeführt werden. Dabei handelt es sich, wie auch bei der Konfiguration der \ac{VM}, um Einstellungen, welche nicht im Zusammenhang mit der Umsetzung der Anwendung stehen. Die nachfolgenden Schritte werden so (oder ähnlich) für die Entwicklung aller Hadoop MapReduce Anwendungen vorgenommen.
 
@@ -11,9 +11,9 @@ Auch in der \ac{IDE} muss ein Setup durchgeführt werden. Dabei handelt es sich,
 Die Installation des Testsystems findet auf einer Linux \ac{VM} mit Ubuntu Version 14.04.2 \ac{LTS} statt, und wird nach der durch Freiknecht beschriebenen Anleitung durchgeführt. 
 
 \subsection{Einrichten eines dedizierten Hadoop-Users}
-Dabei wird zunächst ein eigener User, sowie eine eigene Gruppe, für Hadoop angelegt. Dies wird aus Sicherheitsgründen gemacht, da keine Anwendung als Root-User ausgefürt werden darf.
+Dabei wird zunächst ein eigener User, sowie eine eigene Gruppe, für Hadoop angelegt. Dies wird aus Sicherheitsgründen gemacht, da keine Anwendung als Root-User ausgeführt werden darf.
 
-Zusätzlich wird ein \ac{SSH} Zugang für den User angelegt. Hierzu nennt Freiknecht als Gründe zum einen, dass später bei der Verwendung eines Hadoop-Clusters, die Systeme miteinander kommunizeiren müssen, und zum anderen damit, dass auch vom Hostsystem Dateien auf die \ac{VM} abgelegt werden. Für den \ac{SSH}-Zugang muss ein Schlüssel nach dem Verfahren von \ac{RSA} für den User erzeugt und bei den authorisierten Schlüsseln abgelegt. Abschließend, um den Host zu den bekannten Systemen hinzuzufügen, muss der Hadoop User eine erstmalige Verbindung herstellen.\footcite[Vgl.][S. 30 f.]{Freiknecht.2014}
+Zusätzlich wird ein \ac{SSH} Zugang für den User angelegt. Hierzu nennt Freiknecht als Gründe zum einen, dass später bei der Verwendung eines Hadoop-Clusters, die Systeme miteinander kommunizieren müssen, und zum anderen damit, dass auch vom Hostsystem Dateien auf die \ac{VM} abgelegt werden. Für den \ac{SSH}-Zugang muss ein Schlüssel nach dem Verfahren von \ac{RSA} für den User erzeugt und bei den autorisierten Schlüsseln abgelegt. Abschließend, um den Host zu den bekannten Systemen hinzuzufügen, muss der Hadoop User eine erstmalige Verbindung herstellen.\footcite[Vgl.][S. 30 f.]{Freiknecht.2014}
 
 \autoref{lis:KonfHadoopUser} zeigt die Kommandozeilen Befehle für die gerade beschriebenen Aktionen. \\
 
@@ -34,7 +34,7 @@ ssh localhost
 \end{lstlisting}
 
 \subsection{Installation von Hadoop}
-Dachdem der dedizierter User angelegt wurde, kann die Installation von Hadoop selbst durchgeführt werden. Hierzu wird zunächst die aktuelle Version von Hadoop in das \textit{/usr/local} Verzeichnis heruntergeladen, entpackt, nach hadoop umbenannt und mit den entsprechenden Berechtigungen für den dedizierten User ausgestattet (\autoref{lis:HerunterladenUndEntpacken}). Im gegensatz zur Anleitung von Freiknecht wird die aktuelle Version 2.7.1 statt 2.2.0 verwendet. \\
+Nachdem der dedizierter User angelegt wurde, kann die Installation von Hadoop selbst durchgeführt werden. Hierzu wird zunächst die aktuelle Version von Hadoop in das \textit{/usr/local} Verzeichnis heruntergeladen, entpackt, nach hadoop umbenannt und mit den entsprechenden Berechtigungen für den dedizierten User ausgestattet (\autoref{lis:HerunterladenUndEntpacken}). Im Gegensatz zur Anleitung von Freiknecht wird die aktuelle Version 2.7.1 statt 2.2.0 verwendet. \\
 
 \begin{lstlisting}[language=bash, caption={Herunterladen und entpacke von Hadoop}, label=lis:HerunterladenUndEntpacken]
 $ cd /usr/local
@@ -61,18 +61,18 @@ export HADOOP_HDFS_HOME=HADOOP_INSTALL
 export HADOOP_YARN_HOME=HADOOP_INSTALL
 \end{lstlisting}
 
-Abschließend muss die Installation von Hadoop getestet werden, indem der Befehl \textit{hadoop version} in der Komandozeile ausgeführt wird. \autoref{fig:ErgebnisKomandozeileneingabe} zeigt das Ergebnis der Komandozeileneingabe. Die Ausgabe bestätigt die erfolgreiche Installation.\footcite[Vgl.][S. 32 f.]{Freiknecht.2014}
+Abschließend muss die Installation von Hadoop getestet werden, indem der Befehl \textit{hadoop version} in der Kommandozeile ausgeführt wird. \autoref{fig:ErgebnisKomandozeileneingabe} zeigt das Ergebnis der Kommandozeileneingabe. Die Ausgabe bestätigt die erfolgreiche Installation.\footcite[Vgl.][S. 32 f.]{Freiknecht.2014}
 
 \begin{figure}[h]
 	\includegraphics[width=1\textwidth]{hadoop_version.png}
-	\caption{Ergebnis für die Komandozeileneingabe \textit{hadoop version}}
+	\caption{Ergebnis für die Kommandozeileneingabe \textit{hadoop version}}
 	\label{fig:ErgebnisKomandozeileneingabe}
 \end{figure}
 
 \subsection{Konfiguration für Pseudo-Distributed Umgebung}
-Hadoop kann auch als Single Node installation in einer Pseudo-Distributed Umgebung laufen, in welcher jeder Hadoop Deamon als eigenständiger Java-Prozess ausgefürt wird. Um dies zu ermöglichen sind weitere Konfigurationen notwendig, da für diese Umgebung \ac{HDFS} aktiviert wird.
+Hadoop kann auch als Single Node Installation in einer Pseudo-Distributed Umgebung laufen, in welcher jeder Hadoop Deamon als eigenständiger Java-Prozess ausgeführt wird. Um dies zu ermöglichen sind weitere Konfigurationen notwendig, da für diese Umgebung \ac{HDFS} aktiviert wird.
 
-Die Konfiguration wird nach der Dokumentation von Apache durchgeführt. Dabei werden zunächt in den Dateien \textit{core-site.xml} und \textit{hdfs-site.xml}, welche im Verzeichnis \textit{etc/hadoop} zu finden sind, vorgenommen. \autoref{lis:KonfCoreSite} und \autoref{lis:KonfHDFSSite} zeigen die entsprechenden Konfigurationen. \\
+Die Konfiguration wird nach der Dokumentation von Apache durchgeführt. Dabei werden zunächst in den Dateien \textit{core-site.xml} und \textit{hdfs-site.xml}, welche im Verzeichnis \textit{etc/hadoop} zu finden sind, vorgenommen. \autoref{lis:KonfCoreSite} und \autoref{lis:KonfHDFSSite} zeigen die entsprechenden Konfigurationen. \\
 
 \pagebreak
 \begin{lstlisting}[language=XML, caption=Konfiguration in der core-site.xml, label=lis:KonfCoreSite]
@@ -113,6 +113,73 @@ $ sbin/stop-dfs.sh
 %<Beschreibung der Installation. Was muss dabei beachtet werden? Was ist wichtig? Was wird ignoriert?>
 
 \section{Anlegen eines neuen Maven Projektes}
+Um eine Anwendung zu Programmieren, welche mit dem Hadoop Framework ausgeführt werden soll, müssen die entsprechenden Klassen von Hadoop im Build enthalten sein. Die benötigten Bibliotheken können über \gls{Maven} bezogen werden. \gls{NetBeans} bietet die Möglichkeit, ein neues Projekt direkt als \gls{Maven}-Projekt anzulegen (\autoref{fig:NewMavenProject01}).
 
+\begin{figure}[h]
+	\includegraphics[width=1\textwidth]{NewMavenProject_01.png}
+	\caption{Anlegen neuer Maven Java Application in NetBeans}
+	\label{fig:NewMavenProject01}
+\end{figure}
 
-<Noch ein Arbeitstitel. Hier soll es in erster Linie darum gehen wie man ein Projekt für die Entwicklung einer Java Anwendung anlegt, welche Hadoop MapReduce verwenden soll. Maven sollte aus dem Titel raus, da das noch nicht ein mal bis hier hin erwähnt wurde (außer vielleicht kurz in der Definition der Umgebung). Maven muss beschrieben werden, da es nicht ohne weiteres möglich ist eine Hadoop Anwendung zu schreiben ohne Maven.>
+Charakteristisch für ein \gls{Maven}-Projekt ist das \ac{POM}, eine XML-Repräsentation des Projektes, welche in der \textit{pom.xml} gespeichert wird. Diese ist direkt im Projektverzeichnis des Dateisystems, oder im \textit{Project Files} Verzeichnis, in der \textit{Projects}-View von \gls{NetBeans} zu finden.
+
+Um die zu Hadoop gehörenden Bibliotheken einzubinden, müssen diese im Knoten \textit{dependencyManagement/dependencies} angelegt sein. \autoref{lst:PomXML} zeigt die Für dieses Projekt eingebundenen Bibliotheken in der \textit{pom.xml}.
+
+Für jede \textit{dependency} werden drei Angaben benötigt. Die \textit{groupId} bezeichnet das Paket, in welchem die Bibliothek zu finden ist und \textit{artifactId} enthält den Namen innerhalb des Paketes. Über die Angabe \textit{version} können unterschiedliche Releases der Bibliothek eingebunden werden. Dies ist notwendig, da bestehende Anwendungen eventuell nicht kompatibel sind mit den neusten Versionen einer Bibliothek.
+
+Bis auf die Bibliothek \textit{hadoop-core} werden alle mit der Version 2.7.1 angegeben. Dies liegt darin begründet, dass sich der Core von Hadoop seit Version 1.2.1 nicht mehr verändert hat. \\
+
+\begin{lstlisting}[caption=Auszug aus der \textit{pom.xml},label=lst:PomXML]
+<dependencyManagement>
+	<dependencies>
+		<dependency>
+			<groupId>org.apache.hadoop</groupId>
+			<artifactId>hadoop-hdfs</artifactId>
+			<version>2.7.1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.hadoop</groupId>
+			<artifactId>hadoop-auth</artifactId>
+			<version>2.7.1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.hadoop</groupId>
+			<artifactId>hadoop-common</artifactId>
+			<version>2.7.1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.hadoop</groupId>
+			<artifactId>hadoop-core</artifactId>
+			<version>1.2.1</version>
+		</dependency>
+	</dependencies>
+</dependencyManagement>
+\end{lstlisting}
+
+Um zu verhindern, dass, bei jeder Ausführung der später erzeugten Jar-Datei, die Angabe der \textit{Main Class} erfolgen muss, kann diese über ein \gls{Plugin} konfiguriert werden. Hierzu ist eine zusätzliche Angabe in der \textit{pom.xml}, unter dem Knoten \textit{build/plugins} notwendig, welche in \autoref{lst:MainClassDefinition} zu sehen ist. \\
+
+\pagebreak
+\begin{lstlisting}[caption=Definition der \textit{Main Class} des Projektes,label=lst:MainClassDefinition]
+<plugin>
+	<groupId>org.apache.maven.plugins</groupId>
+	<artifactId>maven-jar-plugin</artifactId>
+	<version>2.4</version>
+	<configuration>
+		<archive>
+			<manifest>
+				<mainClass>com.hszuesz.logfileanalyzer.Main</mainClass>
+			</manifest>
+		</archive>
+	</configuration>
+</plugin>
+\end{lstlisting}
+
+Zuletzt wurde für dieses Projekt eine Modifikation für die Generierung der Javadocs vorgenommen, um auch privat deklarierte Methoden mit zu erzeugen. \autoref{fig:JavaDocMod} zeigt, wo die notwendige Modifikation in \gls{NetBeans} erfolgen muss.
+
+\begin{figure}[h]
+	\includegraphics[width=1\textwidth]{NewMavenProject_03.png}
+	\caption{Modifikation für Javadoc Generator}
+	\label{fig:JavaDocMod}
+\end{figure}
+
+%<Noch ein Arbeitstitel. Hier soll es in erster Linie darum gehen wie man ein Projekt für die Entwicklung einer Java Anwendung anlegt, welche Hadoop MapReduce verwenden soll. Maven sollte aus dem Titel raus, da das noch nicht ein mal bis hier hin erwähnt wurde (außer vielleicht kurz in der Definition der Umgebung). Maven muss beschrieben werden, da es nicht ohne weiteres möglich ist eine Hadoop Anwendung zu schreiben ohne Maven.>

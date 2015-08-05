@@ -78,62 +78,66 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {section}{\numberline {4.2}Anlegen eines neuen Maven Projektes}{24}{section.4.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {5}Umsetzung}{25}{chapter.5}
+\contentsline {chapter}{\numberline {5}Umsetzung}{27}{chapter.5}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {5.1}Infrastruktur \& Prozesse}{25}{section.5.1}
+\contentsline {section}{\numberline {5.1}Infrastruktur \& Prozesse}{27}{section.5.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {5.1.1}Beschreibung der Infrastruktur}{25}{subsection.5.1.1}
+\contentsline {subsection}{\numberline {5.1.1}Beschreibung der Infrastruktur}{27}{subsection.5.1.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {5.1.2}Definition des Anwendungsprozesses}{26}{subsection.5.1.2}
+\contentsline {subsection}{\numberline {5.1.2}Definition des Anwendungsprozesses}{28}{subsection.5.1.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {5.2}Die Konfigurationsschnittstelle}{27}{section.5.2}
+\contentsline {section}{\numberline {5.2}Die Konfigurationsschnittstelle}{29}{section.5.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {5.2.1}Aufbau von Properties}{28}{subsection.5.2.1}
+\contentsline {subsection}{\numberline {5.2.1}Aufbau von Properties}{30}{subsection.5.2.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {5.2.2}Beschreibung der Konfigurationsstufen}{29}{subsection.5.2.2}
+\contentsline {subsection}{\numberline {5.2.2}Beschreibung der Konfigurationsstufen}{31}{subsection.5.2.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {5.2.3}Logger Konfiguration}{30}{subsection.5.2.3}
+\contentsline {subsection}{\numberline {5.2.3}Logger Konfiguration}{32}{subsection.5.2.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {5.3}Implementierung von MapReduce}{31}{section.5.3}
+\contentsline {section}{\numberline {5.3}Implementierung von MapReduce}{33}{section.5.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {5.3.1}Datenfluss in MapReduce}{31}{subsection.5.3.1}
+\contentsline {subsection}{\numberline {5.3.1}Datenfluss in MapReduce}{33}{subsection.5.3.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {5.3.2}Funktion von Bootstrap \& Driver}{32}{subsection.5.3.2}
+\contentsline {subsection}{\numberline {5.3.2}Funktion von Bootstrap \& Driver}{34}{subsection.5.3.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {5.3.3}Einblick in die InputFormat Klasse}{35}{subsection.5.3.3}
+\contentsline {subsection}{\numberline {5.3.3}Einblick in die Funktion von Input-/OutputFormat}{37}{subsection.5.3.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {5.3.4}Der RecordReader}{35}{subsection.5.3.4}
+\contentsline {subsection}{\numberline {5.3.4}Der RecordReader}{39}{subsection.5.3.4}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {5.3.5}Mapper und Reducer}{35}{subsection.5.3.5}
+\contentsline {subsection}{\numberline {5.3.5}Mapper und Reducer}{39}{subsection.5.3.5}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{Implementierung individueller Mapper}{35}{section*.41}
+\contentsline {subsubsection}{Implementierung individueller Mapper}{39}{section*.43}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{Implementierung individueller Reducer}{37}{section*.42}
+\contentsline {subsubsection}{Implementierung individueller Reducer}{41}{section*.44}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {5.4}Betrachtung von alternativen Mappingverfahren}{38}{section.5.4}
+\contentsline {section}{\numberline {5.4}Betrachtung von alternativen Mappingverfahren}{42}{section.5.4}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {5.5}Ausf\IeC {\"u}hrungsdatei Logfileanalyzer.sh}{38}{section.5.5}
+\contentsline {subsection}{\numberline {5.4.1}Regul\IeC {\"a}re Asudr\IeC {\"u}cke oder \textit {String.contains()}}{42}{subsection.5.4.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {5.6}Anwendungstest \& Auswertung der Ergebnisse}{39}{section.5.6}
+\contentsline {subsection}{\numberline {5.4.2}Textanalyse mittels \textit {String.split()}}{42}{subsection.5.4.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {5.6.1}Durchf\IeC {\"u}hrung der Tests}{39}{subsection.5.6.1}
+\contentsline {subsection}{\numberline {5.4.3}Verkettung von MapReduce Jobs}{44}{subsection.5.4.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {5.6.2}Analyse der Laufzeiten}{41}{subsection.5.6.2}
+\contentsline {section}{\numberline {5.5}Anwendungstest \& Auswertung der Ergebnisse}{44}{section.5.5}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {5.6.3}Definition des minimalen Ausf\IeC {\"u}hrungsintervalls}{44}{subsection.5.6.3}
+\contentsline {subsection}{\numberline {5.5.1}Durchf\IeC {\"u}hrung der Tests}{44}{subsection.5.5.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {6}Projektabschluss, Fazit \& Ausblick}{45}{chapter.6}
+\contentsline {subsection}{\numberline {5.5.2}Analyse der Laufzeiten}{46}{subsection.5.5.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {6.1}Vergleich der Umsetzung mit den Zielen}{45}{section.6.1}
+\contentsline {subsection}{\numberline {5.5.3}Definition des minimalen Ausf\IeC {\"u}hrungsintervalls}{49}{subsection.5.5.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {6.2}Proof of Concept}{45}{section.6.2}
+\contentsline {chapter}{\numberline {6}Projektabschluss, Fazit \& Ausblick}{50}{chapter.6}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {6.3}Fazit}{45}{section.6.3}
+\contentsline {section}{\numberline {6.1}Vergleich der Umsetzung mit den Zielen}{50}{section.6.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {6.4}Ausblick}{45}{section.6.4}
+\contentsline {section}{\numberline {6.2}Proof of Concept}{50}{section.6.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{Literatur}{i}{chapter*.43}
+\contentsline {section}{\numberline {6.3}Fazit}{50}{section.6.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{Glossar}{iv}{section*.44}
+\contentsline {section}{\numberline {6.4}Ausblick}{50}{section.6.4}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{Anhang}{vi}{appendix*.46}
+\contentsline {chapter}{Literatur}{i}{chapter*.45}
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{Glossar}{iv}{section*.46}
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{Anhang}{vi}{appendix*.48}

@@ -299,6 +299,39 @@
   \field{year}{2006}
 \endentry
 
+\entry{Lackes.2015}{online}{}
+  \name{author}{3}{}{%
+    {{}%
+     {Prof. Dr.~Lackes}{P.~D.~L.}%
+     {Richard}{R.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Dr.~Siepermann}{D.~S.}%
+     {Markus}{M.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Prof. Dr.~Kollmann}{P.~D.~K.}%
+     {Tobias}{T.}%
+     {}{}%
+     {}{}}%
+  }
+  \strng{namehash}{PDLRDSMPDKT1}
+  \strng{fullhash}{PDLRDSMPDKT1}
+  \field{labelyear}{2015}
+  \field{sortinit}{P}
+  \field{title}{Springer Gabler Verlag (Herausgeber), Gabler
+  Wirtschaftslexikon, Stichwort: Plug-in, online im Internet}
+  \verb{url}
+  \verb http://wirtschaftslexikon.gabler.de/Archiv/76201/plug-in-v8.html
+  \endverb
+  \field{year}{2015}
+  \field{urlday}{04}
+  \field{urlmonth}{08}
+  \field{urlyear}{2015}
+\endentry
+
 \entry{Salm.2007}{book}{}
   \name{author}{1}{}{%
     {{}%

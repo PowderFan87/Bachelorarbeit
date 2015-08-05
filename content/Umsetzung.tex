@@ -11,7 +11,7 @@ Vor Beginn der Entwicklung werden im folgenden die Umgebung, in welcher die Appl
 \subsection{Beschreibung der Infrastruktur}
 Obwohl Java als eine Plattform unabhängige Programmiersprache gesehen wird, spielt die Infrastruktur, in welcher die Anwendung ausgeführt werden soll, bei der Entwicklung eine entscheidende Rolle.
 
-Durch die Infrastruktur wird indirekt die art der Datenverarbeitung vorgegeben. Außerdem müssen potenzielle Einschränkungen, wie z.B. verfügbare Speicherplatz oder maximale Übertragungsrate (falls Daten über ein Netzwerk ausgetauscht werden müssen), identifiziert werden.
+Durch die Infrastruktur wird indirekt die Art der Datenverarbeitung vorgegeben. Außerdem müssen potenzielle Einschränkungen, wie z.B. verfügbare Speicherplatz oder maximale Übertragungsrate (falls Daten über ein Netzwerk ausgetauscht werden müssen), identifiziert werden.
 
 Des weiteren können, erst durch die Betrachtung der Umgebung, die Systeme ermittelt werden, welche für die Ausführung der Anwendung eventuell angepasst werden müssen (Installation zusätzlicher Software, setzen von Berechtigungen, etc.).
 
@@ -236,16 +236,79 @@ public int run(String[] arrArguments) throws Exception {
 }
 \end{lstlisting}
 
-\subsection{Einblick in die InputFormat Klasse}
+\subsection{Einblick in die Funktion von Input-/OutputFormat}
+Klassen, welche das Interface \textit{InputFormat} implementieren (oder sich von Klassen, welche das Interface implementieren, ableiten), geben vor, wie die Eingabedaten gelesen werden müssen. \autoref{tbl:InputFormatKlasses} zeigt die bestehenden \textit{InputFormat} Klassen sowie deren Arbeitsweise.
 
+\begin{table}[h]
+	\centering
+	\begin{tabularx}{\textwidth}{| l | X | X | X |}
+		\hline
+		\rowcolor[HTML]{3531FF} 
+		\multicolumn{1}{|l|}{\cellcolor[HTML]{4F88BB}{\color[HTML]{FFFFFF} {\bf Klasse}}} & \multicolumn{1}{l|}{\cellcolor[HTML]{4F88BB}{\color[HTML]{FFFFFF} {\bf Beschreibung}}} & \multicolumn{1}{l|}{\cellcolor[HTML]{4F88BB}{\color[HTML]{FFFFFF} {\bf Key}}} & \multicolumn{1}{l|}{\cellcolor[HTML]{4F88BB}{\color[HTML]{FFFFFF} {\bf Value}}} \\ \hline
+		\textit{TextInputFormat} & Liest Zeile für Zeile einer Textdatei & Byte-Offset der Zeile & Inhalt der Zeile \\  \hline
+		\textit{KeyValueInputFormat} & Parst Schlüssel und Wert aus einer Zeile & Text bis zum ersten Tab & Rest der Zeile \\ \hline
+		\textit{SequenceFileInputFormat} & Hadoop-spezifisches Binärformat & Benutzerdefiniert & Benutzerdefiniert \\  \hline
+	\end{tabularx}
+	\caption{Bestehende InputFormat-Klassen für Map-Reduce\footnotemark}
+	\label{tbl:InputFormatKlasses}
+\end{table}
+\footnotetext{\cite[S. 61.]{Freiknecht.2014}}
 
-\subsection{Der RecordReader}
+Generell ist es möglich, jegliche Form von Daten, mit MapReduce zu analysieren. Handelt es sich jedoch nicht um textbasierte Dateiformate (wie z.B. Bilder oder Dateien im \ac{PDF}), ist die Entwicklung individueller Klassen notwendig.
+
+Zudem teilt Hadoop besonders große Dateien (mehrere \ac{GB}). in sog. \textit{Splits}, um die Verarbeitung, wenn dies für ein gegebenes Dateiformat möglich ist, in kleineren Einheiten auf verschiedene Knoten im Cluster zu verteilen. \flqq Gerade wenn Dateien Metadaten enthalten (z.B. Farbpaletten in Bildern oder Informationen über Künstler in MP3s), dann ist die Datei sicherlich nicht in einem sequenziell lesbaren Format geschrieben.\frqq\footcite[S. 110]{Freiknecht.2014}
+
+Daher muss bei der Verarbeitung einer Datei immer bedacht werden, ob es möglich ist, diese sequenziell zu verarbeiten. Wenn dies nicht der Fall ist, muss eine Entsprechende Klasse implementiert werden, um Fehler bei der Analyse zu vermeiden.
+
+In einem Beispiel verwendet Jonas Freiknecht \acp{PDF} als Eingabedaten. Da es sich bei \acp{PDF} um Dateien in einem Binärformat handelt, muss eine entsprechende Klasse implementiert werden. \autoref{lst:PDFInputFormat} zeigt die von Freiknecht entwickelte Klasse \textit{PDFInputFormat}. Die in Zeile 15 definierte Methode \textit{isSplittable()}, welche den boolean Wert \textit{false} zurückgibt, verhindert, dass die Datei in kleinere Einheiten unterteilt wird. \\
+
+\begin{lstlisting}[language=Java,caption=Die Klasse PDFInputFormat, title=\autoref*{lst:PDFInputFormat}: Die Klasse PDFInputFormat\protect\footnotemark,label=lst:PDFInputFormat]
+public class PDFInputFormat extends FileInputFormat<Text, Text> {
+	
+	// Eingabe Key und Value müssen den Datentypen des Mappers
+	// entsprechen
+	@Override
+	public RecordReader<Text, Text> createRecordReader(InputSplit split, TaskAttemptContext context) throws IOException, InterruptedException {
+	
+		// Der Record-Reader muss [...] Datentypen des Mappers entsprechen,
+		// andernfalls wird [...] auf einen Typ-Missmatch hingewiesen.
+		return new PDFLineRecordReader();
+	}
+	
+	// Verbiete es, PDF-Dateien zu splitten
+	@Override
+	protected boolean isSplittable(JobContext context, Path filename) {
+		return false;
+	}
+	
+}
+\end{lstlisting}
+\footnotetext{\cite[S. 115.]{Freiknecht.2014}}
+
+Ähnlich zu den Klassen, welche das \textit{InputFormat} Interface implementieren, gibt es das Interface \textit{OutputFormat}, um das Format der, durch Hadoop erzeugten, Ergebnisdateien zu beeinflussen. Auch hier stellt Hadoop drei Standardklassen bereit (siehe \autoref{tbl:OutputFormatKlasses}).
+
+\begin{table}[h]
+	\centering
+	\begin{tabularx}{\textwidth}{| l | X |}
+		\hline
+		\rowcolor[HTML]{3531FF} 
+		\multicolumn{1}{|l|}{\cellcolor[HTML]{4F88BB}{\color[HTML]{FFFFFF} {\bf Klasse}}} & \multicolumn{1}{l|}{\cellcolor[HTML]{4F88BB}{\color[HTML]{FFFFFF} {\bf Beschreibung}}} \\ \hline
+		\textit{TextOutputFormat} & Schreibt Zeile in der Form Schlüssel [tab] Wert (Default) \\  \hline
+		\textit{SequenceFileOutputFormat} & Schreibt Binärdaten, die von folgenden Map-Reduce-Jobs gelesen werden können. \\ \hline
+		\textit{NullOutputFormat} & Gibt keine Datei aus, wird z.B. verwendet, falls die Ausgabe in Datenbanken oder anderem erfolgt. \\  \hline
+	\end{tabularx}
+	\caption{Bestehende OutputFormat-Klassen für Map-Reduce\footnotemark}
+	\label{tbl:OutputFormatKlasses}
+\end{table}
+\footnotetext{\cite[S. 113.]{Freiknecht.2014}}
+
+\subsection{Der RecordReader}\label{subsec:RecordReader}
 
 
 \subsection{Mapper und Reducer}
-Die durch den \textit{RecordReader} erzeugten Schlüssel-Wert-Paare werden an den Mapper weiter gegeben. Die Aufgabe des \textit{Mappers}, ist die weiterverarbeitung und genauere Interpretation/Analyse der Paare.
+Die durch den \textit{RecordReader} erzeugten Schlüssel-Wert-Paare werden an den Mapper weiter gegeben. Die Aufgabe des \textit{Mappers}, ist die Weiterverarbeitung und genauere Interpretation/Analyse der Paare.
 
-Wichtig ist hierbei die unterscheidung zwischen der Aufgabe des \textit{RecordReader} und \textit{Mapper}. Beider wandeln gegebene Informationen in Schlüssel-Wert-Paare um. Die durch den \textit{RecordReader} erzeugten Paare sind als die Datensätze zu sehen, welche durch den Mapper analysiert werden sollen.
+Wichtig ist hierbei die Unterscheidung zwischen der Aufgabe des \textit{RecordReader} und \textit{Mapper}. Beider wandeln gegebene Informationen in Schlüssel-Wert-Paare um. Die durch den \textit{RecordReader} erzeugten Paare sind als die Datensätze zu sehen, welche durch den Mapper analysiert werden sollen.
 
 Diese Trennung muss bei der Entwicklung unter allen Umständen beachtet werden. Der \textit{RecordReader} darf nicht die Aufgaben des \textit{Mapper} übernehmen.
 
@@ -254,7 +317,7 @@ Die Interpretation der Daten kann auf unterschiedlichste weise erfolgen. Die Aus
 \subsubsection{Implementierung individueller Mapper}
 Alle Mapper müssen sich von der Klasse \textit{org.apache.hadoop.mapreduce.Mapper} ableiten. Bei der Klassendefinition muss ebenfalls die Angabe der \glspl{Generic} erfolgen. Der Mapper wird in der Hadoop 2.7.1 \ac{API} der Apache Software Foundation Definiert mit \textit{Class Mapper<KEYIN,VALUEIN,KEYOUT,VALUEOUT>}. Die \glspl{Generic} geben für die Schlüssel-Wert-Paare, sowohl vom Input (\textit{KEYIN}, \textit{VALUEIN}) wie auch für den Output (\textit{KEYOUT}, \textit{VALUEOUT}), die Datentypen an.\footcite[Vgl.][]{ApacheHadoopApiDokuMapper.2015}
 
-\autoref{lst:DefinitionPatternMapper} zeigt die Definition der für diese Anwedung programmierten Klasse \textit{PatternMapper}, mit den entsprechenden Generics innerhalb der spitzen Klammern. Diese erwartet als Input ein Schlüssel-Wert-Paar, bei welchem der Schlüssel ein beliebiges Objekt und der Wert ein Objekt des Typs \textit{org.apache.hadoop.io.Text} repräsentiert. Das Inputpaar wird durch die Methode \textit{map()} in ein Schlüssel-Wert-Paar mit Schlüsseltyp \textit{org.apache.hadoop.io.Text} und Werttyp \textit{org.apache.hadoop.io.IntWritable} umgewandelt. \\
+\autoref{lst:DefinitionPatternMapper} zeigt die Definition der für diese Anwendung programmierten Klasse \textit{PatternMapper}, mit den entsprechenden Generics innerhalb der spitzen Klammern. Diese erwartet als Input ein Schlüssel-Wert-Paar, bei welchem der Schlüssel ein beliebiges Objekt und der Wert ein Objekt des Typs \textit{org.apache.hadoop.io.Text} repräsentiert. Das Input-Paar wird durch die Methode \textit{map()} in ein Schlüssel-Wert-Paar mit Schlüsseltyp \textit{org.apache.hadoop.io.Text} und Werttyp \textit{org.apache.hadoop.io.IntWritable} umgewandelt. \\
 
 \begin{lstlisting}[language=Java,caption=Deklaration \textit{PatternMapper} mit Generics,label=lst:DefinitionPatternMapper]
 public class PatternMapper extends Mapper<Object,Text,Text,IntWritable>
@@ -324,56 +387,116 @@ Der \textit{Reducer} kann auch andere Aufgaben übernehmen. Die naheliegensten F
 Je nach Analyse müssen unterschiedliche \textit{Mapper} und/oder \textit{Reducer} programmiert werden. Die zu verwendenden Klassen sind über die entsprechenden Properties konfigurierbar.
 
 \section{Betrachtung von alternativen Mappingverfahren}
+Die zuvor beschriebene Methode zur Analyse von textbasierten Daten stellt nur eine Möglichkeit von vielen dar. Textbasierte Daten (oder auch Strings) sind auf unterschiedlichstem Weg analysierbar. Dabei besitzt jede Vorgehensweise andere Vor- und Nachteile. Für jeden Anwendungsfall sollte die effizienteste Methode verwendet werden.
+
+Um diesen Punkt weiter zu verdeutlichen, werden nachfolgend drei alternative Mappingverfahren beschrieben. Dabei werden die individuellen Vor- und Nachteile betrachtet, sowie konkrete Anwendungsfälle für deren Einsatzmöglichkeit gegeben. 
+
+\subsection{Reguläre Asudrücke oder \textit{String.contains()}}\label{subsec:Contains}
 
 
-\section{Ausführungsdatei Logfileanalyzer.sh}\label{sec:Ausführungsdatei}
+<Unterscheidung zwischen regex und contains beschreiben. wann macht was sinn? gibt es überhaupt situationen wo contains mehr sinn macht (alles was contains kann kann regex ebenfalls)?>
 
 
-\begin{lstlisting}[language=Bash,caption=Ausführungsdatei Logfileanalyzer.sh,label=lis:Logfileanalyzer.sh]
-#!/bin/bash
-#Load config
-. $1/config.cfg
-#Cleanup input direktory on dfs
-/bin/hdfs dfs -rm -r -skipTrash input/*
-#Delete output directory on dfs
-/bin/hdfs dfs -rm -r -skipTrash output
-#Put input files on dfs
-/bin/hdfs dfs -put $MAP_REDUCE_INPUT input
-mkdir $MAP_REDUCE_OUTPUT
-if [ $MAP_REDUCE_USE_USER_PROPERTIES == true ]
-then
-	#Export HADOOP_OPTS to pass user properties file
-	export HADOOP_OPTS="-Dlfa.userconf=$1/$MAP_REDUCE_USER_PROPERTIES"
-fi
-if [ $MAP_REDUCE_USE_LOG == true ]
-then
-	#Use log logfile
-	echo "Log file wird verwendet"
-	/bin/hadoop jar $1/$MAP_REDUCE_JAR $MAP_REDUCE_MAIN input output 2> $MAP_REDUCE_LOGFILE
-else
-	echo "Kein Logfile"
-	/bin/hadoop jar $1/$MAP_REDUCE_JAR $MAP_REDUCE_MAIN input output
-fi
-if [ $MAP_REDUCE_USE_USER_PROPERTIES == true ]
-then
-	#Unset HADOOP_OPTS after apllication finished
-	export HADOOP_OPTS=""
-fi
-#Get output from dfs
-/bin/hdfs dfs -get output/* $MAP_REDUCE_OUTPUT
-if [ $MAP_REDUCE_DISPLAY_OUTPUT == true ]
-then
-	cat ${MAP_REDUCE_OUTPUT}/*
-fi
+\subsection{Textanalyse mittels \textit{String.split()}}
+Eine weitere Möglichkeit zur Verarbeitung von Strings stellt die \textit{split()} Methode dar. Sie ist ebenfalls teil der Standard \textit{String} klasse von Java, und zerlegt einen \textit{String} in ein \textit{Array} (\textit{String[]}). Die Trennung wird anhand eines regulären Ausdrucks vorgenommen, welcher der Methode als Parameter übergeben wird.
+
+Ein konkreter Anwendungsfall für diese Methode wurde bereits in \autoref{subsec:RecordReader} erwähnt. Dabei wurde die Möglichkeit in Betracht gezogen, einen \textit{RecordReader} zu implementieren, welcher die einzelnen Datensätze anhand eines regulären Ausdrucks identifiziert.
+
+Die Methode kann jedoch auch in der \textit{map()} Funktion eingesetzt werden. Ein Beispiel für den Einsatz der \textit{split()} Methode gibt Freiknecht bei der Implementierung seiner \textit{LogMapper} Klasse. In dieser wird der Übergebene Wert, welcher die komplette Ziele in einem Objekt vom Typ \textit{Text} enthält, mittels der \textit{split()} Methode in ein Array übertragen. Die Trennung erfolgt anhand eines Leerzeichens. \autoref{lst:LogMapper} zeigt einen Auszug der Implementierung von Freiknecht. \\
+
+\begin{lstlisting}[language=Java,caption=Auszug der \textit{map()} Methode der Klasse \textit{LogMapper}, title=\autoref*{lst:LogMapper}: Auszug der \textit{map()} Methode der Klasse \textit{LogMapper}\protect\footnotemark,label=lst:LogMapper]
+[...]
+
+String[] words = key.toString().split(" ");
+
+for (int i = 0; i < words.length; i++) {
+	if (words[i].equals("SEVERE")
+		|| words[i].equals("WARNING")
+		[...]
+		|| words[i].equals("FINEST")) {
+
+		context.write(new Text(words[i]), one);
+	}
+}
+
+[...]
+\end{lstlisting}
+\footnotetext{Vgl. \cite[S. 122.]{Freiknecht.2014}}
+
+Jedes Wort der Zeile wird, mittels der \textit{equals()} Methode überprüft. Falls es sich um einen Bezeichner für ein Loglevel handelt, wird dieser dem Kontext hinzugefügt. Der Bezeichner wird hierbei als Schlüssel verwendet. Der Wert ist eine simple Eins.\footcite[Vgl.][S. 121 f.]{Freiknecht.2014}
+
+Ein weiterer, denkbarer Anwendungsfall, wäre eine Kombination mit der in \autoref{subsec:Contains} vorgestellten Methode \textit{contains()}. Über eine entsprechende Property könnten mehrere, erlaubte Schlüsselwörter definiert werden. Ist da zu prüfende Wort teil dieser Liste, wird es in den Kontext übertragen. \autoref{lst:KombinationContainsSplit} zeigt eine mögliche Implementierung. \\
+
+\begin{lstlisting}[language=Java,caption=Kombination von \textit{contains()} und \textit{split()},label=lst:KombinationContainsSplit]
+[...]
+
+String		strKeywordList	= objContext.getConfiguration().get([...]);
+String[]	arrWords 				= objValue.toString().split(" ");
+
+for (String strWord : arrWords) {
+	if (strKeywordList.contains(strWord)) {
+		objContext.write(new Text(strWord), objOne);
+	}
+}
+
+[...]
 \end{lstlisting}
 
-<Beschreiben der Bash Datei, durch welche der job (Jar) ausgeführt wird. Beschreiben der einzlenen Schritte und der configuration>
+<Vor-/Nachteile noch beschreiben>
+
+\subsection{Verkettung von MapReduce Jobs}
+
+
+<Beschreibung wie eine Verkettung von Jobs durchgeführt werden kann (Freiknecht literatur) und anwendungsfall hierzu beschreiben>
+
+%\section{Ausführungsdatei Logfileanalyzer.sh}\label{sec:Ausführungsdatei}
+%Um eine MapReduce Anwendung in Verbindung mit \ac{HDFS} auszuführen, müssen, noch vor dem Start der Anwendung, einige Vorbereitungen getroffen werden. 
+
+%\begin{lstlisting}[language=Bash,caption=Ausführungsdatei %Logfileanalyzer.sh,label=lis:Logfileanalyzer.sh]
+%#!/bin/bash
+%#Load config
+%. $1/config.cfg
+%#Cleanup input direktory on dfs
+%/bin/hdfs dfs -rm -r -skipTrash input/*
+%#Delete output directory on dfs
+%/bin/hdfs dfs -rm -r -skipTrash output
+%#Put input files on dfs
+%/bin/hdfs dfs -put $MAP_REDUCE_INPUT input
+%mkdir $MAP_REDUCE_OUTPUT
+%if [ $MAP_REDUCE_USE_USER_PROPERTIES == true ]
+%then
+%	#Export HADOOP_OPTS to pass user properties file
+%	export HADOOP_OPTS="-Dlfa.userconf=$1/$MAP_REDUCE_USER_PROPERTIES"
+%fi
+%if [ $MAP_REDUCE_USE_LOG == true ]
+%then
+%	#Use log logfile
+%	echo "Log file wird verwendet"
+%	/bin/hadoop jar $1/$MAP_REDUCE_JAR $MAP_REDUCE_MAIN input output 2> $MAP_REDUCE_LOGFILE
+%else
+%	echo "Kein Logfile"
+%	/bin/hadoop jar $1/$MAP_REDUCE_JAR $MAP_REDUCE_MAIN input output
+%fi
+%if [ $MAP_REDUCE_USE_USER_PROPERTIES == true ]
+%then
+%	#Unset HADOOP_OPTS after apllication finished
+%	export HADOOP_OPTS=""
+%fi
+%#Get output from dfs
+%/bin/hdfs dfs -get output/* $MAP_REDUCE_OUTPUT
+%if [ $MAP_REDUCE_DISPLAY_OUTPUT == true ]
+%then
+%	cat ${MAP_REDUCE_OUTPUT}/*
+%fi
+%\end{lstlisting}
+
+%<Beschreiben der Bash Datei, durch welche der job (Jar) ausgeführt wird. Beschreiben der einzelnen Schritte und der configuration>
 
 \section{Anwendungstest \& Auswertung der Ergebnisse}
 Bevor die Anwendung in den produktiven Betrieb über gehen kann, wird sie unter exakt spezifizierten Bedingungen getestet. Die so durchgeführten Tests sollen Aufschluss über die Leisung der Anwendung geben.
 
 \subsection{Durchführung der Tests}
-Für die Tests werden eine Reihe von Logfiles in unterschiedlichen größen bereitgestellt. Diese enthalten $10$ bis $10^7$ Einträgen. Jedes Logfile wird 10 mal durch die Anwendung analysiert und die Laufzeit protokolliert. \autoref{lis:PropertiesAnwendungstest} zeigt die für die Tests verwendete Konfiguration. \\
+Für die Tests werden eine Reihe von Logfiles in unterschiedlichen Größen bereitgestellt. Diese enthalten $10$ bis $10^7$ Einträgen. Jedes Logfile wird 10 mal durch die Anwendung analysiert und die Laufzeit protokolliert. \autoref{lis:PropertiesAnwendungstest} zeigt die für die Tests verwendete Konfiguration. \\
 
 \begin{lstlisting}[language=Java,caption=Properties für Anwendungstest,label=lis:PropertiesAnwendungstest]
 lfa.runmode              : DEBUG
@@ -393,7 +516,7 @@ lfa.mapper.pattern.key   : \\] ([A-Z]{4,5})
 lfa.mapper.nomatchaction : SKIP
 \end{lstlisting}
 
-Bei jeder Ausführung des Programms wird das in \autoref{sec:Ausführungsdatei} beschriebene Bash-Script ausgeführt, wodurch die Logfiles vor jede Analyse neu in das \ac{HDFS} übertragen wird. Dies ist notwendig, da bei jedem Upload die Datenblöcke neu geschrieben werden müssen, um ein verfältschtes ergebniss durch Caching zu vermeiden.
+Bei jeder Ausführung des Programms wird das in \autoref{sec:Ausführungsdatei} beschriebene Bash-Script ausgeführt, wodurch die Logfiles vor jede Analyse neu in das \ac{HDFS} übertragen wird. Dies ist notwendig, da bei jedem Upload die Datenblöcke neu geschrieben werden müssen, um ein verfälschtes Ergebnis durch Caching zu vermeiden.
 
 \autoref{fig:Streudiagram} zeigt die einzelnen Testläufe als Datenpunkte, \autoref{tbl:DurchschnittlicheLaufzeiten} die arithmetischen Mittelwerte für die einzelnen Logfilegrößen.
 
@@ -425,7 +548,7 @@ Bei jeder Ausführung des Programms wird das in \autoref{sec:Ausführungsdatei} 
 	\label{tbl:DurchschnittlicheLaufzeiten}
 \end{table}
 
-Die visuelle Darstellung lässt einen stärkeren Zusammenhang zwischen den beiden größen $x$ und $y$ vermuten. Aus diesem grund werden, die durch den Anwendungstest erhobenen Daten, genauer betrachtet.
+Die visuelle Darstellung lässt einen stärkeren Zusammenhang zwischen den beiden Größen $x$ und $y$ vermuten. Aus diesem Grund werden, die durch den Anwendungstest erhobenen Daten, genauer betrachtet.
 
 Da die Tests auf der in \autoref{sec:InstallationHadoop} erwähnten \ac{VM} durchgeführt wurden, können die im folgenden getroffenen Aussagen vom späteren produktiven Betrieb abweichen. Aus diesem Grund sollten vor Inbetriebnahme der Anwendung weitere Tests auf einem System ähnlich dem Produktivsystem durchgeführt werden, um aussagekräftigere Daten zu erhalten.
 
