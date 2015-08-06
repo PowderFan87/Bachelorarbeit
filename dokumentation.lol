@@ -7,9 +7,9 @@
 \defcounter {refsection}{0}\relax 
 \addvspace {10\p@ }
 \defcounter {refsection}{0}\relax 
-\contentsline {lstlisting}{\numberline {2.1}Beispieleintrag f\IeC {\"u}r ein Appache-Error-Log}{5}{lstlisting.2.1}
+\contentsline {lstlisting}{\numberline {2.1}Beispieleintrag f\IeC {\"u}r ein Apache-Error-Log}{5}{lstlisting.2.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {lstlisting}{\numberline {2.2}Beispieleintrag f\IeC {\"u}r ein Appache-Access-Log}{5}{lstlisting.2.2}
+\contentsline {lstlisting}{\numberline {2.2}Beispieleintrag f\IeC {\"u}r ein Apache-Access-Log}{5}{lstlisting.2.2}
 \defcounter {refsection}{0}\relax 
 \contentsline {lstlisting}{\numberline {2.3}Befehl zur Anzeige aller Zeilen mit Jahr 2004}{10}{lstlisting.2.3}
 \defcounter {refsection}{0}\relax 
@@ -53,21 +53,23 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {lstlisting}{\numberline {5.6}Die Klasse PDFInputFormat}{38}{lstlisting.5.6}
 \defcounter {refsection}{0}\relax 
-\contentsline {lstlisting}{\numberline {5.7}Deklaration \textit {PatternMapper} mit Generics}{39}{lstlisting.5.7}
+\contentsline {lstlisting}{\numberline {5.7}Auszug aus der Klasse \textit {PDFLineRecordReader}}{39}{lstlisting.5.7}
 \defcounter {refsection}{0}\relax 
-\contentsline {lstlisting}{\numberline {5.8}Methode \textit {map()} der Klasse \textit {PatternMapper}}{40}{lstlisting.5.8}
+\contentsline {lstlisting}{\numberline {5.8}Deklaration \textit {PatternMapper} mit Generics}{41}{lstlisting.5.8}
 \defcounter {refsection}{0}\relax 
-\contentsline {lstlisting}{\numberline {5.9}Deklaration \textit {CountReducer} mit Generics}{41}{lstlisting.5.9}
+\contentsline {lstlisting}{\numberline {5.9}Methode \textit {map()} der Klasse \textit {PatternMapper}}{42}{lstlisting.5.9}
 \defcounter {refsection}{0}\relax 
-\contentsline {lstlisting}{\numberline {5.10}Methode \textit {reduce()} der Klasse \textit {CountReducer}}{41}{lstlisting.5.10}
+\contentsline {lstlisting}{\numberline {5.10}Deklaration \textit {CountReducer} mit Generics}{43}{lstlisting.5.10}
 \defcounter {refsection}{0}\relax 
-\contentsline {lstlisting}{\numberline {5.11}Auszug der \textit {map()} Methode der Klasse \textit {LogMapper}}{43}{lstlisting.5.11}
+\contentsline {lstlisting}{\numberline {5.11}Methode \textit {reduce()} der Klasse \textit {CountReducer}}{43}{lstlisting.5.11}
 \defcounter {refsection}{0}\relax 
-\contentsline {lstlisting}{\numberline {5.12}Kombination von \textit {contains()} und \textit {split()}}{43}{lstlisting.5.12}
+\contentsline {lstlisting}{\numberline {5.12}Auszug der \textit {map()} Methode der Klasse \textit {LogMapper}}{44}{lstlisting.5.12}
 \defcounter {refsection}{0}\relax 
-\contentsline {lstlisting}{\numberline {5.13}Properties f\IeC {\"u}r Anwendungstest}{44}{lstlisting.5.13}
+\contentsline {lstlisting}{\numberline {5.13}Kombination von \textit {contains()} und \textit {split()}}{45}{lstlisting.5.13}
 \defcounter {refsection}{0}\relax 
-\contentsline {lstlisting}{\numberline {5.14}Laufzeiten mit $2 \times 10^7$ Eintr\IeC {\"a}gen}{48}{lstlisting.5.14}
+\contentsline {lstlisting}{\numberline {5.14}Properties f\IeC {\"u}r Anwendungstest}{46}{lstlisting.5.14}
+\defcounter {refsection}{0}\relax 
+\contentsline {lstlisting}{\numberline {5.15}Laufzeiten mit $2 \times 10^7$ Eintr\IeC {\"a}gen}{49}{lstlisting.5.15}
 \defcounter {refsection}{0}\relax 
 \addvspace {10\p@ }
 \defcounter {refsection}{0}\relax 

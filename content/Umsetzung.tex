@@ -303,7 +303,54 @@ public class PDFInputFormat extends FileInputFormat<Text, Text> {
 \footnotetext{\cite[S. 113.]{Freiknecht.2014}}
 
 \subsection{Der RecordReader}\label{subsec:RecordReader}
+In \autoref{lst:PDFInputFormat} wurde, in Zeile 6, die Methode \textit{createRecordReader()} definiert. Diese liefert eine Instanz der Klasse \textit{RecordReader<Text, Text>}, welche die initialen Schlüssel-Wert-Paare aus den einzelnen \textit{Splits} erzeugt.
 
+Auch wenn dies nicht zwingend notwendig ist, sollte für jede individuelle \textit{InputFormat} Klasse ein entsprechender \textit{RecordReader} implementiert werden\footnote{Analog sollte für jede individuelle \textit{OutputFormat} Klasse ein entsprechender \textit{RecordWriter} implementiert werden.}. \autoref{lst:PDFLineRecordReader} zeigt einen Auszug aus dem zur Klasse \textit{PDFInputFormat} gehörenden \textit{RecordReader}, welcher ebenfalls von Freiknecht umgesetzt wurde. \\
+
+\begin{lstlisting}[language=Java,caption=Auszug aus der Klasse \textit{PDFLineRecordReader},title=\autoref*{lst:PDFLineRecordReader}: Auszug aus der Klasse \textit{PDFLineRecordReader}\protect\footnotemark,label=lst:PDFLineRecordReader]
+public class PDFLineRecordReader extends RecordReader<Text, Text> {
+	
+	[...]
+	
+	@Override
+	public void initialize(InputSplit split, TaskAttemptContext context) {
+		[...]
+	}
+	
+	// Geben wir hier false zurück, teilen wir dem Prozess mit, dass
+	// der Split fertig gelesen wurde.
+	@Override
+	public boolean nextKeyValue() {[...]}
+	
+	@Override
+	public Text getCurrentKey() {[...]}
+		
+	@Override
+	public Text getCurrentValue() {[...]}
+			
+	@Override
+	public float getProgress() {[...]}
+	
+	@Override
+	public void close() {[...]}
+	
+}
+\end{lstlisting}
+\footnotetext{Vgl. \cite[S. 115 ff.]{Freiknecht.2014}}
+
+Die Methode \textit{initialize} liest den gegebenen \textit{Split} ein und speichert die einzelnen Zeilen in einem Objekt vom Typ \textit{List<String>} und setzt einen Zähler für die aktuelle Zeile auf Null. Diese wird ein mal zu Beginn aufgerufen, nachdem eine Instanz, durch den Aufruf der Methode \textit{createRecordReader()} (siehe \autoref{lst:PDFInputFormat}), erzeugt wurde.
+
+Der folgende Verarbeitungsprozess erfolgt in drei Schritten. Diese werden ausgeführt, solange das ende des \textit{Splits} nicht erreicht wurde (bis alle Zeilen verarbeitet wurden).
+
+\begin{enumerate}
+\item \textit{nextKeyValue()}: Interpretiert die nächste Zeile und setzt die entsprechenden Werte für die Variablen \textit{key} (Schlüsselvariable) und \textit{value} (Wertvariable).
+\item \textit{getCurrentKey()}: Liefert die Instanz des aktuell gesetzten Schlüssels.
+\item \textit{getCurrentValue()}: Liefert die Instanz des aktuell gesetzten Wertes.
+\end{enumerate} 
+
+Wird das ende des \textit{Splits} erreicht, gibt die Methode \textit{nextKeyValue()} den Wert \textit{false} zurück. Eine weitere Möglichkeit, den Aktuellen Stand der Vararbeitung zu erfahren, bietet die Methode \textit{getProgress()}. Diese gibt einen Wert zwischen Null und Eins zurück (statt einer Prozentzahl zwischen Null und 100).\footcite[Vgl.][S. 117 f.]{Freiknecht.2014}
+
+Die durch die Methode \textit{nextKeyValue()} erzeugten Schlüssel-Wert-Paare werden, zur weiteren Verarbeitung, an die im Job konfigurierten Instanz des \textit{Mappers} übertragen. 
 
 \subsection{Mapper und Reducer}
 Die durch den \textit{RecordReader} erzeugten Schlüssel-Wert-Paare werden an den Mapper weiter gegeben. Die Aufgabe des \textit{Mappers}, ist die Weiterverarbeitung und genauere Interpretation/Analyse der Paare.
@@ -366,7 +413,7 @@ Die Definition der \textit{Reducer} Klasse, in der Hadoop 2.7.1 \ac{API} ähnelt
 public class CountReducer extends Reducer<Text, IntWritable, Text, IntWritable>
 \end{lstlisting}
 
-Der \textit{CountReducer} summiert alle im \textit{Mapper} gesetzten Werte für einen gegebenen Schlüssel auf und schreibt das Ergebnis wieder in den entsprechenden Context. \autoref{lst:MethodeReduce} zeigt die \textit{reduce()} Methode der Klasse \textit{CountReducer}. Im gegensatz zur \textit{map()} Methode, bekommt der \textit{Reducer} ein Array von werten übergeben. \\
+Der \textit{CountReducer} summiert alle im \textit{Mapper} gesetzten Werte für einen gegebenen Schlüssel auf und schreibt das Ergebnis wieder in den entsprechenden Context. \autoref{lst:MethodeReduce} zeigt die \textit{reduce()} Methode der Klasse \textit{CountReducer}. Im Gegensatz zur \textit{map()} Methode, bekommt der \textit{Reducer} ein Array von werten übergeben. \\
 
 \begin{lstlisting}[language=Java,caption=Methode \textit{reduce()} der Klasse \textit{CountReducer},label=lst:MethodeReduce]
 public void reduce(Text objKey, Iterable<IntWritable> arrValues, Context objContext) throws IOException, InterruptedException {
@@ -400,7 +447,7 @@ Um diesen Punkt weiter zu verdeutlichen, werden nachfolgend drei alternative Map
 \subsection{Textanalyse mittels \textit{String.split()}}
 Eine weitere Möglichkeit zur Verarbeitung von Strings stellt die \textit{split()} Methode dar. Sie ist ebenfalls teil der Standard \textit{String} klasse von Java, und zerlegt einen \textit{String} in ein \textit{Array} (\textit{String[]}). Die Trennung wird anhand eines regulären Ausdrucks vorgenommen, welcher der Methode als Parameter übergeben wird.
 
-Ein konkreter Anwendungsfall für diese Methode wurde bereits in \autoref{subsec:RecordReader} erwähnt. Dabei wurde die Möglichkeit in Betracht gezogen, einen \textit{RecordReader} zu implementieren, welcher die einzelnen Datensätze anhand eines regulären Ausdrucks identifiziert.
+Ein möglicher Anwendungsfall für diese Methode wäre die Implementierung einer \textit{RecordReader} Klasse (siehe \autoref{subsec:RecordReader}), welche die Datensätze anhand eines regulären Ausdrucks unterteilt, als Alternative zur sonst üblichen, zeilenweisen Verarbeitung.
 
 Die Methode kann jedoch auch in der \textit{map()} Funktion eingesetzt werden. Ein Beispiel für den Einsatz der \textit{split()} Methode gibt Freiknecht bei der Implementierung seiner \textit{LogMapper} Klasse. In dieser wird der Übergebene Wert, welcher die komplette Ziele in einem Objekt vom Typ \textit{Text} enthält, mittels der \textit{split()} Methode in ein Array übertragen. Die Trennung erfolgt anhand eines Leerzeichens. \autoref{lst:LogMapper} zeigt einen Auszug der Implementierung von Freiknecht. \\
 

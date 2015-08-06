@@ -104,37 +104,37 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {5.3.4}Der RecordReader}{39}{subsection.5.3.4}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {5.3.5}Mapper und Reducer}{39}{subsection.5.3.5}
+\contentsline {subsection}{\numberline {5.3.5}Mapper und Reducer}{40}{subsection.5.3.5}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{Implementierung individueller Mapper}{39}{section*.43}
+\contentsline {subsubsection}{Implementierung individueller Mapper}{41}{section*.43}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{Implementierung individueller Reducer}{41}{section*.44}
+\contentsline {subsubsection}{Implementierung individueller Reducer}{42}{section*.44}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {5.4}Betrachtung von alternativen Mappingverfahren}{42}{section.5.4}
+\contentsline {section}{\numberline {5.4}Betrachtung von alternativen Mappingverfahren}{43}{section.5.4}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {5.4.1}Regul\IeC {\"a}re Asudr\IeC {\"u}cke oder \textit {String.contains()}}{42}{subsection.5.4.1}
+\contentsline {subsection}{\numberline {5.4.1}Regul\IeC {\"a}re Asudr\IeC {\"u}cke oder \textit {String.contains()}}{44}{subsection.5.4.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {5.4.2}Textanalyse mittels \textit {String.split()}}{42}{subsection.5.4.2}
+\contentsline {subsection}{\numberline {5.4.2}Textanalyse mittels \textit {String.split()}}{44}{subsection.5.4.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {5.4.3}Verkettung von MapReduce Jobs}{44}{subsection.5.4.3}
+\contentsline {subsection}{\numberline {5.4.3}Verkettung von MapReduce Jobs}{45}{subsection.5.4.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {5.5}Anwendungstest \& Auswertung der Ergebnisse}{44}{section.5.5}
+\contentsline {section}{\numberline {5.5}Anwendungstest \& Auswertung der Ergebnisse}{46}{section.5.5}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {5.5.1}Durchf\IeC {\"u}hrung der Tests}{44}{subsection.5.5.1}
+\contentsline {subsection}{\numberline {5.5.1}Durchf\IeC {\"u}hrung der Tests}{46}{subsection.5.5.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {5.5.2}Analyse der Laufzeiten}{46}{subsection.5.5.2}
+\contentsline {subsection}{\numberline {5.5.2}Analyse der Laufzeiten}{48}{subsection.5.5.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {5.5.3}Definition des minimalen Ausf\IeC {\"u}hrungsintervalls}{49}{subsection.5.5.3}
+\contentsline {subsection}{\numberline {5.5.3}Definition des minimalen Ausf\IeC {\"u}hrungsintervalls}{50}{subsection.5.5.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {6}Projektabschluss, Fazit \& Ausblick}{50}{chapter.6}
+\contentsline {chapter}{\numberline {6}Projektabschluss, Fazit \& Ausblick}{52}{chapter.6}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {6.1}Vergleich der Umsetzung mit den Zielen}{50}{section.6.1}
+\contentsline {section}{\numberline {6.1}Vergleich der Umsetzung mit den Zielen}{52}{section.6.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {6.2}Proof of Concept}{50}{section.6.2}
+\contentsline {section}{\numberline {6.2}Proof of Concept}{52}{section.6.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {6.3}Fazit}{50}{section.6.3}
+\contentsline {section}{\numberline {6.3}Fazit}{52}{section.6.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {6.4}Ausblick}{50}{section.6.4}
+\contentsline {section}{\numberline {6.4}Ausblick}{52}{section.6.4}
 \defcounter {refsection}{0}\relax 
 \contentsline {chapter}{Literatur}{i}{chapter*.45}
 \defcounter {refsection}{0}\relax 
