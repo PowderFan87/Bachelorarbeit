@@ -223,6 +223,31 @@
   \field{urlyear}{2015}
 \endentry
 
+\entry{Goyvaerts.2010}{book}{}
+  \name{author}{2}{}{%
+    {{}%
+     {Goyvaerts}{G.}%
+     {Jan}{J.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Levithan}{L.}%
+     {Steven}{S.}%
+     {}{}%
+     {}{}}%
+  }
+  \list{publisher}{1}{%
+    {O'Reilly}%
+  }
+  \strng{namehash}{GJLS1}
+  \strng{fullhash}{GJLS1}
+  \field{labelyear}{2010}
+  \field{sortinit}{G}
+  \field{isbn}{9783897219571}
+  \field{title}{Regul{\"a}re Ausdr{\"u}cke Kochbuch}
+  \field{year}{2010}
+\endentry
+
 \entry{Hedtstueck.2012}{book}{}
   \name{author}{1}{}{%
     {{}%

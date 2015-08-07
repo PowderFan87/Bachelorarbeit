@@ -114,30 +114,40 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {5.4.1}Regul\IeC {\"a}re Asudr\IeC {\"u}cke oder \textit {String.contains()}}{44}{subsection.5.4.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {5.4.2}Textanalyse mittels \textit {String.split()}}{44}{subsection.5.4.2}
+\contentsline {subsubsection}{Komplexit\IeC {\"a}t von regul\IeC {\"a}ren Ausdr\IeC {\"u}cken}{44}{section*.45}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {5.4.3}Verkettung von MapReduce Jobs}{45}{subsection.5.4.3}
+\contentsline {subsubsection}{Unterscheidung zwischen \textit {find()} und \textit {matches()}}{45}{section*.46}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {5.5}Anwendungstest \& Auswertung der Ergebnisse}{46}{section.5.5}
+\contentsline {subsubsection}{Komplexit\IeC {\"a}t von \textit {contains()}}{45}{section*.47}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {5.5.1}Durchf\IeC {\"u}hrung der Tests}{46}{subsection.5.5.1}
+\contentsline {subsubsection}{Schlussfolgerung}{45}{section*.48}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {5.5.2}Analyse der Laufzeiten}{48}{subsection.5.5.2}
+\contentsline {subsection}{\numberline {5.4.2}Textanalyse mittels \textit {String.split()}}{46}{subsection.5.4.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {5.5.3}Definition des minimalen Ausf\IeC {\"u}hrungsintervalls}{50}{subsection.5.5.3}
+\contentsline {subsection}{\numberline {5.4.3}Verkettung von MapReduce Jobs}{47}{subsection.5.4.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {6}Projektabschluss, Fazit \& Ausblick}{52}{chapter.6}
+\contentsline {subsubsection}{Beispiel f\IeC {\"u}r Verkettung von MapReduce Jobs}{48}{section*.49}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {6.1}Vergleich der Umsetzung mit den Zielen}{52}{section.6.1}
+\contentsline {section}{\numberline {5.5}Anwendungstest \& Auswertung der Ergebnisse}{49}{section.5.5}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {6.2}Proof of Concept}{52}{section.6.2}
+\contentsline {subsection}{\numberline {5.5.1}Durchf\IeC {\"u}hrung der Tests}{50}{subsection.5.5.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {6.3}Fazit}{52}{section.6.3}
+\contentsline {subsection}{\numberline {5.5.2}Analyse der Laufzeiten}{52}{subsection.5.5.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {6.4}Ausblick}{52}{section.6.4}
+\contentsline {subsection}{\numberline {5.5.3}Berechnung der maximalen Datenmenge}{54}{subsection.5.5.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{Literatur}{i}{chapter*.45}
+\contentsline {chapter}{\numberline {6}Projektabschluss, Fazit \& Ausblick}{56}{chapter.6}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{Glossar}{iv}{section*.46}
+\contentsline {section}{\numberline {6.1}Vergleich der Umsetzung mit den Zielen}{56}{section.6.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{Anhang}{vi}{appendix*.48}
+\contentsline {section}{\numberline {6.2}Proof of Concept}{56}{section.6.2}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {6.3}Fazit}{56}{section.6.3}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {6.4}Ausblick}{56}{section.6.4}
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{Literatur}{i}{chapter*.50}
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{Glossar}{iv}{section*.51}
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{Anhang}{vi}{appendix*.53}

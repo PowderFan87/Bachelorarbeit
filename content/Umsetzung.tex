@@ -8,7 +8,7 @@ Vor Beginn der Entwicklung werden im folgenden die Umgebung, in welcher die Appl
 
 <Weitere Einführung in das Kapitel bzw. aktuelle überarbeiten>
 
-\subsection{Beschreibung der Infrastruktur}
+\subsection{Beschreibung der Infrastruktur}\label{subsec:Infrastruktur}
 Obwohl Java als eine Plattform unabhängige Programmiersprache gesehen wird, spielt die Infrastruktur, in welcher die Anwendung ausgeführt werden soll, bei der Entwicklung eine entscheidende Rolle.
 
 Durch die Infrastruktur wird indirekt die Art der Datenverarbeitung vorgegeben. Außerdem müssen potenzielle Einschränkungen, wie z.B. verfügbare Speicherplatz oder maximale Übertragungsrate (falls Daten über ein Netzwerk ausgetauscht werden müssen), identifiziert werden.
@@ -361,7 +361,7 @@ Diese Trennung muss bei der Entwicklung unter allen Umständen beachtet werden. 
 
 Die Interpretation der Daten kann auf unterschiedlichste weise erfolgen. Die Auswertung ist dabei immer an den zu verarbeitenden Datentyp angepasst. Analysiert werden können alle formen von Daten (Numerisch, Alphanumerisch oder binäre Daten).
 
-\subsubsection{Implementierung individueller Mapper}
+\subsubsection{Implementierung individueller Mapper}\label{subsubsec:IndividuelleMapper}
 Alle Mapper müssen sich von der Klasse \textit{org.apache.hadoop.mapreduce.Mapper} ableiten. Bei der Klassendefinition muss ebenfalls die Angabe der \glspl{Generic} erfolgen. Der Mapper wird in der Hadoop 2.7.1 \ac{API} der Apache Software Foundation Definiert mit \textit{Class Mapper<KEYIN,VALUEIN,KEYOUT,VALUEOUT>}. Die \glspl{Generic} geben für die Schlüssel-Wert-Paare, sowohl vom Input (\textit{KEYIN}, \textit{VALUEIN}) wie auch für den Output (\textit{KEYOUT}, \textit{VALUEOUT}), die Datentypen an.\footcite[Vgl.][]{ApacheHadoopApiDokuMapper.2015}
 
 \autoref{lst:DefinitionPatternMapper} zeigt die Definition der für diese Anwendung programmierten Klasse \textit{PatternMapper}, mit den entsprechenden Generics innerhalb der spitzen Klammern. Diese erwartet als Input ein Schlüssel-Wert-Paar, bei welchem der Schlüssel ein beliebiges Objekt und der Wert ein Objekt des Typs \textit{org.apache.hadoop.io.Text} repräsentiert. Das Input-Paar wird durch die Methode \textit{map()} in ein Schlüssel-Wert-Paar mit Schlüsseltyp \textit{org.apache.hadoop.io.Text} und Werttyp \textit{org.apache.hadoop.io.IntWritable} umgewandelt. \\
@@ -410,12 +410,12 @@ Die Definition der \textit{Reducer} Klasse, in der Hadoop 2.7.1 \ac{API} ähnelt
 \autoref{lst:DefinitionCountReducer} zeigt die Definition des für die Anwendung programmierten \textit{CountReducer}.  \\
 
 \begin{lstlisting}[language=Java,caption=Deklaration \textit{CountReducer} mit Generics,label=lst:DefinitionCountReducer]
-public class CountReducer extends Reducer<Text, IntWritable, Text, IntWritable>
+public class SumReducer extends Reducer<Text, IntWritable, Text, IntWritable>
 \end{lstlisting}
 
-Der \textit{CountReducer} summiert alle im \textit{Mapper} gesetzten Werte für einen gegebenen Schlüssel auf und schreibt das Ergebnis wieder in den entsprechenden Context. \autoref{lst:MethodeReduce} zeigt die \textit{reduce()} Methode der Klasse \textit{CountReducer}. Im Gegensatz zur \textit{map()} Methode, bekommt der \textit{Reducer} ein Array von werten übergeben. \\
+Der \textit{SumReducer} summiert alle im \textit{Mapper} gesetzten Werte für einen gegebenen Schlüssel auf und schreibt das Ergebnis wieder in den entsprechenden Context. \autoref{lst:MethodeReduce} zeigt die \textit{reduce()} Methode der Klasse \textit{SumReducer}. Im Gegensatz zur \textit{map()} Methode, bekommt der \textit{Reducer} ein Array von werten übergeben. \\
 
-\begin{lstlisting}[language=Java,caption=Methode \textit{reduce()} der Klasse \textit{CountReducer},label=lst:MethodeReduce]
+\begin{lstlisting}[language=Java,caption=Methode \textit{reduce()} der Klasse \textit{SumReducer},label=lst:MethodeReduce]
 public void reduce(Text objKey, Iterable<IntWritable> arrValues, Context objContext) throws IOException, InterruptedException {
 	int lngSum = 0;
 
@@ -439,10 +439,59 @@ Die zuvor beschriebene Methode zur Analyse von textbasierten Daten stellt nur ei
 Um diesen Punkt weiter zu verdeutlichen, werden nachfolgend drei alternative Mappingverfahren beschrieben. Dabei werden die individuellen Vor- und Nachteile betrachtet, sowie konkrete Anwendungsfälle für deren Einsatzmöglichkeit gegeben. 
 
 \subsection{Reguläre Asudrücke oder \textit{String.contains()}}\label{subsec:Contains}
+In \autoref{lst:MethodeMap} (in \autoref{subsubsec:IndividuelleMapper}) wurde die Implementierung eines Mappers gezeigt, welcher den Schlüssel, mittels eines regulären Ausdrucks, aus einem \textit{String} extrahiert. Mit der Methode \textit{String.contains()} existiert eine Alternative zu diesem Vorgehen. Diese Funktion sucht eine übergebene Zeichenfolge innerhalb des Strings, auf welchen die Methode ausgeführt wird. Um eine Entscheidungsgrundlage für den Einsatz der Methoden zu besitzen, muss die zugrundeliegende Arbeitsweise und Komplexität der Methoden betrachtet werden.
 
+\subsubsection{Komplexität von regulären Ausdrücken}
+Bei der Berechnung der Komplexität eines regulären Ausdrucks muss zunächst eine Unterscheidung zwischen jeden Ausdrücken, welche der Standarddefinition gerecht werden (jene Ausdrücke, welche durch {\color{LinkColor}\acsp{NEA}}/{\color{LinkColor}\acsp{DEA}} dargestellt werden können), und regulären Ausdrücken, wie sie in Java implementiert sind.
 
-<Unterscheidung zwischen regex und contains beschreiben. wann macht was sinn? gibt es überhaupt situationen wo contains mehr sinn macht (alles was contains kann kann regex ebenfalls)?>
+Alle regulären Ausdrücke, welche sich als \acs{DEA} darstellen lassen, besitzen eine Komplexität von $O(n)$, wobei $n$ für die Länge des zu überprüfenden Strings steht, da bei diesen Automaten jedes Zeichen einzeln abgearbeitet wird.\footnote{Jeder \acs{NEA} lässt sich in einen \acs{DEA} umwandeln.}
 
+Die meisten Programmiersprachen (darunter auch Java) besitzen die Möglichkeit, bei der Verarbeitung von regulären Ausdrücken, ein sog. \textit{Backtracking} durchzuführen. Als Beispiel soll die Zeichenfolge \textit{xxxxxxxx} mit dem Ausdruck \textit{(x+x+)+y} überprüft werden. Diese Überprüfung schlägt erwartungsgemäß fehl. Wird die Anzahl der \textit{x} erhöht, nimmt die Laufzeit immer stärker zu, was sich wie folgt erklären lässt.
+
+Wenn \textit{y} nicht gefunden wird, werden alle Wiederholungspermutationen für jedes \textit{x+} durchgeführt. Erst wenn all diese Permutationen fehlschlagen, wird der Ausdruck als nicht erkannt angesehen. Bei zehn \textit{x} gibt es $1.024$ Permutationen, bei 32 bereits über 4 Milliarden. Dieser Ausdruck lässt sich nicht durch einen \acs{DEA} darstellen und besitzt, im schlimmsten Fall (missmatch), eine Komplexität von $O(2^n)$.\footcite[Vgl.][S. 80]{Goyvaerts.2010}
+
+%<Allgemein lässt sich, schlimmstenfalls, eine Komplexität von $O(n^m)$ definieren, wobei $n$ für die Länge der zu überprüfenden Zeichenkette und $m$ für die Anzahl der durchzuführenden \textit{Backstrackings} steht.>
+
+\subsubsection{Unterscheidung zwischen \textit{find()} und \textit{matches()}}
+Die Klasse \textit{Matcher} besitzt zwei Methoden, um einen regulären Ausdruck auf eine Zeichenfolge anzuwenden, welche sich ebenfalls auf die Komplexität auswirken.
+
+Die Methode \textit{matches()} wendet den gegebenen Ausdruck auf die komplette Zeichenkette an. Die Komplexität für diese Methode bleibt bei $O(n)$ für Standardausdrücke.
+
+Die Methode \textit{find()} hingegen wendet den gegebenen Ausdruck auf Teilketten der vollständigen Zeichenkette an, d.h., kann der Ausdruck mit dem Zeichen $n$ nicht erfüllt werden, so wird die Überprüfung ab dem Zeichen $n+1$ wiederholt. Die Komplexität erhöht sich, im schlimmsten Fall, auf $O(n \times m)$, wobei $m$ für die Länge des regulären Ausdrucks steht.
+
+\subsubsection{Komplexität von \textit{contains()}}
+Um die Komplexität von \textit{contains()} zu berechnen, muss zunächst die Arbeitsweise der Funktion identifiziert werden. \autoref{lst:contains} zeigt, dass \textit{contains()} lediglich das Resultat der Methode \textit{indexOf()} mit $-1$ vergleicht und \textit{true} oder \textit{false} als Ergebnis liefert. \\
+
+\begin{lstlisting}[language=Java,caption=Funktionsweise von \textit{contains()},label=lst:contains]
+public boolean contains(CharSequence s) {
+    return indexOf(s.toString()) > -1;
+}
+\end{lstlisting}
+
+Demzufolge muss, für die Berechnung der Komplexität, die Funktion \textit{indexOf()} hinzugezogen werden. Diese Vergleicht die einzelnen Zeichen nacheinander, und gibt, wenn eine Übereinstimmung gefunden wurde, die Position dieser zurück. Die Überprüfung beginnt mit einem Zeichen $n$. Gibt es keine Übereinstimmung, so wird die Überprüfung am dem Zeichen $n+1$ wiederholt.
+
+Die durchschnittliche Komplexität von \textit{contains()} beträgt somit $O(n)$, mit einer Worst-Case-Komplexität von $O(n \times m)$, wobei $n$ für die Länge der zu durchsuchenden und $m$ für die Länge der zu findenden Zeichenkette steht. 
+
+\subsubsection{Schlussfolgerung}
+Die berechnete Komplexität der Methoden muss nun verglichen werden.\footnote{Vergleich wird unter der Annamhe durchgeführt, dass, für die gegebenen regulären Ausdrücke, kein Backtracking durchgeführt wird.} \autoref{tbl:VerglKomplexität} zeigt, dass lediglich der Worst-Case für die Methode \textit{matches()} eine geringere Komplexität besitzt. 
+
+\begin{table}
+	\centering
+	\begin{tabular}{| l | l | l | l |}
+		\hline
+		\rowcolor[HTML]{3531FF} 
+		\multicolumn{1}{|l|}{\cellcolor[HTML]{4F88BB}{\color[HTML]{FFFFFF} {\bf Methode}}} & \multicolumn{1}{l|}{\cellcolor[HTML]{4F88BB}{\color[HTML]{FFFFFF} {\bf Best-Case}}} & \multicolumn{1}{l|}{\cellcolor[HTML]{4F88BB}{\color[HTML]{FFFFFF} {\bf Durchschnitt}}} & \multicolumn{1}{l|}{\cellcolor[HTML]{4F88BB}{\color[HTML]{FFFFFF} {\bf Worst-Case}}} \\ \hline
+		\textit{contains()} & $O(n)$ & $O(n)$ & $O(n \times m)$ \\  \hline \hline
+		\textit{matches()} & $O(n)$ & $O(n)$ & $O(n)$ \\ \hline
+		\textit{find()} & $O(n)$ & $O(n)$ & $O(n \times m)$ \\  \hline
+	\end{tabular}
+	\caption{Komplexitätsvergleich von regulären Ausdrücken und \textit{contains()}}
+	\label{tbl:VerglKomplexität}
+\end{table}
+
+Abschließend lässt sich sagen, dass, aufgrund der höheren Flexibilität, die Verwendung von regulären Ausdrücken gegenüber der \textit{contains()} Methode zu bevorzugen ist, solange es um die Ermittlung einer Teilkette innerhalb einer Zeichenkette geht. Insbesondere, wenn nicht die exakte Teilkette bekannt ist oder eine große Menge an unterschiedlichen Teilketten gegeben ist.
+
+%<Unterscheidung zwischen regex und contains beschreiben. wann macht was sinn? gibt es überhaupt situationen wo contains mehr sinn macht (alles was contains kann kann regex ebenfalls)?>
 
 \subsection{Textanalyse mittels \textit{String.split()}}
 Eine weitere Möglichkeit zur Verarbeitung von Strings stellt die \textit{split()} Methode dar. Sie ist ebenfalls teil der Standard \textit{String} klasse von Java, und zerlegt einen \textit{String} in ein \textit{Array} (\textit{String[]}). Die Trennung wird anhand eines regulären Ausdrucks vorgenommen, welcher der Methode als Parameter übergeben wird.
@@ -489,12 +538,85 @@ for (String strWord : arrWords) {
 [...]
 \end{lstlisting}
 
-<Vor-/Nachteile noch beschreiben>
-
 \subsection{Verkettung von MapReduce Jobs}
+Bei der Anwendung des MapReduce Modells werden Entwickler in ihrer bisherigen Denkweise eingeschränkt. Methoden wie mehrfaches Iterieren über Eingabedaten, Rückgabe von anderen Datentypen außer Schlüssel-Wert-Paaren oder der gleichzeitigen Verarbeitung von Eingabedaten unterschiedlichen Typs, sind in MapReduce nicht mehr möglich.
 
+Eine mögliche Lösung um diese Einschränkungen zu kompensieren ist die Verkettung von mehreren MapReduce Jobs, d.h., dass die Ausgabedaten eines Jobs \textit{A} die Eingabedaten für die Jobs \textit{B} und \textit{C} sind. Die Datenanalyse wird in unterschiedlichen Stufen durchgeführt, wobei die Granularität i.d.R. von Stufe zu Stufe verfeinert wird.\footcite[Vgl.][S. 94]{Freiknecht.2014} Ein möglicher Anwendungsfall wäre das folgende Beispiel.
 
-<Beschreibung wie eine Verkettung von Jobs durchgeführt werden kann (Freiknecht literatur) und anwendungsfall hierzu beschreiben>
+\subsubsection{Beispiel für Verkettung von MapReduce Jobs}
+Für die Analyse steht initial ein Logfile im CSV-Format bereit. In diesen wird durch die Webserver die Antwortzeit für jede Anfrage an einen Appserver protokolliert. Um die Komplexität der Analyse zu steigern wird weiter angenommen, dass die Appserver in drei Gruppen unterteilt sind. Zudem werden der Infrastruktur Cacheserver hinzugefügt, welche nicht weiter Gruppiert sind. \autoref{tbl:BeispieldatenCSVLog} zeigt die Daten für dieses Beispiel (bei einem wirklichen Fall wäre die Datenmenge wesentlich höher).
+
+\begin{table}[h]
+	\centering
+	\begin{tabular}{| l | l | l | r |}
+		\hline
+		\rowcolor[HTML]{3531FF} 
+		\multicolumn{1}{l|}{\cellcolor[HTML]{4F88BB}{\color[HTML]{FFFFFF} {\bf Serverart}}} & \multicolumn{1}{l|}{\cellcolor[HTML]{4F88BB}{\color[HTML]{FFFFFF} {\bf Gruppe}}} & \multicolumn{1}{l|}{\cellcolor[HTML]{4F88BB}{\color[HTML]{FFFFFF} {\bf IP-Adresse}}} & \multicolumn{1}{l|}{\cellcolor[HTML]{4F88BB}{\color[HTML]{FFFFFF} {\bf Antwortzeit (in Sekunden)}}} \\ \hline
+		Appserver & AS1 & 192.168.2.10 & 5 \\ \hline
+		Appserver & AS2 & 192.168.3.10 & 2 \\ \hline
+		Appserver & AS3 & 192.168.4.10 & 4 \\ \hline
+		Appserver & AS3 & 192.168.4.15 & 3 \\ \hline
+		Appserver & AS1 & 192.168.2.10 & 4 \\ \hline
+		Cacheserver & CS1 & 192.168.5.10 & 2 \\ \hline
+		Cacheserver & CS1 & 192.168.5.15 & 1 \\ \hline
+	\end{tabular}
+	\caption{Beispieldaten für Webserver Logfile}
+	\label{tbl:BeispieldatenCSVLog}
+\end{table}
+
+Durch die Analyse soll nun die durchschnittliche Antwortzeit für einen bestimmten Server, sowie für einzelne Gruppen und Serverarten ermittelt werden (Durchschnitt der Durchschnitte). Statt drei unabhängige Analysen durch zu führen, sollen nun die drei MapReduce Jobs miteinander verbunden werden.
+
+Der erste Job (Job \textit{A}) soll den Mittelwert für jeweils einen Server ermitteln. Die einzelnen Systeme werden anhand ihrer IP-Adresse ermittelt. Aus Ausgabe wird eine neue CSV-Datei erzeugt, welche die Durchschnittswerte der Server enthält. \autoref{tbl:BeispieldatenCSVLog_02} zeigt die Ausgabe für Job \textit{A}.
+
+Als nächstes sollen die MapReduce Jobs \textit{B}, für die Berechnung der durchschnittlichen Antwortzeit für eine Gruppe, und \textit{C}, für die Ermittlung der durchschnittlichen Antwortzeit einer Serverart, parallel ausgeführt werden. \autoref{tbl:BeispieldatenCSVLog_02} stellt hierfür die Eingabe dar. Nach der Verarbeitung sind alle erforderlichen Informationen verfügbar (siehe \autoref{tbl:BeispieldatenCSVLog_03} und \autoref{tbl:BeispieldatenCSVLog_04}).
+
+\begin{table}[h]
+	\centering
+	\begin{tabular}{| l | l | l | r |}
+		\hline
+		\rowcolor[HTML]{3531FF} 
+		\multicolumn{1}{l|}{\cellcolor[HTML]{4F88BB}{\color[HTML]{FFFFFF} {\bf Serverart}}} & \multicolumn{1}{l|}{\cellcolor[HTML]{4F88BB}{\color[HTML]{FFFFFF} {\bf Gruppe}}} & \multicolumn{1}{l|}{\cellcolor[HTML]{4F88BB}{\color[HTML]{FFFFFF} {\bf IP-Adresse}}} & \multicolumn{1}{l|}{\cellcolor[HTML]{4F88BB}{\color[HTML]{FFFFFF} {\bf Antwortzeit (in Sekunden)}}} \\ \hline
+		Appserver & AS1 & 192.168.2.10 & 4,5 \\ \hline
+		Appserver & AS2 & 192.168.3.10 & 2 \\ \hline
+		Appserver & AS3 & 192.168.4.10 & 4 \\ \hline
+		Appserver & AS3 & 192.168.4.15 & 3 \\ \hline
+		Cacheserver & CS1 & 192.168.5.10 & 2 \\ \hline
+		Cacheserver & CS1 & 192.168.5.15 & 1 \\ \hline
+	\end{tabular}
+	\caption{Ergebnis nach Job \textit{A}}
+	\label{tbl:BeispieldatenCSVLog_02}
+\end{table}
+
+\begin{table}[h]
+	\centering
+	\begin{tabular}{| l | r |}
+		\hline
+		\rowcolor[HTML]{3531FF} \multicolumn{1}{l|}{\cellcolor[HTML]{4F88BB}{\color[HTML]{FFFFFF} {\bf Gruppe}}} & \multicolumn{1}{l|}{\cellcolor[HTML]{4F88BB}{\color[HTML]{FFFFFF} {\bf Antwortzeit (in Sekunden)}}} \\ \hline
+		AS1 & 4,5 \\ \hline
+		AS2 & 2 \\ \hline
+		AS3 & 3,5 \\ \hline
+		CS1 & 1,5 \\ \hline
+	\end{tabular}
+	\caption{Ergebnis nach Job \textit{B}}
+	\label{tbl:BeispieldatenCSVLog_03}
+\end{table} 
+
+\begin{table}[h]
+	\centering
+	\begin{tabular}{| l | r |}
+		\hline
+		\rowcolor[HTML]{3531FF} 
+		\multicolumn{1}{l|}{\cellcolor[HTML]{4F88BB}{\color[HTML]{FFFFFF} {\bf Serverart}}} & \multicolumn{1}{l|}{\cellcolor[HTML]{4F88BB}{\color[HTML]{FFFFFF} {\bf Antwortzeit (in Sekunden)}}} \\ \hline
+		Appserver & 3,375 \\ \hline
+		Cacheserver & 1,5 \\ \hline
+	\end{tabular}
+	\caption{Ergebnis nach Job \textit{C}}
+	\label{tbl:BeispieldatenCSVLog_04}
+\end{table}
+
+Der Vorteil der Verkettung von Jobs liegt in der stufenweisen Reduktion der Datenmenge. Angenommen, es gäbe $50$ App- und Cachingserver. Bei einem Logfile mit $10^7$ Einträgen müsste, bei einer getrennten Verarbeitung, jeder Job $10^7$ Einträge analysieren (insgesamt $3 \times 10^7$ Einträge). Durch die Verkettung reduziert sich die Anzahl der zu analysierenden Einträge auf $10^7+ (2 \times 50)$, was einer Reduktion von $\approx 67\%$ entspricht.
+
+%<Beschreibung wie eine Verkettung von Jobs durchgeführt werden kann (Freiknecht literatur) und anwendungsfall hierzu beschreiben>
 
 %\section{Ausführungsdatei Logfileanalyzer.sh}\label{sec:Ausführungsdatei}
 %Um eine MapReduce Anwendung in Verbindung mit \ac{HDFS} auszuführen, müssen, noch vor dem Start der Anwendung, einige Vorbereitungen getroffen werden. 
@@ -563,7 +685,7 @@ lfa.mapper.pattern.key   : \\] ([A-Z]{4,5})
 lfa.mapper.nomatchaction : SKIP
 \end{lstlisting}
 
-Bei jeder Ausführung des Programms wird das in \autoref{sec:Ausführungsdatei} beschriebene Bash-Script ausgeführt, wodurch die Logfiles vor jede Analyse neu in das \ac{HDFS} übertragen wird. Dies ist notwendig, da bei jedem Upload die Datenblöcke neu geschrieben werden müssen, um ein verfälschtes Ergebnis durch Caching zu vermeiden.
+Bei jeder Ausführung des Programms wird ein dafür Bash-Script ausgeführt, wodurch die Logfiles vor jede Analyse neu in das \ac{HDFS} übertragen wird. Dies ist notwendig, da bei jedem Upload die Datenblöcke neu geschrieben werden müssen, um ein verfälschtes Ergebnis durch Caching zu vermeiden.
 
 \autoref{fig:Streudiagram} zeigt die einzelnen Testläufe als Datenpunkte, \autoref{tbl:DurchschnittlicheLaufzeiten} die arithmetischen Mittelwerte für die einzelnen Logfilegrößen.
 
@@ -665,16 +787,21 @@ Runtime: 171
 
 Die Berechnete Laufzeit beträgt $t_e = 172,398$. Die durchschnittliche Laufzeit, bei 20 Mio. Einträgen, beträgt $171,6$. Die berechnete Laufzeit weicht lediglich $\approx 0,46\%$ vom Durchschnitt ab, was die Richtigkeit der Funktion hinreichend bestätigt.
 
-\subsection{Definition des minimalen Ausführungsintervalls}
-<Diese Zurückführung auf die Definition der maximalen Laufzeit funktioniert zwar, ist aber noch nicht richtig rund. Eventuell die Gleichung doch umschreiben. $t_e$ ist in der ursprünglichen Formel gesucht, wird hier jetzt aber teilweise gesucht und steht in der Definition als errechneter wert mit drin...das passt irgendwie noch nicht...>
+\subsection{Berechnung der maximalen Datenmenge}
+Die Logfiles, der in \autoref{subsec:Infrastruktur} beschriebenen Infrastruktur, befinden sich in einer stündlichen Rotation, d.h., dass jede Stunde die aktuellen Logfiles verschoben und neue angelegt werden. Für alle verschobenen Logfiles ist zusätzlich die Durchführung einer Analyse notwendig.
 
-In \autoref{subsubsec:PL001} wurde, durch die \autoref{equ:MaxAusführungszeit}, ein maximale Laufzeit für einen festen Ausführungsintervall definiert. Durch die Kombination mit \autoref{equ:Laufzeit}, durch welche sich ein zu erwartender Wert für $t_e$ berechnen lässt, kann die Definition um einen Gültigkeitsbereich für $t_i$ erweitern:
+Basierend auf der in \autoref{subsubsec:PL001} formulierten Produktleistung \textbf{PL001}, darf die Laufzeit der Analyse lediglich ein fünftel des Intervalls betragen. Aus dieser Definition ergibt sich, für die Analyse der stündlich rotierenden Logfiles, eine Laufzeit von $t_e \leq 720$.
 
-\begin{flalign}
-&& && t_e \leq \frac{t_i}{5} && \{t_e \in \mathbb{Q}^+\},\;\{t_i \in \mathbb{N}\;|\;5t_e \leq t_i \leq +\infty\} \label{equ:MinInterval}
-\end{flalign}
+Durch die Anwendung von \autoref{equ:Laufzeit} lässt sich, durch eine Umformung nach $x$, die maximale Datenmenge, für die zu analysierenden Logfiles errechnen.
 
-Durch diese Anpassung lässt sich, bereits vor Implementierung einer Analyse, ein minimaler Ausführungsintervall, in Abhängigkeit zur Datenmenge, bestimmen. Dies kann auch für bereits bestehende Analysen durchgeführt werden, um festzustellen, ob diese durch die Anwendung ersetzt werden können.
+\begin{flalign*}
+&& 720 &= 8,199 \times 10^{-6} x + 8,418 &&| - 8,418 \\
+&& 720 - 8,418 &= 8,199 \times 10^{-6} x &&| \div 8,199 \times 10^{-6} \\
+&& \frac{720 - 8,418}{8,199 \times 10^{-6}} &= x \\
+&& 86.788.877 &\approx x
+\end{flalign*}
+
+Die Produktleistung lässt sich somit erfüllen, solange die stündliche generierte Datenmenge $x \leq 86.788.877$ beträgt.
 
 %<IDEE: Es wurde eine formel angegeben, welche aussage über die maximale ausführungsdauer gibt...eventuell lassen sich diese beiden formeln verbinden (also eine Formel die aussage gibt über den maximal möglichen intervall für eine bestimmte datenmenge \autoref{equ:MinInterval})>
 

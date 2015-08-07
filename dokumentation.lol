@@ -61,15 +61,17 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {lstlisting}{\numberline {5.10}Deklaration \textit {CountReducer} mit Generics}{43}{lstlisting.5.10}
 \defcounter {refsection}{0}\relax 
-\contentsline {lstlisting}{\numberline {5.11}Methode \textit {reduce()} der Klasse \textit {CountReducer}}{43}{lstlisting.5.11}
+\contentsline {lstlisting}{\numberline {5.11}Methode \textit {reduce()} der Klasse \textit {SumReducer}}{43}{lstlisting.5.11}
 \defcounter {refsection}{0}\relax 
-\contentsline {lstlisting}{\numberline {5.12}Auszug der \textit {map()} Methode der Klasse \textit {LogMapper}}{44}{lstlisting.5.12}
+\contentsline {lstlisting}{\numberline {5.12}Funktionsweise von \textit {contains()}}{45}{lstlisting.5.12}
 \defcounter {refsection}{0}\relax 
-\contentsline {lstlisting}{\numberline {5.13}Kombination von \textit {contains()} und \textit {split()}}{45}{lstlisting.5.13}
+\contentsline {lstlisting}{\numberline {5.13}Auszug der \textit {map()} Methode der Klasse \textit {LogMapper}}{46}{lstlisting.5.13}
 \defcounter {refsection}{0}\relax 
-\contentsline {lstlisting}{\numberline {5.14}Properties f\IeC {\"u}r Anwendungstest}{46}{lstlisting.5.14}
+\contentsline {lstlisting}{\numberline {5.14}Kombination von \textit {contains()} und \textit {split()}}{47}{lstlisting.5.14}
 \defcounter {refsection}{0}\relax 
-\contentsline {lstlisting}{\numberline {5.15}Laufzeiten mit $2 \times 10^7$ Eintr\IeC {\"a}gen}{49}{lstlisting.5.15}
+\contentsline {lstlisting}{\numberline {5.15}Properties f\IeC {\"u}r Anwendungstest}{50}{lstlisting.5.15}
+\defcounter {refsection}{0}\relax 
+\contentsline {lstlisting}{\numberline {5.16}Laufzeiten mit $2 \times 10^7$ Eintr\IeC {\"a}gen}{54}{lstlisting.5.16}
 \defcounter {refsection}{0}\relax 
 \addvspace {10\p@ }
 \defcounter {refsection}{0}\relax 
