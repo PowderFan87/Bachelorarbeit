@@ -13,7 +13,7 @@ Die Installation des Testsystems findet auf einer Linux \ac{VM} mit Ubuntu Versi
 \subsection{Einrichten eines dedizierten Hadoop-Users}
 Dabei wird zunächst ein eigener User, sowie eine eigene Gruppe, für Hadoop angelegt. Dies wird aus Sicherheitsgründen gemacht, da keine Anwendung als Root-User ausgeführt werden darf.
 
-Zusätzlich wird ein \ac{SSH} Zugang für den User angelegt. Hierzu nennt Freiknecht als Gründe zum einen, dass später bei der Verwendung eines Hadoop-Clusters, die Systeme miteinander kommunizieren müssen, und zum anderen damit, dass auch vom Hostsystem Dateien auf die \ac{VM} abgelegt werden. Für den \ac{SSH}-Zugang muss ein Schlüssel nach dem Verfahren von \ac{RSA} für den User erzeugt und bei den autorisierten Schlüsseln abgelegt. Abschließend, um den Host zu den bekannten Systemen hinzuzufügen, muss der Hadoop User eine erstmalige Verbindung herstellen.\footcite[Vgl.][S. 30 f.]{Freiknecht.2014}
+Zusätzlich wird ein \ac{SSH} Zugang für den User angelegt. Hierzu nennt Freiknecht als Gründe zum einen, dass später bei der Verwendung eines Hadoop-Clusters, die Systeme miteinander kommunizieren müssen, und zum anderen, dass auch vom Hostsystem Dateien auf der \ac{VM} abgelegt werden. Für den \ac{SSH}-Zugang muss ein Schlüssel nach dem Verfahren von \ac{RSA} für den User erzeugt und bei den autorisierten Schlüsseln abgelegt werden. Abschließend, um den Host zu den bekannten Systemen hinzuzufügen, muss der Hadoop User eine erstmalige Verbindung herstellen.\footcite[Vgl.][S. 30 f.]{Freiknecht.2014}
 
 \autoref{lis:KonfHadoopUser} zeigt die Kommandozeilen Befehle für die gerade beschriebenen Aktionen. \\
 
@@ -34,7 +34,7 @@ ssh localhost
 \end{lstlisting}
 
 \subsection{Installation von Hadoop}
-Nachdem der dedizierter User angelegt wurde, kann die Installation von Hadoop selbst durchgeführt werden. Hierzu wird zunächst die aktuelle Version von Hadoop in das \textit{/usr/local} Verzeichnis heruntergeladen, entpackt, nach hadoop umbenannt und mit den entsprechenden Berechtigungen für den dedizierten User ausgestattet (\autoref{lis:HerunterladenUndEntpacken}). Im Gegensatz zur Anleitung von Freiknecht wird die aktuelle Version 2.7.1 statt 2.2.0 verwendet. \\
+Nachdem der dedizierter User angelegt wurde, kann die Installation von Hadoop selbst durchgeführt werden. Hierzu wird zunächst die aktuelle Version von Hadoop in das Verzeichnis \textit{/usr/local} heruntergeladen, entpackt und umbenannt nach \textit{hadoop}. Zuletzt werden die benötigten Berechtigungen für den dedizierten User gesetzt (\autoref{lis:HerunterladenUndEntpacken}). Im Gegensatz zur Anleitung von Freiknecht wird die aktuelle Hadoop Version 2.7.1 statt 2.2.0 verwendet. \\
 
 \begin{lstlisting}[language=bash, caption={Herunterladen und entpacke von Hadoop}, label=lis:HerunterladenUndEntpacken]
 $ cd /usr/local
@@ -45,7 +45,7 @@ $ sudo mv hadoop-2.7.1 hadoop
 $ sudo chown -R hduser:hadoop hadoop
 \end{lstlisting}
 
-Da Hadoop in einem extra Verzeichnis installiert wurde, müssen für den User noch eine Reihe von Umgebungsvariablen gesetzt werden. Diese werden der \textit{.bashrc} Datei, welche im Home-Verzeichnis des Users liegt, hinzugefügt. \\
+Da Hadoop in einem extra Verzeichnis installiert wurde, müssen für den User noch eine Reihe von Umgebungsvariablen gesetzt werden. Diese werden der Datei \textit{.bashrc}, welche im Home-Verzeichnis des Users liegt, hinzugefügt. \\
 
 \begin{lstlisting}[language=bash, caption={Umgebungsvariablen für Hadoop}, label=lis:Umgebungsvariablen]
 # Java
@@ -70,9 +70,9 @@ Abschließend muss die Installation von Hadoop getestet werden, indem der Befehl
 \end{figure}
 
 \subsection{Konfiguration für Pseudo-Distributed Umgebung}
-Hadoop kann auch als Single Node Installation in einer Pseudo-Distributed Umgebung laufen, in welcher jeder Hadoop Deamon als eigenständiger Java-Prozess ausgeführt wird. Um dies zu ermöglichen sind weitere Konfigurationen notwendig, da für diese Umgebung \ac{HDFS} aktiviert wird.
+Hadoop kann als Single Node Installation auch in einer Pseudo-Distributed Umgebung laufen, in welcher jeder Hadoop Deamon als eigenständiger Java-Prozess ausgeführt wird. Um dies zu ermöglichen, sind weitere Konfigurationen notwendig, da für diese Umgebung \ac{HDFS} aktiviert wird.
 
-Die Konfiguration wird nach der Dokumentation von Apache durchgeführt. Dabei werden zunächst in den Dateien \textit{core-site.xml} und \textit{hdfs-site.xml}, welche im Verzeichnis \textit{etc/hadoop} zu finden sind, vorgenommen. \autoref{lis:KonfCoreSite} und \autoref{lis:KonfHDFSSite} zeigen die entsprechenden Konfigurationen. \\
+Die Konfiguration wird nach der Dokumentation von Apache durchgeführt. Dabei werden zunächst Einstellungen in den Dateien \textit{core-site.xml} und \textit{hdfs-site.xml}, welche im Verzeichnis \textit{etc/hadoop} zu finden sind, vorgenommen. \autoref{lis:KonfCoreSite} und \autoref{lis:KonfHDFSSite} zeigen die entsprechenden Konfigurationen. \\
 
 \pagebreak
 \begin{lstlisting}[language=XML, caption=Konfiguration in der core-site.xml, label=lis:KonfCoreSite]
@@ -93,9 +93,9 @@ Die Konfiguration wird nach der Dokumentation von Apache durchgeführt. Dabei we
 </configuration>
 \end{lstlisting}
 
-Um die Installation zu testen, muss zunächst eine Formatierung der Knoten vorgenommen werden. Erst nach einer Formatierung ist der Start des Dateisystems möglich. Über den Befehl \textit{jps} können die Anzeige aller laufenden Java-Prozesse möglich. \autoref{lis:TestenDerKonf} zeigt die hierfür notwendigen Befehle. Hadoop bietet zusätzlich ein Web-Interface für die Knoten, welches über \textit{http://localhost:50070/} aufgerufen werden kann. Ein Screenshot des Interfaces ist im Anhang zu finden.\footcite[Vgl.][]{ApacheHadoopDoku.2015} \\
+Um die Installation zu testen, muss zunächst eine Formatierung der Knoten vorgenommen werden. Erst nach einer Formatierung ist der Start des Dateisystems möglich. Über den Befehl \textit{jps} ist die Anzeige aller laufenden Java-Prozesse möglich. \autoref{lis:TestenDerKonf} zeigt die hierfür notwendigen Befehle. Hadoop bietet zusätzlich ein Web-Interface für die Knoten, welches über \textit{http://localhost:50070/} aufgerufen werden kann. Ein Screenshot des Interfaces ist im Anhang zu finden.\footcite[Vgl.][]{ApacheHadoopDoku.2015} \\
 
-\begin{lstlisting}[caption=Testen der Konfiguration, label=lis:TestenDerKonf]
+\begin{lstlisting}[caption=Test der Konfiguration, label=lis:TestenDerKonf]
 $ bin/hdfs namenode -format
 [...]
 $ sbin/start-dfs.sh
@@ -113,7 +113,7 @@ $ sbin/stop-dfs.sh
 %<Beschreibung der Installation. Was muss dabei beachtet werden? Was ist wichtig? Was wird ignoriert?>
 
 \section{Anlegen eines neuen Maven Projektes}
-Um eine Anwendung zu Programmieren, welche mit dem Hadoop Framework ausgeführt werden soll, müssen die entsprechenden Klassen von Hadoop im Build enthalten sein. Die benötigten Bibliotheken können über \gls{Maven} bezogen werden. \gls{NetBeans} bietet die Möglichkeit, ein neues Projekt direkt als \gls{Maven}-Projekt anzulegen (\autoref{fig:NewMavenProject01}).
+Um eine Anwendung zu Programmieren, welche mit dem Hadoop Framework ausgeführt werden soll, müssen die entsprechenden Klassen von Hadoop im Build enthalten sein. Die benötigten Bibliotheken sind über \gls{Maven} beziehbar. \gls{NetBeans} bietet die Möglichkeit, ein neues Projekt direkt als \gls{Maven}-Projekt anzulegen (\autoref{fig:NewMavenProject01}).
 
 \begin{figure}[h]
 	\includegraphics[width=1\textwidth]{NewMavenProject_01.png}
@@ -125,7 +125,7 @@ Charakteristisch für ein \gls{Maven}-Projekt ist das \ac{POM}, eine XML-Repräs
 
 Um die zu Hadoop gehörenden Bibliotheken einzubinden, müssen diese im Knoten \textit{dependencyManagement/dependencies} angelegt sein. \autoref{lst:PomXML} zeigt die Für dieses Projekt eingebundenen Bibliotheken in der \textit{pom.xml}.
 
-Für jede \textit{dependency} werden drei Angaben benötigt. Die \textit{groupId} bezeichnet das Paket, in welchem die Bibliothek zu finden ist und \textit{artifactId} enthält den Namen innerhalb des Paketes. Über die Angabe \textit{version} können unterschiedliche Releases der Bibliothek eingebunden werden. Dies ist notwendig, da bestehende Anwendungen eventuell nicht kompatibel sind mit den neusten Versionen einer Bibliothek.
+Für jede \textit{dependency} werden drei Angaben benötigt. Die \textit{groupId} bezeichnet das Paket, in welchem die Bibliothek zu finden ist und \textit{artifactId} enthält den Namen innerhalb des Paketes. Über die Angabe der \textit{version} ist die Einbindung unterschiedlicher Releases einer Bibliothek möglich. Dies ist notwendig, da bestehende Anwendungen eventuell  mit den neusten Versionen einer Bibliothek kompatibel sind.
 
 Bis auf die Bibliothek \textit{hadoop-core} werden alle mit der Version 2.7.1 angegeben. Dies liegt darin begründet, dass sich der Core von Hadoop seit Version 1.2.1 nicht mehr verändert hat. \\
 

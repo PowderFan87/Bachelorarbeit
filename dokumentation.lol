@@ -33,7 +33,7 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {lstlisting}{\numberline {4.5}Konfiguration in der hdfs-site.xml}{23}{lstlisting.4.5}
 \defcounter {refsection}{0}\relax 
-\contentsline {lstlisting}{\numberline {4.6}Testen der Konfiguration}{23}{lstlisting.4.6}
+\contentsline {lstlisting}{\numberline {4.6}Test der Konfiguration}{23}{lstlisting.4.6}
 \defcounter {refsection}{0}\relax 
 \contentsline {lstlisting}{\numberline {4.7}Auszug aus der \textit {pom.xml}}{25}{lstlisting.4.7}
 \defcounter {refsection}{0}\relax 
