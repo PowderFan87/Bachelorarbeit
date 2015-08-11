@@ -144,9 +144,9 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {section}{\numberline {6.3}Fazit}{56}{section.6.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {6.4}Ausblick}{56}{section.6.4}
+\contentsline {section}{\numberline {6.4}Ausblick}{57}{section.6.4}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{Literatur}{i}{chapter*.50}
+\contentsline {chapter}{Literaturverzeichnis}{i}{chapter*.50}
 \defcounter {refsection}{0}\relax 
 \contentsline {chapter}{Glossar}{iv}{section*.51}
 \defcounter {refsection}{0}\relax 

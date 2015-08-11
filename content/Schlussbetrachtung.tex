@@ -4,13 +4,37 @@
 <Projektabschluss. Worum geht es hier? Warum muss eine Schlussbetrachtung gemacht werden? Welche Schritte werden dabei durchgeführt?>
 
 \section{Vergleich der Umsetzung mit den Zielen}
+
+
 <Welche Ziele wurden erfüllt? Welche nicht? Alles bezogen auf die Anwendung nicht auf die Bachelor Arbeit! Wo gab es Abweichungen? Wenn ja, warum gab es die?>
 
 \section{Proof of Concept}
 <Dokumentation einer kompletten Durchführung der Anwendung von Anfang bis Ende. Aufzeigen der Ergebnisse. Funktioniert die Anwendung?>
 
 \section{Fazit}\label{sec:Fazit}
-<Fazit ziehen über das Projekt und die Arbeit. Welche Erkenntnisse wurden gewonnen? Was hat gut/schlecht funktioniert? Wurden die eigenen Erwartungen erfüllt oder nicht? War das Projekt erfolgreich?>
+Das Ziel der Arbeit, durch die Anwendung des MapReduce Verfahrens, schneller, bessere Informationen über den Zustand des Systems zu erhalten, konnte nicht vollständig erfüllt werden. Es wurde zwar eine prototypische Anwendung geschrieben, welche, mittels MapReduce, textbasierte Logfiles analysieren kann, jedoch nicht in einem dem Ziel entsprechenden Zeitraum.
+
+Bei den durchgeführten Anwendungstests wurde ein konstanter Faktor von $\approx 8$ Sekunden festgestellt, welcher durch das Starten der Anwendung in Hadoop verursacht wird. In Verbindung mit dem Ziel, dass die Laufzeit der Analyse maximal $\sfrac{1}{5}$ des Ausführungsintervalls betragen sollte, bedeutet dies, dass nur Analysen mit einem Intervall von 40 Sekunden oder größer durchgeführt werden können. Dies ist für eine Real-/Neartime Analyse ein zu großer Intervall.
+
+Es konnte jedoch gezeigt werden, dass sich, mit steigender Anzahl der zu verarbeitenden Einträge, die Ausführungskosten und die Effizienz von MapReduce stark verbessern. Die Verarbeitung von sehr großen Datenmengen ($\geq10^6$) ist die eigentliche Stärke des Modells.
+
+Durch die Entwicklung der Applikation wurden nicht nur wertvolle Kenntnisse über die Funktionsweise des MapReduce Modells gewonnen, sondern auch Erfahrungen für die Arbeit im BigData-Bereich gesammelt werden.
+
+Zudem wird durch die Anwendung, anstatt einer Verbesserung der Real-/Neartime Analyse der Infrastruktur, ein neues Werkzeug für Langzeitanalysen bereitgestellt (bzw. können alle Analysen mit einem Intervall $\geq$ 40 Sekunden durchgeführt werden).
+
+Durch die Modulare Entwicklung lässt sich die Applikation leicht erweitern. Die generische Struktur der Konfiguration ermöglicht zudem individuelle Anpassungen, wodurch eine Vielzahl unterschiedlicher Informationen gewonnen werden können.
+
+Obwohl das eigentliche Ziel nicht erreicht wurde, kann die Arbeit aufgrund der gewonnenen Erkenntnisse und der entwickelten Applikation als Erfolg angesehen werden. Sowohl das Wissen über die Arbeitsweise von MapReduce als auch die Anwendung selbst stellen wertvolle Werkzeuge für zukünftige Analysen dar.
+
+%<Fazit ziehen über das Projekt und die Arbeit. Welche Erkenntnisse wurden gewonnen? Was hat gut/schlecht funktioniert? Wurden die eigenen Erwartungen erfüllt oder nicht? War das Projekt erfolgreich?>
 
 \section{Ausblick}\label{sec:Ausblick}
-<Welche Möglichkeiten bieten sich in der Zukunft? Was kann noch erreicht werden? Was bleibt offen? Welche nächsten Schritte sollte man gehen?>
+Vor Inbetriebnahme des Logfileanalyzers sollte eine Laufzeitanalyse, nach dem in \autoref{subsec:Laufzeitanalyse} beschriebenen Verfahren, auf dem Zielsystem durchgeführt werden. Daraus sollten sich neue Erkenntnisse bezüglich der Geschwindigkeit von MapReduce auf einem tatsächlichen System ergeben und somit das Einsatzgebiet des Programms klar werden.
+
+Um das vollständige Potenzial der Anwendung ausnutzen zu können, sollte eine Änderung der Infrastruktur vorgenommen werden. Wie in \autoref{subsec:Infrastruktur} beschrieben wurde, werden die Logfiles aktuell auf einem \ac{NFS} abgelegt, und über einen mount an den Infrastrukturserver gebunden. Dies hat den Nachteil, dass die zu analysierenden Daten zunächst in ein dort laufendes \ac{HDFS} übertragen werden müssen.
+
+Aus diesem Grund sollte das bestehende \ac{NFS} durch ein \ac{HDFS} ersetzt werden. Wenn dies erfolgt ist, kann die Grundidee von Hadoop, die Anwendung zu den Daten zu bringen, statt die Daten zur Anwendung, vollständig umgesetzt werden.
+
+Um spezifischere Analysen durchführen zu können, sollten weitere \textit{Mapper}, sowie \textit{InputFormat} und \textit{RecordReader} Klassen entwickelt werden da diese die Grundlage für neue Analyseverfahren und der Verarbeitung weiterer Dateiformate bilden.
+
+%<Welche Möglichkeiten bieten sich in der Zukunft? Was kann noch erreicht werden? Was bleibt offen? Welche nächsten Schritte sollte man gehen?>
