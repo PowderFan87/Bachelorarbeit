@@ -3,7 +3,24 @@
 \chapter{Projektabschluss, Fazit \& Ausblick}\label{cha:Schlussbetrachtung}
 <Projektabschluss. Worum geht es hier? Warum muss eine Schlussbetrachtung gemacht werden? Welche Schritte werden dabei durchgeführt?>
 
-\section{Vergleich der Umsetzung mit den Zielen}
+\section{Vergleich der Anwendung mit den Zielen}
+Der Erfolg (oder Misserfolg) eines Projektes wird i.d.R. an dem sog. Erfüllungsgrad gemesssen. Dieser wird bestimmt, indem ein Abgleich, der zuvor definierten Ziele mit den Funktionen der fertigen Anwendung, vorgenommen wird.
+
+Im Folgenden soll der Erfüllungsgrad für die vorliegende Anwendung bestimmt werden. Dabei muss beachtet werden, dass dieser lediglich eine Aussage über die Anwendung, nicht jedoch über die geschriebene Arbeit selbst trifft. Der Erfolg (oder Misserfolg) der Arbeit selbst wird in \autoref{sec:Fazit} festgestellt.
+
+\subsection{Abgleich der funktionalen Anforderungen}
+ Im Folgenden werden die in \autoref{subsec:Anforderungen} definierten, funktionalen Anforderungen mit der fertigen Anwendung abgeglichen. Die Bewertung wird in drei Stufen durchgeführt. Diese sind erfüllt (3), teilerfüllt (2) und unerfüllt (1).
+ 
+ \subsubsection{001 - Formatunabhängige Analyse (3)}
+ Die Verarbeitung der Logfiles wird ohne eine Umformung der Einträge durchgeführt. Es sind alle textbasierten Dateiformate analysierbar. Komplexere Daten sind, unter Implementierung einer entsprechenden \textit{InputFormat} Klasse, ebenfalls einlesbar.
+ 
+ \subsubsection{010 - Dynamisches Analyseverfahren (3)}
+ Die Parameter der Analyse sind über die Konfigurationsschnittstelle flexibel. Suchmuster und Mappingverfahren sind über die entsprechenden Properties frei konfigurierbar.
+ 
+ \subsubsection{020 - Konfigurierbarkeit (3)}
+ Die Anwendung ist über drei Stufen frei konfigurierbar. Es werden Dateien des Typs \textit{.properties} verwendet. 
+
+\subsection{Abgleich der Produktleistungen}
 
 
 <Welche Ziele wurden erfüllt? Welche nicht? Alles bezogen auf die Anwendung nicht auf die Bachelor Arbeit! Wo gab es Abweichungen? Wenn ja, warum gab es die?>
@@ -22,7 +39,7 @@ Durch die Entwicklung der Applikation wurden nicht nur wertvolle Kenntnisse übe
 
 Zudem wird durch die Anwendung, anstatt einer Verbesserung der Real-/Neartime Analyse der Infrastruktur, ein neues Werkzeug für Langzeitanalysen bereitgestellt (bzw. können alle Analysen mit einem Intervall $\geq$ 40 Sekunden durchgeführt werden).
 
-Durch die Modulare Entwicklung lässt sich die Applikation leicht erweitern. Die generische Struktur der Konfiguration ermöglicht zudem individuelle Anpassungen, wodurch eine Vielzahl unterschiedlicher Informationen gewonnen werden können.
+Durch die modulare Entwicklung lässt sich die Applikation leicht erweitern. Die generische Struktur der Konfiguration ermöglicht zudem individuelle Anpassungen, wodurch eine Vielzahl unterschiedlicher Informationen gewonnen werden können.
 
 Obwohl das eigentliche Ziel nicht erreicht wurde, kann die Arbeit aufgrund der gewonnenen Erkenntnisse und der entwickelten Applikation als Erfolg angesehen werden. Sowohl das Wissen über die Arbeitsweise von MapReduce als auch die Anwendung selbst stellen wertvolle Werkzeuge für zukünftige Analysen dar.
 

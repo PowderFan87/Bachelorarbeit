@@ -7,7 +7,7 @@ Auch in der \ac{IDE} muss ein Setup durchgeführt werden. Dabei handelt es sich,
 
 <Einleitung in das Kapitel noch nicht komplett rund...>
 
-\section{Installation von Hadoop}\label{sec:InstallationHadoop}
+\section{Installation \& Konfiguration}\label{sec:InstallationHadoop}
 Die Installation des Testsystems findet auf einer Linux \ac{VM} mit Ubuntu Version 14.04.2 \ac{LTS} statt, und wird nach der durch Freiknecht beschriebenen Anleitung durchgeführt. 
 
 \subsection{Einrichten eines dedizierten Hadoop-Users}
@@ -33,7 +33,7 @@ cat $HOME/.ssh/id_rsa.pub >> $HOME/.ssh/authorized_keys
 ssh localhost
 \end{lstlisting}
 
-\subsection{Installation von Hadoop}
+\subsection{Installation des Hadoop Frameworks}
 Nachdem der dedizierter User angelegt wurde, kann die Installation von Hadoop selbst durchgeführt werden. Hierzu wird zunächst die aktuelle Version von Hadoop in das Verzeichnis \textit{/usr/local} heruntergeladen, entpackt und umbenannt nach \textit{hadoop}. Zuletzt werden die benötigten Berechtigungen für den dedizierten User gesetzt (\autoref{lis:HerunterladenUndEntpacken}). Im Gegensatz zur Anleitung von Freiknecht wird die aktuelle Hadoop Version 2.7.1 statt 2.2.0 verwendet. \\
 
 \begin{lstlisting}[language=bash, caption={Herunterladen und entpacke von Hadoop}, label=lis:HerunterladenUndEntpacken]
