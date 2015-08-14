@@ -9,21 +9,37 @@ Der Erfolg (oder Misserfolg) eines Projektes wird i.d.R. an dem sog. Erfüllungs
 Im Folgenden soll der Erfüllungsgrad für die vorliegende Anwendung bestimmt werden. Dabei muss beachtet werden, dass dieser lediglich eine Aussage über die Anwendung, nicht jedoch über die geschriebene Arbeit selbst trifft. Der Erfolg (oder Misserfolg) der Arbeit selbst wird in \autoref{sec:Fazit} festgestellt.
 
 \subsection{Abgleich der funktionalen Anforderungen}
- Im Folgenden werden die in \autoref{subsec:Anforderungen} definierten, funktionalen Anforderungen mit der fertigen Anwendung abgeglichen. Die Bewertung wird in drei Stufen durchgeführt. Diese sind erfüllt (3), teilerfüllt (2) und unerfüllt (1).
- 
- \subsubsection{001 - Formatunabhängige Analyse (3)}
- Die Verarbeitung der Logfiles wird ohne eine Umformung der Einträge durchgeführt. Es sind alle textbasierten Dateiformate analysierbar. Komplexere Daten sind, unter Implementierung einer entsprechenden \textit{InputFormat} Klasse, ebenfalls einlesbar.
- 
- \subsubsection{010 - Dynamisches Analyseverfahren (3)}
- Die Parameter der Analyse sind über die Konfigurationsschnittstelle flexibel. Suchmuster und Mappingverfahren sind über die entsprechenden Properties frei konfigurierbar.
- 
- \subsubsection{020 - Konfigurierbarkeit (3)}
- Die Anwendung ist über drei Stufen frei konfigurierbar. Es werden Dateien des Typs \textit{.properties} verwendet. 
+Im Folgenden werden die in \autoref{subsec:Anforderungen} definierten, funktionalen Anforderungen mit der fertigen Anwendung abgeglichen. Die Bewertung wird in drei Stufen durchgeführt. Diese sind erfüllt (3), teilerfüllt (2) und unerfüllt (1).
+
+\subsubsection{A001 - Formatunabhängige Analyse (3)}
+Die Verarbeitung der Logfiles wird ohne eine Umformung der Einträge durchgeführt. Es sind alle textbasierten Dateiformate analysierbar. Komplexere Daten sind, unter Implementierung einer entsprechenden \textit{InputFormat} Klasse, ebenfalls einlesbar.
+
+\subsubsection{A010 - Dynamisches Analyseverfahren (3)}
+Die Parameter der Analyse sind über die Konfigurationsschnittstelle flexibel. Suchmuster und Mappingverfahren sind über die entsprechenden Properties frei konfigurierbar.
+
+\subsubsection{A020 - Konfigurierbarkeit (3)}
+Die Anwendung ist über drei Stufen frei konfigurierbar. Es werden Dateien des Typs \textit{.properties} verwendet. Die Standardeinstellungen sind für jeden Programmlauf individuell anpassbar.
+
+\subsubsection{A030 - Erweiterbarkeit (3)}
+Durch die modulare Architektur des Programms und der hohen Flexibilität durch die Konfigurationsschnittstelle, sind Erweiterungen schnell und Einfach implementierbar. Da die Angabe, der zu verwendenden Klassen, immer mit dem vollständigen Paket erfolgen muss, ist ein Einbinden und Verwenden von externen Bibliotheken ohne Einschränkungen möglich.
 
 \subsection{Abgleich der Produktleistungen}
+Nach den funktionalen Anforderungen muss ebenfalls ein Abgleich der Anwendung mit den in \autoref{subsec:Produktleistungen} definierten Produktleistungen erfolgen. Dabei werden die gleichen Stufen wie beim Abgleich der funktionalen Anforderungen verwendet.
 
+\subsubsection{PL001 - Ausführungszeit (2)}
+Die maximale Laufzeit der Anwendung wurde durch \autoref{equ:MaxAusführungszeit} in \autoref{subsubsec:PL001} definiert. Nach der Entwicklung wurde, durch die Durchführung von Anwendungstests, eine Minimallaufzeit von $\approx 8$ Sekunden ermittelt. Dies ist auf einen Konstanten Zeitfaktor zurückzuführen, welcher bedingt wird durch das Starten der Anwendung innerhalb des Hadoop Frameworks.
 
-<Welche Ziele wurden erfüllt? Welche nicht? Alles bezogen auf die Anwendung nicht auf die Bachelor Arbeit! Wo gab es Abweichungen? Wenn ja, warum gab es die?>
+Aus diesem Grund wird diese Produktleistung lediglich als teilerfüllt angesehen. Für Analysen mit einem Intervall von weniger als 40 Sekunden, wird die maximale Laufzeit überschritten.
+
+\subsubsection{PL010 - Dateigröße (3)}
+Die Vorgabe, Logfiles mit einer Größe von bis zu 500 \ac{MB}, ohne einen Split zu verarbeiten wird vollständig erfüllt. Erst ab einer Größe von ca. 1 \ac{GB} werden durch die Anwendung Splits erzeugt und parallel verarbeitet. 
+
+\subsection{Zusammenfassung}
+Abschließend wurde festgestellt, dass alle funktionalen Anforderungen vollständig erfüllt werden konnten. Bei den Produktleistungen gibt es lediglich eine teilerfüllung bei der maximalen Laufzeit der Anwendung.
+
+Die Entwickelte Anwendung genügt den definierten Zielen. Das Projekt kann somit als Erfolgreich gewertet werden. 
+
+%<Welche Ziele wurden erfüllt? Welche nicht? Alles bezogen auf die Anwendung nicht auf die Bachelor Arbeit! Wo gab es Abweichungen? Wenn ja, warum gab es die?>
 
 \section{Proof of Concept}
 <Dokumentation einer kompletten Durchführung der Anwendung von Anfang bis Ende. Aufzeigen der Ergebnisse. Funktioniert die Anwendung?>

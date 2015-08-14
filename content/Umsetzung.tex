@@ -1,21 +1,25 @@
 %!TEX root = ../dokumentation.tex
 
 \chapter{Umsetzung}\label{cha:Umsetzung}
-<Allgemeine Beschreibung des Inhalts des Kapitels.>
+Nach Abschluss der Planung und der Durchführung des Setups, sowohl der \ac{VM} als auch der \ac{IDE}, kann die Entwicklung der Applikation beginnen. Im Folgenden werden die einzelnen Phasen der Entwicklung genauer dokumentiert.
+
+Beginnend mit der Beschreibung der Infrastruktur sowie der Definition von Verarbeitungsprozessen. Anhand dieser orientiert sich die weitere Entwicklung der Anwendung. Abschließend wird ein Anwendungstest durchgeführt, bei welchem Logfiles unterschiedlicher Größe durch das Programm analysiert werden sollen. 
+
+%<Allgemeine Beschreibung des Inhalts des Kapitels.>
 
 \section{Infrastruktur \& Prozesse}
-Vor Beginn der Entwicklung werden im folgenden die Umgebung, in welcher die Applikation später ausgeführt werden soll, sowie der Anwendungsprozess, genauer definiert. 
+Vor Beginn der Entwicklung werden im Folgenden die Umgebung, in welcher die Applikation später ausgeführt werden soll, sowie der Anwendungsprozess, genauer definiert. 
 
-<Weitere Einführung in das Kapitel bzw. aktuelle überarbeiten>
+Dies soll bei der Implementierung des Programms helfen, da durch die einzelnen Definitionen bereits eine grundlegende Idee geschaffen wird. Diese wird durch die eigentliche Implementierung komplettiert.
 
 \subsection{Beschreibung der Infrastruktur}\label{subsec:Infrastruktur}
 Obwohl Java als eine Plattform unabhängige Programmiersprache gesehen wird, spielt die Infrastruktur, in welcher die Anwendung ausgeführt werden soll, bei der Entwicklung eine entscheidende Rolle.
 
-Durch die Infrastruktur wird indirekt die Art der Datenverarbeitung vorgegeben. Außerdem müssen potenzielle Einschränkungen, wie z.B. verfügbare Speicherplatz oder maximale Übertragungsrate (falls Daten über ein Netzwerk ausgetauscht werden müssen), identifiziert werden.
+Durch die Infrastruktur wird indirekt die Art der Datenverarbeitung vorgegeben. Außerdem müssen potenzielle Einschränkungen, wie z.B. verfügbarer Speicherplatz oder maximale Übertragungsrate (falls Daten über ein Netzwerk ausgetauscht werden müssen), identifiziert werden.
 
-Des weiteren können, erst durch die Betrachtung der Umgebung, die Systeme ermittelt werden, welche für die Ausführung der Anwendung eventuell angepasst werden müssen (Installation zusätzlicher Software, setzen von Berechtigungen, etc.).
+Des Weiteren können, erst durch die Betrachtung der Umgebung, die Systeme ermittelt werden, welche für die Ausführung der Anwendung eventuell angepasst werden müssen (Installation zusätzlicher Software, Setzen von Berechtigungen, etc.).
 
-Innerhalb der Infrastruktur werden drei verschiedene Serverarten unterschieden. Aktuell werden die Webseiten auf zwei, physisch getrennten Webservern betrieben. Durch sie wird die Kommunikation zwischen den Clients und den \textit{Appservern} gesteuert (Annehmen von Requests und senden des entsprechenden Response).
+Innerhalb der Infrastruktur werden drei verschiedene Serverarten unterschieden. Aktuell werden die Webseiten auf zwei physisch getrennten Webservern betrieben. Durch sie wird die Kommunikation zwischen den Clients und den \textit{Appservern} gesteuert (Annehmen von Requests und Senden des entsprechenden Response).
 
 Die Inhalte für die einzelnen Seiten werden durch die \textit{Appserver} bereitgestellt. Die Anzahl dieser ist nicht festgelegt, um auf schwankende Anforderungen schneller regieren zu können. Steigt die Last auf das System, können weitere \textit{Appserver} der Infrastruktur hinzugefügt werden.
 
@@ -33,7 +37,8 @@ Der \textit{Infrastrukturserver} muss über eine Hadoop Installation verfügen, 
 \subsection{Definition des Anwendungsprozesses}
 Um die Entwicklung der Anwendung zu vereinfachen wird zunächst der vollständige Anwendungsprozess grob beschrieben. Die Beschreibung wird aus den in \autoref{sec:AnforderungenUndPLs} definierten Anforderungen und Produktleistungen abgeleitet.
 
-<Einleitung noch nicht rund/komplett>
+%TODO: Einleitung schreiben/umschreiben
+%<Einleitung noch nicht rund/komplett>
 
 Nach dem Starten der Anwendung wird zunächst überprüft, ob beim Aufruf eine zusätzliche Konfiguration angegeben wurde. Ist dies der Fall, so wird die Konfiguration der Anwendung unter Verwendung dieser erzeugt. Anderenfalls wird die Standardkonfiguration verwendet.
 
@@ -41,7 +46,7 @@ Mit der erstellten Konfiguration wird mittels einer Initialisierungsfunktion ein
 
 Der \textit{Driver} wird anschließend durch den, vom Hadoop Framework bereitgestellten, \textit{ToolRunner} ausgeführt. Letztendlich wird die Anwendung mit dem vom \textit{ToolRunner} zurückgegebenen Statuscode beendet.
 
-\autoref{fig:PAP_Main_main} zeigt den beschriebenen Prozess als \ac{PAP}. Die einzelnen Unterprozesse werden in den folgenden Kapiteln genauer betrachtet.\footnote{Die \acp{PAP} der Unterprozesse sind im Anhang (S. \pageref{subsec:PAPMainMain} bis \pageref{subsec:PAPDriverRun}) zu finden.} \\
+\autoref{fig:PAP_Main_main} zeigt den beschriebenen Prozess als \ac{PAP}. Die einzelnen Unterprozesse werden in den folgenden Kapiteln genauer betrachtet.\footnote{Die \acp{PAP} der Unterprozesse sind im Anhang (S. \pageref{subsec:PAPMainMain} bis \pageref{subsec:PAPDriverRun}) zu finden.}
 
 \begin{figure}[h]
 	\centering
@@ -55,7 +60,7 @@ Der \textit{Driver} wird anschließend durch den, vom Hadoop Framework bereitges
 \section{Die Konfigurationsschnittstelle}
 Wie bereits bei der Beschreibung des Verarbeitungsprozesses gezeigt wurde, wird direkt nach dem Start der Anwendung eine Initialisierung vorgenommen. Hierbei soll die Umgebung so konfiguriert werden, dass die gewünschte Analyse durch die Anwendung ohne Probleme vorgenommen werden kann.
 
-Die Konfiguration der Anwendung wird durch Dateien vom Typ \textit{.properties} vorgenommen. Diese werden von Java vollständig unterstützt. Für die Interpretation der Konfigurationsdateien wird auf die Klasse \textit{java.util.Properties} zurückgegriffen. Die Funktionsweise der Properties wird im folgenden genauer betrachtet.
+Die Konfiguration der Anwendung wird durch Dateien vom Typ \textit{.properties} vorgenommen. Diese werden von Java vollständig unterstützt. Für die Interpretation der Konfigurationsdateien wird auf die Klasse \textit{java.util.Properties} zurückgegriffen. Die Funktionsweise der Properties wird im Folgenden genauer betrachtet.
 
 \subsection{Aufbau von Properties}
 Die Konfigurationswerte werden in Properties Dateien als Schlüssel-Wert-Paare gespeichert. Die Trennung kann hierbei durch einen Doppelpunkt oder Gleichheitszeichen erfolgen. Des weiteren ist es möglich, Platzhalter bei den Werten zu definieren, welche später durch Variablen ersetzt werden können. Außerdem ist es möglich, zum besseren Verständnis, die Datei um Kommentare zu erweitern. Jede Zeile, welche mit einem Hash oder Ausrufezeichen beginnt, wird als Kommentar gesehen, und von der Anwendung nicht interpretiert. \autoref{lis:AuszugDefaultProperties} zeigt einen Auszug aus der \textit{default.properties} Datei. \\
@@ -76,9 +81,9 @@ lfa.logger.handlers : {0}
 [...]
 \end{lstlisting}
 
-Grundsätzlich sind alle Konfigurationen vom Typ \textit{String}. Es ist, nativ, nicht möglich, direkt einen Wert in einem anderen Datentyp zu definieren. Falls eine Typenkonvertieren notwendig ist, muss diese manuell durchgeführt werden.
+Grundsätzlich sind alle Konfigurationen vom Typ \textit{String}. Es ist, nativ, nicht möglich, direkt einen Wert in einem anderen Datentyp zu definieren. Falls eine Typenkonvertierung notwendig ist, muss diese manuell durchgeführt werden.
 
-In Java stellt die Klasse \textit{Properties}, welche teil des \textit{java.util} Paketes ist, alle benötigten Methoden bereit. Um die Konfiguration der Anwendung zu vereinfachen, wurde die Klasse \textit{LFAConfiguration}\footnote{Der Name \textit{LFAConfiguration} wurde bewusst gewählt, da der Name \textit{Configuration} bereits von einer Klasse des Hadoop Frameworks verwendet wird.} im Paket \textit{com.hszuesz.logfileanalyzer} erzeugt. Diese leitet sich aus der Klasse \textit{Properties} ab, und stellt Erweiterungen zum einlesen mehrerer Konfigurationsdateien bereit. Dies ist notwendig, um eine stufenweise Konfiguration der Anwendung zu realisieren.
+In Java stellt die Klasse \textit{Properties}, welche Teil des \textit{java.util} Paketes ist, alle benötigten Methoden bereit. Um die Konfiguration der Anwendung zu vereinfachen, wurde die Klasse \textit{LFAConfiguration}\footnote{Der Name \textit{LFAConfiguration} wurde bewusst gewählt, da der Name \textit{Configuration} bereits von einer Klasse des Hadoop Frameworks verwendet wird.} im Paket \textit{com.hszuesz.logfileanalyzer} erzeugt. Diese leitet sich aus der Klasse \textit{Properties} ab, und stellt Erweiterungen zum Einlesen mehrerer Konfigurationsdateien bereit. Dies ist notwendig, um eine stufenweise Konfiguration der Anwendung zu realisieren.
 
 Da die Anwendung später innerhalb des Hadoop Frameworks ausgeführt wird, müssen die Konfigurationsdateien ein Teil der, durch Maven erzeugten, JAR-Datei sein. Dies wird durch eine Ergänzung in der \textit{pom.xml} innerhalb des \textit{build} Knotens sichergestellt (siehe \autoref{lis:POMErgänzung}). \\
 
@@ -96,9 +101,9 @@ Da die Anwendung später innerhalb des Hadoop Frameworks ausgeführt wird, müss
 \end{lstlisting}
 
 \subsection{Beschreibung der Konfigurationsstufen}
-Die Konfiguration der Anwendung wird in drei Stufen durchgeführt. Dies soll die Komplexität der Konfigurationsdateien reduzieren, indem die individuellen Anpassungen für jede Ausführung des Programms gekapselt, und immer gleiche Einstellungen ausgelagert werden.
+Die Konfiguration der Anwendung wird in drei Stufen durchgeführt. Dies soll die Komplexität der Konfigurationsdateien reduzieren, indem die individuellen Anpassungen für jede Ausführung des Programms gekapselt und immer gleiche Einstellungen ausgelagert sind.
 
-Die erste Stufe bilden die sog. Core-Properties, welche in der Datei \textit{core.properties} hinterlegt sind. Wie der Name bereits erkennen lässt, handelt es sich hierbei um Grundlegende Einstellungen, welche den Kern der Anwendung beeinflussen. Dazu gehört z.B. die Konfiguration der verschiedenen \textit{RUNMODES} oder Pfade zu weiteren wichtigen Dateien, wie den Default- oder Logger-Properties. Ein überschreiben dieser Einstellungen ist nicht möglich.
+Die erste Stufe bilden die sog. Core-Properties, welche in der Datei \textit{core.properties} hinterlegt sind. Wie der Name bereits erkennen lässt, handelt es sich hierbei um grundlegende Einstellungen, welche den Kern der Anwendung beeinflussen. Dazu gehört z.B. die Konfiguration der verschiedenen \textit{RUNMODES} oder Pfade zu weiteren wichtigen Dateien, wie den Default- oder Logger-Properties. Ein Überschreiben dieser Einstellungen ist nicht möglich.
 
 Die zweite Stufe bildet die Defaults. Hier werden alle Konfigurationen vorgenommen, welche für eine Standardausführung der Anwendung benötigt werden. Alle Einstellungen, welche in der \textit{defaults.properties} Datei hinterlegt sind, können durch den Anwender verändert werden.
 
@@ -109,7 +114,7 @@ Der Prozess für die Verarbeitung der einzelnen Stufen wird im \ac{PAP} der \tex
 %<Beschreibung wie Properties programmiert werden. Wie werden diese in der Anwendung umgesetzt? Welche Rolle spielen Properties für den generischen Teil der Anwendung?>
 
 \subsection{Logger Konfiguration}
-Ein weiteres Modul, welches durch die Konfigurationsschnittstelle beeinflusst wird, ist der Logger. Die Anwendung verwendet den standard Logger von Java, welcher sich über eine externe Properties Datei beliebig einstellen lässt.
+Ein weiteres Modul, welches durch die Konfigurationsschnittstelle beeinflusst wird, ist der Logger. Die Anwendung verwendet den Standard Logger von Java, welcher sich über eine externe Properties Datei beliebig einstellen lässt.
 
 Es gibt zwei Möglichkeiten die Arbeitsweise des Loggers zu beeinflussen. Die erste bildet der sog. \textit{Rumode}, welcher sich über die Property \textit{lfa.runmode} setzen lässt. Es wird unterschieden zwischen \textit{DEBUG}, \textit{TEST} und \textit{LIVE}. \autoref{tbl:LoggerSettingsRunmode} zeigt die Voreinstellungen des Loggers, für die unterschiedlichen Runmodes. Diese Einstellungen können durch eine zusätzliche Konfigurationsdatei individuell angepasst werden. 
 
@@ -153,7 +158,7 @@ Um dem generischen Anforderungen der Anwendung gerecht zu werden, ist ein Verst�
 \subsection{Datenfluss in MapReduce}
 Ein MapReduce Job beginnt mit der Übertragung der Daten an die Klasse \textit{InputFormat}. Diese teilt die Daten nach einer vorgegebenen Größe\footnote{Standardgröße für \textit{FileInputFormat} beträgt 64 \ac{MB}. Dieser Wert kann durch setzen der Einstellung \textit{mapred.min.split.size} verändert werden. Die Angabe erfolgt in Bytes.}. Jeder erzeugte \textit{Split} wird von einem \textit{Mapper} verarbeitet. Dabei werden die Daten mit dem \textit{RecordReader} aufbereitet, welcher die initialen Schlüssel-Wert-Paare ermittelt. Im Anschluss werden diese an die \textit{Map}-Funktion weitergegeben. Die einzelnen \textit{Splits} werden parallel verarbeitet.
 
-Erst wenn alle \textit{Mapper} die Verarbeitung abgeschlossen haben, folgt die Partitionierung und Sortierung der neuen Schlüssel-Wert-Paare. Die Sortierten Paare werden den \textit{Reducern} übergeben.
+Erst wenn alle \textit{Mapper} die Verarbeitung abgeschlossen haben, folgt die Partitionierung und Sortierung der neuen Schlüssel-Wert-Paare. Die sortierten Paare werden den \textit{Reducern} übergeben.
 
 Abschließend wird das Ergebnis der Analyse an eine Instanz der Klasse \textit{OutputFormat} übergeben, welche das Resultat aufbereitet und im \ac{HDFS} ablegt. \autoref{fig:DatenflussMapReduce} stellt den Datenfluss zur Verdeutlichung grafisch dar.
 
@@ -181,16 +186,13 @@ public static Driver init(LFAConfiguration objConfiguration) {
 	[...]
 	// Set class to use for InputFormat
 	objDriver.setClsInputFormatClass(Class.forName(objConfiguration.getProperty("lfa.driver.input.format")));
-	
 	// Set classes regarding the output
 	objDriver.setClsOutputFormatClass(Class.forName(objConfiguration.getProperty("lfa.driver.output.format")));
 	objDriver.setClsOutputKeyClass(Class.forName(objConfiguration.getProperty("lfa.driver.output.key")));
 	objDriver.setClsOutputValueClass(Class.forName(objConfiguration.getProperty("lfa.driver.output.value")));
-	
 	// Set classes for mapper and reducer
 	objDriver.setClsMapperClass(Class.forName(objConfiguration.getProperty("lfa.driver.mapper")));
 	objDriver.setClsReducerClass(Class.forName(objConfiguration.getProperty("lfa.driver.reducer")));
-	
 	// Set job name
 	objDriver.setStrJobName(objConfiguration.getProperty("lfa.driver.job.name"));
 	
@@ -208,7 +210,7 @@ public static Driver init(LFAConfiguration objConfiguration) {
 
 Die Klasse \textit{Driver} leitet sich von \textit{org.apache.hadoop.conf.Configured} ab und implementiert das Interface \textit{org.apache.hadoop.util.Tool}. Von der Klasse \textit{Configured} werden alle notwendigen Methoden und Attribute geerbt, welche für die Verwendung der, durch das Hadoop Framework gestellte und interpretierte, Konfiguration notwendig sind. Durch das Interface wird wiederum die Implementierung der Methode \textit{run()} vorgegeben.
 
-Diese Methode, welche später durch den \textit{ToolRunner} aufgerufen wird, Erstellt und Konfiguriert einen neuen Job, um diesen auszuführen und seinen Statuscode zurück zu geben. Hier werden alle, durch die \textit{Bootstrap:init()} Methode gesetzten Einstellungen, an den Job übergeben. Dieser Umweg ist notwendig, da ein Job mit einer Instanz von \textit{import org.apache.hadoop.conf.Configuration} erzeugt werden muss. Diese steht erst nach Ausführung durch den \textit{ToolRunner} zu Verfügung.
+Diese Methode, welche später durch den \textit{ToolRunner} aufgerufen wird, erstellt und konfiguriert einen neuen Job, um diesen auszuführen und seinen Statuscode zurück zu geben. Hier werden alle, durch die \textit{Bootstrap:init()} Methode gesetzten Einstellungen, an den Job übergeben. Dieser Umweg ist notwendig, da ein Job mit einer Instanz von \textit{import org.apache.hadoop.conf.Configuration} erzeugt werden muss. Diese steht erst nach Ausführung durch den \textit{ToolRunner} zu Verfügung.
 
 Dieser Konfigurationsklasse werden ebenfalls die zusätzlichen Einstellungen übergeben, sofern diese vorhanden sind. Das übergebene Array enthält die Pfade für den Input und Output des Jobs, welche der Klasse \textit{FileInputFormat} und \textit{FileOutputFormat} hinzugefügt werden. \autoref{lst:AuszugRunMethode} zeigt einen Auszug der \textit{run} Methode (siehe auch \ac{PAP}\footnote{\ac{PAP} für \textit{Driver.run()} im Anhang, S. \pageref{subsec:PAPDriverRun}}) \\
 
@@ -258,7 +260,7 @@ Generell ist es möglich, jegliche Form von Daten, mit MapReduce zu analysieren.
 
 Zudem teilt Hadoop besonders große Dateien (mehrere \ac{GB}). in sog. \textit{Splits}, um die Verarbeitung, wenn dies für ein gegebenes Dateiformat möglich ist, in kleineren Einheiten auf verschiedene Knoten im Cluster zu verteilen. \flqq Gerade wenn Dateien Metadaten enthalten (z.B. Farbpaletten in Bildern oder Informationen über Künstler in MP3s), dann ist die Datei sicherlich nicht in einem sequenziell lesbaren Format geschrieben.\frqq\footcite[S. 110]{Freiknecht.2014}
 
-Daher muss bei der Verarbeitung einer Datei immer bedacht werden, ob es möglich ist, diese sequenziell zu verarbeiten. Wenn dies nicht der Fall ist, muss eine Entsprechende Klasse implementiert werden, um Fehler bei der Analyse zu vermeiden.
+Daher muss bei der Verarbeitung einer Datei immer bedacht werden, ob es möglich ist, diese sequenziell zu verarbeiten. Wenn dies nicht der Fall ist, muss eine entsprechende Klasse implementiert werden, um Fehler bei der Analyse zu vermeiden.
 
 In einem Beispiel verwendet Jonas Freiknecht \acp{PDF} als Eingabedaten. Da es sich bei \acp{PDF} um Dateien in einem Binärformat handelt, muss eine entsprechende Klasse implementiert werden. \autoref{lst:PDFInputFormat} zeigt die von Freiknecht entwickelte Klasse \textit{PDFInputFormat}. Die in Zeile 15 definierte Methode \textit{isSplittable()}, welche den boolean Wert \textit{false} zurückgibt, verhindert, dass die Datei in kleinere Einheiten unterteilt wird. \\
 
@@ -305,7 +307,7 @@ public class PDFInputFormat extends FileInputFormat<Text, Text> {
 \subsection{Der RecordReader}\label{subsec:RecordReader}
 In \autoref{lst:PDFInputFormat} wurde, in Zeile 6, die Methode \textit{createRecordReader()} definiert. Diese liefert eine Instanz der Klasse \textit{RecordReader<Text, Text>}, welche die initialen Schlüssel-Wert-Paare aus den einzelnen \textit{Splits} erzeugt.
 
-Auch wenn dies nicht zwingend notwendig ist, sollte für jede individuelle \textit{InputFormat} Klasse ein entsprechender \textit{RecordReader} implementiert werden\footnote{Analog sollte für jede individuelle \textit{OutputFormat} Klasse ein entsprechender \textit{RecordWriter} implementiert werden.}. \autoref{lst:PDFLineRecordReader} zeigt einen Auszug aus dem zur Klasse \textit{PDFInputFormat} gehörenden \textit{RecordReader}, welcher ebenfalls von Freiknecht umgesetzt wurde. \\
+Auch wenn dies nicht zwingend notwendig ist, sollte für jede, individuelle \textit{InputFormat} Klasse ein entsprechender \textit{RecordReader} implementiert werden\footnote{Analog sollte für jede individuelle \textit{OutputFormat} Klasse ein entsprechender \textit{RecordWriter} implementiert werden.}. \autoref{lst:PDFLineRecordReader} zeigt einen Auszug aus dem zur Klasse \textit{PDFInputFormat} gehörenden \textit{RecordReader}, welcher ebenfalls von Freiknecht umgesetzt wurde. \\
 
 \begin{lstlisting}[language=Java,caption=Auszug aus der Klasse \textit{PDFLineRecordReader},title=\autoref*{lst:PDFLineRecordReader}: Auszug aus der Klasse \textit{PDFLineRecordReader}\protect\footnotemark,label=lst:PDFLineRecordReader]
 public class PDFLineRecordReader extends RecordReader<Text, Text> {
@@ -338,9 +340,10 @@ public class PDFLineRecordReader extends RecordReader<Text, Text> {
 \end{lstlisting}
 \footnotetext{Vgl. \cite[S. 115 ff.]{Freiknecht.2014}}
 
-Die Methode \textit{initialize} liest den gegebenen \textit{Split} ein und speichert die einzelnen Zeilen in einem Objekt vom Typ \textit{List<String>} und setzt einen Zähler für die aktuelle Zeile auf Null. Diese wird ein mal zu Beginn aufgerufen, nachdem eine Instanz, durch den Aufruf der Methode \textit{createRecordReader()} (siehe \autoref{lst:PDFInputFormat}), erzeugt wurde.
+\newpage
+Die Methode \textit{initialize} liest den gegebenen \textit{Split} ein und speichert die einzelnen Zeilen in einem Objekt vom Typ \textit{List<String>} und setzt einen Zähler für die aktuelle Zeile auf Null. Diese wird ein Mal zu Beginn aufgerufen, nachdem eine Instanz, durch den Aufruf der Methode \textit{createRecordReader()} (siehe \autoref{lst:PDFInputFormat}), erzeugt wurde.
 
-Der folgende Verarbeitungsprozess erfolgt in drei Schritten. Diese werden ausgeführt, solange das ende des \textit{Splits} nicht erreicht wurde (bis alle Zeilen verarbeitet wurden).
+Der folgende Verarbeitungsprozess erfolgt in drei Schritten. Diese werden ausgeführt, solange das Ende des \textit{Splits} nicht erreicht wurde (bis alle Zeilen verarbeitet wurden).
 
 \begin{enumerate}
 \item \textit{nextKeyValue()}: Interpretiert die nächste Zeile und setzt die entsprechenden Werte für die Variablen \textit{key} (Schlüsselvariable) und \textit{value} (Wertvariable).
@@ -348,9 +351,9 @@ Der folgende Verarbeitungsprozess erfolgt in drei Schritten. Diese werden ausgef
 \item \textit{getCurrentValue()}: Liefert die Instanz des aktuell gesetzten Wertes.
 \end{enumerate} 
 
-Wird das ende des \textit{Splits} erreicht, gibt die Methode \textit{nextKeyValue()} den Wert \textit{false} zurück. Eine weitere Möglichkeit, den Aktuellen Stand der Vararbeitung zu erfahren, bietet die Methode \textit{getProgress()}. Diese gibt einen Wert zwischen Null und Eins zurück (statt einer Prozentzahl zwischen Null und 100).\footcite[Vgl.][S. 117 f.]{Freiknecht.2014}
+Wird das Ende des \textit{Splits} erreicht, gibt die Methode \textit{nextKeyValue()} den Wert \textit{false} zurück. Eine weitere Möglichkeit, den aktuellen Stand der Vararbeitung zu erfahren, bietet die Methode \textit{getProgress()}. Diese gibt einen Wert zwischen Null und Eins zurück (statt einer Prozentzahl zwischen Null und 100).\footcite[Vgl.][S. 117 f.]{Freiknecht.2014}
 
-Die durch die Methode \textit{nextKeyValue()} erzeugten Schlüssel-Wert-Paare werden, zur weiteren Verarbeitung, an die im Job konfigurierten Instanz des \textit{Mappers} übertragen. 
+Die durch die Methode \textit{nextKeyValue()} erzeugten Schlüssel-Wert-Paare werden, zur weiteren Verarbeitung, an die im Job konfigurierte Instanz des \textit{Mappers} übertragen. 
 
 \subsection{Mapper und Reducer}
 Die durch den \textit{RecordReader} erzeugten Schlüssel-Wert-Paare werden an den Mapper weiter gegeben. Die Aufgabe des \textit{Mappers}, ist die Weiterverarbeitung und genauere Interpretation/Analyse der Paare.
@@ -359,10 +362,10 @@ Wichtig ist hierbei die Unterscheidung zwischen der Aufgabe des \textit{RecordRe
 
 Diese Trennung muss bei der Entwicklung unter allen Umständen beachtet werden. Der \textit{RecordReader} darf nicht die Aufgaben des \textit{Mapper} übernehmen.
 
-Die Interpretation der Daten kann auf unterschiedlichste weise erfolgen. Die Auswertung ist dabei immer an den zu verarbeitenden Datentyp angepasst. Analysiert werden können alle formen von Daten (Numerisch, Alphanumerisch oder binäre Daten).
+Die Interpretation der Daten kann auf unterschiedlichste Weise erfolgen. Die Auswertung ist dabei immer an den zu verarbeitenden Datentyp angepasst. Analysiert werden können alle Formen von Daten (Numerisch, Alphanumerisch oder binäre Daten).
 
 \subsubsection{Implementierung individueller Mapper}\label{subsubsec:IndividuelleMapper}
-Alle Mapper müssen sich von der Klasse \textit{org.apache.hadoop.mapreduce.Mapper} ableiten. Bei der Klassendefinition muss ebenfalls die Angabe der \glspl{Generic} erfolgen. Der Mapper wird in der Hadoop 2.7.1 \ac{API} der Apache Software Foundation Definiert mit \textit{Class Mapper<KEYIN,VALUEIN,KEYOUT,VALUEOUT>}. Die \glspl{Generic} geben für die Schlüssel-Wert-Paare, sowohl vom Input (\textit{KEYIN}, \textit{VALUEIN}) wie auch für den Output (\textit{KEYOUT}, \textit{VALUEOUT}), die Datentypen an.\footcite[Vgl.][]{ApacheHadoopApiDokuMapper.2015}
+Alle Mapper müssen sich von der Klasse \textit{org.apache.hadoop.mapreduce.Mapper} ableiten. Bei der Klassendefinition muss ebenfalls die Angabe der \glspl{Generic} erfolgen. Der Mapper wird in der Hadoop 2.7.1 \ac{API} der Apache Software Foundation definiert mit \textit{Class Mapper<KEYIN,VALUEIN,KEYOUT,VALUEOUT>}. Die \glspl{Generic} geben für die Schlüssel-Wert-Paare, sowohl vom Input (\textit{KEYIN}, \textit{VALUEIN}) wie auch für den Output (\textit{KEYOUT}, \textit{VALUEOUT}), die Datentypen an.\footcite[Vgl.][]{ApacheHadoopApiDokuMapper.2015}
 
 \autoref{lst:DefinitionPatternMapper} zeigt die Definition der für diese Anwendung programmierten Klasse \textit{PatternMapper}, mit den entsprechenden Generics innerhalb der spitzen Klammern. Diese erwartet als Input ein Schlüssel-Wert-Paar, bei welchem der Schlüssel ein beliebiges Objekt und der Wert ein Objekt des Typs \textit{org.apache.hadoop.io.Text} repräsentiert. Das Input-Paar wird durch die Methode \textit{map()} in ein Schlüssel-Wert-Paar mit Schlüsseltyp \textit{org.apache.hadoop.io.Text} und Werttyp \textit{org.apache.hadoop.io.IntWritable} umgewandelt. \\
 
@@ -370,7 +373,7 @@ Alle Mapper müssen sich von der Klasse \textit{org.apache.hadoop.mapreduce.Mapp
 public class PatternMapper extends Mapper<Object,Text,Text,IntWritable>
 \end{lstlisting}
 
-Der \textit{PatternMapper} Analysiert den übergebenen Wert anhand eines in der Konfiguration definierten regulären Ausdrucks. Dieser kann alle Daten analysieren, welche durch \aclp{DEA} ({\color{LinkColor}\acsp{DEA}}) oder \aclp{NEA} ({\color{LinkColor}\acsp{NEA}}) erkannt werden können, d.h., dass die Daten mit einer \textit{Grammatik} vom \textit{Typ 3} der Chomsky-Hierarchie interpretiert werden können. Diese wird von Ulrich Hedtstück wie folgt definiert:
+Der \textit{PatternMapper} analysiert den übergebenen Wert anhand eines in der Konfiguration definierten regulären Ausdrucks. Dieser kann alle Daten analysieren, welche durch \aclp{DEA} ({\color{LinkColor}\acsp{DEA}}) oder \aclp{NEA} ({\color{LinkColor}\acsp{NEA}}) erkannt werden können, d.h., dass die Daten mit einer \textit{Grammatik} vom \textit{Typ 3} der Chomsky-Hierarchie interpretiert werden können. Diese wird von Ulrich Hedtstück wie folgt definiert:
 
 Sei $G = (V_N, V_T, P, S)$ eine \textit{Grammatik}, mit der endlichen, nichtleeren Mengen $V = V_N \cup V_T$, wobei $V_N$ die Menge aller \textit{Variablen} (\textit{nichtterminalen Symbole}) und $V_T$ die Menge aller \textit{terminalen Symbole} (\textit{Terminale}) ist, einer endlichen Menge $P$ von \textit{Regeln} (\textit{Produktionen}) der Form $\alpha$ \textrightarrow $\beta$ (mit $\alpha \in (V_N \cup V_T)^+$ und $\beta \in (V_N \cup V_T)^*$) und dem \textit{Startsymbol} $S \in V_N$. 
 
@@ -404,16 +407,17 @@ public void map(Object objKey, Text objValue, Context objContext) throws IOExcep
 
 Wie in \autoref{fig:DatenflussMapReduce} gezeigt wird, werden die durch den \textit{Mapper} erzeugten Schlüssel-Wert-Paare, nach deren Partitionierung/Sortierung, an den \textit{Reducer} weitergegeben.
 
+\newpage
 \subsubsection{Implementierung individueller Reducer}
 Die Definition der \textit{Reducer} Klasse, in der Hadoop 2.7.1 \ac{API} ähnelt stark der des \textit{Mappers} mit \textit{Class Reducer<KEYIN,VALUEIN,KEYOUT,VALUEOUT>}.\footcite[Vgl.][]{ApacheHadoopApiDokuReducer.2015} Die Generics haben die gleiche Bedeutung wie die des \textit{Mappers}.
 
-\autoref{lst:DefinitionCountReducer} zeigt die Definition des für die Anwendung programmierten \textit{CountReducer}.  \\
+\autoref{lst:DefinitionSumReducer} zeigt die Definition des für die Anwendung programmierten \textit{SumReducer}.  \\
 
-\begin{lstlisting}[language=Java,caption=Deklaration \textit{CountReducer} mit Generics,label=lst:DefinitionCountReducer]
+\begin{lstlisting}[language=Java,caption=Deklaration \textit{SumReducer} mit Generics,label=lst:DefinitionSumReducer]
 public class SumReducer extends Reducer<Text, IntWritable, Text, IntWritable>
 \end{lstlisting}
 
-Der \textit{SumReducer} summiert alle im \textit{Mapper} gesetzten Werte für einen gegebenen Schlüssel auf und schreibt das Ergebnis wieder in den entsprechenden Context. \autoref{lst:MethodeReduce} zeigt die \textit{reduce()} Methode der Klasse \textit{SumReducer}. Im Gegensatz zur \textit{map()} Methode, bekommt der \textit{Reducer} ein Array von werten übergeben. \\
+Der \textit{SumReducer} summiert alle im \textit{Mapper} gesetzten Werte für einen gegebenen Schlüssel auf und schreibt das Ergebnis wieder in den entsprechenden Context. \autoref{lst:MethodeReduce} zeigt die \textit{reduce()} Methode der Klasse \textit{SumReducer}. Im Gegensatz zur \textit{map()} Methode, bekommt der \textit{Reducer} ein Array von Werten übergeben. \\
 
 \begin{lstlisting}[language=Java,caption=Methode \textit{reduce()} der Klasse \textit{SumReducer},label=lst:MethodeReduce]
 public void reduce(Text objKey, Iterable<IntWritable> arrValues, Context objContext) throws IOException, InterruptedException {
@@ -438,11 +442,11 @@ Die zuvor beschriebene Methode zur Analyse von textbasierten Daten stellt nur ei
 
 Um diesen Punkt weiter zu verdeutlichen, werden nachfolgend drei alternative Mappingverfahren beschrieben. Dabei werden die individuellen Vor- und Nachteile betrachtet, sowie konkrete Anwendungsfälle für deren Einsatzmöglichkeit gegeben. 
 
-\subsection{Reguläre Asudrücke oder \textit{String.contains()}}\label{subsec:Contains}
+\subsection{Reguläre Ausdrücke oder \textit{String.contains()}}\label{subsec:Contains}
 In \autoref{lst:MethodeMap} (in \autoref{subsubsec:IndividuelleMapper}) wurde die Implementierung eines Mappers gezeigt, welcher den Schlüssel, mittels eines regulären Ausdrucks, aus einem \textit{String} extrahiert. Mit der Methode \textit{String.contains()} existiert eine Alternative zu diesem Vorgehen. Diese Funktion sucht eine übergebene Zeichenfolge innerhalb des Strings, auf welchen die Methode ausgeführt wird. Um eine Entscheidungsgrundlage für den Einsatz der Methoden zu besitzen, muss die zugrundeliegende Arbeitsweise und Komplexität der Methoden betrachtet werden.
 
 \subsubsection{Komplexität von regulären Ausdrücken}
-Bei der Berechnung der Komplexität eines regulären Ausdrucks muss zunächst eine Unterscheidung zwischen jeden Ausdrücken, welche der Standarddefinition gerecht werden (jene Ausdrücke, welche durch {\color{LinkColor}\acsp{NEA}}/{\color{LinkColor}\acsp{DEA}} dargestellt werden können), und regulären Ausdrücken, wie sie in Java implementiert sind.
+Bei der Berechnung der Komplexität eines regulären Ausdrucks muss zunächst eine Unterscheidung vorgenommen werden, zwischen jenen Ausdrücken, welche der Standarddefinition gerecht werden (jene Ausdrücke, welche durch {\color{LinkColor}\acsp{NEA}}/{\color{LinkColor}\acsp{DEA}} dargestellt werden können), und regulären Ausdrücken, wie sie in Java implementiert sind.
 
 Alle regulären Ausdrücke, welche sich als \acs{DEA} darstellen lassen, besitzen eine Komplexität von $O(n)$, wobei $n$ für die Länge des zu überprüfenden Strings steht, da bei diesen Automaten jedes Zeichen einzeln abgearbeitet wird.\footnote{Jeder \acs{NEA} lässt sich in einen \acs{DEA} umwandeln.}
 
@@ -475,7 +479,7 @@ Die durchschnittliche Komplexität von \textit{contains()} beträgt somit $O(n)$
 \subsubsection{Schlussfolgerung}
 Die berechnete Komplexität der Methoden muss nun verglichen werden.\footnote{Vergleich wird unter der Annamhe durchgeführt, dass, für die gegebenen regulären Ausdrücke, kein Backtracking durchgeführt wird.} \autoref{tbl:VerglKomplexität} zeigt, dass lediglich der Worst-Case für die Methode \textit{matches()} eine geringere Komplexität besitzt. 
 
-\begin{table}
+\begin{table}[h]
 	\centering
 	\begin{tabular}{| l | l | l | l |}
 		\hline
@@ -494,11 +498,11 @@ Abschließend lässt sich sagen, dass, aufgrund der höheren Flexibilität, die 
 %<Unterscheidung zwischen regex und contains beschreiben. wann macht was sinn? gibt es überhaupt situationen wo contains mehr sinn macht (alles was contains kann kann regex ebenfalls)?>
 
 \subsection{Textanalyse mittels \textit{String.split()}}
-Eine weitere Möglichkeit zur Verarbeitung von Strings stellt die \textit{split()} Methode dar. Sie ist ebenfalls teil der Standard \textit{String} klasse von Java, und zerlegt einen \textit{String} in ein \textit{Array} (\textit{String[]}). Die Trennung wird anhand eines regulären Ausdrucks vorgenommen, welcher der Methode als Parameter übergeben wird.
+Eine weitere Möglichkeit zur Verarbeitung von Strings stellt die \textit{split()} Methode dar. Sie ist ebenfalls Teil der Standard \textit{String} Klasse von Java, und zerlegt einen \textit{String} in ein \textit{Array} (\textit{String[]}). Die Trennung wird anhand eines regulären Ausdrucks vorgenommen, welcher der Methode als Parameter übergeben wird.
 
 Ein möglicher Anwendungsfall für diese Methode wäre die Implementierung einer \textit{RecordReader} Klasse (siehe \autoref{subsec:RecordReader}), welche die Datensätze anhand eines regulären Ausdrucks unterteilt, als Alternative zur sonst üblichen, zeilenweisen Verarbeitung.
 
-Die Methode kann jedoch auch in der \textit{map()} Funktion eingesetzt werden. Ein Beispiel für den Einsatz der \textit{split()} Methode gibt Freiknecht bei der Implementierung seiner \textit{LogMapper} Klasse. In dieser wird der Übergebene Wert, welcher die komplette Ziele in einem Objekt vom Typ \textit{Text} enthält, mittels der \textit{split()} Methode in ein Array übertragen. Die Trennung erfolgt anhand eines Leerzeichens. \autoref{lst:LogMapper} zeigt einen Auszug der Implementierung von Freiknecht. \\
+Die Methode kann jedoch auch in der \textit{map()} Funktion eingesetzt werden. Ein Beispiel für den Einsatz der \textit{split()} Methode gibt Freiknecht bei der Implementierung seiner \textit{LogMapper} Klasse. In dieser wird der übergebene Wert, welcher die komplette Zeile in einem Objekt vom Typ \textit{Text} enthält, mittels der \textit{split()} Methode in ein Array übertragen. Die Trennung erfolgt anhand eines Leerzeichens. \autoref{lst:LogMapper} zeigt einen Auszug der Implementierung von Freiknecht. \\
 
 \begin{lstlisting}[language=Java,caption=Auszug der \textit{map()} Methode der Klasse \textit{LogMapper}, title=\autoref*{lst:LogMapper}: Auszug der \textit{map()} Methode der Klasse \textit{LogMapper}\protect\footnotemark,label=lst:LogMapper]
 [...]
@@ -521,7 +525,7 @@ for (int i = 0; i < words.length; i++) {
 
 Jedes Wort der Zeile wird, mittels der \textit{equals()} Methode überprüft. Falls es sich um einen Bezeichner für ein Loglevel handelt, wird dieser dem Kontext hinzugefügt. Der Bezeichner wird hierbei als Schlüssel verwendet. Der Wert ist eine simple Eins.\footcite[Vgl.][S. 121 f.]{Freiknecht.2014}
 
-Ein weiterer, denkbarer Anwendungsfall, wäre eine Kombination mit der in \autoref{subsec:Contains} vorgestellten Methode \textit{contains()}. Über eine entsprechende Property könnten mehrere, erlaubte Schlüsselwörter definiert werden. Ist da zu prüfende Wort teil dieser Liste, wird es in den Kontext übertragen. \autoref{lst:KombinationContainsSplit} zeigt eine mögliche Implementierung. \\
+Ein weiterer, denkbarer Anwendungsfall, wäre eine Kombination mit der in \autoref{subsec:Contains} vorgestellten Methode \textit{contains()}. Über eine entsprechende Property könnten mehrere, erlaubte Schlüsselwörter definiert werden. Ist da zu prüfende Wort Teil dieser Liste, wird es in den Kontext übertragen. \autoref{lst:KombinationContainsSplit} zeigt eine mögliche Implementierung. \\
 
 \begin{lstlisting}[language=Java,caption=Kombination von \textit{contains()} und \textit{split()},label=lst:KombinationContainsSplit]
 [...]
@@ -544,7 +548,7 @@ Bei der Anwendung des MapReduce Modells werden Entwickler in ihrer bisherigen De
 Eine mögliche Lösung um diese Einschränkungen zu kompensieren ist die Verkettung von mehreren MapReduce Jobs, d.h., dass die Ausgabedaten eines Jobs \textit{A} die Eingabedaten für die Jobs \textit{B} und \textit{C} sind. Die Datenanalyse wird in unterschiedlichen Stufen durchgeführt, wobei die Granularität i.d.R. von Stufe zu Stufe verfeinert wird.\footcite[Vgl.][S. 94]{Freiknecht.2014} Ein möglicher Anwendungsfall wäre das folgende Beispiel.
 
 \subsubsection{Beispiel für Verkettung von MapReduce Jobs}
-Für die Analyse steht initial ein Logfile im CSV-Format bereit. In diesen wird durch die Webserver die Antwortzeit für jede Anfrage an einen Appserver protokolliert. Um die Komplexität der Analyse zu steigern wird weiter angenommen, dass die Appserver in drei Gruppen unterteilt sind. Zudem werden der Infrastruktur Cacheserver hinzugefügt, welche nicht weiter Gruppiert sind. \autoref{tbl:BeispieldatenCSVLog} zeigt die Daten für dieses Beispiel (bei einem wirklichen Fall wäre die Datenmenge wesentlich höher).
+Für die Analyse steht initial ein Logfile im CSV-Format bereit. In diesen wird durch die Webserver die Antwortzeit für jede Anfrage an einen Appserver protokolliert. Um die Komplexität der Analyse zu steigern wird weiter angenommen, dass die Appserver in drei Gruppen unterteilt sind. Zudem werden der Infrastruktur Cacheserver hinzugefügt, welche nicht weiter gruppiert sind. \autoref{tbl:BeispieldatenCSVLog} zeigt die Daten für dieses Beispiel (bei einem wirklichen Fall wäre die Datenmenge wesentlich höher).
 
 \begin{table}[h]
 	\centering
@@ -568,7 +572,7 @@ Durch die Analyse soll nun die durchschnittliche Antwortzeit für einen bestimmt
 
 Der erste Job (Job \textit{A}) soll den Mittelwert für jeweils einen Server ermitteln. Die einzelnen Systeme werden anhand ihrer IP-Adresse ermittelt. Aus Ausgabe wird eine neue CSV-Datei erzeugt, welche die Durchschnittswerte der Server enthält. \autoref{tbl:BeispieldatenCSVLog_02} zeigt die Ausgabe für Job \textit{A}.
 
-Als nächstes sollen die MapReduce Jobs \textit{B}, für die Berechnung der durchschnittlichen Antwortzeit für eine Gruppe, und \textit{C}, für die Ermittlung der durchschnittlichen Antwortzeit einer Serverart, parallel ausgeführt werden. \autoref{tbl:BeispieldatenCSVLog_02} stellt hierfür die Eingabe dar. Nach der Verarbeitung sind alle erforderlichen Informationen verfügbar (siehe \autoref{tbl:BeispieldatenCSVLog_03} und \autoref{tbl:BeispieldatenCSVLog_04}).
+Als nächstes sollen die MapReduce Jobs \textit{B}, für die Berechnung der durchschnittlichen Antwortzeit für eine Gruppe, und \textit{C}, für die Ermittlung der durchschnittlichen Antwortzeit einer Serverart, parallel ausgeführt werden. \autoref{tbl:BeispieldatenCSVLog_02} stellt hierfür die Eingabe dar. Nach der Verarbeitung sind alle erforderlichen Informationen verfügbar (siehe \autoref{tbl:BeispieldatenCSVLog_03} und \autoref{tbl:BeispieldatenCSVLog_04}). \\
 
 \begin{table}[h]
 	\centering
@@ -614,6 +618,7 @@ Als nächstes sollen die MapReduce Jobs \textit{B}, für die Berechnung der durc
 	\label{tbl:BeispieldatenCSVLog_04}
 \end{table}
 
+\newpage
 Der Vorteil der Verkettung von Jobs liegt in der stufenweisen Reduktion der Datenmenge. Angenommen, es gäbe $50$ App- und Cachingserver. Bei einem Logfile mit $10^7$ Einträgen müsste, bei einer getrennten Verarbeitung, jeder Job $10^7$ Einträge analysieren (insgesamt $3 \times 10^7$ Einträge). Durch die Verkettung reduziert sich die Anzahl der zu analysierenden Einträge auf $10^7+ (2 \times 50)$, was einer Reduktion von $\approx 67\%$ entspricht.
 
 %<Beschreibung wie eine Verkettung von Jobs durchgeführt werden kann (Freiknecht literatur) und anwendungsfall hierzu beschreiben>
@@ -662,7 +667,7 @@ Der Vorteil der Verkettung von Jobs liegt in der stufenweisen Reduktion der Date
 %<Beschreiben der Bash Datei, durch welche der job (Jar) ausgeführt wird. Beschreiben der einzelnen Schritte und der configuration>
 
 \section{Anwendungstest \& Auswertung der Ergebnisse}
-Bevor die Anwendung in den produktiven Betrieb über gehen kann, wird sie unter exakt spezifizierten Bedingungen getestet. Die so durchgeführten Tests sollen Aufschluss über die Leisung der Anwendung geben.
+Bevor die Anwendung in den produktiven Betrieb übergehen kann, wird sie unter exakt spezifizierten Bedingungen getestet. Die so durchgeführten Tests sollen Aufschluss über die Leistung der Anwendung geben.
 
 \subsection{Durchführung der Tests}
 Für die Tests werden eine Reihe von Logfiles in unterschiedlichen Größen bereitgestellt. Diese enthalten $10$ bis $10^7$ Einträgen. Jedes Logfile wird 10 mal durch die Anwendung analysiert und die Laufzeit protokolliert. \autoref{lis:PropertiesAnwendungstest} zeigt die für die Tests verwendete Konfiguration. \\
@@ -685,11 +690,11 @@ lfa.mapper.pattern.key   : \\] ([A-Z]{4,5})
 lfa.mapper.nomatchaction : SKIP
 \end{lstlisting}
 
-Bei jeder Ausführung des Programms wird ein dafür Bash-Script ausgeführt, wodurch die Logfiles vor jede Analyse neu in das \ac{HDFS} übertragen wird. Dies ist notwendig, da bei jedem Upload die Datenblöcke neu geschrieben werden müssen, um ein verfälschtes Ergebnis durch Caching zu vermeiden.
+Bei jeder Ausführung des Programms erfolgt über ein eigens entwickeltes Bash-Script, welches die Logfiles vor jede Analyse neu in das \ac{HDFS} überträgt. Dies ist notwendig, da bei jedem Upload die Datenblöcke neu geschrieben werden müssen, um ein verfälschtes Ergebnis durch Caching zu vermeiden.
 
 \autoref{fig:Streudiagram} zeigt die einzelnen Testläufe als Datenpunkte, \autoref{tbl:DurchschnittlicheLaufzeiten} die arithmetischen Mittelwerte für die einzelnen Logfilegrößen.
 
-\begin{figure}
+\begin{figure}[h]
 	\centering
 	\includegraphics[width=1\textwidth]{ErgebnisAnwendungstest.png}
 	\caption{Streudiagram der Laufzeiten}
@@ -722,7 +727,7 @@ Die visuelle Darstellung lässt einen stärkeren Zusammenhang zwischen den beide
 Da die Tests auf der in \autoref{sec:InstallationHadoop} erwähnten \ac{VM} durchgeführt wurden, können die im folgenden getroffenen Aussagen vom späteren produktiven Betrieb abweichen. Aus diesem Grund sollten vor Inbetriebnahme der Anwendung weitere Tests auf einem System ähnlich dem Produktivsystem durchgeführt werden, um aussagekräftigere Daten zu erhalten.
 
 \subsection{Analyse der Laufzeiten}\label{subsec:Laufzeitanalyse}
-Die im Anwendungstest erhobenen Laufzeiten sollen nun weiter Analysiert werden. Hierfür soll zunächst das Ausmaß des \textit{linearen} Zusammenhangs zwischen der Anzahl der verarbeiteten Einträge und der Laufzeit ermittelt werden. Gerald und Susanne Teschl definieren die, nach dem englischen Mathematiker Karl Pearson (1857 - 1936) benannte, Kennzahl wie folgt:
+Die im Anwendungstest erhobenen Laufzeiten sollen nun weiter analysiert werden. Hierfür soll zunächst das Ausmaß des \textit{linearen} Zusammenhangs zwischen der Anzahl der verarbeiteten Einträge und der Laufzeit ermittelt werden. Gerald und Susanne Teschl definieren die, nach dem englischen Mathematiker Karl Pearson (1857 - 1936) benannte, Kennzahl wie folgt:
 
 \flqq Gegeben seien die Wertepaare $(x_1,y_1), \dots,(x_n,y_n)$, wobei nicht alle $x_i$ gleich sind bzw. nicht alle $y_i$ gleich sind. Die Zahl
 \begin{equation*}
@@ -762,6 +767,7 @@ Daraus ergeben sich, basierend auf den ermittelten Testdaten, die Werte $k \appr
 &&  && t_e = f(x) = 8,199 \times 10^{-6}x + 8,418 && \{x \in \mathbb{N}\} \label{equ:Laufzeit}
 \end{flalign}
 
+\newpage
 \autoref{fig:VerlaufRegressionsgerade} zeigt den Verlauf der Regressionsgeraden durch die Testdaten.
 
 \begin{figure}[h]
@@ -785,13 +791,21 @@ Runtime: 171
 Runtime: 171
 \end{lstlisting}
 
-Die Berechnete Laufzeit beträgt $t_e = 172,398$. Die durchschnittliche Laufzeit, bei 20 Mio. Einträgen, beträgt $171,6$. Die berechnete Laufzeit weicht lediglich $\approx 0,46\%$ vom Durchschnitt ab, was die Richtigkeit der Funktion hinreichend bestätigt.
+Die berechnete Laufzeit beträgt $t_e = 172,398$. Die durchschnittliche Laufzeit, bei 20 Mio. Einträgen, beträgt $171,6$. Die berechnete Laufzeit weicht lediglich $\approx 0,46\%$ vom Durchschnitt ab, was die Richtigkeit der Funktion hinreichend bestätigt.
+
+\subsubsection{Randbemerkung zur Berechnung der Laufzeit}
+Bei Tests mit weiteren Logfiles, welche eine abweichende Formatierung hatten, konnte festgestellt werden, dass die berechnete Laufzeit nur dann zutreffend ist, wenn sowohl Mapper als auch Reducer die gleiche Anzahl an Datensätzen verarbeiten muss.
+
+Angenommen die Logeinträge einer Datei erstrecken sich über mehr als eine Zeile. Um unnötige Informationen direkt zu filtern, wird die \textit{SKIP} Anweisung für den \textit{PatternMapper} aktiviert. Dies hat zur Folge, dass nur die Zeilen verarbeitet werden, welche das gesucht Muster enthalten. Wird nun ein Logfile mit $7 \times 10^6$ Zeilen verarbeitet, wo nur $3 \times 10^5$ Zeilen den regulären Ausdruck erfüllen können, hat dies zur Folge, dass der Reducer wesentlich weniger Datensätze zu verarbeiten hat. Die Laufzeit ist entsprechend geringer.
+
+Da es, ohne eine bereits durchgeführte Analyse, nicht möglich ist zu wissen, wie viele Zeilen dem Muster gerecht werden können, handelt es sich bei der Berechneten Laufzeit um die maximale, durchschnittliche Laufzeit.
 
 \subsection{Berechnung der maximalen Datenmenge}
 Die Logfiles, der in \autoref{subsec:Infrastruktur} beschriebenen Infrastruktur, befinden sich in einer stündlichen Rotation, d.h., dass jede Stunde die aktuellen Logfiles verschoben und neue angelegt werden. Für alle verschobenen Logfiles ist zusätzlich die Durchführung einer Analyse notwendig.
 
-Basierend auf der in \autoref{subsubsec:PL001} formulierten Produktleistung \textbf{PL001}, darf die Laufzeit der Analyse lediglich ein fünftel des Intervalls betragen. Aus dieser Definition ergibt sich, für die Analyse der stündlich rotierenden Logfiles, eine Laufzeit von $t_e \leq 720$.
+Basierend auf der in \autoref{subsubsec:PL001} formulierten Produktleistung \textbf{PL001}, darf die Laufzeit der Analyse lediglich ein Fünftel des Intervalls betragen. Aus dieser Definition ergibt sich, für die Analyse der stündlich rotierenden Logfiles, eine Laufzeit von $t_e \leq 720$.
 
+\newpage
 Durch die Anwendung von \autoref{equ:Laufzeit} lässt sich, durch eine Umformung nach $x$, die maximale Datenmenge, für die zu analysierenden Logfiles errechnen.
 
 \begin{flalign*}

@@ -1,11 +1,12 @@
 %!TEX root = ../dokumentation.tex
 
+%TODO: Einleitung überarbeiten
 \chapter{Setup}\label{cha:Setup}
-Vor Beginn der Implementierung steht das Setup der Entwicklungsumgebung. Um die Anwendung testen zu können, wird eine \ac{VM} mit dem \ac{OS} Ubuntu verwendet. Auf diesem muss Hadoop installiert und konfiguriert sein. Dabe ist zu beachten, dass es sich um eine Single Node Installation handelt. Es wird also kein Clustering vorgenommen.
+Vor Beginn der Implementierung steht das Setup der Entwicklungsumgebung. Um die Anwendung testen zu können, wird eine \ac{VM} mit dem \ac{OS} Ubuntu verwendet. Auf diesem muss Hadoop installiert und konfiguriert sein. Dabei ist zu beachten, dass es sich um eine Single Node Installation handelt. Es wird also kein Clustering vorgenommen.
 
 Auch in der \ac{IDE} muss ein Setup durchgeführt werden. Dabei handelt es sich, wie auch bei der Konfiguration der \ac{VM}, um Einstellungen, welche nicht im Zusammenhang mit der Umsetzung der Anwendung stehen. Die nachfolgenden Schritte werden so (oder ähnlich) für die Entwicklung aller Hadoop MapReduce Anwendungen vorgenommen.
 
-<Einleitung in das Kapitel noch nicht komplett rund...>
+%<Einleitung in das Kapitel noch nicht komplett rund...>
 
 \section{Installation \& Konfiguration}\label{sec:InstallationHadoop}
 Die Installation des Testsystems findet auf einer Linux \ac{VM} mit Ubuntu Version 14.04.2 \ac{LTS} statt, und wird nach der durch Freiknecht beschriebenen Anleitung durchgeführt. 
@@ -47,6 +48,7 @@ $ sudo chown -R hduser:hadoop hadoop
 
 Da Hadoop in einem extra Verzeichnis installiert wurde, müssen für den User noch eine Reihe von Umgebungsvariablen gesetzt werden. Diese werden der Datei \textit{.bashrc}, welche im Home-Verzeichnis des Users liegt, hinzugefügt. \\
 
+\newpage
 \begin{lstlisting}[language=bash, caption={Umgebungsvariablen für Hadoop}, label=lis:Umgebungsvariablen]
 # Java
 export JAVA_HOME=/usr/lib/jvm/java-7-openjdk-amd64
@@ -113,7 +115,7 @@ $ sbin/stop-dfs.sh
 %<Beschreibung der Installation. Was muss dabei beachtet werden? Was ist wichtig? Was wird ignoriert?>
 
 \section{Anlegen eines neuen Maven Projektes}
-Um eine Anwendung zu Programmieren, welche mit dem Hadoop Framework ausgeführt werden soll, müssen die entsprechenden Klassen von Hadoop im Build enthalten sein. Die benötigten Bibliotheken sind über \gls{Maven} beziehbar. \gls{NetBeans} bietet die Möglichkeit, ein neues Projekt direkt als \gls{Maven}-Projekt anzulegen (\autoref{fig:NewMavenProject01}).
+Um eine Anwendung zu programmieren, welche mit dem Hadoop Framework ausgeführt werden soll, müssen die entsprechenden Klassen von Hadoop im Build enthalten sein. Die benötigten Bibliotheken sind über \gls{Maven} beziehbar. \gls{NetBeans} bietet die Möglichkeit, ein neues Projekt direkt als \gls{Maven}-Projekt anzulegen (\autoref{fig:NewMavenProject01}).
 
 \begin{figure}[h]
 	\includegraphics[width=1\textwidth]{NewMavenProject_01.png}
@@ -156,7 +158,7 @@ Bis auf die Bibliothek \textit{hadoop-core} werden alle mit der Version 2.7.1 an
 </dependencyManagement>
 \end{lstlisting}
 
-Um zu verhindern, dass, bei jeder Ausführung der später erzeugten Jar-Datei, die Angabe der \textit{Main Class} erfolgen muss, kann diese über ein \gls{Plugin} konfiguriert werden. Hierzu ist eine zusätzliche Angabe in der \textit{pom.xml}, unter dem Knoten \textit{build/plugins} notwendig, welche in \autoref{lst:MainClassDefinition} zu sehen ist. \\
+Um zu verhindern, dass bei jeder Ausführung der später erzeugten Jar-Datei, die Angabe der \textit{Main Class} erfolgen muss, kann diese über ein \gls{Plugin} konfiguriert werden. Hierzu ist eine zusätzliche Angabe in der \textit{pom.xml}, unter dem Knoten \textit{build/plugins} notwendig, welche in \autoref{lst:MainClassDefinition} zu sehen ist. \\
 
 \pagebreak
 \begin{lstlisting}[caption=Definition der \textit{Main Class} des Projektes,label=lst:MainClassDefinition]

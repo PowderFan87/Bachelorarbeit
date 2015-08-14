@@ -1,29 +1,36 @@
 %!TEX root = ../dokumentation.tex
 
+%TODO: Einleitungen überarbeiten
 \chapter{Planung}\label{cha:Planung}
-Bevor mit die Entwicklung der Anwendung begonnen werden kann, müssen die Anforderungen, sowie Ziele und Umgebung festgelegt werden. Die exakte Planung ist notwendig, um eine qualitativ hochwertige, lösungsorientierte Anwendung zu entwickeln.
+Bevor die Entwicklung der Anwendung begonnen werden kann, müssen die Anforderungen, sowie Ziele und Umgebung festgelegt werden. Die exakte Planung ist notwendig, um eine qualitativ hochwertige, lösungsorientierte Anwendung zu entwickeln.
 
 %Beschreiben worum es im Kapitel geht. Warum wird eine Planung gemacht? Was ist das Ziel der Planung?
 
 \section{Anforderungen \& Produktleistungen}\label{sec:AnforderungenUndPLs}
-<Schreiben wozu die Ziele gut sein sollen. welche Form sollen sie haben. welchen Zweck dienen sie usw. Zusätzlich schreiben warum manche Aspekte wie die Art der Logs nicht definiert wurden oder manche ziele eher abstrakt sind>
+Um eine strukturierte Entwicklung eines Softwareprojektes sicherzustellen, müssen vor Beginn der Implementierung alle Anforderungen und Produktleistungen definiert werden, welche die fertige Applikation erfüllen muss.
+
+Dies soll sicherstellen, dass die fertige Anwendung alle notwendigen Funktionalitäten erfüllen kann. Ohne die Definition konkreter Ziele kann der Erfolg (oder Misserfolg) eines Projektes nicht sichergestellt werden, da keine Entscheidungsgrundlage vorhanden ist.
+
+Die Ziele für die im Zuge dieser Arbeit zu entwickelnden Anwendung werden in den folgenden Abschnitten genauer definiert.
+
+%<Schreiben wozu die Ziele gut sein sollen. welche Form sollen sie haben. welchen Zweck dienen sie usw. Zusätzlich schreiben warum manche Aspekte wie die Art der Logs nicht definiert wurden oder manche ziele eher abstrakt sind>
 
 \subsection{Anforderungen}\label{subsec:Anforderungen}
-Im folgenden werden die Anforderungen beschrieben, welche an die fertige Anwendung gestellt werden. Bei der Definition von Anforderungen oder Zielen ist es hilfreich, sich gedanklich an das Ende des Projektes zu versetzen, und diese Situation dan zu beschreiben. Außerdem sollten alle Anforderungen "`smart"' sein, d.h., sie sind \textbf{s}peziefisch, \textbf{m}essbar, \textbf{a}ttraktiv, \textbf{r}ealistisch und \textbf{t}erminiert.\footcite[Vgl.][S. 48]{Bauer.2014}
+Im Folgenden werden die Anforderungen beschrieben, welche an die fertige Anwendung gestellt werden. Bei der Definition von Anforderungen oder Zielen ist es hilfreich, sich gedanklich an das Ende des Projektes zu versetzen, und diese Situation dann zu beschreiben. Außerdem sollten alle Anforderungen "`smart"' sein, d.h., sie sind \textbf{s}peziefisch, \textbf{m}essbar, \textbf{a}ttraktiv, \textbf{r}ealistisch und \textbf{t}erminiert.\footcite[Vgl.][S. 48]{Bauer.2014}
 
-Bei den folgenden, rein funktionale Anforderungen, gibt es keine Unterscheidung bei der Priorität. Alle müssen durch der fertigen Anwendung abgedeckt sein.
+Bei den folgenden, rein funktionalen, Anforderungen gibt es keine Unterscheidung bei der Priorität. Alle müssen durch der fertigen Anwendung abgedeckt sein.
 
 \subsubsection{A001 - Formatunabhängige Analyse}\label{subsubsec:A001}
 Die Analyse eines Logfiles muss unabhängig von dessen Format möglich sein. Alle textbasierten Formate (z.B. .txt, .log, .csv, usw.) müssen durch die Anwendung interpretierbar sein. Eine Umwandlung der Datei soll nicht stattfinden. Es wird davon ausgegangen, dass alle Logfiles UTF-8 codiert sind.
 
 \subsubsection{A010 - Dynamisches Analyseverfahren}\label{subsubsec:A010}
-Die Analyse eines Logfiles muss dynamisch sein, d.h., dass die Parameter der Analyse flexibel eingestellt werden können. Dies bezieht sich z.B. auf die Suchmuster, welche durch Reguläre Ausdrücke oder Keywords eingestellt werden können, oder die Anwendung unterschiedlicher MapReduce Klassen.
+Die Analyse eines Logfiles muss dynamisch sein, d.h., dass die Parameter der Analyse flexibel eingestellt werden können. Dies bezieht sich z.B. auf die Suchmuster, welche durch reguläre Ausdrücke oder Keywords eingestellt werden können, oder die Anwendung unterschiedlicher MapReduce Klassen.
 
 \subsubsection{A020 - Konfigurierbarkeit}\label{subsubsec:A020}
-Die Anwendung muss für jede  Ausführung individuell konfigurierbar sein. Die Konfiguration findet über eine Datei des Typs \textit{.properies} statt, welche zu Beginn der Ausführung durch die Anwendung geladen und interpretiert werden muss. Die Konfigurationswerte folgen der, für dieses Dateiformat üblichen, Formatierung. Jeder Eintrag besteht aus einem eindeutigen Schlüssel sowie einem dazu gehörenden Wert. Die Trennung erfolgt durch einen Doppelpunkt.
+Die Anwendung muss für jede  Ausführung individuell konfigurierbar sein. Die Konfiguration findet über eine Datei des Typs \textit{.properies} statt, welche zu Beginn der Ausführung durch die Anwendung geladen und interpretiert werden muss. Die Konfigurationswerte folgen der für dieses Dateiformat üblichen Formatierung. Jeder Eintrag besteht aus einem eindeutigen Schlüssel sowie einem dazu gehörenden Wert. Die Trennung erfolgt durch einen Doppelpunkt.
 
 \subsubsection{A030 - Erweiterbarkeit}\label{subsubsec:A030}
-Die Anwendung muss eine modularen Aufbau folgen, um eine einfache Erweiterbarkeit durch eventuell folgende Features zu gewährleisten. Die einzelnen Komponenten müssen, soweit dies programmatisch möglich ist, eine lose Kopplung besitzen. Dies soll sicherstelle, dass neue Komponenten hinzugefügt oder bestehende ausgetauscht werden können, ohne die Integrität der Anwendung zu gefärden.
+Die Anwendung muss einem modularen Aufbau folgen, um eine einfache Erweiterbarkeit durch eventuell folgende Features zu gewährleisten. Die einzelnen Komponenten müssen eine lose Kopplung zueinander besitzen. Dies soll sicherstellen, dass neue Komponenten hinzugefügt oder bestehende ausgetauscht werden können, ohne die Integrität der Anwendung zu gefärden.
 
 %\begin{table}[h]
 %	\centering
@@ -39,11 +46,12 @@ Die Anwendung muss eine modularen Aufbau folgen, um eine einfache Erweiterbarkei
 %	\label{my-label}
 %\end{table}
 
-\subsection{Produktleistungen}
+\newpage
+\subsection{Produktleistungen}\label{subsec:Produktleistungen}
 Zusätzlich zu den beschriebenen, funktionalen Anforderungen, werden weitere, nicht funktionale Leistungen definiert, welche von der fertigen Anwendung erfüllt werden müssen. Hierbei handelt es sich um Richtwerte, welche sich auf die Performance der Anwendung beziehen.
 
 \subsubsection{PL001 - Ausführungszeit}\label{subsubsec:PL001}
-Die Ausführungszeit der Anwendung muss unter dem im folgenden definierten Richtwert liegen. Ist die Einhaltung von diesem nicht möglich, muss eine alternative für den Verarbeitungsprozess implementiert werden, welche die Ergebnisse der Analyse in einer NoSQL-Datenbank speichert, welche dann durch ein Checkscript abgefragt werden kann.
+Die Ausführungszeit der Anwendung muss unter dem im folgenden definierten Richtwert liegen. Ist die Einhaltung von diesem nicht möglich, muss eine Alternative für den Verarbeitungsprozess implementiert werden, welche die Ergebnisse der Analyse in einer NoSQL-Datenbank speichert, welche dann durch ein Checkscript abgefragt werden kann.
 
 Es ist nicht möglich einen festen Richtwert für die Ausführungszeit zu definieren, da dieser in Abhängigkeit zum Ausführungsintervall steht (z.B. wäre eine max. Ausführungszeit von einer Minute bei einem Intervall von einer Minute nicht ausreichend). Aus diesem Grund wird die maximale Ausführungszeit $t_e$, in Abhängigkeit zum Intervall $t_i$, wie folgt definiert:
 
@@ -54,6 +62,7 @@ Es ist nicht möglich einen festen Richtwert für die Ausführungszeit zu defini
 \subsubsection{PL010 - Dateigröße}\label{subsubsec:PL010}
 Die Anwendung muss in der Lage sein, Logfiles bis zu einer Größe von 500 \ac{MB} verarbeiten zu können. Größere Dateien dürfen, wenn dies noch nicht durch \ac{HDFS} selbst vorgenommen wurde, in mehrere Dateien, für die weitere Verarbeitung, zerlegt werden.
 
+\newpage
 \section{Definition der Umgebung}
 Die Programmierung der Anwendung erfolgt in der Programmiersprache Java, unter Verwendung des Hadoop Frameworks für MapReduce in der Version 2.7.1. Die Entwicklung wird mit der \ac{IDE} \gls{NetBeans}, Version 8.0.2, durchgeführt. Für die Versionsverwaltung wird \gls{Git} eingesetzt. In der \ac{IDE} wird ein \gls{Maven}-Projekt erzeugt, um alle benötigten Bibliotheken automatisch beziehen zu können.
 
@@ -62,7 +71,7 @@ Die Programmierung der Anwendung erfolgt in der Programmiersprache Java, unter V
 
 Sollte sich im Verlauf der Entwicklung abzeichnen, dass der Richtwert, welcher in \autoref{subsubsec:PL001} durch \autoref{equ:MaxAusführungszeit} definiert wurde, nicht eingehalten werden kann, so muss eine NoSQL-Datenbank für die Speicherung der Ergebnisse verwendet werden. In diesem Fall muss das entsprechende Datenbanksystem auf dem Server vorhanden sein.
 
-Die Anwendung wird durch das Hadoop Framework Version 2.7.1 ausgeführt. Es muss mindestens eine \textit{Single Node} Installation vorhanden sein. Es müssen die entsprechenden Rechte auf dem Dateisystem \ac{HDFS} gesetzt sein, um Dateien lesen und schreiben zu können.
+Die Anwendung wird durch das Hadoop Framework Version 2.7.1 ausgeführt. Es muss mindestens eine \textit{Single Node} Installation vorhanden sein. Zusätzlich müssen die entsprechenden Rechte auf dem Dateisystem \ac{HDFS} gesetzt sein, um Dateien lesen und schreiben zu können.
 
 %Welche Sprache wird verwendet? Auf welcher Plattform wird entwickelt? Welche Technologien werden eingesetzt.
 
