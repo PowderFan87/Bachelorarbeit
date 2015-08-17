@@ -12,8 +12,8 @@
 		\item Bootstrap:init
 		\item Driver:run
 	\end{enumerate}
-	\item List of CD Contents
-	\item CD 
+	\item DVD Inhalt
+	\item DVD 
 \end{enumerate}
 }
 \pagebreak
@@ -44,25 +44,34 @@
 \includegraphics[scale=1]{PAP_Driver_run.png}
 \pagebreak
 
-\section*{B. List of CD Contents}
+\section*{C. DVD Inhalt}
 \begin{tabbing}
-	mm \= mm \= mmmmmmmmmmmmmmmm \= \kill
-	$\vdash$ \textbf{Sourcecode/} \\ 
-	| \> $\vdash$ \textbf{conf/} \> \> \\
-	| \> $\vdash$ \textbf{src/} \\
+	mm \= mm \= mm \= mmmmmmmmmmmmmmmmmm \= \kill
+	$\vdash$ \textbf{Anwendung/} \\ 
+	| \> -- pom-xml \> \> \> $\Rightarrow$ \textit{Maven POM Datei} \\
+	| \> $\vdash$ \textbf{conf/} \> \> \> $\Rightarrow$ \textit{*.properties Dateien für Konfiguration} \\
+	| \> $\vdash$ \textbf{src/} \> \> \> $\Rightarrow$ \textit{Quellcode Dateien} \\
 	| \> $\vdash$ \textbf{target/} \\
+	| \> | \> -- Logfileanalyzer-1.0-SNAPSHOT.jar \> \> $\Rightarrow$ \textit{Ausführtbare JAR-Datei} \\
+	| \> | \> $\vdash$ \textbf{site/apidocs/} \> \> $\Rightarrow$ \textit{JavaDoc für Browser} \\
 	| \\
-	$\vdash$ \textbf{Präsentation/} \\
-	| \>  -- praesentation.pptx \\
-	| \>  -- praesentation.pdf \\
+	$\vdash$ \textbf{Testdateien/} \> \> \> \> $\Rightarrow$ \textit{Dateien für Anwendungstests} \\
+	$\vdash$ \textbf{Praesentationen/} \\
+	| \> -- Abschlusspraesentation.pptx \> \> \> $\Rightarrow$ \textit{Präsentation vom 21. August 2015} \\
+	| \> -- Abschlusspraesentation.pdf \\
+	| \> -- Kickoffpraesentation.pptx \> \> \> $\Rightarrow$ \textit{Präsentation vom 03. Juni 2015} \\
+	| \> -- Kickoffpraesentation.pdf \\
 	| \\
-	$\vdash$ \textbf{Testfiles/} \\ %\llcorner
-	| \>  -- Aufgabenstellung.pdf\\
-	| \>  -- Studienarbeit2.pdf\\
+	$\vdash$ \textbf{Sonstiges/} \\
+	| \> -- LineareRegression.xlsx \> \> \> $\Rightarrow$ \textit{Berechnung der linearen Regression} \\
 	| \\
-	$\vdash$ \textbf{Latex-Files/} \> \> \> $\Rightarrow$ \textit{editable \LaTeX~files and other included files for this report}\\ %\llcorner
-	\>  $\vdash$  \textbf{ads/}   	\> \> $\Rightarrow$ \textit{Front- and Backmatter}\\
-	\>  $\vdash$  \textbf{content/}  \> \> $\Rightarrow$ \textit{Main part}\\
-	\>  $\vdash$  \textbf{images/}   \> \> $\Rightarrow$ \textit{All used images}\\
-	\>  $\vdash$  \textbf{lang/}  \> \> $\Rightarrow$ \textit{Language files for \LaTeX~template}\\ %\llcorner
+	$\vdash$ \textbf{Latex-Files/} \> \> \> \> $\Rightarrow$ \textit{Editierbare \LaTeX~Dateien der Arbeit}\\ %\llcorner
+	\> -- bibliographie.bib \> \> \> $\Rightarrow$ \textit{Literaturverzeichnis} \\
+	\> -- dokumentation.tex \> \> \> $\Rightarrow$ \textit{Hauptdokument} \\
+	\> -- einstellungen.tex \> \> \> $\Rightarrow$ \textit{Einstellungen} \\
+	\> $\vdash$  \textbf{ads/}   	\> \> \> $\Rightarrow$ \textit{Header, Glosar, Abkürzungen, etc.}\\
+	\> $\vdash$  \textbf{content/}  \> \> \> $\Rightarrow$ \textit{Kapitel}\\
+	\> $\vdash$  \textbf{images/}   \> \> \> $\Rightarrow$ \textit{Bilder}\\
+	\> $\vdash$  \textbf{lang/}  \> \> \> $\Rightarrow$ \textit{Sprachdateien für \LaTeX~Template}\\
+	\> 
 \end{tabbing}

@@ -1,9 +1,27 @@
 %!TEX root = ../dokumentation.tex
 
 \chapter{Einleitung}\label{cha:Einleitung}
+Laut einer Studie des Bitkom e.V. aus dem Jahr 2014 wächst die Datenmenge von Unternehmen seit Jahren exponentiell. Dies ist u.a. auf die verstärkte mobile Internetnutzung zurückzuführen. Für die Analyse dieser Datenmengen werden sog. Big Data Anwendungen benötigt. Die Verarbeitung großer Datenmengen unterscheidet sich von der herkömlichen Datenverarbeitung durch drei Faktoren:
+
+\begin{itemize}
+	\item \textbf{Menge:} Keine Begrenzung der Datenmenge für die Verarbeitung
+	\item \textbf{Vielfalt:} Daten aus verschiedenen Quellen in unterschiedlichen Formaten
+	\item \textbf{Geschwindigkeit:} Die Datenverarbeitung erfolgt oft nahezu in Echtzeit
+\end{itemize}
+
+Häufig ist das Ziel die Erkennung neuer Zusammenhänge und Muster. Die gewonnenen Erkentnisse werden anschließend für Vorhersagen oder Entscheidungsvorlagen verwedet. Die Einsatzgebiete von Big Data Anwendungen umfassen alle Bereiche, in denen größere Datenmengen vorhanden sind.\footcite[Vgl.][S. 3]{Bitkom.2014}
+
+Von diesem Zuwachs an Informationen sind auch Logfiles von Webservern betroffen. Begünstigt durch die wachsenden Geschwindigkeiten des mobilen Internets, werden Webseiten sehr viel häufiger, von einer noch größeren Vielfalt von Geräten aufgerufen. Dabei enthalten Logfiles viele aussagekräftige Informationen, welche sowohl in Echtzeit als auch über längere Zeiträume ausgewertet werden müssen.
+
+Nach einer im Zuge der Studie durchgeführten Umfrage, analysieren 31\% der befragten Unternehmen Logdaten IT-gestützt für Entscheidungsprozesse.\footcite[Vgl.][S. 8]{Bitkom.2014}
+
+
+
 <Kurze Einleitung. Vorstellung der Firma und Abteilung. Allgemeine Heranführung zum Thema und der Brance (IT Umfeld ist groß. Hier sollte klar werden, dass im weiteren Verlauf der Arbeit das Web Umfeld speziell mit Java als Grundlage dient).>
 
 \section{Motivation}\label{sec:Motivation}
+
+
 <Beschreibung warum dieses Thema gewählt wurde für die Arbeit. Eventuell beschreiben was ich mir selbst erhoffe von der Arbeit und welchen Nährwert ich mir wünsche.>
 
 \section{Problemstellung}\label{sec:Problemstellung}
@@ -12,9 +30,9 @@
 \section{Zielsetzung}\label{sec:Zielsetzung}
 Ziel dieser Bachelorarbeit ist die Umsetzung und Dokumentation einer Java-Anwendung, welche, durch die Anwendung des Hadoop Frameworks und des Mapreduce Algorithmus, eine Analyse von Logfiles durchführt. Das Programm muss konfigurierbar sein, um unterschiedliche Formate verarbeiten zu können. Die  Resultate müssen jedoch immer im gleichen format gespeichert sein, damit diese über eine Schnittstelle standartisiert abgefragt werden können.
 
-
-
 \section{Abgrenzung}\label{sec:Abgrenzung}
-Nicht Teil der Arbeit ist die Installation und Konfiguration des Ressourcenmanagement und der automatischen Skallierung von Hadoop. Es wird nur eine einfache Single Node Installation vorgenommen und beschrieben. Ebenfalls nicht teil der Arbeit ist die Impelmentierung eines Checkskriptes für ein Monitoringtool. Es wird lediglich eine Schnittstelle zur Abfrage der Daten bereitgestellt.
+Nicht Teil der Arbeit ist die Installation und Konfiguration des Ressourcenmanagement und der automatischen Skallierung von Hadoop. Es wird nur eine einfache Single Node Installation vorgenommen und beschrieben. Ebenfalls nicht teil der Arbeit ist die Impelmentierung eines Checkskriptes für ein Monitoringtool.
+
+Logfiles können Personenbezogene Daten enthalten, welche nach §3 Abs. 1 \ac{BDSG} geschützt werden müssen\footcite[§3 Abs. 1 BDSG,][]{BDSG3.1990} (Potenziell Personenbezogen, da nicht ersichtlich ist, ob eine \ac{IP}-Adresse statisch oder dynamisch ist). Die Speicherung von z.B. der \ac{IP}-Adresse ist daher nur gestattet, wenn der Anwender zustimmt, oder ein Grund für die Speicherung vorliegt, welcher §15 \ac{TMG} genügt.\footcite[§15 TMG,][]{TMG15.2007}  Da es sich bei dem im Zuge dieser Arbeit entwickelten Programm um eine prototypische Anwendung handelt, sind die Datenschutzrichtlinien nicht Teil der Arbeit und werden daher nicht betrachtet.
 
 %Was soll NICHT Teil der Arbeit sein? Dabei unbedingt beschreiben das die serverseitige Konfiguration von Hadoop und YARN und das Aufsetzung von Clustern ignoriert wird. Dadurch soll klar werden, dass der Fokus auf der Anwendung des Algorithmus auf einen konkreten Fall liegt.

@@ -162,6 +162,7 @@ Erst wenn alle \textit{Mapper} die Verarbeitung abgeschlossen haben, folgt die P
 
 Abschließend wird das Ergebnis der Analyse an eine Instanz der Klasse \textit{OutputFormat} übergeben, welche das Resultat aufbereitet und im \ac{HDFS} ablegt. \autoref{fig:DatenflussMapReduce} stellt den Datenfluss zur Verdeutlichung grafisch dar.
 
+\newpage
 \begin{figure}[h]
 	\centering
 	\includegraphics[width=1\textwidth]{MapReduceDatenfluss.png}
@@ -184,17 +185,16 @@ Zuletzt wird eine Iteration über alle Schlüssel der Konfiguration durchgeführ
 \begin{lstlisting}[language=Java,caption=Auszug der Methode \textit{Bootstrap:init()},label=lst:BootstrapInit]
 public static Driver init(LFAConfiguration objConfiguration) {
 	[...]
+	
 	// Set class to use for InputFormat
 	objDriver.setClsInputFormatClass(Class.forName(objConfiguration.getProperty("lfa.driver.input.format")));
-	// Set classes regarding the output
-	objDriver.setClsOutputFormatClass(Class.forName(objConfiguration.getProperty("lfa.driver.output.format")));
-	objDriver.setClsOutputKeyClass(Class.forName(objConfiguration.getProperty("lfa.driver.output.key")));
-	objDriver.setClsOutputValueClass(Class.forName(objConfiguration.getProperty("lfa.driver.output.value")));
+	
+	[...]
+	
 	// Set classes for mapper and reducer
 	objDriver.setClsMapperClass(Class.forName(objConfiguration.getProperty("lfa.driver.mapper")));
-	objDriver.setClsReducerClass(Class.forName(objConfiguration.getProperty("lfa.driver.reducer")));
-	// Set job name
-	objDriver.setStrJobName(objConfiguration.getProperty("lfa.driver.job.name"));
+	
+	[...]
 	
 	Set<String> setKeys = objConfiguration.stringPropertyNames();
 	
@@ -204,6 +204,7 @@ public static Driver init(LFAConfiguration objConfiguration) {
 			objDriver.setAdditionalConfiguration(strKey, objConfiguration.getProperty(strKey));
 		}
 	}
+	
 	[...]
 }
 \end{lstlisting}
