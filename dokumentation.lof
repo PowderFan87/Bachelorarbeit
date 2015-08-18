@@ -10,33 +10,33 @@
 \defcounter {refsection}{0}\relax 
 \addvspace {10\p@ }
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {2.1}{\ignorespaces Die drei Phasen eines Map-Reduce-Prozesses\FN@sf@gobble@optonly }}{6}{figure.2.1}
+\contentsline {figure}{\numberline {2.1}{\ignorespaces Die drei Phasen eines Map-Reduce-Prozesses\FN@sf@gobble@optonly }}{7}{figure.2.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {2.2}{\ignorespaces Master-Worker in MapReduce\FN@sf@gobble@optonly }}{7}{figure.2.2}
+\contentsline {figure}{\numberline {2.2}{\ignorespaces Master-Worker in MapReduce\FN@sf@gobble@optonly }}{8}{figure.2.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {2.3}{\ignorespaces HDFS Architektur-Schema\FN@sf@gobble@optonly }}{13}{figure.2.3}
-\defcounter {refsection}{0}\relax 
-\addvspace {10\p@ }
+\contentsline {figure}{\numberline {2.3}{\ignorespaces HDFS Architektur-Schema\FN@sf@gobble@optonly }}{14}{figure.2.3}
 \defcounter {refsection}{0}\relax 
 \addvspace {10\p@ }
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {4.1}{\ignorespaces Ergebnis f\IeC {\"u}r die Kommandozeileneingabe \textit {hadoop version}}}{23}{figure.4.1}
+\addvspace {10\p@ }
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {4.2}{\ignorespaces Anlegen neuer Maven Java Application in NetBeans}}{25}{figure.4.2}
+\contentsline {figure}{\numberline {4.1}{\ignorespaces Ergebnis f\IeC {\"u}r die Kommandozeileneingabe \textit {hadoop version}}}{24}{figure.4.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {4.3}{\ignorespaces Modifikation f\IeC {\"u}r Javadoc Generator}}{27}{figure.4.3}
+\contentsline {figure}{\numberline {4.2}{\ignorespaces Anlegen neuer Maven Java Application in NetBeans}}{26}{figure.4.2}
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {4.3}{\ignorespaces Modifikation f\IeC {\"u}r Javadoc Generator}}{28}{figure.4.3}
 \defcounter {refsection}{0}\relax 
 \addvspace {10\p@ }
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {5.1}{\ignorespaces Aufbau der Infrastruktur}}{29}{figure.5.1}
+\contentsline {figure}{\numberline {5.1}{\ignorespaces Aufbau der Infrastruktur}}{30}{figure.5.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {5.2}{\ignorespaces PAP f\IeC {\"u}r main Methode der Main Klasse}}{30}{figure.5.2}
+\contentsline {figure}{\numberline {5.2}{\ignorespaces PAP f\IeC {\"u}r main Methode der Main Klasse}}{31}{figure.5.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {5.3}{\ignorespaces Datenfluss in MapReduce\FN@sf@gobble@optonly }}{35}{figure.5.3}
+\contentsline {figure}{\numberline {5.3}{\ignorespaces Datenfluss in MapReduce\FN@sf@gobble@optonly }}{36}{figure.5.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {5.4}{\ignorespaces Streudiagram der Laufzeiten}}{52}{figure.5.4}
+\contentsline {figure}{\numberline {5.4}{\ignorespaces Streudiagram der Laufzeiten}}{53}{figure.5.4}
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {5.5}{\ignorespaces Verlauf der Regressionsgeraden}}{55}{figure.5.5}
+\contentsline {figure}{\numberline {5.5}{\ignorespaces Verlauf der Regressionsgeraden}}{56}{figure.5.5}
 \defcounter {refsection}{0}\relax 
 \addvspace {10\p@ }
 \defcounter {refsection}{0}\relax 

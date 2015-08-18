@@ -33,14 +33,13 @@ Speziell bei Webseiten und deren Infrastrukturen, ist die Überwachung ein signi
 
 Von besonderem Interesse sind hier Logfiles. Aus ihnen lassen sich viele Informationen über den Zustand eines Systems auslesen. Dabei handelt es sich sowohl um Real- oder Near-Time, als auch historische Informationen.
 
-%TODO: Überleitung zu Logfiles schreiben aus fokusieren auf web und monitoring systemen
 %<Kurze Fokusierung auf Online Service. Welche Informationen werden hier im speziellen benötigt. Erwähnen von Monitoring Systemen. Funktion von Agenten, im zusammenspiel mit Monitoring Systemen, bei der analyse von Logfiles beschreiben und daraus die Überleitung zu Logfiles ableiten>
 
 %Worum geht es bei der Überwachung? Was ist das Ziel? Warum braucht man eine Überwachung? Wie sieht diese i.d.R. Aus? Welche Kernpunkte gibt es in der Überwachung? \\
 %Hier sollte die Überleitung zum nächsten Kapitel kommen d.h. Logfiles werden als letztes behandelt in diesem Kapitel, damit der Übergang sauber ist.
 
 \section{Bedeutung von Logfiles}\label{sec:BedeutungVonLogfiles}
-Nach Baur und Blasius bezeichnen Logfiles (oder auch Protokolldateien) \flqq [...] automatisch erstellte Dateien [..], in denen bestimmte Ereignisse elektronisch aufgezeichnet werden.\frqq\footcite[S. 847]{Baur.2014} Dabei werden sowohl negative wie auch positive Ereignisse protokolliert.
+Nach Bernard J. Jansen, sind Logfiles \flqq electronic [records] of interactions that have occurred between a system and users of that system\frqq.\footcite[S. 2]{Jansen.2008} Dabei werden sowohl negative wie auch positive Ereignisse protokolliert.
 
 Bei Web-Servern, welche mit Apache \acs{HTTP} Server (später Apache) unter Linux betrieben werden, stellen syslog von Linux, sowie Error- und Access-Log von Apache, die Grundlage zur Überwachung des Servers. Sie lassen sich sehr einfach durch die in \autoref{sec:UeberwachungIT} beschriebenen Agenten überwachen, da sie einem klar vorgegebenen Standard folgen.
 
