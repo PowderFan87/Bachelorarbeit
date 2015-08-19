@@ -70,7 +70,7 @@ Wie gezeigt wurde, gibt es keinen einheitlichen Standard für die Notation inner
 %Was sind Logfiles im allgemeinen? Was ist die Funktion eines Logfiles? Gibt es Standards? Wenn ja welche und wie sehen die aus? Werden die Standards im weiteren Verlauf der Arbeit noch einmal relevant sein (Ja/Nein begründen und erläutern)?
 
 \section{Einführung in MapReduce}\label{sec:EinführungInMapReduce}
-Die Google Mitarbeiter Jeffrey Dean und Sanjar Ghemawat veröffentlichten 2004 eine Arbeit, in welcher sie einen neuen Ansatz zur Verarbeitung von großen, unstrukturierten Daten beschrieben. Das in der Arbeit beschriebene Modell wurde als \textit{Map-Reduce} bezeichnet. Dabei wurde nicht nur beschrieben, wie man große Datenmengen durchsucht, auswertet und in Schlüssel-Wert-Paaren zusammenfasst. Die Clusterung von Jobs auf \gls{Commodity-Hardware} waren ebenfalls ein Bestandteil der Arbeit. Freiknecht schreibt weiter, dass diese Arbeit als Ursprung des Algorithmus bezeichnet wird, und somit Implementierungen wie Hadoop, Disco oder BashReduce inspiriert hat.\footcite[Vgl.][S. 42]{Freiknecht.2014}
+Die Google Mitarbeiter Jeffrey Dean und Sanjar Ghemawat veröffentlichten 2004 eine Arbeit, in welcher sie einen neuen Ansatz zur Verarbeitung von großen, unstrukturierten Daten beschrieben. Das in der Arbeit beschriebene Modell wurde als \textit{Map-Reduce} bezeichnet. Dabei wurde nicht nur beschrieben, wie man große Datenmengen durchsucht, auswertet und in Schlüssel-Wert-Paaren zusammenfasst. Die Clusterung von Jobs auf \gls{Commodity-Hardware} waren ebenfalls ein Bestandteil der Arbeit.\footcite[Vgl.][Abstract]{Dean.2004} Freiknecht schreibt, dass diese Arbeit als Ursprung des Modells zu sehen ist, und Implementierungen wie Hadoop, Disco oder BashReduce inspiriert hat.\footcite[Vgl.][S. 42]{Freiknecht.2014}
 
 Ein MapReduce Programm lässt sich i.d.R. in drei Bereiche unterteilen. Der Map-Phase, in welcher die Schlüssel-Wert-Paare aus den Eingabedaten erzeugt werden, der Combine-Phase, zur Aggregation der Paare, sowie der Reduce-Phase, in welcher die Daten ausgedünnt werden, bis nur noch ein Wert pro Schlüssel vorhanden ist (siehe \autoref{fig:DreiPhasenMapReduce}).
 
@@ -172,9 +172,9 @@ Für die Anwendung von MapReduce auf komplexere bzw. größere Daten reicht dies
 
 %TODO: Einleitung ändern. Nicht direkt mit Zitat beginnen. Eher etwas in die richtung "Wartala sagt..." oder so
 \section{Was ist Hadoop?}\label{sec:WasIstHadoop}
-\flqq Kurz gesagt: Hadoop ist ein freies, Java-basiertes Open-Source-Framework für die skalierbare und verteilte Verarbeitung großer Datenmengen auf vielen Rechnern innerhalb eines Netzwerks.\frqq\footcite[S. 21]{Wartala.2012}
+Gemäß Wartala ist Hadoop \flqq ein freies, Java-basiertes Open-Source-Framework für die skalierbare und verteilte Verarbeitung großer Datenmengen auf vielen Rechnern innerhalb eines Netzwerks.\frqq\footcite[S. 21]{Wartala.2012}
 
-Die Entwicklung begann im Jahr 2004 durch den Programmierer Doug Cutting, nachdem dieser, im Rahmen des 6. Symposiums \ac{OSDI}, den Vortrag "`MapReduce - Simplified Data Processing on Large Clusters"', von den Google Mitarbeitern Jeffrey Dean und Sanjay Ghemawat, gehört hatte.
+Die Entwicklung von Hadoop begann im Jahr 2004 durch den Programmierer Doug Cutting, nachdem dieser, im Rahmen des 6. Symposiums \ac{OSDI}, den Vortrag "`MapReduce - Simplified Data Processing on Large Clusters"', von den Google Mitarbeitern Jeffrey Dean und Sanjay Ghemawat, gehört hatte.
 
 Zu diesem Zeitpunkt arbeitete Cutting an seinem Suchmaschinenprojekt mit dem Namen "`Nutch"', welches bereits 2002 ins leben gerufen wurde. Sein Ziel war eine leistungsfähige und konkurrenzfähige Softwarearchitektur, die es mit kommerziellen Suchmaschinen aufnehmen konnte. Bis 2004 konnte Nutch bereits 100 Mio. Webseiten mit nur vier Rechnerknoten indexieren.
 

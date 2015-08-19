@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.4-1.40.13 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2014.6.27)  18 AUG 2015 15:02
+This is pdfTeX, Version 3.1415926-2.4-1.40.13 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2014.6.27)  19 AUG 2015 13:42
 entering extended mode
 **dokumentation.tex
 (C:\Users\szueshol\Documents\__DHBW\Bachelorarbeit\documents\dokumentation.tex
@@ -2283,7 +2283,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 54--55
 Overfull \vbox (7.89444pt too high) has occurred while \output is active []
 
 
-[6] <images/MapReduce_001.png, id=418, 730.73pt x 131.49126pt>
+[6] <images/MapReduce_001.png, id=420, 730.73pt x 131.49126pt>
 File: images/MapReduce_001.png Graphic file (type png)
 
 <use images/MapReduce_001.png>
@@ -2292,16 +2292,12 @@ Package pdftex.def Info: images/MapReduce_001.png used on input line 79.
 LaTeX Font Info:    External font `lmex10' loaded for size
 (Font)              <10.95> on input line 80.
 
-<images/MasterWorkerMR.png, id=427, 384.4764pt x 264.99pt>
+<images/MasterWorkerMR.png, id=429, 384.4764pt x 264.99pt>
 File: images/MasterWorkerMR.png Graphic file (type png)
 
 <use images/MasterWorkerMR.png>
 Package pdftex.def Info: images/MasterWorkerMR.png used on input line 90.
 (pdftex.def)             Requested size: 455.24417pt x 313.76912pt.
-
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
 
 Overfull \vbox (7.89444pt too high) has occurred while \output is active []
 
@@ -2319,7 +2315,7 @@ rkerMR.png>]
 Overfull \vbox (7.89444pt too high) has occurred while \output is active []
 
 
-[9] <images/Beispieldaten.png, id=481, 317.2653pt x 124.7862pt>
+[9] <images/Beispieldaten.png, id=483, 317.2653pt x 124.7862pt>
 File: images/Beispieldaten.png Graphic file (type png)
 
 <use images/Beispieldaten.png>
@@ -2380,7 +2376,7 @@ although it is yet undefined on input line 201.
 Overfull \vbox (7.89444pt too high) has occurred while \output is active []
 
 
-[13] <images/HDFS_Architektur.png, id=576, 209.1012pt x 222.8325pt>
+[13] <images/HDFS_Architektur.png, id=578, 209.1012pt x 222.8325pt>
 File: images/HDFS_Architektur.png Graphic file (type png)
 
 <use images/HDFS_Architektur.png>
@@ -2478,7 +2474,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 49--50
 Overfull \vbox (7.89444pt too high) has occurred while \output is active []
 
 
-[23] <images/hadoop_version.png, id=733, 514.17094pt x 111.41624pt>
+[23] <images/hadoop_version.png, id=735, 514.17094pt x 111.41624pt>
 File: images/hadoop_version.png Graphic file (type png)
 
 <use images/hadoop_version.png>
@@ -2503,7 +2499,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 98--99
 Overfull \vbox (7.89444pt too high) has occurred while \output is active []
 
 
-[25] <images/NewMavenProject_01.png, id=792, 723.70375pt x 510.90875pt>
+[25] <images/NewMavenProject_01.png, id=794, 723.70375pt x 510.90875pt>
 File: images/NewMavenProject_01.png Graphic file (type png)
 
 <use images/NewMavenProject_01.png>
@@ -2530,7 +2526,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 161--162
 Overfull \vbox (7.89444pt too high) has occurred while \output is active []
 
 
-[27] <images/NewMavenProject_03.png, id=836, 602.25pt x 434.37282pt>
+[27] <images/NewMavenProject_03.png, id=838, 602.25pt x 434.37282pt>
 File: images/NewMavenProject_03.png Graphic file (type png)
 
 <use images/NewMavenProject_03.png>
@@ -2555,7 +2551,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 28--29
 
  []
 
-<images/Infrastruktur.png, id=863, 543.02875pt x 484.81125pt>
+<images/Infrastruktur.png, id=865, 543.02875pt x 484.81125pt>
 File: images/Infrastruktur.png Graphic file (type png)
 
 <use images/Infrastruktur.png>
@@ -2569,7 +2565,7 @@ Overfull \vbox (7.89444pt too high) has occurred while \output is active []
 ruktur.png>]
 Package acronym Info: Label `acro:PAP' newly defined as it shall be overridden
 although it is yet undefined on input line 49.
- <images/PAP_Main_main.png, id=878, 418.56375pt x 302.63063pt>
+ <images/PAP_Main_main.png, id=880, 418.56375pt x 302.63063pt>
 File: images/PAP_Main_main.png Graphic file (type png)
 
 <use images/PAP_Main_main.png>
@@ -2628,7 +2624,7 @@ Overfull \vbox (7.89444pt too high) has occurred while \output is active []
 Overfull \vbox (7.89444pt too high) has occurred while \output is active []
 
 
-[35] <images/MapReduceDatenfluss.png, id=953, 361.8318pt x 269.808pt>
+[35] <images/MapReduceDatenfluss.png, id=955, 361.8318pt x 269.808pt>
 File: images/MapReduceDatenfluss.png Graphic file (type png)
 
 <use images/MapReduceDatenfluss.png>
@@ -2900,7 +2896,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 674--675
 Overfull \vbox (7.89444pt too high) has occurred while \output is active []
 
 
-[52] <images/ErgebnisAnwendungstest.png, id=1321, 963.6pt x 699.61375pt>
+[52] <images/ErgebnisAnwendungstest.png, id=1323, 963.6pt x 699.61375pt>
 File: images/ErgebnisAnwendungstest.png Graphic file (type png)
 
 <use images/ErgebnisAnwendungstest.png>
@@ -2937,7 +2933,7 @@ Overfull \vbox (7.89444pt too high) has occurred while \output is active []
 Overfull \vbox (7.89444pt too high) has occurred while \output is active []
 
 
-[55] <images/Laufzeitanalyse.png, id=1360, 963.6pt x 699.61375pt>
+[55] <images/Laufzeitanalyse.png, id=1362, 963.6pt x 699.61375pt>
 File: images/Laufzeitanalyse.png Graphic file (type png)
 
 <use images/Laufzeitanalyse.png>
@@ -3025,7 +3021,7 @@ Overfull \vbox (7.89444pt too high) has occurred while \output is active []
 [6
 
 
-] <images/NameNodeWebInterface.png, id=1546, 1445.4pt x 1640.1275pt>
+] <images/NameNodeWebInterface.png, id=1548, 1445.4pt x 1640.1275pt>
 File: images/NameNodeWebInterface.png Graphic file (type png)
 
 <use images/NameNodeWebInterface.png>
@@ -3046,7 +3042,7 @@ Package pdftex.def Info: images/PAP_Main_main.png used on input line 29.
 Overfull \vbox (7.89444pt too high) has occurred while \output is active []
 
 
-[8] <images/PAP_LFAConfiguration.png, id=1559, 305.64188pt x 548.0475pt>
+[8] <images/PAP_LFAConfiguration.png, id=1561, 305.64188pt x 548.0475pt>
 File: images/PAP_LFAConfiguration.png Graphic file (type png)
 
 <use images/PAP_LFAConfiguration.png>
@@ -3059,7 +3055,7 @@ Overfull \vbox (7.89444pt too high) has occurred while \output is active []
 
 [9 <C:/Users/szueshol/Documents/__DHBW/Bachelorarbeit/documents/images/PAP_LFAC
 onfiguration.png>]
-<images/PAP_Bootstrap_init.png, id=1565, 279.29344pt x 706.89093pt>
+<images/PAP_Bootstrap_init.png, id=1567, 279.29344pt x 706.89093pt>
 File: images/PAP_Bootstrap_init.png Graphic file (type png)
 
 <use images/PAP_Bootstrap_init.png>
@@ -3071,7 +3067,7 @@ Overfull \vbox (7.89444pt too high) has occurred while \output is active []
 
 [10 <C:/Users/szueshol/Documents/__DHBW/Bachelorarbeit/documents/images/PAP_Boo
 tstrap_init.png>]
-<images/PAP_Driver_run.png, id=1571, 228.855pt x 617.30624pt>
+<images/PAP_Driver_run.png, id=1573, 228.855pt x 617.30624pt>
 File: images/PAP_Driver_run.png Graphic file (type png)
 
 <use images/PAP_Driver_run.png>
@@ -3100,10 +3096,10 @@ Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 139.
 Package logreq Info: Writing requests to 'dokumentation.run.xml'.
  ) 
 Here is how much of TeX's memory you used:
- 40656 strings out of 493921
- 695138 string characters out of 3147273
+ 40658 strings out of 493921
+ 695163 string characters out of 3147273
  1189901 words of memory out of 3000000
- 42127 multiletter control sequences out of 15000+200000
+ 42128 multiletter control sequences out of 15000+200000
  175365 words of font info for 259 fonts, out of 3000000 for 9000
  845 hyphenation exceptions out of 8191
  59i,12n,93p,1468b,3339s stack positions out of 5000i,500n,10000p,200000b,50000s
@@ -3132,9 +3128,9 @@ c/lm/lmsy6.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/lm/lmsy8.pfb><C:
 KTeX 2.9/fonts/type1/public/lm/lmtt10.pfb><C:/Program Files/MiKTeX 2.9/fonts/ty
 pe1/public/lm/lmtt12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfon
 ts/symbols/msbm10.pfb>
-Output written on dokumentation.pdf (83 pages, 6661864 bytes).
+Output written on dokumentation.pdf (83 pages, 6662210 bytes).
 PDF statistics:
- 2007 PDF objects out of 2073 (max. 8388607)
- 714 named destinations out of 1000 (max. 500000)
+ 2010 PDF objects out of 2073 (max. 8388607)
+ 715 named destinations out of 1000 (max. 500000)
  48215 words of extra memory for PDF output out of 51595 (max. 10000000)
 
