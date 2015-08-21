@@ -806,7 +806,6 @@ Die Logfiles, der in \autoref{subsec:Infrastruktur} beschriebenen Infrastruktur,
 
 Basierend auf der in \autoref{subsubsec:PL001} formulierten Produktleistung \textbf{PL001}, darf die Laufzeit der Analyse lediglich ein Fünftel des Intervalls betragen. Aus dieser Definition ergibt sich, für die Analyse der stündlich rotierenden Logfiles, eine Laufzeit von $t_e \leq 720$.
 
-\newpage
 Durch die Anwendung von \autoref{equ:Laufzeit} lässt sich, durch eine Umformung nach $x$, die maximale Datenmenge, für die zu analysierenden Logfiles errechnen.
 
 \begin{flalign*}
@@ -817,6 +816,10 @@ Durch die Anwendung von \autoref{equ:Laufzeit} lässt sich, durch eine Umformung
 \end{flalign*}
 
 Die Produktleistung lässt sich somit erfüllen, solange die stündliche generierte Datenmenge $x \leq 86.788.877$ beträgt.
+
+Ein Weg diesen Schwellenwert zu umgehen bietet die Möglichkeit Daten zu Streamen. Dabei können Dateien entweder nach HDFS oder direkt als Eingabe übertragen werden. Der Verarbeitungsprozess verändert sich jedoch sehr stark im vergleich zur normalen Datenverarbeitung. Die Laufzeit wird durch den Veränderten Prozess ebenfalls beeinflusst.
+
+Aufgrund dieser Komplexität und der Tatsache, dass Streaming kein teil der definierten Anforderungen ist, wir dieser Punkt nicht weiter verfolgt.
 
 %<IDEE: Es wurde eine formel angegeben, welche aussage über die maximale ausführungsdauer gibt...eventuell lassen sich diese beiden formeln verbinden (also eine Formel die aussage gibt über den maximal möglichen intervall für eine bestimmte datenmenge \autoref{equ:MinInterval})>
 

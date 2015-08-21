@@ -213,7 +213,7 @@ Die genaue Funktionsweise von \ac{HDFS} wird in einem Comic\footnote{Comic über
 \end{figure}
 \footnotetext{\cite[S. 23.]{Wartala.2012}}
 
-\subsubsection{NameNodes}
+\subsubsection{NameNode}
 Der NameNode kontrolliert und regelt alle Dateioperationen, welche auf das Dateisystem ausgeübt werden sollen. Er stellt den Master des Systems dar, und kümmert sich um die Speicherung der Dateinamen, Verzeichnisse und Zugriffe. Dabei koordiniert er die Verteilung der Dateiblöcke im Cluster und überwacht die ihm bekannten Slave Knoten (DataNodes). Der NameNode speichert lediglich Metainformationen über die im Dateisystem gespeicherten Daten. Die Daten selbst werden von ihm an die DataNodes weitergeleitet. Zusammengefasst sind die Aufgaben des NameNode:
 
 \begin{itemize}
@@ -236,6 +236,23 @@ DataNodes sind die Slave Knoten des Dateisystems, in welchen die Datenblöcke ge
 \end{itemize}
 
 Zudem werden die MapReduce-Prozesse auf genau den Knoten ausgeführt, welche die benötigten Daten besitzen. DataNodes replizieren selbstständig die durch den NameNode übermittelten Daten an weitere DataNodes, wenn ihnen dies durch den Master mitgeteilt wird. Zudem können sie, nach einer entsprechenden Anweisung des NameNodes, beschädigte Datenblöcke von anderen DataNodes kopieren und ersetzen.\footcite[Vgl.][S. 25 f.]{Wartala.2012}
+
+\subsubsection{Secondary NameNode}
+Der NameNode hällt alle Metadaten des \ac{HDFS} in einem Image mit dem Namen \textit{fsimage} (eine Liste aller gespeicherten Dateien und die Position ihrer korrespondierenden Blocks). Ändernungen am Dateisystem werden in einer Datei mit dem Namen \textit{edits} gestgehalten.
+
+Mit der Zeit wächst der Inhalt von \textit{edits} an und damit auch die diskrepanz zu \textit{fsimage}. Bei einem Ausfall des NameNode würde so der aktuelle Stand des Dateisystems verloren gehen.
+
+Um dies zu vermeiden, wird in regelmäßigen Intervallen (standard liegt bei einer Stunde) durch den Secondary NameNode eine neue \textit{edits} Datei erzeugt und mit dem NameNode ausgetauscht.
+
+\newpage
+Danach führt der Secondary NameNode die bestehende \textit{edits} datei mit dem \textit{fsimage} zusammen, und kopiert das aktualisierte Image zurück auf den \textit{NameNode}. \autoref{fig:FunktionsweiseSecNameNode} veranschaulicht die Funktionsweise des Secondary NameNode.\footcite[Vgl.][S. 23]{Lakhe.2014} \\
+
+\begin{figure}[h]
+	\includegraphics[width=1\textwidth]{SecNameNode.png}
+	\caption{Funktionsweise des Secondary NameNode\footnotemark}
+	\label{fig:FunktionsweiseSecNameNode}
+\end{figure}
+\footnotetext{\cite[S. 23]{Lakhe.2014}}
 
 %<Was ist ein verteiltes Dateisystem überhaupt und wozu braucht man es? Vergleich mit einem normalen Dateisystem?>
 
@@ -268,6 +285,7 @@ In einer komplexeren Infrastruktur, mit mehreren DataNodes, verteilt auf untersc
 	\item Nur maximal zwei Replikationen im gleichen Rack
 \end{enumerate}
 
+\newpage
 Die Knoten melden sich in regelmäßigen Abständen beim NameNode, um zum einen mitzuteilen dass sie noch aktiv sind, und um einen Abgleich der Datenblöcke mittels einer Checksumme vor zu nehmen. Sollte diese nicht stimmen, kann der NameNode dem betreffenden DataNode den Auftrag erteilen, den Datenblock von einem anderen Knoten zu kopieren. Dadurch wird der beschädigte Block ersetzt. Die Integrität der Daten ist somit durch die Replikation sehr sicher.
 
 Es gibt jedoch eine große Schwachstelle in Form des im System einmalig vorhandenen NameNodes. Dieser stellt einen \ac{SPOF} dar. Ein Ausfall des NameNode würde das gesamte Dateisystem lahm legen. Zudem besteht die Gefahr, dass, bei einem plötzlichen Ausfall des NameNode, die gespeicherten Metadaten beschädigt oder verloren gehen.\footcite[Vgl.][S. 277 f.]{Wartala.2012}
