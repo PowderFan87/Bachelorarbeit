@@ -144,6 +144,38 @@ java.util.logging.FileHandler.pattern=%h/scripts/default_%u.log
 
 %<Beschreibung wie der Logger in Java funktioniert und wie dieser hier eingesetzt wird. Speziell die Konfiguration über die logger.properties datei hervorheben.>
 
+\subsection{Konfiguration der Anwendung}
+Um eine Vielzahl an unterschiedlichen Analysen durchführen zu können, sind die einzelnen, in \autoref{subsec:DatenflussMapReduce} beschriebenen Komponenten über Properties konfigurierbar. Gemäß der Architektur der Anwendung, sind auch die Einstellungen in unterschiedlichen Gruppen gekapselt.
+
+\begin{table}[h]
+	\centering
+	\begin{tabularx}{\textwidth}{| l | l | l | X |}
+		\hline
+		\rowcolor[HTML]{3531FF} 
+		\multicolumn{1}{l|}{\cellcolor[HTML]{4F88BB}{\color[HTML]{FFFFFF} {\bf Gruppe}}} &
+		\multicolumn{1}{l|}{\cellcolor[HTML]{4F88BB}{\color[HTML]{FFFFFF} {\bf Property}}} &
+		\multicolumn{1}{l|}{\cellcolor[HTML]{4F88BB}{\color[HTML]{FFFFFF} {\bf Standardwert}}} & \multicolumn{1}{l|}{\cellcolor[HTML]{4F88BB}{\color[HTML]{FFFFFF} {\bf Beschreibung}}} \\ \hline
+		lfa.driver & .mapper & \footnotemark[1].mapper.PatternMapper & Klasse für den Mappingvorgang \\ \cline{2-4}
+		 & .reducer & \footnotemark[1].reducer.SumReducer & Klasse für den Reducevorgang \\ \hline
+		*.input & .format & \footnotemark[2].input.TextInputFormat & Klasse für die Interpretation des Inputs \\ \hline
+		*.output & .key & \footnotemark[3].Text & Klasse für den Datentyp des Schlüssels \\ \cline{2-4}
+		 & .value & \footnotemark[3].IntWritable & Klasse für den Datentyp des Wertes \\ \cline{2-4}
+		 & .format & \footnotemark[2].output.TextOutputFormat & Klasse für die Formatierung des Outputs \\ \hline
+		*.job & .name & Logfileanalyzer & Name für den MapReduce Job \\ \hline
+		lfa.mapper & .* &  & Zusätzliche Properties für den Mapper \\ \hline
+		lfa.reducer & .* &  & Zusätzliche Porperties für den Reducer \\ \hline
+	\end{tabularx}
+	\caption{Properties zur Steuerung der Analyse}
+	\label{tbl:AppProperties}
+\end{table}
+\footnotetext[1]{com.hszuesz.logfileanalyzer}
+\footnotetext[2]{org.apache.hadoop.mapreduce.lib}
+\footnotetext[3]{org.apache.hadoop.io}
+
+\autoref{tbl:AppProperties} zeigt die wichtigsten Properties zur Steuerung der Anwendung mit ihren jeweiligen Standardwerten. Die Werte können durch Setzen der Einstellungen in den User Properties verändert werden. Soll z.B. statt einer Summe der Durchschnitt der Werte für einen Schlüssel ermittelt werden, so ist die Property \textit{lfa.driver.reducer} auf den Wert \textit{com.hszuesz.logfileanalyzer.reducer.AverageReducer} zu setzen. Es findet keine Überprüfung der Werte Statt. Die Angabe von ungültigen Konfigurationseinstellungen (z.B. einer nicht bekannten Klasse) führt zum Programmabsturz.
+
+Die Einstellungen \textit{lfa.mapper} sowie \textit{lfa.reducer}, dienen der weiteren Konfiguration der jeweiligen Klassen. So wird beispielsweise über \textit{lfa.mapper.pattern.key} der reguläre Ausdruck für den Pattern Mapper festgelegt.
+
 %\section{Grundlagen für Datenverarbeitung}
 %<Beschreibung der Entwicklung für die Grundlagen zur Datenverarbeitung. Welche Klassen werden dabei verwendet? Welches System liegt dahinter? Warum dieses System? Dabei nicht nur auf die Speicherung von Daten eingehen sondern auch auf das Lesen von Dateien.>
 
@@ -151,35 +183,14 @@ java.util.logging.FileHandler.pattern=%h/scripts/default_%u.log
 %<Wie sehen die Logfiles aus? Welche Formate haben sie? Welche rolle spielen diese bei der Datenverarbeitung? Welche Informationen sind die richtigen Informationen?>
 
 \section{Implementierung von MapReduce}
-Nachdem alle Grundlagen der Anwendung fertiggestellt wurden kann mit der Entwicklung des Kernstückes begonnen werden, der Implementierung von MapReduce. Zunächst wird der Verarbeitungsprozess innerhalb des MapReduce Modells beschrieben. Im Anschluss werden einzelne Module genauer betrachtet.
-
-Um dem generischen Anforderungen der Anwendung gerecht zu werden, ist ein Verständnis des modularen Aufbaus des Modells, für die Entwicklung der individuellen Anpassungen, von entscheidender Bedeutung. 
-
-\subsection{Datenfluss in MapReduce}
-Ein MapReduce Job beginnt mit der Übertragung der Daten an die Klasse \textit{InputFormat}. Diese teilt die Daten nach einer vorgegebenen Größe\footnote{Standardgröße für \textit{FileInputFormat} beträgt 64 \ac{MB}. Dieser Wert kann durch setzen der Einstellung \textit{mapred.min.split.size} verändert werden. Die Angabe erfolgt in Bytes.}. Jeder erzeugte \textit{Split} wird von einem \textit{Mapper} verarbeitet. Dabei werden die Daten mit dem \textit{RecordReader} aufbereitet, welcher die initialen Schlüssel-Wert-Paare ermittelt. Im Anschluss werden diese an die \textit{Map}-Funktion weitergegeben. Die einzelnen \textit{Splits} werden parallel verarbeitet.
-
-Erst wenn alle \textit{Mapper} die Verarbeitung abgeschlossen haben, folgt die Partitionierung und Sortierung der neuen Schlüssel-Wert-Paare. Die sortierten Paare werden den \textit{Reducern} übergeben.
-
-Abschließend wird das Ergebnis der Analyse an eine Instanz der Klasse \textit{OutputFormat} übergeben, welche das Resultat aufbereitet und im \ac{HDFS} ablegt. \autoref{fig:DatenflussMapReduce} stellt den Datenfluss zur Verdeutlichung grafisch dar.
-
-\newpage
-\begin{figure}[h]
-	\centering
-	\includegraphics[width=1\textwidth]{MapReduceDatenfluss.png}
-	\caption{Datenfluss in MapReduce\footnotemark}
-	\label{fig:DatenflussMapReduce}
-\end{figure}
-\footnotetext{\cite[S. 111]{Freiknecht.2014}}
-
-Die einzelnen Module, sowie deren Implementierung in der Anwendung, werden in den nächsten Abschnitten beschrieben, mit Ausnahme der Module \textit{Partitioner} und der \textit{Sortierung}, da diese keine Anpassungen benötigen.
-
-Zusätzlich zu den Modulen von MapReduce, werden vorab die Klassen \textit{Bootstrap} und \textit{Driver} beschrieben. Diese gehören nicht direkt in das Modell von MapReduce sondern sind Teil der Initialisierung der Anwendung selbst.
+Nachdem alle Grundlagen der Anwendung fertiggestellt wurden kann mit der Entwicklung des Kernstückes begonnen werden, der Implementierung von MapReduce. Der Verarbeitungsprozess innerhalb des MapReduce Modells wurde bereits in \autoref{subsec:DatenflussMapReduce} beschrieben. Nachfolgend wird sowohl die Funktionsweise als auch die Entwicklung der einzelnen Module der Anwendung beschrieben.
 
 \subsection{Funktion von Bootstrap \& Driver}
 Durch den generischen Ansatz der Anwendung muss jeder Programmlauf initialisiert werden (auch als \gls{Bootstrapping} bezeichnet). Dies wird durch die Methode \textit{init} der Klasse \textit{Bootstrap} durchgeführt. Die zuvor erstellte Instanz der Klasse \textit{LFAConfiguration} wird hierfür an die Methode übergeben. Basierend auf den gesetzten Properties wird eine Instanz der Klasse \textit{Driver} erzeugt (siehe \autoref{lst:BootstrapInit} oder \ac{PAP}\footnote{\ac{PAP} für \textit{Bootstrap:init() im Anhang, S. \pageref{subsec:PAPBootstrapInit}}}).
 
 Dem \textit{Driver} werden zunächst alle Klassen mitgeteilt, welche zur Ausführung eines Jobs essentiell notwendig sind. Hierzu gehören die Klassen für \textit{InputFormat}, \textit{OutputFormat}, \textit{OutputKey}, \textit{OutputValue}, \textit{Mapper} und \textit{Reducer}. Die gesetzten Werte sind vom Typ \textit{Class<?>}. Es werden keine Instanzen der Klassen erzeugt. Ebenfalls notwendig für die Ausführung eines Jobs ist das Setzen eines Namens.
 
+\newpage
 Zuletzt wird eine Iteration über alle Schlüssel der Konfiguration durchgeführt, um zusätzliche Properties an den \textit{Driver} zu übergeben. Diese erweiterten Einstellungen werden vor Ausführung des Jobs in eine Instanz der Klasse \textit{org.apache.hadoop.conf.Configuration} geschrieben. Bei diesen Properties handelt es sich um Einstellungen, welche von den einzelnen Modulen des MapReduce Modells verwendet werden (z.B. ein regulärer Ausdruck für die \textit{Mapper} Klasse).\\
 
 \begin{lstlisting}[language=Java,caption=Auszug der Methode \textit{Bootstrap:init()},label=lst:BootstrapInit]
@@ -239,6 +250,7 @@ public int run(String[] arrArguments) throws Exception {
 }
 \end{lstlisting}
 
+\newpage
 \subsection{Einblick in die Funktion von Input-/OutputFormat}
 Klassen, welche das Interface \textit{InputFormat} implementieren (oder sich von Klassen, welche das Interface implementieren, ableiten), geben vor, wie die Eingabedaten gelesen werden müssen. \autoref{tbl:InputFormatKlasses} zeigt die bestehenden \textit{InputFormat} Klassen sowie deren Arbeitsweise.
 

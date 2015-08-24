@@ -259,6 +259,27 @@ Danach führt der Secondary NameNode die bestehende \textit{edits} datei mit dem
 %\subsection{MapReduce-Framework}\label{subsec:MapReduceFramework}
 %ACHTUNG. Vermutlich überflüssig da MapReduce bereits beschrieben wurde. Das Framework funktioniert nicht wirklich anders es stellt nur interfaces bereit damit die klassen stimmen.
 
+\subsection{MapReduce in Hadoop}\label{subsec:DatenflussMapReduce}
+Wie in \autoref{sec:EinführungInMapReduce} bereits beschrieben wurde, handelt es sich bei MapReduce um ein Modell zur Verarbeitung großer Datenmengen. Wie dieses in Hadoop implementiert wurde, soll in diesem Abschnitt gezeigt werden. Die einzelnen Module werden anhand eines Beispieljobs beschrieben.
+
+Ein MapReduce Job beginnt mit der Übertragung der Daten an die Klasse \textit{InputFormat}. Diese teilt die Daten nach einer vorgegebenen Größe\footnote{Standardgröße für \textit{FileInputFormat} beträgt 64 \ac{MB}. Dieser Wert kann durch setzen der Einstellung \textit{mapred.min.split.size} verändert werden. Die Angabe erfolgt in Bytes.}. Jeder erzeugte \textit{Split} wird von einem \textit{Mapper} verarbeitet. Dabei werden die Daten mit dem \textit{RecordReader} aufbereitet, welcher die initialen Schlüssel-Wert-Paare ermittelt. Im Anschluss werden diese an die \textit{Map}-Funktion weitergegeben. Die einzelnen \textit{Splits} werden parallel verarbeitet.
+
+Erst wenn alle \textit{Mapper} die Verarbeitung abgeschlossen haben, folgt die Partitionierung und Sortierung der neuen Schlüssel-Wert-Paare. Die sortierten Paare werden den \textit{Reducern} übergeben.
+
+Abschließend wird das Ergebnis der Analyse an eine Instanz der Klasse \textit{OutputFormat} übergeben, welche das Resultat aufbereitet und im \ac{HDFS} ablegt. \autoref{fig:DatenflussMapReduce} stellt den Datenfluss zur Verdeutlichung grafisch dar.\footcite[Vgl.][S. 110-113]{Freiknecht.2014}
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=1\textwidth]{MapReduceDatenfluss.png}
+	\caption{Datenfluss in MapReduce\footnotemark}
+	\label{fig:DatenflussMapReduce}
+\end{figure}
+\footnotetext{\cite[S. 111]{Freiknecht.2014}}
+
+Die Implementierung von MapReduce in Hadoop verfolgt einen modularen Ansatz. Die einzelnen Komponenten können nach belieben ausgetauscht werden, solange die eingesetzte Klasse die Aufgabe der Komponente vollständig übernehmen kann. Die Reihenfolge der Module muss dabei unverändert bleiben.
+
+Eine Ausnahme zu dieser Definition bildet die \ac{HDFS} Komponente. Diese kann als Ziel des Outputs ersetzt werden durch eine zusätzliche Komponente. Der Input muss nicht gleich dem Output sein (z.B. lassen sich Daten aus einer Datenbank oder einem Stream einlesen und das Ergebnis in das \ac{HDFS} schreiben, oder umgekehrt).
+
 \subsection{Abgrenzung - Was ist Hadoop nicht?}
 Es gibt unterschiedliche Techniken für die Speicherung und Verarbeitung von Daten, mit ihren jeweiligen Stärken und Schwächen. Es gibt eine Reihe von Kritikern, welche dem MapReduce-Ansatz unterschiedlichste Mängel vorwerfen. Darunter u.a. der sei Ansatz nicht wirklich innovativ und würde Funktionen wie Loadbalancing, Transaktionen oder auch Views vermissen.
 
@@ -285,7 +306,6 @@ In einer komplexeren Infrastruktur, mit mehreren DataNodes, verteilt auf untersc
 	\item Nur maximal zwei Replikationen im gleichen Rack
 \end{enumerate}
 
-\newpage
 Die Knoten melden sich in regelmäßigen Abständen beim NameNode, um zum einen mitzuteilen dass sie noch aktiv sind, und um einen Abgleich der Datenblöcke mittels einer Checksumme vor zu nehmen. Sollte diese nicht stimmen, kann der NameNode dem betreffenden DataNode den Auftrag erteilen, den Datenblock von einem anderen Knoten zu kopieren. Dadurch wird der beschädigte Block ersetzt. Die Integrität der Daten ist somit durch die Replikation sehr sicher.
 
 Es gibt jedoch eine große Schwachstelle in Form des im System einmalig vorhandenen NameNodes. Dieser stellt einen \ac{SPOF} dar. Ein Ausfall des NameNode würde das gesamte Dateisystem lahm legen. Zudem besteht die Gefahr, dass, bei einem plötzlichen Ausfall des NameNode, die gespeicherten Metadaten beschädigt oder verloren gehen.\footcite[Vgl.][S. 277 f.]{Wartala.2012}
