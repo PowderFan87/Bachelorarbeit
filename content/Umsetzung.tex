@@ -184,7 +184,6 @@ Die Einstellungen \textit{lfa.mapper} sowie \textit{lfa.reducer}, dienen der wei
 %\section{Bestimmung des Aufbaus der Logfiles}
 %<Wie sehen die Logfiles aus? Welche Formate haben sie? Welche rolle spielen diese bei der Datenverarbeitung? Welche Informationen sind die richtigen Informationen?>
 
-\newpage
 \section{Implementierung von MapReduce}
 Nachdem alle Grundlagen der Anwendung fertiggestellt wurden kann mit der Entwicklung des Kernstückes begonnen werden, der Implementierung von MapReduce. Der Verarbeitungsprozess innerhalb des MapReduce Modells wurde bereits in \autoref{subsec:DatenflussMapReduce} beschrieben. Nachfolgend wird sowohl die Funktionsweise als auch die Entwicklung der einzelnen Module der Anwendung beschrieben.
 
@@ -193,9 +192,9 @@ Durch den generischen Ansatz der Anwendung muss jeder Programmlauf initialisiert
 
 Dem \textit{Driver} werden zunächst alle Klassen mitgeteilt, welche zur Ausführung eines Jobs essentiell notwendig sind. Hierzu gehören die Klassen für \textit{InputFormat}, \textit{OutputFormat}, \textit{OutputKey}, \textit{OutputValue}, \textit{Mapper} und \textit{Reducer}. Die gesetzten Werte sind vom Typ \textit{Class<?>}. Es werden keine Instanzen der Klassen erzeugt. Ebenfalls notwendig für die Ausführung eines Jobs ist das Setzen eines Namens.
 
+\newpage
 Zuletzt wird eine Iteration über alle Schlüssel der Konfiguration durchgeführt, um zusätzliche Properties an den \textit{Driver} zu übergeben. Diese erweiterten Einstellungen werden vor Ausführung des Jobs in eine Instanz der Klasse \textit{org.apache.hadoop.conf.Configuration} geschrieben. Bei diesen Properties handelt es sich um Einstellungen, welche von den einzelnen Modulen des MapReduce Modells verwendet werden (z.B. ein regulärer Ausdruck für die \textit{Mapper} Klasse).\\
 
-\newpage
 \begin{lstlisting}[language=Java,caption=Auszug der Methode \textit{Bootstrap:init()},label=lst:BootstrapInit]
 public static Driver init(LFAConfiguration objConfiguration) {
 	[...]
@@ -571,7 +570,7 @@ Für die Analyse steht initial ein Logfile im CSV-Format bereit. In diesen wird 
 	\begin{tabular}{| l | l | l | r |}
 		\hline
 		\rowcolor[HTML]{3531FF} 
-		\multicolumn{1}{l|}{\cellcolor[HTML]{4F88BB}{\color[HTML]{FFFFFF} {\bf Serverart}}} & \multicolumn{1}{l|}{\cellcolor[HTML]{4F88BB}{\color[HTML]{FFFFFF} {\bf Gruppe}}} & \multicolumn{1}{l|}{\cellcolor[HTML]{4F88BB}{\color[HTML]{FFFFFF} {\bf IP-Adresse}}} & \multicolumn{1}{l|}{\cellcolor[HTML]{4F88BB}{\color[HTML]{FFFFFF} {\bf Antwortzeit (in Sekunden)}}} \\ \hline
+		\multicolumn{1}{l|}{\cellcolor[HTML]{4F88BB}{\color[HTML]{FFFFFF} {\bf Serverart}}} & \multicolumn{1}{l|}{\cellcolor[HTML]{4F88BB}{\color[HTML]{FFFFFF} {\bf Gruppe}}} & \multicolumn{1}{l|}{\cellcolor[HTML]{4F88BB}{\color[HTML]{FFFFFF} {\bf IP-Adresse}}} & \multicolumn{1}{l|}{\cellcolor[HTML]{4F88BB}{\color[HTML]{FFFFFF} {\bf Antwortzeit (in Sek.)}}} \\ \hline
 		Appserver & AS1 & 192.168.2.10 & 5 \\ \hline
 		Appserver & AS2 & 192.168.3.10 & 2 \\ \hline
 		Appserver & AS3 & 192.168.4.10 & 4 \\ \hline

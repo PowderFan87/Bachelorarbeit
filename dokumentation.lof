@@ -10,35 +10,35 @@
 \defcounter {refsection}{0}\relax 
 \addvspace {10\p@ }
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {2.1}{\ignorespaces Die drei Phasen eines Map-Reduce-Prozesses\FN@sf@gobble@optonly \relax }}{8}{figure.caption.11}
+\contentsline {figure}{\numberline {2.1}{\ignorespaces Die drei Phasen eines Map-Reduce-Prozesses\FN@sf@gobble@optonly \relax }}{7}{figure.caption.11}
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {2.2}{\ignorespaces Master-Worker in MapReduce\FN@sf@gobble@optonly \relax }}{9}{figure.caption.12}
+\contentsline {figure}{\numberline {2.2}{\ignorespaces Master-Worker in MapReduce\FN@sf@gobble@optonly \relax }}{8}{figure.caption.12}
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {2.3}{\ignorespaces HDFS Architektur-Schema\FN@sf@gobble@optonly \relax }}{15}{figure.caption.20}
+\contentsline {figure}{\numberline {2.3}{\ignorespaces HDFS Architektur-Schema\FN@sf@gobble@optonly \relax }}{14}{figure.caption.20}
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {2.4}{\ignorespaces Funktionsweise des Secondary NameNode\FN@sf@gobble@optonly \relax }}{17}{figure.caption.28}
+\contentsline {figure}{\numberline {2.4}{\ignorespaces Funktionsweise des Secondary NameNode\FN@sf@gobble@optonly \relax }}{16}{figure.caption.28}
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {2.5}{\ignorespaces Datenfluss in MapReduce\FN@sf@gobble@optonly \relax }}{18}{figure.caption.29}
-\defcounter {refsection}{0}\relax 
-\addvspace {10\p@ }
+\contentsline {figure}{\numberline {2.5}{\ignorespaces Datenfluss in MapReduce\FN@sf@gobble@optonly \relax }}{17}{figure.caption.29}
 \defcounter {refsection}{0}\relax 
 \addvspace {10\p@ }
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {4.1}{\ignorespaces Ergebnis f\IeC {\"u}r die Kommandozeileneingabe \textit {hadoop version}\relax }}{27}{figure.caption.46}
+\addvspace {10\p@ }
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {4.2}{\ignorespaces Anlegen neuer Maven Java Application in NetBeans\relax }}{29}{figure.caption.47}
+\contentsline {figure}{\numberline {4.1}{\ignorespaces Ergebnis f\IeC {\"u}r die Kommandozeileneingabe \textit {hadoop version}\relax }}{26}{figure.caption.46}
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {4.3}{\ignorespaces Modifikation f\IeC {\"u}r Javadoc Generator\relax }}{31}{figure.caption.49}
+\contentsline {figure}{\numberline {4.2}{\ignorespaces Anlegen neuer Maven Java Application in NetBeans\relax }}{28}{figure.caption.47}
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {4.3}{\ignorespaces Modifikation f\IeC {\"u}r Javadoc Generator\relax }}{30}{figure.caption.49}
 \defcounter {refsection}{0}\relax 
 \addvspace {10\p@ }
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {5.1}{\ignorespaces Aufbau der Infrastruktur\relax }}{33}{figure.caption.51}
+\contentsline {figure}{\numberline {5.1}{\ignorespaces Aufbau der Infrastruktur\relax }}{32}{figure.caption.51}
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {5.2}{\ignorespaces PAP f\IeC {\"u}r main Methode der Main Klasse\relax }}{34}{figure.caption.53}
+\contentsline {figure}{\numberline {5.2}{\ignorespaces PAP f\IeC {\"u}r main Methode der Main Klasse\relax }}{33}{figure.caption.53}
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {5.3}{\ignorespaces Streudiagram der Laufzeiten\relax }}{57}{figure.caption.70}
+\contentsline {figure}{\numberline {5.3}{\ignorespaces Streudiagram der Laufzeiten\relax }}{55}{figure.caption.70}
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {5.4}{\ignorespaces Verlauf der Regressionsgeraden\relax }}{60}{figure.caption.72}
+\contentsline {figure}{\numberline {5.4}{\ignorespaces Verlauf der Regressionsgeraden\relax }}{58}{figure.caption.72}
 \defcounter {refsection}{0}\relax 
 \addvspace {10\p@ }
 \defcounter {refsection}{0}\relax 

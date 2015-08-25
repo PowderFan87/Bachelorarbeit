@@ -38,7 +38,6 @@ Von besonderem Interesse sind hier Logfiles. Aus ihnen lassen sich viele Informa
 %Worum geht es bei der Überwachung? Was ist das Ziel? Warum braucht man eine Überwachung? Wie sieht diese i.d.R. Aus? Welche Kernpunkte gibt es in der Überwachung? \\
 %Hier sollte die Überleitung zum nächsten Kapitel kommen d.h. Logfiles werden als letztes behandelt in diesem Kapitel, damit der Übergang sauber ist.
 
-\newpage
 \section{Bedeutung von Logfiles}\label{sec:BedeutungVonLogfiles}
 Nach Bernard J. Jansen, sind Logfiles \flqq electronic [records] of interactions that have occurred between a system and users of that system\frqq.\footcite[S. 2]{Jansen.2008} Dabei werden sowohl negative wie auch positive Ereignisse protokolliert.
 
@@ -70,7 +69,6 @@ Wie gezeigt wurde, gibt es keinen einheitlichen Standard für die Notation inner
 
 %Was sind Logfiles im allgemeinen? Was ist die Funktion eines Logfiles? Gibt es Standards? Wenn ja welche und wie sehen die aus? Werden die Standards im weiteren Verlauf der Arbeit noch einmal relevant sein (Ja/Nein begründen und erläutern)?
 
-\newpage
 \section{Einführung in MapReduce}\label{sec:EinführungInMapReduce}
 Die Google Mitarbeiter Jeffrey Dean und Sanjar Ghemawat veröffentlichten 2004 eine Arbeit, in welcher sie einen neuen Ansatz zur Verarbeitung von großen, unstrukturierten Daten beschrieben. Das in der Arbeit beschriebene Modell wurde als \textit{Map-Reduce} bezeichnet. Dabei wurde nicht nur beschrieben, wie man große Datenmengen durchsucht, auswertet und in Schlüssel-Wert-Paaren zusammenfasst. Die Clusterung von Jobs auf \gls{Commodity-Hardware} waren ebenfalls ein Bestandteil der Arbeit.\footcite[Vgl.][Abstract]{Dean.2004} Freiknecht schreibt, dass diese Arbeit als Ursprung des Modells zu sehen ist, und Implementierungen wie Hadoop, Disco oder BashReduce inspiriert hat.\footcite[Vgl.][S. 42]{Freiknecht.2014}
 
@@ -206,7 +204,6 @@ Die Architektur von \ac{HDFS} entspricht einem Master-Slave-System. Die verschie
 
 Die genaue Funktionsweise von \ac{HDFS} wird in einem Comic\footnote{Comic über Funktionsweise von HDFS: \\ \url{http://de.slideshare.net/jaganadhg/hdfs-10509123}} von \textit{Maneesh Varshney} sehr einfach und anschaulich erklärt.\footcite[Vgl.][S. 22 f.]{Wartala.2012}
 
-\newpage
 \begin{figure}[h]
 	\centering
 	\includegraphics[scale=1.2]{HDFS_Architektur.png}
@@ -246,7 +243,6 @@ Mit der Zeit wächst der Inhalt von \textit{edits} an und damit auch die diskrep
 
 Um dies zu vermeiden, wird in regelmäßigen Intervallen (standard liegt bei einer Stunde) durch den Secondary NameNode eine neue \textit{edits} Datei erzeugt und mit dem NameNode ausgetauscht.
 
-\newpage
 Danach führt der Secondary NameNode die bestehende \textit{edits} datei mit dem \textit{fsimage} zusammen, und kopiert das aktualisierte Image zurück auf den \textit{NameNode}. \autoref{fig:FunktionsweiseSecNameNode} veranschaulicht die Funktionsweise des Secondary NameNode.\footcite[Vgl.][S. 23]{Lakhe.2014} \\
 
 \begin{figure}[h]
