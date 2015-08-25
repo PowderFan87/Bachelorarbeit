@@ -19,11 +19,13 @@ Durch die Infrastruktur wird indirekt die Art der Datenverarbeitung vorgegeben. 
 
 Des Weiteren können, erst durch die Betrachtung der Umgebung, die Systeme ermittelt werden, welche für die Ausführung der Anwendung eventuell angepasst werden müssen (Installation zusätzlicher Software, Setzen von Berechtigungen, etc.).
 
-Innerhalb der Infrastruktur werden drei verschiedene Serverarten unterschieden. Aktuell werden die Webseiten auf zwei physisch getrennten Webservern betrieben. Durch sie wird die Kommunikation zwischen den Clients und den \textit{Appservern} gesteuert (Annehmen von Requests und Senden des entsprechenden Response).
+Innerhalb der Infrastruktur werden drei verschiedene Serverarten unterschieden:
 
-Die Inhalte für die einzelnen Seiten werden durch die \textit{Appserver} bereitgestellt. Die Anzahl dieser ist nicht festgelegt, um auf schwankende Anforderungen schneller regieren zu können. Steigt die Last auf das System, können weitere \textit{Appserver} der Infrastruktur hinzugefügt werden.
+\textbf{1) Webserver:} Aktuell werden die Webseiten auf zwei physisch getrennten Webservern betrieben. Durch sie wird die Kommunikation zwischen den Clients und den \textit{Appservern} gesteuert (Annehmen von Requests und Senden des entsprechenden Response).
 
-Der \textit{Infrastrukturserver} überwacht das gesamte System. Alle Informationen über den Zustand der Infrastruktur werden auf diesem Server konsolidiert. Dazu gehören ebenfalls die Logfiles. Diese werden, sowohl vom \textit{Web}- wie auch \textit{Appserver}, auf einem \ac{NFS} abgelegt. Die entsprechenden Verzeichnisse werden über einen mount dem \textit{Infrastrukturserver} zugänglich gemacht. 
+\textbf{2) Appserver}: Die Inhalte für die einzelnen Seiten werden durch die \textit{Appserver} bereitgestellt. Die Anzahl dieser ist nicht festgelegt, um auf schwankende Anforderungen schneller regieren zu können. Steigt die Last auf das System, können weitere \textit{Appserver} der Infrastruktur hinzugefügt werden.
+
+\textbf{3) Infrastrukturserver}: Der \textit{Infrastrukturserver} überwacht das gesamte System. Alle Informationen über den Zustand der Infrastruktur werden auf diesem Server konsolidiert. Dazu gehören ebenfalls die Logfiles. Diese werden, sowohl vom \textit{Web}- wie auch \textit{Appserver}, auf einem \ac{NFS} abgelegt. Die entsprechenden Verzeichnisse werden über einen mount dem \textit{Infrastrukturserver} zugänglich gemacht. 
 
 Der \textit{Infrastrukturserver} muss über eine Hadoop Installation verfügen, auf welcher die Applikation ausgeführt werden muss. \autoref{fig:AufbauInfrastruktur} zeigt die beschriebene Infrastruktur. \\
 
@@ -182,6 +184,7 @@ Die Einstellungen \textit{lfa.mapper} sowie \textit{lfa.reducer}, dienen der wei
 %\section{Bestimmung des Aufbaus der Logfiles}
 %<Wie sehen die Logfiles aus? Welche Formate haben sie? Welche rolle spielen diese bei der Datenverarbeitung? Welche Informationen sind die richtigen Informationen?>
 
+\newpage
 \section{Implementierung von MapReduce}
 Nachdem alle Grundlagen der Anwendung fertiggestellt wurden kann mit der Entwicklung des Kernstückes begonnen werden, der Implementierung von MapReduce. Der Verarbeitungsprozess innerhalb des MapReduce Modells wurde bereits in \autoref{subsec:DatenflussMapReduce} beschrieben. Nachfolgend wird sowohl die Funktionsweise als auch die Entwicklung der einzelnen Module der Anwendung beschrieben.
 
@@ -190,9 +193,9 @@ Durch den generischen Ansatz der Anwendung muss jeder Programmlauf initialisiert
 
 Dem \textit{Driver} werden zunächst alle Klassen mitgeteilt, welche zur Ausführung eines Jobs essentiell notwendig sind. Hierzu gehören die Klassen für \textit{InputFormat}, \textit{OutputFormat}, \textit{OutputKey}, \textit{OutputValue}, \textit{Mapper} und \textit{Reducer}. Die gesetzten Werte sind vom Typ \textit{Class<?>}. Es werden keine Instanzen der Klassen erzeugt. Ebenfalls notwendig für die Ausführung eines Jobs ist das Setzen eines Namens.
 
-\newpage
 Zuletzt wird eine Iteration über alle Schlüssel der Konfiguration durchgeführt, um zusätzliche Properties an den \textit{Driver} zu übergeben. Diese erweiterten Einstellungen werden vor Ausführung des Jobs in eine Instanz der Klasse \textit{org.apache.hadoop.conf.Configuration} geschrieben. Bei diesen Properties handelt es sich um Einstellungen, welche von den einzelnen Modulen des MapReduce Modells verwendet werden (z.B. ein regulärer Ausdruck für die \textit{Mapper} Klasse).\\
 
+\newpage
 \begin{lstlisting}[language=Java,caption=Auszug der Methode \textit{Bootstrap:init()},label=lst:BootstrapInit]
 public static Driver init(LFAConfiguration objConfiguration) {
 	[...]
@@ -320,7 +323,7 @@ public class PDFInputFormat extends FileInputFormat<Text, Text> {
 \subsection{Der RecordReader}\label{subsec:RecordReader}
 In \autoref{lst:PDFInputFormat} wurde, in Zeile 6, die Methode \textit{createRecordReader()} definiert. Diese liefert eine Instanz der Klasse \textit{RecordReader<Text, Text>}, welche die initialen Schlüssel-Wert-Paare aus den einzelnen \textit{Splits} erzeugt.
 
-Auch wenn dies nicht zwingend notwendig ist, sollte für jede, individuelle \textit{InputFormat} Klasse ein entsprechender \textit{RecordReader} implementiert werden\footnote{Analog sollte für jede individuelle \textit{OutputFormat} Klasse ein entsprechender \textit{RecordWriter} implementiert werden.}. \autoref{lst:PDFLineRecordReader} zeigt einen Auszug aus dem zur Klasse \textit{PDFInputFormat} gehörenden \textit{RecordReader}, welcher ebenfalls von Freiknecht umgesetzt wurde. \\
+Auch wenn dies nicht zwingend notwendig ist, sollte für jede, individuelle \textit{InputFormat} Klasse ein entsprechender \textit{RecordReader} implementiert werden\footnote{Analog sollte für jede individuelle \textit{OutputFormat} Klasse ein entsprechender \textit{RecordWriter} existieren.}(Ein Beispiel wäre die Definition einer \textit{InputFormat} Klasse welche lediglich definiert, dass kein \textit{split} durchgeführt werden soll. In diesem Fall wäre ein Standard \textit{RecordReader} ausreichend). \autoref{lst:PDFLineRecordReader} zeigt einen Auszug aus dem zur Klasse \textit{PDFInputFormat} gehörenden \textit{RecordReader}, welcher ebenfalls von Freiknecht umgesetzt wurde. \\
 
 \begin{lstlisting}[language=Java,caption=Auszug aus der Klasse \textit{PDFLineRecordReader},title=\autoref*{lst:PDFLineRecordReader}: Auszug aus der Klasse \textit{PDFLineRecordReader}\protect\footnotemark,label=lst:PDFLineRecordReader]
 public class PDFLineRecordReader extends RecordReader<Text, Text> {
@@ -418,7 +421,7 @@ public void map(Object objKey, Text objValue, Context objContext) throws IOExcep
 }
 \end{lstlisting}
 
-Wie in \autoref{fig:DatenflussMapReduce} gezeigt wird, werden die durch den \textit{Mapper} erzeugten Schlüssel-Wert-Paare, nach deren Partitionierung/Sortierung, an den \textit{Reducer} weitergegeben.
+Wie das Datenflussdiagramm (\autoref{fig:DatenflussMapReduce}) in \autoref{subsec:DatenflussMapReduce} zeigt, werden die durch den \textit{Mapper} erzeugten Schlüssel-Wert-Paare, nach deren Partitionierung/Sortierung, an den \textit{Reducer} weitergegeben. Diese Übergabe ist in Zeile 11 und 18 von \autoref{lst:MethodeMap} zu sehen.
 
 \newpage
 \subsubsection{Implementierung individueller Reducer}
@@ -585,14 +588,14 @@ Durch die Analyse soll nun die durchschnittliche Antwortzeit für einen bestimmt
 
 Der erste Job (Job \textit{A}) soll den Mittelwert für jeweils einen Server ermitteln. Die einzelnen Systeme werden anhand ihrer IP-Adresse ermittelt. Aus Ausgabe wird eine neue CSV-Datei erzeugt, welche die Durchschnittswerte der Server enthält. \autoref{tbl:BeispieldatenCSVLog_02} zeigt die Ausgabe für Job \textit{A}.
 
-Als nächstes sollen die MapReduce Jobs \textit{B}, für die Berechnung der durchschnittlichen Antwortzeit für eine Gruppe, und \textit{C}, für die Ermittlung der durchschnittlichen Antwortzeit einer Serverart, parallel ausgeführt werden. \autoref{tbl:BeispieldatenCSVLog_02} stellt hierfür die Eingabe dar. Nach der Verarbeitung sind alle erforderlichen Informationen verfügbar (siehe \autoref{tbl:BeispieldatenCSVLog_03} und \autoref{tbl:BeispieldatenCSVLog_04}). \\
+Als nächstes sollen die MapReduce Jobs \textit{B}, für die Berechnung der durchschnittlichen Antwortzeit für eine Gruppe, und \textit{C}, für die Ermittlung der durchschnittlichen Antwortzeit einer Serverart, parallel ausgeführt werden. \autoref{tbl:BeispieldatenCSVLog_02} stellt hierfür die Eingabe dar. Nach der Verarbeitung sind alle erforderlichen Informationen verfügbar (siehe \autoref{tbl:BeispieldatenCSVLog_03} und \autoref{tbl:BeispieldatenCSVLog_04}).
 
 \begin{table}[h]
 	\centering
 	\begin{tabular}{| l | l | l | r |}
 		\hline
 		\rowcolor[HTML]{3531FF} 
-		\multicolumn{1}{l|}{\cellcolor[HTML]{4F88BB}{\color[HTML]{FFFFFF} {\bf Serverart}}} & \multicolumn{1}{l|}{\cellcolor[HTML]{4F88BB}{\color[HTML]{FFFFFF} {\bf Gruppe}}} & \multicolumn{1}{l|}{\cellcolor[HTML]{4F88BB}{\color[HTML]{FFFFFF} {\bf IP-Adresse}}} & \multicolumn{1}{l|}{\cellcolor[HTML]{4F88BB}{\color[HTML]{FFFFFF} {\bf Antwortzeit (in Sekunden)}}} \\ \hline
+		\multicolumn{1}{l|}{\cellcolor[HTML]{4F88BB}{\color[HTML]{FFFFFF} {\bf Serverart}}} & \multicolumn{1}{l|}{\cellcolor[HTML]{4F88BB}{\color[HTML]{FFFFFF} {\bf Gruppe}}} & \multicolumn{1}{l|}{\cellcolor[HTML]{4F88BB}{\color[HTML]{FFFFFF} {\bf IP-Adresse}}} & \multicolumn{1}{l|}{\cellcolor[HTML]{4F88BB}{\color[HTML]{FFFFFF} {\bf Antwortzeit (in Sek.)}}} \\ \hline
 		Appserver & AS1 & 192.168.2.10 & 4,5 \\ \hline
 		Appserver & AS2 & 192.168.3.10 & 2 \\ \hline
 		Appserver & AS3 & 192.168.4.10 & 4 \\ \hline
@@ -605,33 +608,32 @@ Als nächstes sollen die MapReduce Jobs \textit{B}, für die Berechnung der durc
 \end{table}
 
 \begin{table}[h]
-	\centering
-	\begin{tabular}{| l | r |}
-		\hline
-		\rowcolor[HTML]{3531FF} \multicolumn{1}{l|}{\cellcolor[HTML]{4F88BB}{\color[HTML]{FFFFFF} {\bf Gruppe}}} & \multicolumn{1}{l|}{\cellcolor[HTML]{4F88BB}{\color[HTML]{FFFFFF} {\bf Antwortzeit (in Sekunden)}}} \\ \hline
-		AS1 & 4,5 \\ \hline
-		AS2 & 2 \\ \hline
-		AS3 & 3,5 \\ \hline
-		CS1 & 1,5 \\ \hline
-	\end{tabular}
-	\caption{Ergebnis nach Job \textit{B}}
-	\label{tbl:BeispieldatenCSVLog_03}
-\end{table} 
-
-\begin{table}[h]
-	\centering
-	\begin{tabular}{| l | r |}
-		\hline
-		\rowcolor[HTML]{3531FF} 
-		\multicolumn{1}{l|}{\cellcolor[HTML]{4F88BB}{\color[HTML]{FFFFFF} {\bf Serverart}}} & \multicolumn{1}{l|}{\cellcolor[HTML]{4F88BB}{\color[HTML]{FFFFFF} {\bf Antwortzeit (in Sekunden)}}} \\ \hline
-		Appserver & 3,375 \\ \hline
-		Cacheserver & 1,5 \\ \hline
-	\end{tabular}
-	\caption{Ergebnis nach Job \textit{C}}
-	\label{tbl:BeispieldatenCSVLog_04}
+	\begin{subtable}[b]{.5\linewidth}
+		\begin{tabular}{| l | r |}
+			\hline
+			\rowcolor[HTML]{3531FF} \multicolumn{1}{l|}{\cellcolor[HTML]{4F88BB}{\color[HTML]{FFFFFF} {\bf Gruppe}}} & \multicolumn{1}{l|}{\cellcolor[HTML]{4F88BB}{\color[HTML]{FFFFFF} {\bf Antwortzeit (in Sek.)}}} \\ \hline
+			AS1 & 4,5 \\ \hline
+			AS2 & 2 \\ \hline
+			AS3 & 3,5 \\ \hline
+			CS1 & 1,5 \\ \hline
+		\end{tabular}
+		\caption{}
+		\label{tbl:BeispieldatenCSVLog_03} 
+	\end{subtable}
+	\begin{subtable}[b]{.5\linewidth}
+		\begin{tabular}{| l | r |}
+			\hline
+			\rowcolor[HTML]{3531FF} 
+			\multicolumn{1}{l|}{\cellcolor[HTML]{4F88BB}{\color[HTML]{FFFFFF} {\bf Serverart}}} & \multicolumn{1}{l|}{\cellcolor[HTML]{4F88BB}{\color[HTML]{FFFFFF} {\bf Antwortzeit (in Sek.)}}} \\ \hline
+			Appserver & 3,375 \\ \hline
+			Cacheserver & 1,5 \\ \hline
+		\end{tabular}
+		\caption{}
+		\label{tbl:BeispieldatenCSVLog_04}
+	\end{subtable}
+	\caption{Ergebnistabellen für Job B (a) und Job C (b)}
 \end{table}
 
-\newpage
 Der Vorteil der Verkettung von Jobs liegt in der stufenweisen Reduktion der Datenmenge. Angenommen, es gäbe $50$ App- und Cachingserver. Bei einem Logfile mit $10^7$ Einträgen müsste, bei einer getrennten Verarbeitung, jeder Job $10^7$ Einträge analysieren (insgesamt $3 \times 10^7$ Einträge). Durch die Verkettung reduziert sich die Anzahl der zu analysierenden Einträge auf $10^7+ (2 \times 50)$, was einer Reduktion von $\approx 67\%$ entspricht.
 
 %<Beschreibung wie eine Verkettung von Jobs durchgeführt werden kann (Freiknecht literatur) und anwendungsfall hierzu beschreiben>
@@ -679,11 +681,12 @@ Der Vorteil der Verkettung von Jobs liegt in der stufenweisen Reduktion der Date
 
 %<Beschreiben der Bash Datei, durch welche der job (Jar) ausgeführt wird. Beschreiben der einzelnen Schritte und der configuration>
 
+\newpage
 \section{Anwendungstest \& Auswertung der Ergebnisse}
 Bevor die Anwendung in den produktiven Betrieb übergehen kann, wird sie unter exakt spezifizierten Bedingungen getestet. Die so durchgeführten Tests sollen Aufschluss über die Leistung der Anwendung geben.
 
 \subsection{Durchführung der Tests}
-Für die Tests werden eine Reihe von Logfiles in unterschiedlichen Größen bereitgestellt. Diese enthalten $10$ bis $10^7$ Einträgen. Jedes Logfile wird 10 mal durch die Anwendung analysiert und die Laufzeit protokolliert. \autoref{lis:PropertiesAnwendungstest} zeigt die für die Tests verwendete Konfiguration. \\
+Für die Tests werden eine Reihe von Logfiles in unterschiedlichen Größen bereitgestellt. Diese enthalten $10$ bis $10^7$ Einträgen. Jedes Logfile wird 10 mal durch die Anwendung analysiert und die Laufzeit protokolliert. Die Analyse soll Fehlercodes anhand des definierten regulären Ausdrucks ermitteln und zählen. \autoref{lis:PropertiesAnwendungstest} zeigt die für die Tests verwendete Konfiguration. Der zu verwendende reguläre Ausdruck wird in Zeile 14 definiert. \\
 
 \begin{lstlisting}[language=Java,caption=Properties für Anwendungstest,label=lis:PropertiesAnwendungstest]
 lfa.runmode              : DEBUG
@@ -699,13 +702,20 @@ lfa.driver.output.format : org.apache.hadoop.mapreduce.lib.output.TextOutputForm
 
 lfa.driver.job.name      : Laufzeittest webadapter.log
 
-lfa.mapper.pattern.key   : \\] ([A-Z]{4,5})
+lfa.mapper.pattern.key   : \\] ([A-Z]{3,6})
 lfa.mapper.nomatchaction : SKIP
 \end{lstlisting}
 
-Bei jeder Ausführung des Programms erfolgt über ein eigens entwickeltes Bash-Script, welches die Logfiles vor jede Analyse neu in das \ac{HDFS} überträgt. Dies ist notwendig, da bei jedem Upload die Datenblöcke neu geschrieben werden müssen, um ein verfälschtes Ergebnis durch Caching zu vermeiden.
+\newpage
+Bei jeder Ausführung des Programms erfolgt über ein eigens entwickeltes Bash-Script, welches die Logfiles vor jede Analyse neu in das \ac{HDFS} überträgt. Dies ist notwendig, da bei jedem Upload die Datenblöcke neu geschrieben werden müssen, um ein verfälschtes Ergebnis durch Caching zu vermeiden. \autoref{lis:Ergebnisdatei} zeigt, als Beispiel, den Inhalt einer Ergebnisdatei des Tests Nr. 6 ($2,5 \times 10^5$ Einträge). Die Schlüssel-Wert-Paare werden Zeilenweise geschrieben. Schlüssel und Wert werden durch einen Tabulator getrennt. \\
 
-\autoref{fig:Streudiagram} zeigt die einzelnen Testläufe als Datenpunkte, \autoref{tbl:DurchschnittlicheLaufzeiten} die arithmetischen Mittelwerte für die einzelnen Logfilegrößen.
+\begin{lstlisting}[language=bash,caption=Inhalt der Ergebnisdatei \textit{part-r-00000},label=lis:Ergebnisdatei]
+ERROR   95348
+INFO    78384
+WARN    76268
+\end{lstlisting}
+
+\autoref{fig:Streudiagram} zeigt die einzelnen Testläufe als Datenpunkte, \autoref{tbl:DurchschnittlicheLaufzeiten} die arithmetischen Mittelwerte für die einzelnen Logfilegrößen. \\
 
 \begin{figure}[h]
 	\centering
@@ -714,7 +724,7 @@ Bei jeder Ausführung des Programms erfolgt über ein eigens entwickeltes Bash-S
 	\label{fig:Streudiagram}
 \end{figure}
 
-\begin{table}
+\begin{table}[h]
 	\centering
 	\begin{tabular}{| r | l | r | r |}
 		\hline
@@ -737,7 +747,7 @@ Bei jeder Ausführung des Programms erfolgt über ein eigens entwickeltes Bash-S
 
 Die visuelle Darstellung lässt einen stärkeren Zusammenhang zwischen den beiden Größen $x$ und $y$ vermuten. Aus diesem Grund werden, die durch den Anwendungstest erhobenen Daten, genauer betrachtet.
 
-Da die Tests auf der in \autoref{sec:InstallationHadoop} erwähnten \ac{VM} durchgeführt wurden, können die im folgenden getroffenen Aussagen vom späteren produktiven Betrieb abweichen. Aus diesem Grund sollten vor Inbetriebnahme der Anwendung weitere Tests auf einem System ähnlich dem Produktivsystem durchgeführt werden, um aussagekräftigere Daten zu erhalten.
+%Da die Tests auf der in \autoref{sec:InstallationHadoop} erwähnten \ac{VM} durchgeführt wurden, können die im folgenden getroffenen Aussagen vom späteren produktiven Betrieb abweichen.
 
 \subsection{Analyse der Laufzeiten}\label{subsec:Laufzeitanalyse}
 Die im Anwendungstest erhobenen Laufzeiten sollen nun weiter analysiert werden. Hierfür soll zunächst das Ausmaß des \textit{linearen} Zusammenhangs zwischen der Anzahl der verarbeiteten Einträge und der Laufzeit ermittelt werden. Gerald und Susanne Teschl definieren die, nach dem englischen Mathematiker Karl Pearson (1857 - 1936) benannte, Kennzahl wie folgt:
@@ -829,7 +839,7 @@ Durch die Anwendung von \autoref{equ:Laufzeit} lässt sich, durch eine Umformung
 
 Die Produktleistung lässt sich somit erfüllen, solange die stündliche generierte Datenmenge $x \leq 86.788.877$ beträgt.
 
-Ein Weg diesen Schwellenwert zu umgehen bietet die Möglichkeit Daten zu Streamen. Dabei können Dateien entweder nach HDFS oder direkt als Eingabe übertragen werden. Der Verarbeitungsprozess verändert sich jedoch sehr stark im vergleich zur normalen Datenverarbeitung. Die Laufzeit wird durch den Veränderten Prozess ebenfalls beeinflusst.
+Ein Weg diesen Schwellenwert zu umgehen bietet die Möglichkeit Daten zu Streamen. Dabei können Dateien entweder nach \ac{HDFS} oder direkt als Eingabe übertragen werden. Der Verarbeitungsprozess verändert sich jedoch sehr stark im vergleich zur normalen Datenverarbeitung. Die Laufzeit wird durch den Veränderten Prozess ebenfalls beeinflusst.
 
 Aufgrund dieser Komplexität und der Tatsache, dass Streaming kein teil der definierten Anforderungen ist, wir dieser Punkt nicht weiter verfolgt.
 
@@ -842,3 +852,5 @@ Aufgrund dieser Komplexität und der Tatsache, dass Streaming kein teil der defi
 %\end{figure}
 
 %<Dokumentation der Tests mit unterschiedlich großen Datenmengen (10 Logeinträge bis 10.000.000 Einträge). Grafische Darstellung der Laufzeiten. Jede Stufe min. 10 mal ausführen und Ausführungszeit Nottieren/Dokumentieren. In Kapitel 6 Erkenntnisse aus den Tests aufarbeiten>
+
+%\newpage\null\newpage
