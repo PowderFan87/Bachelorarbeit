@@ -126,14 +126,14 @@ Es gibt zwei Möglichkeiten die Arbeitsweise des Loggers zu beeinflussen. Die er
 		\hline
 		\rowcolor[HTML]{3531FF} 
 		\multicolumn{1}{|l|}{\cellcolor[HTML]{4F88BB}{\color[HTML]{FFFFFF} {\bf Runmode}}} & \multicolumn{1}{l|}{\cellcolor[HTML]{4F88BB}{\color[HTML]{FFFFFF} {\bf Handlers}}} & \multicolumn{1}{l|}{\cellcolor[HTML]{4F88BB}{\color[HTML]{FFFFFF} {\bf Loglevel}}} & \multicolumn{1}{l|}{\cellcolor[HTML]{4F88BB}{\color[HTML]{FFFFFF} {\bf Formatter}}} \\ \hline
-		\textbf{DEBUG} & ConsoleHandler & ALL & SimpleFormatter \\  \hline
-		\textbf{TEST} & FileHandler & WARNING & SimpleFormatter \\ \hline
-		\textbf{LIVE} & FileHandler & SEVERE & SimpleFormatter \\  \hline
+		\textbf{DEBUG} & \footnotemark[2].ConsoleHandler & ALL & \footnotemark[2].SimpleFormatter \\  \hline
+		\textbf{TEST} & \footnotemark[2].FileHandler & WARNING & \footnotemark[2].SimpleFormatter \\ \hline
+		\textbf{LIVE} & \footnotemark[2].FileHandler & SEVERE & \footnotemark[2].SimpleFormatter \\  \hline
 	\end{tabular}
-	\caption{Logger Einstellungen für die einzelnen Runmodes\footnotemark}
+	\caption{Logger Einstellungen für die einzelnen Runmodes}
 	\label{tbl:LoggerSettingsRunmode}
 \end{table}
-\footnotetext{Die Angaben in den Spalten \textit{Handlers} und \textit{Formatter} haben noch den zusätzlichen Prefix \\ \textit{java.util.logging.}, um die expliziten Klassen zu definieren.}
+\footnotetext[2]{java.util.logging}
 
 Aus den einzelnen Konfigurationsdateien werden die endgültigen Einstellungen zusammengestellt und über den \textit{LogManager} gesetzt. Für den \textit{FileHandler} wird zusätzlich ein Pattern definiert, welches den Speicherort und Dateinamen des Logfiles angibt. \autoref{lst:BeispielConfLogger} zeigt ein Beispiel für eine Logger Konfiguration. Im angegebenen Pattern sind zwei Platzhalter definiert. Die Variable \textit{\%h} wird mit dem Home-Verzeichnis des aktiven Users ersetzt, \textit{\%u} mit einer Identifikationsnummer. \\
 

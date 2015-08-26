@@ -1,7 +1,7 @@
 %!TEX root = ../dokumentation.tex
 
 \chapter{Theoretische Grundlagen}\label{cha:Grundlagen}
-Für das bessere Verständnis des Themas soll dieses Kapitel die relevanten, theoretischen Grundlagen vermitteln,  und an das Kernthema heranführen. Dabei wird zunächst geklärt, worum es sich bei der Überwachung von IT-Infrastrukturen handelt, und soll Antworten auf Fragen wie "`Warum werden diese überwacht?"', "`Welche Komponenten sind zu unterscheiden?"' und "`Welche Technologien werden eingesetzt?"' geben. Danach soll der Begriff Logfiles genauer definiert werden, bevor die Funktionalität von MapReduce und Hadoop erläutert wird.
+Für ein besseres Verständnis des Themas soll dieses Kapitel die relevanten, theoretischen Grundlagen vermitteln,  und an das Kernthema heranführen. Dabei wird zunächst erklärt, worum es sich bei der Überwachung von IT-Infrastrukturen handelt, und es werden Antworten auf Fragen wie "`Warum werden diese überwacht?"', "`Welche Komponenten sind zu unterscheiden?"' und "`Welche Technologien werden eingesetzt?"' gegeben. Danach soll der Begriff Logfiles genauer definiert werden, bevor die Funktionalität von MapReduce und Hadoop erläutert wird.
 
 %TODO: Einleitung überarbeiten
 %<Einleitung in das Kapitel noch nicht wirklich rund. Überarbeiten!>
@@ -14,9 +14,9 @@ Ziel der Überwachung ist es, durch Extraktion von Informationen Aussagen über 
 Nach Salm gibt es drei Arten von Komponenten die es zu unterscheiden gilt:
 
 \begin{itemize}
-	\item Netzwerk, um eine ausreichende Bandbreite und bestehende Übertragung zu sichern
+	\item Netzwerkkomponenten, um eine ausreichende Bandbreite und bestehende Übertragung zu sichern
 	\item Ressourcen, um eine effiziente Lastverteilung innerhalb der Infrastruktur zu gewährleisten
-	\item Anwendung, um Anwender schnellen, unkomplizierten Zugriff zu ermöglichen
+	\item Anwendung, um dem Anwender schnellen, unkomplizierten Zugriff zu ermöglichen
 \end{itemize}
 
 Überwachungssysteme zeigen Administratoren die Up- und Downtime, sowie die Auslastung von Soft- und Hardware an.\footcite[Vgl.][S. 8]{Salm.2007}
@@ -41,9 +41,9 @@ Von besonderem Interesse sind hier Logfiles. Aus ihnen lassen sich viele Informa
 \section{Bedeutung von Logfiles}\label{sec:BedeutungVonLogfiles}
 Nach Bernard J. Jansen, sind Logfiles \flqq electronic [records] of interactions that have occurred between a system and users of that system\frqq.\footcite[S. 2]{Jansen.2008} Dabei werden sowohl negative wie auch positive Ereignisse protokolliert.
 
-Bei Web-Servern, welche mit Apache \acs{HTTP} Server (später Apache) unter Linux betrieben werden, stellen syslog von Linux, sowie Error- und Access-Log von Apache, die Grundlage zur Überwachung des Servers. Sie lassen sich sehr einfach durch die in \autoref{sec:UeberwachungIT} beschriebenen Agenten überwachen, da sie einem klar vorgegebenen Standard folgen.
+Bei Web-Servern, welche mit Apache \acs{HTTP} Server (später Apache) unter Linux betrieben werden, stellen syslog von Linux, sowie Error- und Access-Log von Apache, die Grundlage zur Überwachung des Servers. Sie lassen sich sehr einfach durch die in \autoref{sec:UeberwachungIT} beschriebenen Agenten überwachen, da sie einem klar vorgegebenen Schema folgen.
 
-Im syslog von Linux werden alle Ereignisse protokolliert, welche im direkten Zusammenhang mit dem System stehen. Die Einträge folgen dabei der im \ac{RFC} 5424\footcite[RFC 5424,][]{RFC5424.2009} festgehaltenen Beschreibung (Da  RFC keine offizielle Norm ist, handelt es sich lediglich um eine Beschreibung, nicht um einen Standard).
+Im syslog von Linux werden alle Ereignisse protokolliert, welche im direkten Zusammenhang mit dem System stehen. Die Einträge folgen dabei der im \ac{RFC} 5424\footcite[RFC 5424,][]{RFC5424.2009} festgehaltenen Beschreibung (Da RFC keine offizielle Norm ist, handelt es sich lediglich um eine Beschreibung, nicht um einen Standard).
 
 Das Apache-Error-Log enthält diagnostische Informationen und protokolliert alle Fehler, welche bei der Verarbeitung einer Anfrage auftreten. \autoref{lst:BeispieleintragApacheErrorLog} zeigt, wie ein Eintrag in einem Error-Log aussehen könnte. Es lässt sich klar erkennen, wann der Fehler aufgetreten ist, was fehlgeschlagen ist und welches Modul betroffen ist. Ebenfalls sichtbar ist die \ac{IP}-Adresse des Clients, bei dem der Fehler aufgetreten ist. Die Einträge des Error-Logs entsprechen keiner Norm oder \ac{RFC} Beschreibung. Sie können nach der Installation individuell angepasst werden.\footcite[Vgl.][]{ApacheErrorLog.2015} \\
 
@@ -204,6 +204,7 @@ Die Architektur von \ac{HDFS} entspricht einem Master-Slave-System. Die verschie
 
 Die genaue Funktionsweise von \ac{HDFS} wird in einem Comic\footnote{Comic über Funktionsweise von HDFS: \\ \url{http://de.slideshare.net/jaganadhg/hdfs-10509123}} von \textit{Maneesh Varshney} sehr einfach und anschaulich erklärt.\footcite[Vgl.][S. 22 f.]{Wartala.2012}
 
+\newpage
 \begin{figure}[h]
 	\centering
 	\includegraphics[scale=1.2]{HDFS_Architektur.png}

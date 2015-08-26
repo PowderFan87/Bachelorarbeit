@@ -41,7 +41,7 @@ Ziel dieser Arbeit ist die Anwendung des MapReduce Modells bei der Entwicklung e
 
 Die Arbeit soll alle Phasen der Entwicklung dokumentieren und die Funktionsweise von MapReduce vermitteln. Dies bezieht sich nicht nur auf die Implementierung, sondern beinhaltet ebenfalls die theoretischen Hintergründe, sowohl des Modells als auch des gesamten Hadoop Frameworks.
 
-Die fertige Anwendung muss generisch sein und in der Lage sein, unabhängig vom Format eines Logfiles, unterschiedliche Analysen durchführen zu können. Die Parameter der Analyse sollen über Konfigurationsdateien gesteuert werden.
+Die fertige Anwendung muss einen generischen Ansatz besitzen und in der Lage sein, unabhängig vom Format eines Logfiles, unterschiedliche Analysen durchführen zu können. Die Parameter der Analyse sollen über Konfigurationsdateien gesteuert werden.
 
 \newpage
 Zum Zeitpunkt dieser Arbeit gibt es keinerlei Informationen über die Performance von MapReduce für diesen Anwendungsfall. Sollten die Laufzeiten der Fertigen Anwendung zu hoch sein, müssen die Ergebnisse der Analyse gespeichert und über eine externe Schnittstelle zugänglich gemacht werden.
@@ -49,7 +49,7 @@ Zum Zeitpunkt dieser Arbeit gibt es keinerlei Informationen über die Performanc
 Die Performance der Anwendung ist durch Anwendungstests festzustellen. Dabei soll die Anzahl verschiedener Fehlercodes in einem Logfile ermittelt werden. Die Menge der Einträge innerhalb der Datei erhöht sich immer nach 10 Programmläufen. Insgesamt sind 100 Analysen durchzuführen. Die ermittelten Laufzeiten sollen Aufschluss über die Performance geben.
 
 \section{Abgrenzung}\label{sec:Abgrenzung}
-Nicht Teil der Arbeit ist die Installation und Konfiguration des Ressourcenmanagement und der automatischen Skallierung von Hadoop. Es wird nur eine einfache Single Node Installation vorgenommen und beschrieben. Ebenfalls nicht teil der Arbeit ist die Impelmentierung eines Checkskriptes für ein Monitoringtool.
+Nicht Teil der Arbeit ist die Installation und Konfiguration des Ressourcenmanagement und der automatischen Skallierung von Hadoop. Es wird nur eine einfache Single Node Installation vorgenommen und beschrieben.
 
 Ebenfalls nicht teil der Arbeit ist die Absicherung der Hadoop Infrastruktur oder andere Sicherheitsfragen bei der Entwicklung von MapReduce Anwendungen. Ein Hinweis auf mögliche Schwachstellen reicht hier aus.
 
