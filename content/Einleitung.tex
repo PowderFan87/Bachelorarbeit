@@ -11,11 +11,11 @@ Laut einer Studie des Bitkom e.V. aus dem Jahr 2014 wächst die Datenmenge von U
 
 Häufig ist das Ziel die Erkennung neuer Zusammenhänge und Muster. Die gewonnenen Erkenntnisse werden anschließend für Vorhersagen oder Entscheidungsvorlagen verwendet. Die Einsatzgebiete von Big Data Anwendungen umfassen alle Bereiche, in denen größere Datenmengen vorhanden sind.\footcite[Vgl.][S. 3]{Bitkom.2014}
 
-Von diesem Zuwachs an Informationen sind auch Logfiles von Webservern betroffen. Begünstigt durch die wachsenden Geschwindigkeiten des mobilen Internets, werden Webseiten sehr viel häufiger, von einer noch größeren Vielfalt von Geräten aufgerufen. Dabei enthalten Logfiles viele aussagekräftige Informationen, welche sowohl in Echtzeit als auch über längere Zeiträume ausgewertet werden müssen.
+Von diesem Zuwachs an Informationen sind auch Logfiles von Webservern betroffen. Begünstigt durch die wachsenden Geschwindigkeiten des mobilen Internets werden Webseiten sehr viel häufiger von einer noch größeren Vielfalt von Geräten aufgerufen. Dabei enthalten Logfiles viele aussagekräftige Informationen, welche sowohl in Echtzeit als auch über längere Zeiträume ausgewertet werden müssen.
 
-Nach einer im Zuge der Studie durchgeführten Umfrage, analysieren 31\% der befragten Unternehmen Logdaten IT-gestützt für Entscheidungsprozesse.\footcite[Vgl.][S. 8]{Bitkom.2014} Ein denkbares Szenario könnte der gezielte Einsatz von Ressourcen zur Verbesserung kritischer Teilsysteme sein. Deren Identifikation könnte durch die Analyse von Logfiles erfolgen.
+Nach einer im Zuge der Studie durchgeführten Umfrage analysieren 31\% der befragten Unternehmen Logdaten IT-gestützt für Entscheidungsprozesse.\footcite[Vgl.][S. 8]{Bitkom.2014} Ein denkbares Szenario könnte der gezielte Einsatz von Ressourcen zur Verbesserung kritischer Teilsysteme sein. Deren Identifikation könnte durch die Analyse von Logfiles erfolgen.
 
-Eine mögliche Vorgehensweise bei der Analyse von Logfiles, und Kernpunkt dieser Arbeit, stellt das MapReduce Modell in Verbindung mit Apache Hadoop dar.
+Eine mögliche Vorgehensweise bei der Analyse von Logfiles und Kernpunkt dieser Arbeit stellt das MapReduce Modell in Verbindung mit Apache Hadoop dar.
 
 \newpage
 Die in dieser Arbeit dokumentierte Vorgehensweise basiert auf der gegebenen Infrastruktur. Diese wird, um einen Sperrvermerk zu vermeiden, jedoch nicht im Detail beschrieben. Die Funktionsweise der einzelnen Komponenten wurde hinreichend übernommen. Die beschriebenen Grundlagen lassen sich auf vergleichbare Anwendungsfälle übertragen.
@@ -44,7 +44,7 @@ Die Arbeit soll alle Phasen der Entwicklung dokumentieren und die Funktionsweise
 Die fertige Anwendung muss einen generischen Ansatz besitzen und in der Lage sein, unabhängig vom Format eines Logfiles, unterschiedliche Analysen durchführen zu können. Die Parameter der Analyse sollen über Konfigurationsdateien gesteuert werden.
 
 \newpage
-Zum Zeitpunkt dieser Arbeit gibt es keinerlei Informationen über die Performance von MapReduce für diesen Anwendungsfall. Sollten die Laufzeiten der Fertigen Anwendung zu hoch sein, müssen die Ergebnisse der Analyse gespeichert und über eine externe Schnittstelle zugänglich gemacht werden.
+Zum Zeitpunkt dieser Arbeit gibt es keinerlei Informationen über die Performance von MapReduce für diesen Anwendungsfall. Sollten die Laufzeiten der fertigen Anwendung zu hoch sein, müssen die Ergebnisse der Analyse gespeichert und über eine externe Schnittstelle zugänglich gemacht werden.
 
 Die Performance der Anwendung ist durch Anwendungstests festzustellen. Dabei soll die Anzahl verschiedener Fehlercodes in einem Logfile ermittelt werden. Die Menge der Einträge innerhalb der Datei erhöht sich immer nach 10 Programmläufen. Insgesamt sind 100 Analysen durchzuführen. Die ermittelten Laufzeiten sollen Aufschluss über die Performance geben.
 
@@ -53,7 +53,7 @@ Nicht Teil der Arbeit ist die Installation und Konfiguration des Ressourcenmanag
 
 Ebenfalls nicht teil der Arbeit ist die Absicherung der Hadoop Infrastruktur oder andere Sicherheitsfragen bei der Entwicklung von MapReduce Anwendungen. Ein Hinweis auf mögliche Schwachstellen reicht hier aus.
 
-Logfiles können Personenbezogene Daten enthalten, welche nach §3 Abs. 1 \ac{BDSG} geschützt werden müssen\footcite[§3 Abs. 1 BDSG,][]{BDSG3.1990} (Potenziell Personenbezogen, da nicht ersichtlich ist, ob eine \ac{IP}-Adresse statisch oder dynamisch ist). Die Speicherung von z.B. der \ac{IP}-Adresse ist daher nur gestattet, wenn der Anwender zustimmt, oder ein Grund für die Speicherung vorliegt, welcher §15 \ac{TMG} genügt.\footcite[§15 TMG,][]{TMG15.2007}  Da es sich bei dem im Zuge dieser Arbeit entwickelten Programm um eine prototypische Anwendung handelt, sind die Datenschutzrichtlinien nicht Teil der Arbeit und werden daher nicht betrachtet.
+Logfiles können personenbezogene Daten enthalten, welche nach §3 Abs. 1 \ac{BDSG} geschützt werden müssen\footcite[§3 Abs. 1 BDSG,][]{BDSG3.1990} (potenziell personenbezogen, da nicht ersichtlich ist, ob eine \ac{IP}-Adresse statisch oder dynamisch ist). Die Speicherung von z.B. der \ac{IP}-Adresse ist daher nur gestattet, wenn der Anwender zustimmt oder ein Grund für die Speicherung vorliegt, welcher §15 \ac{TMG} genügt.\footcite[§15 TMG,][]{TMG15.2007}  Da es sich bei dem im Zuge dieser Arbeit entwickelten Programm um eine prototypische Anwendung handelt sind die Datenschutzrichtlinien nicht Teil der Arbeit und werden daher nicht betrachtet.
 
 %Was soll NICHT Teil der Arbeit sein? Dabei unbedingt beschreiben das die serverseitige Konfiguration von Hadoop und YARN und das Aufsetzung von Clustern ignoriert wird. Dadurch soll klar werden, dass der Fokus auf der Anwendung des Algorithmus auf einen konkreten Fall liegt.
 
