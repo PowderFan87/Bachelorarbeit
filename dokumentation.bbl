@@ -1,5 +1,5 @@
 % $ biblatex auxiliary file $
-% $ biblatex version 2.3 $
+% $ biblatex bbl format version 2.9 $
 % Do not modify the above lines!
 %
 % This is an auxiliary file used by the 'biblatex' package.
@@ -16,695 +16,705 @@
   {}
 \endgroup
 
-\entry{Beal.2015}{online}{}
-  \name{author}{1}{}{%
-    {{}%
-     {Beal}{B.}%
-     {Vangie}{V.}%
-     {}{}%
-     {}{}}%
-  }
-  \strng{namehash}{BV1}
-  \strng{fullhash}{BV1}
-  \field{labelyear}{2015}
-  \field{sortinit}{B}
-  \field{title}{Commodity Hardware}
-  \verb{url}
-  \verb http://www.webopedia.com/TERM/C/commodity_hardware.html
-  \endverb
-  \field{year}{2015}
-  \field{urlday}{30}
-  \field{urlmonth}{06}
-  \field{urlyear}{2015}
-\endentry
-
-\entry{Buchholz.1953}{article}{}
-  \name{author}{1}{}{%
-    {{}%
-     {Buchholz}{B.}%
-     {Werner}{W.}%
-     {}{}%
-     {}{}}%
-  }
-  \strng{namehash}{BW1}
-  \strng{fullhash}{BW1}
-  \field{labelyear}{1953}
-  \field{sortinit}{B}
-  \field{issn}{0096-8390}
-  \field{pages}{1262 \bibrangedash  1275}
-  \field{title}{The System Design of the IBM Type 701 Computer}
-  \field{journaltitle}{Proceedings of the I.R.E., Vol. 41", no. 10 Special
-  Computer Issue}
-  \field{year}{1953}
-\endentry
-
-\entry{BDSG3.1990}{online}{}
-  \name{author}{1}{}{%
-    {{}%
-     {{Bundesministerium der Justiz und f{\"u}r Verbraucherschutz}}{B.}%
-     {}{}%
-     {}{}%
-     {}{}}%
-  }
-  \keyw{Gesetz}
-  \strng{namehash}{B1}
-  \strng{fullhash}{B1}
-  \field{labelyear}{1990}
-  \field{sortinit}{B}
-  \field{title}{Bundesdatenschutzgesetz (BDSG) § 3 Weitere
+\datalist[entry]{nyt/global//global/global}
+  \entry{BDSG3.1990}{online}{}
+    \name{author}{1}{}{%
+      {{hash=B}{%
+         family={{Bundesministerium der Justiz und f{\"u}r Verbraucherschutz}},
+         familyi={B\bibinitperiod},
+      }}%
+    }
+    \keyw{Gesetz}
+    \strng{namehash}{B1}
+    \strng{fullhash}{B1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{labelyear}{1990}
+    \field{labeldatesource}{year}
+    \field{sortinit}{B}
+    \field{sortinithash}{B}
+    \field{title}{Bundesdatenschutzgesetz (BDSG) § 3 Weitere
   Begriffsbestimmungen}
-  \verb{url}
-  \verb http://www.gesetze-im-internet.de/bdsg_1990/__3.html
-  \endverb
-  \field{year}{1990}
-  \field{urlday}{07}
-  \field{urlmonth}{07}
-  \field{urlyear}{2015}
-\endentry
+    \verb{url}
+    \verb http://www.gesetze-im-internet.de/bdsg_1990/__3.html
+    \endverb
+    \field{year}{1990}
+    \field{urlday}{07}
+    \field{urlmonth}{07}
+    \field{urlyear}{2015}
+  \endentry
 
-\entry{TMG15.2007}{online}{}
-  \name{author}{1}{}{%
-    {{}%
-     {{Bundesministerium der Justiz und f{\"u}r Verbraucherschutz}}{B.}%
-     {}{}%
-     {}{}%
-     {}{}}%
-  }
-  \keyw{Gesetz}
-  \strng{namehash}{B1}
-  \strng{fullhash}{B1}
-  \field{labelyear}{2007}
-  \field{sortinit}{B}
-  \field{title}{Telemediengesetz (TMG) § 15 Nutzungsdaten}
-  \verb{url}
-  \verb http://www.gesetze-im-internet.de/tmg/__15.html
-  \endverb
-  \field{year}{2007}
-  \field{urlday}{07}
-  \field{urlmonth}{07}
-  \field{urlyear}{2015}
-\endentry
+  \entry{TMG15.2007}{online}{}
+    \name{author}{1}{}{%
+      {{hash=B}{%
+         family={{Bundesministerium der Justiz und f{\"u}r Verbraucherschutz}},
+         familyi={B\bibinitperiod},
+      }}%
+    }
+    \keyw{Gesetz}
+    \strng{namehash}{B1}
+    \strng{fullhash}{B1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{labelyear}{2007}
+    \field{labeldatesource}{year}
+    \field{sortinit}{B}
+    \field{sortinithash}{B}
+    \field{title}{Telemediengesetz (TMG) § 15 Nutzungsdaten}
+    \verb{url}
+    \verb http://www.gesetze-im-internet.de/tmg/__15.html
+    \endverb
+    \field{year}{2007}
+    \field{urlday}{07}
+    \field{urlmonth}{07}
+    \field{urlyear}{2015}
+  \endentry
 
-\entry{Dean.2004}{book}{}
-  \name{author}{2}{}{%
-    {{}%
-     {Dean}{D.}%
-     {Jeffrey}{J.}%
-     {}{}%
-     {}{}}%
-    {{}%
-     {Ghemawat}{G.}%
-     {Sanjay}{S.}%
-     {}{}%
-     {}{}}%
-  }
-  \list{publisher}{2}{%
-    {Sixth Symposium on Operating System Design}%
-    {Implementation}%
-  }
-  \strng{namehash}{DJGS1}
-  \strng{fullhash}{DJGS1}
-  \field{labelyear}{2004}
-  \field{sortinit}{D}
-  \field{title}{MapReduce: Simplified Data Processing on Large Clusters}
-  \verb{url}
-  \verb http://research.google.com/archive/mapreduce.html
-  \endverb
-  \field{year}{2004}
-\endentry
+  \entry{Dean.2004}{book}{}
+    \name{author}{2}{}{%
+      {{hash=DJ}{%
+         family={Dean},
+         familyi={D\bibinitperiod},
+         given={Jeffrey},
+         giveni={J\bibinitperiod},
+      }}%
+      {{hash=GS}{%
+         family={Ghemawat},
+         familyi={G\bibinitperiod},
+         given={Sanjay},
+         giveni={S\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{2}{%
+      {Sixth Symposium on Operating System Design}%
+      {Implementation}%
+    }
+    \strng{namehash}{DJGS1}
+    \strng{fullhash}{DJGS1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{labelyear}{2004}
+    \field{labeldatesource}{year}
+    \field{sortinit}{D}
+    \field{sortinithash}{D}
+    \field{title}{MapReduce: Simplified Data Processing on Large Clusters}
+    \verb{url}
+    \verb http://research.google.com/archive/mapreduce.html
+    \endverb
+    \field{year}{2004}
+  \endentry
 
-\entry{Fey.2008}{book}{}
-  \name{author}{1}{}{%
-    {{}%
-     {Fey}{F.}%
-     {Dietmar}{D.}%
-     {}{}%
-     {}{}}%
-  }
-  \list{publisher}{1}{%
-    {Springer}%
-  }
-  \strng{namehash}{FD1}
-  \strng{fullhash}{FD1}
-  \field{labelyear}{2008}
-  \field{sortinit}{F}
-  \field{isbn}{9783540797470}
-  \field{title}{Grid-Computing: Eine Basistechnologie F{\"u}r Computational
+  \entry{Fey.2008}{book}{}
+    \name{author}{1}{}{%
+      {{hash=FD}{%
+         family={Fey},
+         familyi={F\bibinitperiod},
+         given={Dietmar},
+         giveni={D\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {Springer}%
+    }
+    \strng{namehash}{FD1}
+    \strng{fullhash}{FD1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{labelyear}{2008}
+    \field{labeldatesource}{year}
+    \field{sortinit}{F}
+    \field{sortinithash}{F}
+    \field{isbn}{9783540797470}
+    \field{title}{Grid-Computing: Eine Basistechnologie F{\"u}r Computational
   Science}
-  \field{year}{2008}
-\endentry
+    \field{year}{2008}
+  \endentry
 
-\entry{Freiknecht.2014}{book}{}
-  \name{author}{1}{}{%
-    {{}%
-     {Freiknecht}{F.}%
-     {Jonas}{J.}%
-     {}{}%
-     {}{}}%
-  }
-  \list{publisher}{1}{%
-    {Carl Hanser Verlag GmbH \& Company KG}%
-  }
-  \strng{namehash}{FJ1}
-  \strng{fullhash}{FJ1}
-  \field{labelyear}{2014}
-  \field{sortinit}{F}
-  \field{isbn}{9783446441774}
-  \field{title}{Big Data in der Praxis: Beispiell{\"o}sungen mit Hadoop und
+  \entry{Freiknecht.2014}{book}{}
+    \name{author}{1}{}{%
+      {{hash=FJ}{%
+         family={Freiknecht},
+         familyi={F\bibinitperiod},
+         given={Jonas},
+         giveni={J\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {Carl Hanser Verlag GmbH \& Company KG}%
+    }
+    \strng{namehash}{FJ1}
+    \strng{fullhash}{FJ1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{labelyear}{2014}
+    \field{labeldatesource}{year}
+    \field{sortinit}{F}
+    \field{sortinithash}{F}
+    \field{isbn}{9783446441774}
+    \field{title}{Big Data in der Praxis: Beispiell{\"o}sungen mit Hadoop und
   NoSQL. Daten speichern, aufbereiten, visualisieren}
-  \field{year}{2014}
-\endentry
+    \field{year}{2014}
+  \endentry
 
-\entry{RFC5424.2009}{online}{}
-  \name{author}{1}{}{%
-    {{}%
-     {{Gerhards, R. Adiscon GmbH}}{G.}%
-     {}{}%
-     {}{}%
-     {}{}}%
-  }
-  \keyw{Standard}
-  \strng{namehash}{G1}
-  \strng{fullhash}{G1}
-  \field{labelyear}{2009}
-  \field{sortinit}{G}
-  \field{title}{RFC 5424, The Syslog Protocol}
-  \verb{url}
-  \verb https://tools.ietf.org/html/rfc5424
-  \endverb
-  \field{year}{2009}
-  \field{urlday}{07}
-  \field{urlmonth}{07}
-  \field{urlyear}{2015}
-\endentry
+  \entry{RFC5424.2009}{online}{}
+    \name{author}{1}{}{%
+      {{hash=G}{%
+         family={{Gerhards, R. Adiscon GmbH}},
+         familyi={G\bibinitperiod},
+      }}%
+    }
+    \keyw{Standard}
+    \strng{namehash}{G1}
+    \strng{fullhash}{G1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{labelyear}{2009}
+    \field{labeldatesource}{year}
+    \field{sortinit}{G}
+    \field{sortinithash}{G}
+    \field{title}{RFC 5424, The Syslog Protocol}
+    \verb{url}
+    \verb https://tools.ietf.org/html/rfc5424
+    \endverb
+    \field{year}{2009}
+    \field{urlday}{07}
+    \field{urlmonth}{07}
+    \field{urlyear}{2015}
+  \endentry
 
-\entry{Goyvaerts.2010}{book}{}
-  \name{author}{2}{}{%
-    {{}%
-     {Goyvaerts}{G.}%
-     {Jan}{J.}%
-     {}{}%
-     {}{}}%
-    {{}%
-     {Levithan}{L.}%
-     {Steven}{S.}%
-     {}{}%
-     {}{}}%
-  }
-  \list{publisher}{1}{%
-    {O'Reilly}%
-  }
-  \strng{namehash}{GJLS1}
-  \strng{fullhash}{GJLS1}
-  \field{labelyear}{2010}
-  \field{sortinit}{G}
-  \field{isbn}{9783897219571}
-  \field{title}{Regul{\"a}re Ausdr{\"u}cke Kochbuch}
-  \field{year}{2010}
-\endentry
+  \entry{Goyvaerts.2010}{book}{}
+    \name{author}{2}{}{%
+      {{hash=GJ}{%
+         family={Goyvaerts},
+         familyi={G\bibinitperiod},
+         given={Jan},
+         giveni={J\bibinitperiod},
+      }}%
+      {{hash=LS}{%
+         family={Levithan},
+         familyi={L\bibinitperiod},
+         given={Steven},
+         giveni={S\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {O'Reilly}%
+    }
+    \strng{namehash}{GJLS1}
+    \strng{fullhash}{GJLS1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{labelyear}{2010}
+    \field{labeldatesource}{year}
+    \field{sortinit}{G}
+    \field{sortinithash}{G}
+    \field{isbn}{9783897219571}
+    \field{title}{Regul{\"a}re Ausdr{\"u}cke Kochbuch}
+    \field{year}{2010}
+  \endentry
 
-\entry{Hedtstueck.2012}{book}{}
-  \name{author}{1}{}{%
-    {{}%
-     {Hedtst{\"u}ck}{H.}%
-     {Ulrich}{U.}%
-     {}{}%
-     {}{}}%
-  }
-  \list{publisher}{1}{%
-    {Oldenbourg Verlag}%
-  }
-  \strng{namehash}{HU1}
-  \strng{fullhash}{HU1}
-  \field{labelyear}{2012}
-  \field{sortinit}{H}
-  \field{isbn}{9783486714043}
-  \field{title}{Einf{\"u}hrung in die Theoretische Informatik. Formale Sprachen
-  und Automatentheorie. 5. Auflage}
-  \field{year}{2012}
-\endentry
+  \entry{Hedtstueck.2012}{book}{}
+    \name{author}{1}{}{%
+      {{hash=HU}{%
+         family={Hedtst{\"u}ck},
+         familyi={H\bibinitperiod},
+         given={Ulrich},
+         giveni={U\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {Oldenbourg Verlag}%
+    }
+    \strng{namehash}{HU1}
+    \strng{fullhash}{HU1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{labelyear}{2012}
+    \field{labeldatesource}{year}
+    \field{sortinit}{H}
+    \field{sortinithash}{H}
+    \field{isbn}{9783486714043}
+    \field{title}{Einf{\"u}hrung in die Theoretische Informatik. Formale
+  Sprachen und Automatentheorie. 5. Auflage}
+    \field{year}{2012}
+  \endentry
 
-\entry{Jansen.2008}{book}{}
-  \name{author}{1}{}{%
-    {{}%
-     {Jansen}{J.}%
-     {Bernard~J.}{B.~J.}%
-     {}{}%
-     {}{}}%
-  }
-  \list{publisher}{1}{%
-    {IGI Global}%
-  }
-  \strng{namehash}{JBJ1}
-  \strng{fullhash}{JBJ1}
-  \field{labelyear}{2008}
-  \field{sortinit}{J}
-  \field{isbn}{9781599049755}
-  \field{title}{Handbook of Research on Web Log Analysis}
-  \field{year}{2008}
-\endentry
+  \entry{Jansen.2008}{book}{}
+    \name{author}{1}{}{%
+      {{hash=JBJ}{%
+         family={Jansen},
+         familyi={J\bibinitperiod},
+         given={Bernard\bibnamedelima J.},
+         giveni={B\bibinitperiod\bibinitdelim J\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {IGI Global}%
+    }
+    \strng{namehash}{JBJ1}
+    \strng{fullhash}{JBJ1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{labelyear}{2008}
+    \field{labeldatesource}{year}
+    \field{sortinit}{J}
+    \field{sortinithash}{J}
+    \field{isbn}{9781599049755}
+    \field{title}{Handbook of Research on Web Log Analysis}
+    \field{year}{2008}
+  \endentry
 
-\entry{Karloff.2010}{article}{}
-  \name{author}{3}{}{%
-    {{}%
-     {Karloff}{K.}%
-     {Howard}{H.}%
-     {}{}%
-     {}{}}%
-    {{}%
-     {Suri}{S.}%
-     {Siddharth}{S.}%
-     {}{}%
-     {}{}}%
-    {{}%
-     {Vassilvitskii}{V.}%
-     {Sergei}{S.}%
-     {}{}%
-     {}{}}%
-  }
-  \strng{namehash}{KHSSVS1}
-  \strng{fullhash}{KHSSVS1}
-  \field{labelyear}{2010}
-  \field{sortinit}{K}
-  \field{isbn}{9780898716986}
-  \field{pages}{938 \bibrangedash  948}
-  \field{title}{A Model of Computation for MapReduce}
-  \field{journaltitle}{SODA '10 Proceedings of the twenty-first annual ACM-SIAM
-  symposium on Discrete Algorithms}
-  \field{year}{2010}
-\endentry
+  \entry{Karloff.2010}{article}{}
+    \name{author}{3}{}{%
+      {{hash=KH}{%
+         family={Karloff},
+         familyi={K\bibinitperiod},
+         given={Howard},
+         giveni={H\bibinitperiod},
+      }}%
+      {{hash=SS}{%
+         family={Suri},
+         familyi={S\bibinitperiod},
+         given={Siddharth},
+         giveni={S\bibinitperiod},
+      }}%
+      {{hash=VS}{%
+         family={Vassilvitskii},
+         familyi={V\bibinitperiod},
+         given={Sergei},
+         giveni={S\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{KHSSVS1}
+    \strng{fullhash}{KHSSVS1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{labelyear}{2010}
+    \field{labeldatesource}{year}
+    \field{sortinit}{K}
+    \field{sortinithash}{K}
+    \field{isbn}{9780898716986}
+    \field{pages}{938 \bibrangedash  948}
+    \field{title}{A Model of Computation for MapReduce}
+    \field{journaltitle}{SODA '10 Proceedings of the twenty-first annual
+  ACM-SIAM symposium on Discrete Algorithms}
+    \field{year}{2010}
+  \endentry
 
-\entry{Lakhe.2014}{book}{}
-  \name{author}{1}{}{%
-    {{}%
-     {Lakhe}{L.}%
-     {Bhushan}{B.}%
-     {}{}%
-     {}{}}%
-  }
-  \list{publisher}{1}{%
-    {Apress}%
-  }
-  \strng{namehash}{LB1}
-  \strng{fullhash}{LB1}
-  \field{labelyear}{2014}
-  \field{sortinit}{L}
-  \field{isbn}{9781430265450}
-  \field{series}{Expert's voice in security}
-  \field{title}{Practical Hadoop Security}
-  \field{year}{2014}
-\endentry
+  \entry{Lakhe.2014}{book}{}
+    \name{author}{1}{}{%
+      {{hash=LB}{%
+         family={Lakhe},
+         familyi={L\bibinitperiod},
+         given={Bhushan},
+         giveni={B\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {Apress}%
+    }
+    \strng{namehash}{LB1}
+    \strng{fullhash}{LB1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{labelyear}{2014}
+    \field{labeldatesource}{year}
+    \field{sortinit}{L}
+    \field{sortinithash}{L}
+    \field{isbn}{9781430265450}
+    \field{series}{Expert's voice in security}
+    \field{title}{Practical Hadoop Security}
+    \field{year}{2014}
+  \endentry
 
-\entry{Naftalin.2006}{book}{}
-  \name{author}{2}{}{%
-    {{}%
-     {Naftalin}{N.}%
-     {Maurice}{M.}%
-     {}{}%
-     {}{}}%
-    {{}%
-     {Wadler}{W.}%
-     {Philip}{P.}%
-     {}{}%
-     {}{}}%
-  }
-  \list{publisher}{1}{%
-    {O'Reilly Media}%
-  }
-  \strng{namehash}{NMWP1}
-  \strng{fullhash}{NMWP1}
-  \field{labelyear}{2006}
-  \field{sortinit}{N}
-  \field{isbn}{9780596551506}
-  \field{title}{Java Generics and Collections}
-  \field{year}{2006}
-\endentry
+  \entry{Salm.2007}{book}{}
+    \name{author}{1}{}{%
+      {{hash=SE}{%
+         family={Salm},
+         familyi={S\bibinitperiod},
+         given={Erwin},
+         giveni={E\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {Diplomica-Verlag}%
+    }
+    \strng{namehash}{SE1}
+    \strng{fullhash}{SE1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{labelyear}{2007}
+    \field{labeldatesource}{year}
+    \field{sortinit}{S}
+    \field{sortinithash}{S}
+    \field{isbn}{9783836652537}
+    \field{title}{IT-Systemmanagement: Infrastruktur-Management}
+    \field{year}{2007}
+  \endentry
 
-\entry{Lackes.2015}{online}{}
-  \name{author}{3}{}{%
-    {{}%
-     {Prof. Dr.~Lackes}{P.~D.~L.}%
-     {Richard}{R.}%
-     {}{}%
-     {}{}}%
-    {{}%
-     {Dr.~Siepermann}{D.~S.}%
-     {Markus}{M.}%
-     {}{}%
-     {}{}}%
-    {{}%
-     {Prof. Dr.~Kollmann}{P.~D.~K.}%
-     {Tobias}{T.}%
-     {}{}%
-     {}{}}%
-  }
-  \strng{namehash}{PDLRDSMPDKT1}
-  \strng{fullhash}{PDLRDSMPDKT1}
-  \field{labelyear}{2015}
-  \field{sortinit}{P}
-  \field{title}{Springer Gabler Verlag (Herausgeber), Gabler
-  Wirtschaftslexikon, Stichwort: Plug-in, online im Internet}
-  \verb{url}
-  \verb http://wirtschaftslexikon.gabler.de/Archiv/76201/plug-in-v8.html
-  \endverb
-  \field{year}{2015}
-  \field{urlday}{04}
-  \field{urlmonth}{08}
-  \field{urlyear}{2015}
-\endentry
-
-\entry{Salm.2007}{book}{}
-  \name{author}{1}{}{%
-    {{}%
-     {Salm}{S.}%
-     {Erwin}{E.}%
-     {}{}%
-     {}{}}%
-  }
-  \list{publisher}{1}{%
-    {Diplomica-Verlag}%
-  }
-  \strng{namehash}{SE1}
-  \strng{fullhash}{SE1}
-  \field{labelyear}{2007}
-  \field{sortinit}{S}
-  \field{isbn}{9783836652537}
-  \field{title}{IT-Systemmanagement: Infrastruktur-Management}
-  \field{year}{2007}
-\endentry
-
-\entry{Teschl.2014}{book}{}
-  \name{author}{2}{}{%
-    {{}%
-     {Teschl}{T.}%
-     {Gerald}{G.}%
-     {}{}%
-     {}{}}%
-    {{}%
-     {Teschl}{T.}%
-     {Susanne}{S.}%
-     {}{}%
-     {}{}}%
-  }
-  \list{publisher}{1}{%
-    {Springer Berlin Heidelberg}%
-  }
-  \strng{namehash}{TGTS1}
-  \strng{fullhash}{TGTS1}
-  \field{labelyear}{2014}
-  \field{sortinit}{T}
-  \field{isbn}{9783642542749}
-  \field{series}{eXamen.press}
-  \field{title}{Mathematik f{\"u}r Informatiker: Band 2: Analysis und
+  \entry{Teschl.2014}{book}{}
+    \name{author}{2}{}{%
+      {{hash=TG}{%
+         family={Teschl},
+         familyi={T\bibinitperiod},
+         given={Gerald},
+         giveni={G\bibinitperiod},
+      }}%
+      {{hash=TS}{%
+         family={Teschl},
+         familyi={T\bibinitperiod},
+         given={Susanne},
+         giveni={S\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {Springer Berlin Heidelberg}%
+    }
+    \strng{namehash}{TGTS1}
+    \strng{fullhash}{TGTS1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{labelyear}{2014}
+    \field{labeldatesource}{year}
+    \field{sortinit}{T}
+    \field{sortinithash}{T}
+    \field{isbn}{9783642542749}
+    \field{series}{eXamen.press}
+    \field{title}{Mathematik f{\"u}r Informatiker: Band 2: Analysis und
   Statistik}
-  \field{year}{2014}
-\endentry
+    \field{year}{2014}
+  \endentry
 
-\entry{ApacheHadoopDoku.2015}{online}{}
-  \name{author}{1}{}{%
-    {{}%
-     {{The Apache Software Foundation}}{T.}%
-     {}{}%
-     {}{}%
-     {}{}}%
-  }
-  \strng{namehash}{T1}
-  \strng{fullhash}{T1}
-  \field{labelyear}{2015}
-  \field{extrayear}{1}
-  \field{sortinit}{T}
-  \field{title}{Apache Hadoop 2.7.1 - Hadoop: Setting up a Single Node
+  \entry{ApacheHadoopDoku.2015}{online}{}
+    \name{author}{1}{}{%
+      {{hash=T}{%
+         family={{The Apache Software Foundation}},
+         familyi={T\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{T1}
+    \strng{fullhash}{T1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{labelyear}{2015}
+    \field{extradate}{1}
+    \field{labeldatesource}{year}
+    \field{sortinit}{T}
+    \field{sortinithash}{T}
+    \field{title}{Apache Hadoop 2.7.1 - Hadoop: Setting up a Single Node
   Cluster.}
-  \verb{url}
-  \verb http://hadoop.apache.org/docs/current/hadoop-project-dist/hadoop-common
-  \verb /SingleCluster.html
-  \endverb
-  \field{year}{2015}
-  \field{urlday}{13}
-  \field{urlmonth}{07}
-  \field{urlyear}{2015}
-\endentry
+    \verb{url}
+    \verb http://hadoop.apache.org/docs/current/hadoop-project-dist/hadoop-comm
+    \verb on/SingleCluster.html
+    \endverb
+    \field{year}{2015}
+    \field{urlday}{13}
+    \field{urlmonth}{07}
+    \field{urlyear}{2015}
+  \endentry
 
-\entry{ApacheAccessLog.2015}{online}{}
-  \name{author}{1}{}{%
-    {{}%
-     {{The Apache Software Foundation}}{T.}%
-     {}{}%
-     {}{}%
-     {}{}}%
-  }
-  \strng{namehash}{T1}
-  \strng{fullhash}{T1}
-  \field{labelyear}{2015}
-  \field{extrayear}{2}
-  \field{sortinit}{T}
-  \field{title}{Log Files - Access Log}
-  \verb{url}
-  \verb http://httpd.apache.org/docs/2.4/logs.html#accesslog
-  \endverb
-  \field{year}{2015}
-  \field{urlday}{07}
-  \field{urlmonth}{07}
-  \field{urlyear}{2015}
-\endentry
+  \entry{ApacheAccessLog.2015}{online}{}
+    \name{author}{1}{}{%
+      {{hash=T}{%
+         family={{The Apache Software Foundation}},
+         familyi={T\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{T1}
+    \strng{fullhash}{T1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{labelyear}{2015}
+    \field{extradate}{2}
+    \field{labeldatesource}{year}
+    \field{sortinit}{T}
+    \field{sortinithash}{T}
+    \field{title}{Log Files - Access Log}
+    \verb{url}
+    \verb http://httpd.apache.org/docs/2.4/logs.html#accesslog
+    \endverb
+    \field{year}{2015}
+    \field{urlday}{07}
+    \field{urlmonth}{07}
+    \field{urlyear}{2015}
+  \endentry
 
-\entry{ApacheErrorLog.2015}{online}{}
-  \name{author}{1}{}{%
-    {{}%
-     {{The Apache Software Foundation}}{T.}%
-     {}{}%
-     {}{}%
-     {}{}}%
-  }
-  \strng{namehash}{T1}
-  \strng{fullhash}{T1}
-  \field{labelyear}{2015}
-  \field{extrayear}{3}
-  \field{sortinit}{T}
-  \field{title}{Log Files - Error Log}
-  \verb{url}
-  \verb http://httpd.apache.org/docs/2.4/logs.html#errorlog
-  \endverb
-  \field{year}{2015}
-  \field{urlday}{07}
-  \field{urlmonth}{07}
-  \field{urlyear}{2015}
-\endentry
+  \entry{ApacheErrorLog.2015}{online}{}
+    \name{author}{1}{}{%
+      {{hash=T}{%
+         family={{The Apache Software Foundation}},
+         familyi={T\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{T1}
+    \strng{fullhash}{T1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{labelyear}{2015}
+    \field{extradate}{3}
+    \field{labeldatesource}{year}
+    \field{sortinit}{T}
+    \field{sortinithash}{T}
+    \field{title}{Log Files - Error Log}
+    \verb{url}
+    \verb http://httpd.apache.org/docs/2.4/logs.html#errorlog
+    \endverb
+    \field{year}{2015}
+    \field{urlday}{07}
+    \field{urlmonth}{07}
+    \field{urlyear}{2015}
+  \endentry
 
-\entry{ApacheHadoopApiDokuMapper.2015}{online}{}
-  \name{author}{1}{}{%
-    {{}%
-     {{The Apache Software Foundation}}{T.}%
-     {}{}%
-     {}{}%
-     {}{}}%
-  }
-  \strng{namehash}{T1}
-  \strng{fullhash}{T1}
-  \field{labelyear}{2015}
-  \field{extrayear}{4}
-  \field{sortinit}{T}
-  \field{title}{Mapper (Apache Hadoop Main 2.7.1 API)}
-  \verb{url}
-  \verb http://hadoop.apache.org/docs/r2.7.1/api/org/apache/hadoop/mapreduce/Ma
-  \verb pper.html
-  \endverb
-  \field{year}{2015}
-  \field{urlday}{02}
-  \field{urlmonth}{08}
-  \field{urlyear}{2015}
-\endentry
+  \entry{ApacheHadoopApiDokuMapper.2015}{online}{}
+    \name{author}{1}{}{%
+      {{hash=T}{%
+         family={{The Apache Software Foundation}},
+         familyi={T\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{T1}
+    \strng{fullhash}{T1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{labelyear}{2015}
+    \field{extradate}{4}
+    \field{labeldatesource}{year}
+    \field{sortinit}{T}
+    \field{sortinithash}{T}
+    \field{title}{Mapper (Apache Hadoop Main 2.7.1 API)}
+    \verb{url}
+    \verb http://hadoop.apache.org/docs/r2.7.1/api/org/apache/hadoop/mapreduce/
+    \verb Mapper.html
+    \endverb
+    \field{year}{2015}
+    \field{urlday}{02}
+    \field{urlmonth}{08}
+    \field{urlyear}{2015}
+  \endentry
 
-\entry{ApacheHadoopApiDokuReducer.2015}{online}{}
-  \name{author}{1}{}{%
-    {{}%
-     {{The Apache Software Foundation}}{T.}%
-     {}{}%
-     {}{}%
-     {}{}}%
-  }
-  \strng{namehash}{T1}
-  \strng{fullhash}{T1}
-  \field{labelyear}{2015}
-  \field{extrayear}{5}
-  \field{sortinit}{T}
-  \field{title}{Reducer (Apache Hadoop Main 2.7.1 API)}
-  \verb{url}
-  \verb http://hadoop.apache.org/docs/r2.7.1/api/org/apache/hadoop/mapreduce/Re
-  \verb ducer.html
-  \endverb
-  \field{year}{2015}
-  \field{urlday}{02}
-  \field{urlmonth}{08}
-  \field{urlyear}{2015}
-\endentry
+  \entry{ApacheHadoopApiDokuReducer.2015}{online}{}
+    \name{author}{1}{}{%
+      {{hash=T}{%
+         family={{The Apache Software Foundation}},
+         familyi={T\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{T1}
+    \strng{fullhash}{T1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{labelyear}{2015}
+    \field{extradate}{5}
+    \field{labeldatesource}{year}
+    \field{sortinit}{T}
+    \field{sortinithash}{T}
+    \field{title}{Reducer (Apache Hadoop Main 2.7.1 API)}
+    \verb{url}
+    \verb http://hadoop.apache.org/docs/r2.7.1/api/org/apache/hadoop/mapreduce/
+    \verb Reducer.html
+    \endverb
+    \field{year}{2015}
+    \field{urlday}{02}
+    \field{urlmonth}{08}
+    \field{urlyear}{2015}
+  \endentry
 
-\entry{Bauer.2014}{book}{}
-  \name{author}{17}{}{%
-    {{}%
-     {Tiemeyer}{T.}%
-     {Ernst}{E.}%
-     {}{}%
-     {}{}}%
-    {{}%
-     {Bauer}{B.}%
-     {Nikolai}{N.}%
-     {}{}%
-     {}{}}%
-    {{}%
-     {Beims}{B.}%
-     {Martin}{M.}%
-     {}{}%
-     {}{}}%
-    {{}%
-     {Bergmann}{B.}%
-     {Robert}{R.}%
-     {}{}%
-     {}{}}%
-    {{}%
-     {Ebert}{E.}%
-     {Christof}{C.}%
-     {}{}%
-     {}{}}%
-    {{}%
-     {Eckardt}{E.}%
-     {Carsten}{C.}%
-     {}{}%
-     {}{}}%
-    {{}%
-     {Eckkrammer}{E.}%
-     {Florian}{F.}%
-     {}{}%
-     {}{}}%
-    {{}%
-     {Eckkrammer}{E.}%
-     {Tobias}{T.}%
-     {}{}%
-     {}{}}%
-    {{}%
-     {Gollner}{G.}%
-     {Helmut}{H.}%
-     {}{}%
-     {}{}}%
-    {{}%
-     {Hauptmann}{H.}%
-     {Jens}{J.}%
-     {}{}%
-     {}{}}%
-    {{}%
-     {Hruschka}{H.}%
-     {Peter}{P.}%
-     {}{}%
-     {}{}}%
-    {{}%
-     {Klotz}{K.}%
-     {Michael}{M.}%
-     {}{}%
-     {}{}}%
-    {{}%
-     {Litke}{L.}%
-     {Hans-Dieter}{H.-D.}%
-     {}{}%
-     {}{}}%
-    {{}%
-     {Melbinger}{M.}%
-     {Wilhelm}{W.}%
-     {}{}%
-     {}{}}%
-    {{}%
-     {Nehfort}{N.}%
-     {Andreas}{A.}%
-     {}{}%
-     {}{}}%
-    {{}%
-     {Sneed}{S.}%
-     {Harry~M.}{H.~M.}%
-     {}{}%
-     {}{}}%
-    {{}%
-     {Zsifkovits}{Z.}%
-     {Helmut~E.}{H.~E.}%
-     {}{}%
-     {}{}}%
-  }
-  \list{publisher}{1}{%
-    {Hanser, Carl}%
-  }
-  \strng{namehash}{TE+1}
-  \strng{fullhash}{TEBNBMBRECECEFETGHHJHPKMLHDMWNASHMZHE1}
-  \field{labelyear}{2014}
-  \field{sortinit}{T}
-  \field{edition}{2., {\"u}berarb. u. erw. Aufl}
-  \field{isbn}{9783446440746}
-  \field{title}{Handbuch IT-Projektmanagement: Vorgehensmodelle,
+  \entry{Bauer.2014}{book}{}
+    \name{author}{17}{}{%
+      {{hash=TE}{%
+         family={Tiemeyer},
+         familyi={T\bibinitperiod},
+         given={Ernst},
+         giveni={E\bibinitperiod},
+      }}%
+      {{hash=BN}{%
+         family={Bauer},
+         familyi={B\bibinitperiod},
+         given={Nikolai},
+         giveni={N\bibinitperiod},
+      }}%
+      {{hash=BM}{%
+         family={Beims},
+         familyi={B\bibinitperiod},
+         given={Martin},
+         giveni={M\bibinitperiod},
+      }}%
+      {{hash=BR}{%
+         family={Bergmann},
+         familyi={B\bibinitperiod},
+         given={Robert},
+         giveni={R\bibinitperiod},
+      }}%
+      {{hash=EC}{%
+         family={Ebert},
+         familyi={E\bibinitperiod},
+         given={Christof},
+         giveni={C\bibinitperiod},
+      }}%
+      {{hash=EC}{%
+         family={Eckardt},
+         familyi={E\bibinitperiod},
+         given={Carsten},
+         giveni={C\bibinitperiod},
+      }}%
+      {{hash=EF}{%
+         family={Eckkrammer},
+         familyi={E\bibinitperiod},
+         given={Florian},
+         giveni={F\bibinitperiod},
+      }}%
+      {{hash=ET}{%
+         family={Eckkrammer},
+         familyi={E\bibinitperiod},
+         given={Tobias},
+         giveni={T\bibinitperiod},
+      }}%
+      {{hash=GH}{%
+         family={Gollner},
+         familyi={G\bibinitperiod},
+         given={Helmut},
+         giveni={H\bibinitperiod},
+      }}%
+      {{hash=HJ}{%
+         family={Hauptmann},
+         familyi={H\bibinitperiod},
+         given={Jens},
+         giveni={J\bibinitperiod},
+      }}%
+      {{hash=HP}{%
+         family={Hruschka},
+         familyi={H\bibinitperiod},
+         given={Peter},
+         giveni={P\bibinitperiod},
+      }}%
+      {{hash=KM}{%
+         family={Klotz},
+         familyi={K\bibinitperiod},
+         given={Michael},
+         giveni={M\bibinitperiod},
+      }}%
+      {{hash=LHD}{%
+         family={Litke},
+         familyi={L\bibinitperiod},
+         given={Hans-Dieter},
+         giveni={H\bibinitperiod-D\bibinitperiod},
+      }}%
+      {{hash=MW}{%
+         family={Melbinger},
+         familyi={M\bibinitperiod},
+         given={Wilhelm},
+         giveni={W\bibinitperiod},
+      }}%
+      {{hash=NA}{%
+         family={Nehfort},
+         familyi={N\bibinitperiod},
+         given={Andreas},
+         giveni={A\bibinitperiod},
+      }}%
+      {{hash=SHM}{%
+         family={Sneed},
+         familyi={S\bibinitperiod},
+         given={Harry\bibnamedelima M.},
+         giveni={H\bibinitperiod\bibinitdelim M\bibinitperiod},
+      }}%
+      {{hash=ZHE}{%
+         family={Zsifkovits},
+         familyi={Z\bibinitperiod},
+         given={Helmut\bibnamedelima E.},
+         giveni={H\bibinitperiod\bibinitdelim E\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {Hanser, Carl}%
+    }
+    \strng{namehash}{TE+1}
+    \strng{fullhash}{TEBNBMBRECECEFETGHHJHPKMLHDMWNASHMZHE1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{labelyear}{2014}
+    \field{labeldatesource}{year}
+    \field{sortinit}{T}
+    \field{sortinithash}{T}
+    \field{edition}{2., {\"u}berarb. u. erw. Aufl}
+    \field{isbn}{9783446440746}
+    \field{title}{Handbuch IT-Projektmanagement: Vorgehensmodelle,
   Managementinstrumente, Good Practices ; [mit kostenlosem E-Book]}
-  \list{location}{1}{%
-    {M{\"u}nchen}%
-  }
-  \field{year}{2014}
-\endentry
+    \list{location}{1}{%
+      {M{\"u}nchen}%
+    }
+    \field{year}{2014}
+  \endentry
 
-\entry{Wartala.2012}{book}{}
-  \name{author}{1}{}{%
-    {{}%
-     {Wartala}{W.}%
-     {Ramon}{R.}%
-     {}{}%
-     {}{}}%
-  }
-  \list{publisher}{1}{%
-    {Open Source Press}%
-  }
-  \strng{namehash}{WR1}
-  \strng{fullhash}{WR1}
-  \field{labelyear}{2012}
-  \field{sortinit}{W}
-  \field{isbn}{9783941841611}
-  \field{series}{Professional reference}
-  \field{title}{Hadoop: Zuverl{\"a}ssige, verteilte und skalierbare
+  \entry{Wartala.2012}{book}{}
+    \name{author}{1}{}{%
+      {{hash=WR}{%
+         family={Wartala},
+         familyi={W\bibinitperiod},
+         given={Ramon},
+         giveni={R\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {Open Source Press}%
+    }
+    \strng{namehash}{WR1}
+    \strng{fullhash}{WR1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{labelyear}{2012}
+    \field{labeldatesource}{year}
+    \field{sortinit}{W}
+    \field{sortinithash}{W}
+    \field{isbn}{9783941841611}
+    \field{series}{Professional reference}
+    \field{title}{Hadoop: Zuverl{\"a}ssige, verteilte und skalierbare
   Big-Data-Anwendungen}
-  \field{year}{2012}
-\endentry
+    \field{year}{2012}
+  \endentry
 
-\entry{Bitkom.2014}{online}{}
-  \name{author}{3}{}{%
-    {{}%
-     {Weber}{W.}%
-     {Mathias}{M.}%
-     {}{}%
-     {}{}}%
-    {{}%
-     {Shahd}{S.}%
-     {Maurice}{M.}%
-     {}{}%
-     {}{}}%
-    {{}%
-     {Hampe}{H.}%
-     {Katja}{K.}%
-     {}{}%
-     {}{}}%
-  }
-  \list{publisher}{1}{%
-    {Bitkom e.V.}%
-  }
-  \strng{namehash}{WMSMHK1}
-  \strng{fullhash}{WMSMHK1}
-  \field{labelyear}{2014}
-  \field{sortinit}{W}
-  \field{title}{Potenziale und Einsatz von Big Data. Ergebnisse einer
+  \entry{Bitkom.2014}{online}{}
+    \name{author}{3}{}{%
+      {{hash=WM}{%
+         family={Weber},
+         familyi={W\bibinitperiod},
+         given={Mathias},
+         giveni={M\bibinitperiod},
+      }}%
+      {{hash=SM}{%
+         family={Shahd},
+         familyi={S\bibinitperiod},
+         given={Maurice},
+         giveni={M\bibinitperiod},
+      }}%
+      {{hash=HK}{%
+         family={Hampe},
+         familyi={H\bibinitperiod},
+         given={Katja},
+         giveni={K\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {Bitkom e.V.}%
+    }
+    \strng{namehash}{WMSMHK1}
+    \strng{fullhash}{WMSMHK1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{labelyear}{2014}
+    \field{labeldatesource}{year}
+    \field{sortinit}{W}
+    \field{sortinithash}{W}
+    \field{title}{Potenziale und Einsatz von Big Data. Ergebnisse einer
   repra{\"a}sentativen Befragung von Unternehmen in Deutschland}
-  \verb{url}
-  \verb https://www.bitkom.org/Publikationen/2014/Studien/Studie-Big-Data-in-de
-  \verb utschen-Unternehmen/Studienbericht_Big_Data_in_deutschen_Unternehmen.pd
-  \verb f
-  \endverb
-  \field{year}{2014}
-  \field{urlday}{17}
-  \field{urlmonth}{08}
-  \field{urlyear}{2015}
-\endentry
-
-\lossort
-\endlossort
-
+    \verb{url}
+    \verb https://www.bitkom.org/Publikationen/2014/Studien/Studie-Big-Data-in-
+    \verb deutschen-Unternehmen/Studienbericht_Big_Data_in_deutschen_Unternehme
+    \verb n.pdf
+    \endverb
+    \field{year}{2014}
+    \field{urlday}{17}
+    \field{urlmonth}{08}
+    \field{urlyear}{2015}
+  \endentry
+\enddatalist
 \endinput

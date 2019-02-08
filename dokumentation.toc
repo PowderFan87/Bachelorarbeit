@@ -1,6 +1,5 @@
 \boolfalse {citerequest}\boolfalse {citetracker}\boolfalse {pagetracker}\boolfalse {backtracker}\relax 
-\defcounter {refsection}{0}\relax 
-\select@language {ngerman}
+\babel@toc {ngerman}{}
 \defcounter {refsection}{0}\relax 
 \contentsline {chapter}{\nonumberline Abk\IeC {\"u}rzungsverzeichnis}{I}{chapter*.3}
 \defcounter {refsection}{0}\relax 
@@ -34,140 +33,138 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {2.4.1}Das verteilte Dateisystem HDFS}{13}{subsection.2.4.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\nonumberline NameNode}{14}{section*.21}
+\contentsline {subsubsection}{\nonumberline NameNode}{15}{section*.21}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\nonumberline DataNodes}{15}{section*.26}
+\contentsline {subsubsection}{\nonumberline DataNodes}{16}{section*.26}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\nonumberline Secondary NameNode}{15}{section*.27}
+\contentsline {subsubsection}{\nonumberline Secondary NameNode}{16}{section*.27}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {2.4.2}MapReduce in Hadoop}{16}{subsection.2.4.2}
+\contentsline {subsection}{\numberline {2.4.2}MapReduce in Hadoop}{17}{subsection.2.4.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {2.4.3}Abgrenzung - Was ist Hadoop nicht?}{18}{subsection.2.4.3}
+\contentsline {subsection}{\numberline {2.4.3}Abgrenzung - Was ist Hadoop nicht?}{19}{subsection.2.4.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {2.4.4}\IeC {\"U}berlegungen zur Ausfallsicherheit von Hadoop}{19}{subsection.2.4.4}
+\contentsline {subsection}{\numberline {2.4.4}\IeC {\"U}berlegungen zur Ausfallsicherheit von Hadoop}{20}{subsection.2.4.4}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {3}Planung}{20}{chapter.3}
+\contentsline {chapter}{\numberline {3}Planung}{21}{chapter.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {3.1}Anforderungen \& Produktleistungen}{20}{section.3.1}
+\contentsline {section}{\numberline {3.1}Anforderungen \& Produktleistungen}{21}{section.3.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {3.1.1}Anforderungen}{20}{subsection.3.1.1}
+\contentsline {subsection}{\numberline {3.1.1}Anforderungen}{21}{subsection.3.1.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\nonumberline A001 - Formatunabh\IeC {\"a}ngige Analyse}{21}{section*.34}
+\contentsline {subsubsection}{\nonumberline A001 - Formatunabh\IeC {\"a}ngige Analyse}{22}{section*.34}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\nonumberline A010 - Dynamisches Analyseverfahren}{21}{section*.35}
+\contentsline {subsubsection}{\nonumberline A010 - Dynamisches Analyseverfahren}{22}{section*.35}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\nonumberline A020 - Konfigurierbarkeit}{21}{section*.36}
+\contentsline {subsubsection}{\nonumberline A020 - Konfigurierbarkeit}{22}{section*.36}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\nonumberline A030 - Erweiterbarkeit}{21}{section*.37}
+\contentsline {subsubsection}{\nonumberline A030 - Erweiterbarkeit}{22}{section*.37}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {3.1.2}Produktleistungen}{22}{subsection.3.1.2}
+\contentsline {subsection}{\numberline {3.1.2}Produktleistungen}{23}{subsection.3.1.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\nonumberline PL001 - Ausf\IeC {\"u}hrungszeit}{22}{section*.38}
+\contentsline {subsubsection}{\nonumberline PL001 - Ausf\IeC {\"u}hrungszeit}{23}{section*.38}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\nonumberline PL010 - Dateigr\IeC {\"o}\IeC {\ss }e}{22}{section*.39}
+\contentsline {subsubsection}{\nonumberline PL010 - Dateigr\IeC {\"o}\IeC {\ss }e}{23}{section*.39}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {3.2}Definition der Umgebung}{23}{section.3.2}
+\contentsline {section}{\numberline {3.2}Definition der Umgebung}{24}{section.3.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {4}Setup}{24}{chapter.4}
+\contentsline {chapter}{\numberline {4}Setup}{25}{chapter.4}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {4.1}Installation \& Konfiguration}{24}{section.4.1}
+\contentsline {section}{\numberline {4.1}Installation \& Konfiguration}{25}{section.4.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {4.1.1}Einrichten eines dedizierten Hadoop-Users}{24}{subsection.4.1.1}
+\contentsline {subsection}{\numberline {4.1.1}Einrichten eines dedizierten Hadoop-Users}{25}{subsection.4.1.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {4.1.2}Installation des Hadoop Frameworks}{25}{subsection.4.1.2}
+\contentsline {subsection}{\numberline {4.1.2}Installation des Hadoop Frameworks}{26}{subsection.4.1.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {4.1.3}Konfiguration f\IeC {\"u}r Pseudo-Distributed Umgebung}{26}{subsection.4.1.3}
+\contentsline {subsection}{\numberline {4.1.3}Konfiguration f\IeC {\"u}r Pseudo-Distributed Umgebung}{27}{subsection.4.1.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {4.2}Anlegen eines neuen Maven Projektes}{28}{section.4.2}
+\contentsline {section}{\numberline {4.2}Anlegen eines neuen Maven Projektes}{29}{section.4.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {5}Umsetzung}{31}{chapter.5}
+\contentsline {chapter}{\numberline {5}Umsetzung}{32}{chapter.5}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {5.1}Infrastruktur \& Prozesse}{31}{section.5.1}
+\contentsline {section}{\numberline {5.1}Infrastruktur \& Prozesse}{32}{section.5.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {5.1.1}Beschreibung der Infrastruktur}{31}{subsection.5.1.1}
+\contentsline {subsection}{\numberline {5.1.1}Beschreibung der Infrastruktur}{32}{subsection.5.1.1}
 \defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {5.1.2}Definition des Anwendungsprozesses}{33}{subsection.5.1.2}
 \defcounter {refsection}{0}\relax 
 \contentsline {section}{\numberline {5.2}Die Konfigurationsschnittstelle}{34}{section.5.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {5.2.1}Aufbau von Properties}{34}{subsection.5.2.1}
+\contentsline {subsection}{\numberline {5.2.1}Aufbau von Properties}{35}{subsection.5.2.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {5.2.2}Beschreibung der Konfigurationsstufen}{35}{subsection.5.2.2}
+\contentsline {subsection}{\numberline {5.2.2}Beschreibung der Konfigurationsstufen}{37}{subsection.5.2.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {5.2.3}Logger Konfiguration}{36}{subsection.5.2.3}
+\contentsline {subsection}{\numberline {5.2.3}Logger Konfiguration}{37}{subsection.5.2.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {5.2.4}Konfiguration der Anwendung}{37}{subsection.5.2.4}
+\contentsline {subsection}{\numberline {5.2.4}Konfiguration der Anwendung}{38}{subsection.5.2.4}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {5.3}Implementierung von MapReduce}{38}{section.5.3}
+\contentsline {section}{\numberline {5.3}Implementierung von MapReduce}{39}{section.5.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {5.3.1}Funktion von Bootstrap \& Driver}{38}{subsection.5.3.1}
+\contentsline {subsection}{\numberline {5.3.1}Funktion von Bootstrap \& Driver}{40}{subsection.5.3.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {5.3.2}Einblick in die Funktion von Input-/OutputFormat}{41}{subsection.5.3.2}
+\contentsline {subsection}{\numberline {5.3.2}Einblick in die Funktion von Input-/OutputFormat}{43}{subsection.5.3.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {5.3.3}Der RecordReader}{43}{subsection.5.3.3}
+\contentsline {subsection}{\numberline {5.3.3}Der RecordReader}{45}{subsection.5.3.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {5.3.4}Mapper und Reducer}{44}{subsection.5.3.4}
+\contentsline {subsection}{\numberline {5.3.4}Mapper und Reducer}{46}{subsection.5.3.4}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\nonumberline Implementierung individueller Mapper}{45}{section*.59}
+\contentsline {subsubsection}{\nonumberline Implementierung individueller Mapper}{47}{section*.59}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\nonumberline Implementierung individueller Reducer}{47}{section*.60}
+\contentsline {subsubsection}{\nonumberline Implementierung individueller Reducer}{49}{section*.60}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {5.4}Betrachtung von alternativen Mappingverfahren}{48}{section.5.4}
+\contentsline {section}{\numberline {5.4}Betrachtung von alternativen Mappingverfahren}{50}{section.5.4}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {5.4.1}Regul\IeC {\"a}re Ausdr\IeC {\"u}cke oder \textit {String.contains()}}{48}{subsection.5.4.1}
+\contentsline {subsection}{\numberline {5.4.1}Regul\IeC {\"a}re Ausdr\IeC {\"u}cke oder \textit {String.contains()}}{50}{subsection.5.4.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\nonumberline Komplexit\IeC {\"a}t von regul\IeC {\"a}ren Ausdr\IeC {\"u}cken}{48}{section*.61}
+\contentsline {subsubsection}{\nonumberline Komplexit\IeC {\"a}t von regul\IeC {\"a}ren Ausdr\IeC {\"u}cken}{50}{section*.61}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\nonumberline Unterscheidung zwischen \textit {find()} und \textit {matches()}}{49}{section*.62}
+\contentsline {subsubsection}{\nonumberline Unterscheidung zwischen \textit {find()} und \textit {matches()}}{51}{section*.62}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\nonumberline Komplexit\IeC {\"a}t von \textit {contains()}}{49}{section*.63}
+\contentsline {subsubsection}{\nonumberline Komplexit\IeC {\"a}t von \textit {contains()}}{51}{section*.63}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\nonumberline Schlussfolgerung}{50}{section*.64}
+\contentsline {subsubsection}{\nonumberline Schlussfolgerung}{52}{section*.64}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {5.4.2}Textanalyse mittels \textit {String.split()}}{50}{subsection.5.4.2}
+\contentsline {subsection}{\numberline {5.4.2}Textanalyse mittels \textit {String.split()}}{52}{subsection.5.4.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {5.4.3}Verkettung von MapReduce Jobs}{52}{subsection.5.4.3}
+\contentsline {subsection}{\numberline {5.4.3}Verkettung von MapReduce Jobs}{54}{subsection.5.4.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\nonumberline Beispiel f\IeC {\"u}r Verkettung von MapReduce Jobs}{52}{section*.66}
+\contentsline {subsubsection}{\nonumberline Beispiel f\IeC {\"u}r Verkettung von MapReduce Jobs}{54}{section*.66}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {5.5}Anwendungstest \& Auswertung der Ergebnisse}{54}{section.5.5}
+\contentsline {section}{\numberline {5.5}Anwendungstest \& Auswertung der Ergebnisse}{56}{section.5.5}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {5.5.1}Durchf\IeC {\"u}hrung der Tests}{54}{subsection.5.5.1}
+\contentsline {subsection}{\numberline {5.5.1}Durchf\IeC {\"u}hrung der Tests}{56}{subsection.5.5.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {5.5.2}Analyse der Laufzeiten}{56}{subsection.5.5.2}
+\contentsline {subsection}{\numberline {5.5.2}Analyse der Laufzeiten}{58}{subsection.5.5.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\nonumberline Randbemerkung zur Berechnung der Laufzeit}{59}{section*.73}
+\contentsline {subsubsection}{\nonumberline Randbemerkung zur Berechnung der Laufzeit}{61}{section*.73}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {5.5.3}Berechnung der maximalen Datenmenge}{59}{subsection.5.5.3}
+\contentsline {subsection}{\numberline {5.5.3}Berechnung der maximalen Datenmenge}{61}{subsection.5.5.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {6}Projektabschluss, Fazit \& Ausblick}{61}{chapter.6}
+\contentsline {chapter}{\numberline {6}Projektabschluss, Fazit \& Ausblick}{63}{chapter.6}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {6.1}Vergleich der Anwendung mit den Zielen}{61}{section.6.1}
+\contentsline {section}{\numberline {6.1}Vergleich der Anwendung mit den Zielen}{63}{section.6.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {6.1.1}Abgleich der funktionalen Anforderungen}{61}{subsection.6.1.1}
+\contentsline {subsection}{\numberline {6.1.1}Abgleich der funktionalen Anforderungen}{63}{subsection.6.1.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\nonumberline A001 - Formatunabh\IeC {\"a}ngige Analyse (3)}{62}{section*.74}
+\contentsline {subsubsection}{\nonumberline A001 - Formatunabh\IeC {\"a}ngige Analyse (3)}{64}{section*.74}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\nonumberline A010 - Dynamisches Analyseverfahren (3)}{62}{section*.75}
+\contentsline {subsubsection}{\nonumberline A010 - Dynamisches Analyseverfahren (3)}{64}{section*.75}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\nonumberline A020 - Konfigurierbarkeit (3)}{62}{section*.76}
+\contentsline {subsubsection}{\nonumberline A020 - Konfigurierbarkeit (3)}{64}{section*.76}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\nonumberline A030 - Erweiterbarkeit (3)}{62}{section*.77}
+\contentsline {subsubsection}{\nonumberline A030 - Erweiterbarkeit (3)}{64}{section*.77}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {6.1.2}Abgleich der Produktleistungen}{62}{subsection.6.1.2}
+\contentsline {subsection}{\numberline {6.1.2}Abgleich der Produktleistungen}{64}{subsection.6.1.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\nonumberline PL001 - Ausf\IeC {\"u}hrungszeit (2)}{62}{section*.78}
+\contentsline {subsubsection}{\nonumberline PL001 - Ausf\IeC {\"u}hrungszeit (2)}{65}{section*.78}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\nonumberline PL010 - Dateigr\IeC {\"o}\IeC {\ss }e (3)}{63}{section*.79}
+\contentsline {subsubsection}{\nonumberline PL010 - Dateigr\IeC {\"o}\IeC {\ss }e (3)}{65}{section*.79}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {6.1.3}Zusammenfassung}{63}{subsection.6.1.3}
+\contentsline {subsection}{\numberline {6.1.3}Zusammenfassung}{65}{subsection.6.1.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {6.2}Fazit}{64}{section.6.2}
+\contentsline {section}{\numberline {6.2}Fazit}{66}{section.6.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {6.3}Ausblick}{65}{section.6.3}
+\contentsline {section}{\numberline {6.3}Ausblick}{67}{section.6.3}
 \defcounter {refsection}{0}\relax 
 \contentsline {chapter}{\nonumberline Literaturverzeichnis}{i}{chapter*.80}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{Glossar}{iv}{section*.81}
-\defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\nonumberline Anhang}{vi}{appendix*.83}
+\contentsline {chapter}{\nonumberline Anhang}{iv}{chapter*.81}

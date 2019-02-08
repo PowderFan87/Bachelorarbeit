@@ -125,7 +125,7 @@ Es gibt zwei Möglichkeiten die Arbeitsweise des Loggers zu beeinflussen. Die er
 	\begin{tabular}{| l | l | l | l |}
 		\hline
 		\rowcolor[HTML]{3531FF} 
-		\multicolumn{1}{|l|}{\cellcolor[HTML]{4F88BB}{\color[HTML]{FFFFFF} {\bf Runmode}}} & \multicolumn{1}{l|}{\cellcolor[HTML]{4F88BB}{\color[HTML]{FFFFFF} {\bf Handlers}}} & \multicolumn{1}{l|}{\cellcolor[HTML]{4F88BB}{\color[HTML]{FFFFFF} {\bf Loglevel}}} & \multicolumn{1}{l|}{\cellcolor[HTML]{4F88BB}{\color[HTML]{FFFFFF} {\bf Formatter}}} \\ \hline
+		\multicolumn{1}{|l|}{\cellcolor[HTML]{4F88BB}{\color[HTML]{FFFFFF} {\textbf{Runmode}}}} & \multicolumn{1}{l|}{\cellcolor[HTML]{4F88BB}{\color[HTML]{FFFFFF} {\textbf{Handlers}}}} & \multicolumn{1}{l|}{\cellcolor[HTML]{4F88BB}{\color[HTML]{FFFFFF} {\textbf{Loglevel}}}} & \multicolumn{1}{l|}{\cellcolor[HTML]{4F88BB}{\color[HTML]{FFFFFF} {\textbf{Formatter}}}} \\ \hline
 		\textbf{DEBUG} & \footnotemark[2].ConsoleHandler & ALL & \footnotemark[2].SimpleFormatter \\  \hline
 		\textbf{TEST} & \footnotemark[2].FileHandler & WARNING & \footnotemark[2].SimpleFormatter \\ \hline
 		\textbf{LIVE} & \footnotemark[2].FileHandler & SEVERE & \footnotemark[2].SimpleFormatter \\  \hline
@@ -154,9 +154,9 @@ Um eine Vielzahl an unterschiedlichen Analysen durchführen zu können, sind die
 	\begin{tabularx}{\textwidth}{| l | l | l | X |}
 		\hline
 		\rowcolor[HTML]{3531FF} 
-		\multicolumn{1}{l|}{\cellcolor[HTML]{4F88BB}{\color[HTML]{FFFFFF} {\bf Gruppe}}} &
-		\multicolumn{1}{l|}{\cellcolor[HTML]{4F88BB}{\color[HTML]{FFFFFF} {\bf Property}}} &
-		\multicolumn{1}{l|}{\cellcolor[HTML]{4F88BB}{\color[HTML]{FFFFFF} {\bf Standardwert}}} & \multicolumn{1}{l|}{\cellcolor[HTML]{4F88BB}{\color[HTML]{FFFFFF} {\bf Beschreibung}}} \\ \hline
+		\multicolumn{1}{l|}{\cellcolor[HTML]{4F88BB}{\color[HTML]{FFFFFF} {\textbf{Gruppe}}}} &
+		\multicolumn{1}{l|}{\cellcolor[HTML]{4F88BB}{\color[HTML]{FFFFFF} {\textbf{Property}}}} &
+		\multicolumn{1}{l|}{\cellcolor[HTML]{4F88BB}{\color[HTML]{FFFFFF} {\textbf{Standardwert}}}} & \multicolumn{1}{l|}{\cellcolor[HTML]{4F88BB}{\color[HTML]{FFFFFF} {\textbf{Beschreibung}}}} \\ \hline
 		lfa.driver & .mapper & \footnotemark[1].mapper.PatternMapper & Klasse für den Mappingvorgang \\ \cline{2-4}
 		 & .reducer & \footnotemark[1].reducer.SumReducer & Klasse für den Reducevorgang \\ \hline
 		*.input & .format & \footnotemark[2].input.TextInputFormat & Klasse für die Interpretation des Inputs \\ \hline
@@ -261,7 +261,7 @@ Klassen, welche das Interface \textit{InputFormat} implementieren (oder sich von
 	\begin{tabularx}{\textwidth}{| l | X | X | X |}
 		\hline
 		\rowcolor[HTML]{3531FF} 
-		\multicolumn{1}{|l|}{\cellcolor[HTML]{4F88BB}{\color[HTML]{FFFFFF} {\bf Klasse}}} & \multicolumn{1}{l|}{\cellcolor[HTML]{4F88BB}{\color[HTML]{FFFFFF} {\bf Beschreibung}}} & \multicolumn{1}{l|}{\cellcolor[HTML]{4F88BB}{\color[HTML]{FFFFFF} {\bf Key}}} & \multicolumn{1}{l|}{\cellcolor[HTML]{4F88BB}{\color[HTML]{FFFFFF} {\bf Value}}} \\ \hline
+		\multicolumn{1}{|l|}{\cellcolor[HTML]{4F88BB}{\color[HTML]{FFFFFF} {\textbf{Klasse}}}} & \multicolumn{1}{l|}{\cellcolor[HTML]{4F88BB}{\color[HTML]{FFFFFF} {\textbf{Beschreibung}}}} & \multicolumn{1}{l|}{\cellcolor[HTML]{4F88BB}{\color[HTML]{FFFFFF} {\textbf{Key}}}} & \multicolumn{1}{l|}{\cellcolor[HTML]{4F88BB}{\color[HTML]{FFFFFF} {\textbf{Value}}}} \\ \hline
 		\textit{TextInputFormat} & Liest Zeile für Zeile einer Textdatei & Byte-Offset der Zeile & Inhalt der Zeile \\  \hline
 		\textit{KeyValueInputFormat} & Parst Schlüssel und Wert aus einer Zeile & Text bis zum ersten Tab & Rest der Zeile \\ \hline
 		\textit{SequenceFileInputFormat} & Hadoop-spezifisches Binärformat & Benutzerdefiniert & Benutzerdefiniert \\  \hline
@@ -309,7 +309,7 @@ public class PDFInputFormat extends FileInputFormat<Text, Text> {
 	\begin{tabularx}{\textwidth}{| l | X |}
 		\hline
 		\rowcolor[HTML]{3531FF} 
-		\multicolumn{1}{|l|}{\cellcolor[HTML]{4F88BB}{\color[HTML]{FFFFFF} {\bf Klasse}}} & \multicolumn{1}{l|}{\cellcolor[HTML]{4F88BB}{\color[HTML]{FFFFFF} {\bf Beschreibung}}} \\ \hline
+		\multicolumn{1}{|l|}{\cellcolor[HTML]{4F88BB}{\color[HTML]{FFFFFF} {\textbf{Klasse}}}} & \multicolumn{1}{l|}{\cellcolor[HTML]{4F88BB}{\color[HTML]{FFFFFF} {\textbf{Beschreibung}}}} \\ \hline
 		\textit{TextOutputFormat} & Schreibt Zeile in der Form Schlüssel [tab] Wert (Default) \\  \hline
 		\textit{SequenceFileOutputFormat} & Schreibt Binärdaten, die von folgenden Map-Reduce-Jobs gelesen werden können. \\ \hline
 		\textit{NullOutputFormat} & Gibt keine Datei aus, wird z.B. verwendet, falls die Ausgabe in Datenbanken oder anderem erfolgt. \\  \hline
@@ -499,7 +499,7 @@ Die berechnete Komplexität der Methoden muss nun verglichen werden.\footnote{Ve
 	\begin{tabular}{| l | l | l | l |}
 		\hline
 		\rowcolor[HTML]{3531FF} 
-		\multicolumn{1}{|l|}{\cellcolor[HTML]{4F88BB}{\color[HTML]{FFFFFF} {\bf Methode}}} & \multicolumn{1}{l|}{\cellcolor[HTML]{4F88BB}{\color[HTML]{FFFFFF} {\bf Best-Case}}} & \multicolumn{1}{l|}{\cellcolor[HTML]{4F88BB}{\color[HTML]{FFFFFF} {\bf Durchschnitt}}} & \multicolumn{1}{l|}{\cellcolor[HTML]{4F88BB}{\color[HTML]{FFFFFF} {\bf Worst-Case}}} \\ \hline
+		\multicolumn{1}{|l|}{\cellcolor[HTML]{4F88BB}{\color[HTML]{FFFFFF} {\textbf{Methode}}}} & \multicolumn{1}{l|}{\cellcolor[HTML]{4F88BB}{\color[HTML]{FFFFFF} {\textbf{Best-Case}}}} & \multicolumn{1}{l|}{\cellcolor[HTML]{4F88BB}{\color[HTML]{FFFFFF} {\textbf{Durchschnitt}}}} & \multicolumn{1}{l|}{\cellcolor[HTML]{4F88BB}{\color[HTML]{FFFFFF} {\textbf{Worst-Case}}}} \\ \hline
 		\textit{contains()} & $O(n)$ & $O(n)$ & $O(n \times m)$ \\  \hline \hline
 		\textit{matches()} & $O(n)$ & $O(n)$ & $O(n)$ \\ \hline
 		\textit{find()} & $O(n)$ & $O(n)$ & $O(n \times m)$ \\  \hline
@@ -570,7 +570,7 @@ Für die Analyse steht initial ein Logfile im CSV-Format bereit. In diesen wird 
 	\begin{tabular}{| l | l | l | r |}
 		\hline
 		\rowcolor[HTML]{3531FF} 
-		\multicolumn{1}{l|}{\cellcolor[HTML]{4F88BB}{\color[HTML]{FFFFFF} {\bf Serverart}}} & \multicolumn{1}{l|}{\cellcolor[HTML]{4F88BB}{\color[HTML]{FFFFFF} {\bf Gruppe}}} & \multicolumn{1}{l|}{\cellcolor[HTML]{4F88BB}{\color[HTML]{FFFFFF} {\bf IP-Adresse}}} & \multicolumn{1}{l|}{\cellcolor[HTML]{4F88BB}{\color[HTML]{FFFFFF} {\bf Antwortzeit (in Sek.)}}} \\ \hline
+		\multicolumn{1}{l|}{\cellcolor[HTML]{4F88BB}{\color[HTML]{FFFFFF} {\textbf{Serverart}}}} & \multicolumn{1}{l|}{\cellcolor[HTML]{4F88BB}{\color[HTML]{FFFFFF} {\textbf{Gruppe}}}} & \multicolumn{1}{l|}{\cellcolor[HTML]{4F88BB}{\color[HTML]{FFFFFF} {\textbf{IP-Adresse}}}} & \multicolumn{1}{l|}{\cellcolor[HTML]{4F88BB}{\color[HTML]{FFFFFF} {\textbf{Antwortzeit (in Sek.)}}}} \\ \hline
 		Appserver & AS1 & 192.168.2.10 & 5 \\ \hline
 		Appserver & AS2 & 192.168.3.10 & 2 \\ \hline
 		Appserver & AS3 & 192.168.4.10 & 4 \\ \hline
@@ -594,7 +594,7 @@ Als nächstes sollen die MapReduce Jobs \textit{B}, für die Berechnung der durc
 	\begin{tabular}{| l | l | l | r |}
 		\hline
 		\rowcolor[HTML]{3531FF} 
-		\multicolumn{1}{l|}{\cellcolor[HTML]{4F88BB}{\color[HTML]{FFFFFF} {\bf Serverart}}} & \multicolumn{1}{l|}{\cellcolor[HTML]{4F88BB}{\color[HTML]{FFFFFF} {\bf Gruppe}}} & \multicolumn{1}{l|}{\cellcolor[HTML]{4F88BB}{\color[HTML]{FFFFFF} {\bf IP-Adresse}}} & \multicolumn{1}{l|}{\cellcolor[HTML]{4F88BB}{\color[HTML]{FFFFFF} {\bf Antwortzeit (in Sek.)}}} \\ \hline
+		\multicolumn{1}{l|}{\cellcolor[HTML]{4F88BB}{\color[HTML]{FFFFFF} {\textbf{Serverart}}}} & \multicolumn{1}{l|}{\cellcolor[HTML]{4F88BB}{\color[HTML]{FFFFFF} {\textbf{Gruppe}}}} & \multicolumn{1}{l|}{\cellcolor[HTML]{4F88BB}{\color[HTML]{FFFFFF} {\textbf{IP-Adresse}}}} & \multicolumn{1}{l|}{\cellcolor[HTML]{4F88BB}{\color[HTML]{FFFFFF} {\textbf{Antwortzeit (in Sek.)}}}} \\ \hline
 		Appserver & AS1 & 192.168.2.10 & 4,5 \\ \hline
 		Appserver & AS2 & 192.168.3.10 & 2 \\ \hline
 		Appserver & AS3 & 192.168.4.10 & 4 \\ \hline
@@ -610,7 +610,7 @@ Als nächstes sollen die MapReduce Jobs \textit{B}, für die Berechnung der durc
 	\begin{subtable}[b]{.5\linewidth}
 		\begin{tabular}{| l | r |}
 			\hline
-			\rowcolor[HTML]{3531FF} \multicolumn{1}{l|}{\cellcolor[HTML]{4F88BB}{\color[HTML]{FFFFFF} {\bf Gruppe}}} & \multicolumn{1}{l|}{\cellcolor[HTML]{4F88BB}{\color[HTML]{FFFFFF} {\bf Antwortzeit (in Sek.)}}} \\ \hline
+			\rowcolor[HTML]{3531FF} \multicolumn{1}{l|}{\cellcolor[HTML]{4F88BB}{\color[HTML]{FFFFFF} {\textbf{Gruppe}}}} & \multicolumn{1}{l|}{\cellcolor[HTML]{4F88BB}{\color[HTML]{FFFFFF} {\textbf{Antwortzeit (in Sek.)}}}} \\ \hline
 			AS1 & 4,5 \\ \hline
 			AS2 & 2 \\ \hline
 			AS3 & 3,5 \\ \hline
@@ -623,7 +623,7 @@ Als nächstes sollen die MapReduce Jobs \textit{B}, für die Berechnung der durc
 		\begin{tabular}{| l | r |}
 			\hline
 			\rowcolor[HTML]{3531FF} 
-			\multicolumn{1}{l|}{\cellcolor[HTML]{4F88BB}{\color[HTML]{FFFFFF} {\bf Serverart}}} & \multicolumn{1}{l|}{\cellcolor[HTML]{4F88BB}{\color[HTML]{FFFFFF} {\bf Antwortzeit (in Sek.)}}} \\ \hline
+			\multicolumn{1}{l|}{\cellcolor[HTML]{4F88BB}{\color[HTML]{FFFFFF} {\textbf{Serverart}}}} & \multicolumn{1}{l|}{\cellcolor[HTML]{4F88BB}{\color[HTML]{FFFFFF} {\textbf{Antwortzeit (in Sek.)}}}} \\ \hline
 			Appserver & 3,375 \\ \hline
 			Cacheserver & 1,5 \\ \hline
 		\end{tabular}
@@ -728,7 +728,7 @@ WARN    76268
 	\begin{tabular}{| r | l | r | r |}
 		\hline
 		\rowcolor[HTML]{3531FF} 
-		\multicolumn{1}{|l|}{\cellcolor[HTML]{4F88BB}{\color[HTML]{FFFFFF} {\bf \#}}} & \multicolumn{1}{l|}{\cellcolor[HTML]{4F88BB}{\color[HTML]{FFFFFF} {\bf Anzahl Einträge}}} & \multicolumn{1}{l|}{\cellcolor[HTML]{4F88BB}{\color[HTML]{FFFFFF} {\bf Dateigröße}}} & \multicolumn{1}{l|}{\cellcolor[HTML]{4F88BB}{\color[HTML]{FFFFFF} {\bf Laufzeit}}} \\ \hline
+		\multicolumn{1}{|l|}{\cellcolor[HTML]{4F88BB}{\color[HTML]{FFFFFF} {\textbf{\#}}}} & \multicolumn{1}{l|}{\cellcolor[HTML]{4F88BB}{\color[HTML]{FFFFFF} {\textbf{Anzahl Einträge}}}} & \multicolumn{1}{l|}{\cellcolor[HTML]{4F88BB}{\color[HTML]{FFFFFF} {\textbf{Dateigröße}}}} & \multicolumn{1}{l|}{\cellcolor[HTML]{4F88BB}{\color[HTML]{FFFFFF} {\textbf{Laufzeit}}}} \\ \hline
 		1 & $10$ & 1,6 \ac{KB} & 7,4 \\  \hline
 		2 & $100$ & 17,0 \ac{KB} & 7,1 \\ \hline
 		3 & $1000$ & 157,0 \ac{KB} & 7,3 \\  \hline \hline
